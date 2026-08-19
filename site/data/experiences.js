@@ -1,0 +1,2762 @@
+export const experienceFamilies = [
+  {
+    "id": "body-image-and-self-recognition",
+    "experiences": [
+      "mirrors-and-photographs-feel-unflattering",
+      "unfamiliar-reflection",
+      "difficulty-picturing-your-current-body-shape",
+      "body-looks-like-the-wrong-gender",
+      "feeling-detached-from-the-body",
+      "seeing-yourself-shift-toward-recognition",
+      "avoiding-your-own-unclothed-body"
+    ]
+  },
+  {
+    "id": "bodily-privacy-and-visibility-to-others",
+    "experiences": [
+      "discomfort-with-your-body-being-seen",
+      "feeling-out-of-place-in-gendered-restrooms",
+      "covering-the-bare-upper-torso",
+      "concealing-chest-development-while-boymoding"
+    ]
+  },
+  {
+    "id": "gendered-body-traits-and-changes",
+    "experiences": [
+      "discomfort-with-sex-characteristics",
+      "extreme-body-shape-and-gendered-silhouette",
+      "voice-feels-unlike-oneself",
+      "body-changes-create-recognition-and-relief"
+    ]
+  },
+  {
+    "id": "clothing-and-body-silhouette",
+    "experiences": [
+      "minimizing-or-binding-an-unwanted-chest",
+      "clothing-that-hides-the-body-silhouette",
+      "clothing-fit-highlights-body-shape"
+    ]
+  },
+  {
+    "id": "hair-and-grooming",
+    "experiences": [
+      "controlling-gendered-body-hair",
+      "hair-carries-unusual-importance"
+    ]
+  },
+  {
+    "id": "gender-expression-and-assigned-expectations",
+    "experiences": [
+      "assigned-gender-presentation-feels-wrong",
+      "plain-clothes-over-assigned-gender-beauty",
+      "gravitating-away-from-assigned-gender-expectations",
+      "relief-from-gender-affirming-expression"
+    ]
+  },
+  {
+    "id": "gender-recognition-and-evaluation",
+    "experiences": [
+      "being-treated-as-the-assigned-gender-feels-wrong",
+      "gendered-records-feel-inaccurate",
+      "relief-from-gender-recognition",
+      "gender-policing-insults-feel-affirming",
+      "assigned-gender-compliments-feel-wrong",
+      "belonging-among-peers-of-another-gender",
+      "gender-peer-friendship-mistaken-for-romantic-interest",
+      "belonging-among-transgender-and-lgbtq-people",
+      "separate-online-identity-until-gender-disclosure-feels-safe"
+    ]
+  },
+  {
+    "id": "assigned-gender-roles-and-performance",
+    "experiences": [
+      "assigned-gender-roles-feel-performed",
+      "same-gender-friendship-feels-socially-wrong",
+      "overperforming-the-assigned-gender"
+    ]
+  },
+  {
+    "id": "exploring-gender-through-imagination-and-identification",
+    "experiences": [
+      "another-gender-in-games-and-imagined-roles",
+      "gender-transformation-stories-feel-compelling",
+      "identifying-with-characters-of-another-gender",
+      "living-through-another-persons-presentation",
+      "envy-blends-appearance-identity-and-attraction",
+      "attuned-to-gender-variance-in-other-people"
+    ]
+  },
+  {
+    "id": "suppressing-or-avoiding-gender-awareness",
+    "experiences": [
+      "social-withdrawal-reduces-gendered-exposure",
+      "staying-busy-to-avoid-gender-feelings"
+    ]
+  },
+  {
+    "id": "understanding-gender-across-time",
+    "experiences": [
+      "grief-for-life-in-the-wrong-gender-role",
+      "returning-to-gendered-childhood-interests",
+      "fear-of-aging-in-the-assigned-gender",
+      "fear-that-transition-began-too-late",
+      "gender-feelings-fluctuate-in-intensity",
+      "gender-expression-becomes-less-deliberate",
+      "moving-forward-after-gender-self-recognition",
+      "aligned-with-gender-concerns-before-self-recognition"
+    ]
+  },
+  {
+    "id": "gendered-roles-in-intimacy-and-attraction",
+    "experiences": [
+      "intimacy-when-gendered-roles-align",
+      "withdrawing-when-a-promising-date-becomes-real",
+      "attraction-to-women-and-the-imposed-male-role"
+    ]
+  },
+  {
+    "id": "sexual-responses-and-embodiment",
+    "experiences": [
+      "libido-or-arousal-feels-alien",
+      "libido-changes-make-friendship-with-women-easier",
+      "masturbation-that-affirms-a-feminine-self"
+    ]
+  }
+];
+
+export const domains = [
+  {
+    "id": "body",
+    "families": [
+      "body-image-and-self-recognition",
+      "bodily-privacy-and-visibility-to-others",
+      "gendered-body-traits-and-changes"
+    ]
+  },
+  {
+    "id": "social",
+    "families": [
+      "gender-recognition-and-evaluation",
+      "assigned-gender-roles-and-performance"
+    ]
+  },
+  {
+    "id": "presentation",
+    "families": [
+      "clothing-and-body-silhouette",
+      "hair-and-grooming",
+      "gender-expression-and-assigned-expectations"
+    ]
+  },
+  {
+    "id": "self-understanding",
+    "families": [
+      "exploring-gender-through-imagination-and-identification",
+      "suppressing-or-avoiding-gender-awareness",
+      "understanding-gender-across-time"
+    ]
+  },
+  {
+    "id": "sexuality",
+    "families": [
+      "gendered-roles-in-intimacy-and-attraction",
+      "sexual-responses-and-embodiment"
+    ]
+  }
+];
+
+export const experiences = [
+  {
+    "slug": "mirrors-and-photographs-feel-unflattering",
+    "family": "body-image-and-self-recognition",
+    "domain": "body",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "low-confidence",
+      "feeling-ugly",
+      "photo-avoidance",
+      "self-criticism"
+    ],
+    "tags": [
+      "mirrors",
+      "photographs",
+      "appearance",
+      "confidence",
+      "body-image"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ],
+      [
+        "Gender Congruence and Life Satisfaction Scale",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6831013/",
+        "Questionnaire",
+        "Covers genitalia, chest, other sex characteristics, social gender recognition, intimacy, psychological functioning, and life satisfaction."
+      ]
+    ]
+  },
+  {
+    "slug": "unfamiliar-reflection",
+    "family": "body-image-and-self-recognition",
+    "domain": "body",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "unfamiliarity",
+      "detachment",
+      "disbelief",
+      "avoidance"
+    ],
+    "tags": [
+      "mirrors",
+      "photographs",
+      "self-recognition",
+      "depersonalization"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Biochemical Dysphoria",
+        "https://genderdysphoria.fyi/en/biochemical-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "difficulty-picturing-your-current-body-shape",
+    "family": "body-image-and-self-recognition",
+    "domain": "body",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "blankness",
+      "surprise",
+      "outdated-self-image",
+      "uncertain-body-awareness"
+    ],
+    "tags": [
+      "body-image",
+      "mental-imagery",
+      "body-shape",
+      "memory",
+      "self-recognition",
+      "body-ownership"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Biochemical Dysphoria",
+        "https://genderdysphoria.fyi/en/biochemical-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "avoiding-your-own-unclothed-body",
+    "family": "body-image-and-self-recognition",
+    "domain": "body",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "looking-away",
+      "covering-features",
+      "dissociation",
+      "avoidance"
+    ],
+    "tags": [
+      "own-body",
+      "nudity",
+      "showering",
+      "dressing",
+      "body-avoidance"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ]
+    ]
+  },
+  {
+    "slug": "discomfort-with-your-body-being-seen",
+    "family": "bodily-privacy-and-visibility-to-others",
+    "domain": "body",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "covering-up",
+      "privacy",
+      "changing-room-avoidance",
+      "anxiety"
+    ],
+    "tags": [
+      "own-body",
+      "being-seen",
+      "nudity",
+      "changing-rooms",
+      "body-exposure"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "TransNavi: 日常生活で困ったとき",
+        "https://transnavi.jp/everyday/"
+      ]
+    ]
+  },
+  {
+    "slug": "feeling-out-of-place-in-gendered-restrooms",
+    "family": "bodily-privacy-and-visibility-to-others",
+    "domain": "body",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "wrongness",
+      "exposure",
+      "anxiety",
+      "avoidance",
+      "relief-in-privacy"
+    ],
+    "tags": [
+      "restrooms",
+      "toilets",
+      "gender-neutral-facilities",
+      "privacy",
+      "stalls",
+      "public-spaces",
+      "avoidance"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "Murchison et al.: Public bathroom avoidance among transgender people",
+        "https://pubmed.ncbi.nlm.nih.gov/34595532/",
+        "Research study"
+      ],
+      [
+        "Bladder health experiences of sexual and gender minorities",
+        "https://pubmed.ncbi.nlm.nih.gov/31480302/",
+        "Qualitative study"
+      ],
+      [
+        "Transgender youths’ public-facility use and well-being",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC5685206/",
+        "Research study"
+      ]
+    ]
+  },
+  {
+    "slug": "body-looks-like-the-wrong-gender",
+    "family": "body-image-and-self-recognition",
+    "domain": "body",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "transfeminine",
+      "transmasculine"
+    ],
+    "variations": [
+      {
+        "direction": "transfeminine"
+      },
+      {
+        "direction": "transmasculine"
+      }
+    ],
+    "responses": [
+      "wrongness",
+      "distress",
+      "looking-away",
+      "wish-for-change"
+    ],
+    "tags": [
+      "own-body",
+      "body-perception",
+      "sex-characteristics",
+      "mirrors",
+      "gender-incongruence"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ],
+      [
+        "Utrecht Gender Dysphoria Scale–Gender Spectrum",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7430422/",
+        "Questionnaire",
+        "An 18-item gender-neutral measure covering affirmed-gender behavior, assigned-gender treatment, identity, and bodily experience."
+      ],
+      [
+        "Gender Congruence and Life Satisfaction Scale",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6831013/",
+        "Questionnaire",
+        "Covers genitalia, chest, other sex characteristics, social gender recognition, intimacy, psychological functioning, and life satisfaction."
+      ]
+    ]
+  },
+  {
+    "slug": "covering-the-bare-upper-torso",
+    "family": "bodily-privacy-and-visibility-to-others",
+    "domain": "body",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "transfeminine"
+    ],
+    "responses": [
+      "modesty",
+      "covering-up",
+      "anxiety",
+      "preference-for-full-body-swimwear"
+    ],
+    "tags": [
+      "toplessness",
+      "nipples",
+      "chest",
+      "swimming",
+      "boymoding",
+      "public-exposure",
+      "gendered-social-norms"
+    ],
+    "reportCount": 20,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ],
+      [
+        "polen (@polen_ball): Did any other trans women/enbies who were raised male have problems going topless as a kid? I remember I always felt extremely uncomfortable wearing just shorts…",
+        "https://x.com/polen_ball/status/2089362325619007865",
+        "Community report"
+      ],
+      [
+        "TescoPespsi ミヤ (@PespoTeski): I hated not wearing a shirt… I really hate people seeing me wearing anything that isn’t at least a shirt and trousers.",
+        "https://x.com/PespoTeski/status/2089364294945112299",
+        "Community report · reply"
+      ],
+      [
+        "noinconsistency (@noinconsistency): I used to wear a shirt to the pool that wasn’t even meant for swimming.",
+        "https://x.com/noinconsistency/status/2089378128745414777",
+        "Community report · reply"
+      ],
+      [
+        "gvttrmvttmvsic (@gvttrmvttmvsic): If I were walking around with a towel on I would have it up to my armpits covering my chest.",
+        "https://x.com/gvttrmvttmvsic/status/2089384435737362757",
+        "Community report · reply"
+      ],
+      [
+        "Innerste (@Innerste_): I refused to ever go swimming without a shirt.",
+        "https://x.com/Innerste_/status/2089363153524072713",
+        "Community report · reply"
+      ],
+      [
+        "PiralisArt (@PiralisArt): I feel more comfortable topless today than I did as a kid.",
+        "https://x.com/PiralisArt/status/2089363859207237759",
+        "Community report · reply"
+      ],
+      [
+        "Asbestosdealer1 (@Asbestosdealer1): I used to love swimming until I turned 13; then I never went again without a swimming shirt on.",
+        "https://x.com/Asbestosdealer1/status/2089369646998970724",
+        "Community report · reply"
+      ],
+      [
+        "RedPandaVeth (@RedPandaVeth): Before puberty I didn’t care, but after, the idea of being topless was hell, even when I was alone.",
+        "https://x.com/RedPandaVeth/status/2089381435052327408",
+        "Community report · reply"
+      ],
+      [
+        "neco_arctic (@neco_arctic): I felt intense sensations of shame at the pool and I really couldn’t place why.",
+        "https://x.com/neco_arctic/status/2089383389417918816",
+        "Community report · reply"
+      ],
+      [
+        "Alcalino (@AlcalinoO_o): I was very uncomfortable going topless, but my parents insisted that I should because that’s what men do.",
+        "https://x.com/AlcalinoO_o/status/2089404709903671392",
+        "Community report · reply"
+      ],
+      [
+        "AxoLofa (@AxoLofa): I hated it before puberty; after puberty it was over. I still haven’t gone swimming since I was 12.",
+        "https://x.com/AxoLofa/status/2089427772963799169",
+        "Community report · reply"
+      ],
+      [
+        "gabem (@gabem_p): I was always quick to dry and put my shirt back on after I got out of the water.",
+        "https://x.com/gabem_p/status/2089622406654476734",
+        "Community report · quote"
+      ],
+      [
+        "Kuiper (@wolfgirldick): I begged my dad for a swim shirt as a kid… I would nearly cry when picked for the skins team.",
+        "https://x.com/wolfgirldick/status/2089573863248322771",
+        "Community report · quote"
+      ],
+      [
+        "Mega (@Nozomega): When I was younger I always wore a rashguard because I hated going shirtless… I think it was dysphoria too.",
+        "https://x.com/Nozomega/status/2089575697316511867",
+        "Community report · quote"
+      ],
+      [
+        "gwen (@gwenjamjam): Once I reached around 10 I couldn’t be shirtless… even swimming meant shorts and a shirt.",
+        "https://x.com/gwenjamjam/status/2089533059372839278",
+        "Community report · quote"
+      ],
+      [
+        "Soonfald (@Soonfald): I always felt exposed without a shirt on… I wasn’t self-conscious about how my chest looked.",
+        "https://x.com/Soonfald/status/2089525927256666315",
+        "Community report · quote"
+      ],
+      [
+        "Puyo (@Ms_Caskett): When I was younger I hated showing skin… Nowadays I love skirts and short shorts; they feel good.",
+        "https://x.com/Ms_Caskett/status/2089556125683253558",
+        "Community report · quote"
+      ],
+      [
+        "doodoomrpoopyman on r/MtF: Since I was around six, I never went to the swimming pool without a shirt and felt naked without one.",
+        "https://www.reddit.com/r/MtF/comments/1ep0c2l/did_anyone_else_not_like_being_shirtless_pre/",
+        "Community report · independent discussion"
+      ],
+      [
+        "lost_and_found_2000 on r/MtF: Going swimming from around age 13 caused anxiety; I covered my shoulders and chest until the last possible moment.",
+        "https://www.reddit.com/r/MtF/comments/16mrrzh/were_any_other_of_you_girls_uncomfortable_being/",
+        "Community report · independent discussion"
+      ],
+      [
+        "CoolWatermelon123 on r/MtF: At the beach or pool, having to be shirtless or show much skin felt especially uncomfortable.",
+        "https://www.reddit.com/r/MtF/comments/vxoyk0/feeling_weirduncomfortable_with_my_body/",
+        "Community report · independent discussion"
+      ]
+    ]
+  },
+  {
+    "slug": "concealing-chest-development-while-boymoding",
+    "family": "bodily-privacy-and-visibility-to-others",
+    "domain": "body",
+    "types": [
+      "dysphoric",
+      "euphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "transfeminine"
+    ],
+    "responses": [
+      "joy",
+      "anxiety",
+      "layering",
+      "concealment",
+      "protectiveness"
+    ],
+    "tags": [
+      "breasts",
+      "chest",
+      "boymoding",
+      "clothing",
+      "silhouette",
+      "public-exposure"
+    ],
+    "reportCount": 1,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ],
+      [
+        "🏳️‍⚧️Tsuki✨ (@PrestonRay83): 去游泳馆换衣服真是尴尬……怎看着像男生又有胸……求求别看了。 Changing at the pool was awkward; people kept looking at someone who appeared male and had breasts.",
+        "https://x.com/PrestonRay83/status/2087192200274985246",
+        "Community report"
+      ]
+    ]
+  },
+  {
+    "slug": "minimizing-or-binding-an-unwanted-chest",
+    "family": "clothing-and-body-silhouette",
+    "domain": "presentation",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "transmasculine"
+    ],
+    "responses": [
+      "relief",
+      "compression",
+      "concealment",
+      "reduced-body-awareness"
+    ],
+    "tags": [
+      "chest",
+      "breasts",
+      "binding",
+      "compression",
+      "silhouette"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "discomfort-with-sex-characteristics",
+    "family": "gendered-body-traits-and-changes",
+    "domain": "body",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "wrongness",
+      "revulsion",
+      "persistent-awareness",
+      "wish-for-change"
+    ],
+    "tags": [
+      "puberty",
+      "anatomy",
+      "chest",
+      "genitals",
+      "body-hair"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Diagnosing Gender Dysphoria",
+        "https://genderdysphoria.fyi/en/diagnoses"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ],
+      [
+        "WHO ICD-11: Gender incongruence",
+        "https://www.who.int/standards/classifications/frequently-asked-questions/gender-incongruence-and-transgender-health-in-the-icd",
+        "Diagnostic classification",
+        "Describes persistent incongruence with assigned sex and desires to live, be accepted, or align the body with the experienced gender."
+      ],
+      [
+        "MSD Manual: Symptoms and diagnostic criteria",
+        "https://www.msdmanuals.com/professional/psychiatric-disorders/gender-incongruence-and-gender-dysphoria/gender-incongruence-and-gender-dysphoria",
+        "Clinical manual",
+        "Summarizes adult and childhood presentations together with DSM-5-TR and ICD-11 diagnostic features."
+      ],
+      [
+        "Utrecht Gender Dysphoria Scale–Gender Spectrum",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7430422/",
+        "Questionnaire",
+        "An 18-item gender-neutral measure covering affirmed-gender behavior, assigned-gender treatment, identity, and bodily experience."
+      ],
+      [
+        "Gender Congruence and Life Satisfaction Scale",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6831013/",
+        "Questionnaire",
+        "Covers genitalia, chest, other sex characteristics, social gender recognition, intimacy, psychological functioning, and life satisfaction."
+      ]
+    ]
+  },
+  {
+    "slug": "extreme-body-shape-and-gendered-silhouette",
+    "family": "gendered-body-traits-and-changes",
+    "domain": "body",
+    "types": [
+      "dysphoric",
+      "preference",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "control",
+      "concealment",
+      "longing",
+      "relief"
+    ],
+    "tags": [
+      "weight",
+      "thinness",
+      "fatness",
+      "muscularity",
+      "body-composition",
+      "silhouette",
+      "exercise",
+      "beauty-standards"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria — extreme exercise",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "feeling-detached-from-the-body",
+    "family": "body-image-and-self-recognition",
+    "domain": "body",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "numbness",
+      "neglect",
+      "hyperfocus",
+      "lack-of-ownership"
+    ],
+    "tags": [
+      "depersonalization",
+      "body-ownership",
+      "self-care",
+      "detachment"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Biochemical Dysphoria",
+        "https://genderdysphoria.fyi/en/biochemical-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "assigned-gender-presentation-feels-wrong",
+    "family": "gender-expression-and-assigned-expectations",
+    "domain": "presentation",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "restriction",
+      "discomfort",
+      "self-consciousness",
+      "wish-for-another-expression"
+    ],
+    "tags": [
+      "gender-expression",
+      "clothing",
+      "hair",
+      "grooming",
+      "mannerisms"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ],
+      [
+        "MSD Manual: Symptoms and diagnostic criteria",
+        "https://www.msdmanuals.com/professional/psychiatric-disorders/gender-incongruence-and-gender-dysphoria/gender-incongruence-and-gender-dysphoria",
+        "Clinical manual",
+        "Summarizes adult and childhood presentations together with DSM-5-TR and ICD-11 diagnostic features."
+      ],
+      [
+        "Utrecht Gender Dysphoria Scale–Gender Spectrum",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7430422/",
+        "Questionnaire",
+        "An 18-item gender-neutral measure covering affirmed-gender behavior, assigned-gender treatment, identity, and bodily experience."
+      ],
+      [
+        "Gender Identity/Gender Dysphoria Questionnaire for Adolescents and Adults",
+        "https://pubmed.ncbi.nlm.nih.gov/19396705/",
+        "Questionnaire",
+        "A 27-item dimensional measure of gender identity and gender dysphoria for adolescents and adults."
+      ]
+    ]
+  },
+  {
+    "slug": "plain-clothes-over-assigned-gender-beauty",
+    "family": "gender-expression-and-assigned-expectations",
+    "domain": "presentation",
+    "types": [
+      "dysphoric",
+      "preference",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "indifference",
+      "low-motivation",
+      "avoidance",
+      "deliberate-plainness"
+    ],
+    "tags": [
+      "plain-clothing",
+      "black-clothing",
+      "fashion",
+      "grooming",
+      "appearance",
+      "boymoding",
+      "girlmoding",
+      "beauty-standards"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Biochemical Dysphoria",
+        "https://genderdysphoria.fyi/en/biochemical-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "gravitating-away-from-assigned-gender-expectations",
+    "family": "gender-expression-and-assigned-expectations",
+    "domain": "presentation",
+    "types": [
+      "preference"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "disinterest",
+      "rejection",
+      "affinity",
+      "curiosity"
+    ],
+    "tags": [
+      "toys",
+      "play",
+      "hobbies",
+      "friends",
+      "gender-nonconformity",
+      "childhood"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Diagnosing Gender Dysphoria",
+        "https://genderdysphoria.fyi/en/diagnoses"
+      ],
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ],
+      [
+        "WHO ICD-11: Gender incongruence",
+        "https://www.who.int/standards/classifications/frequently-asked-questions/gender-incongruence-and-transgender-health-in-the-icd",
+        "Diagnostic classification",
+        "Describes persistent incongruence with assigned sex and desires to live, be accepted, or align the body with the experienced gender."
+      ],
+      [
+        "MSD Manual: Symptoms in children",
+        "https://www.msdmanuals.com/professional/psychiatric-disorders/gender-incongruence-and-gender-dysphoria/gender-incongruence-and-gender-dysphoria",
+        "Clinical manual",
+        "Describes childhood gender expression, play, clothing preferences, and distress around pubertal change."
+      ]
+    ]
+  },
+  {
+    "slug": "being-treated-as-the-assigned-gender-feels-wrong",
+    "family": "gender-recognition-and-evaluation",
+    "domain": "social",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "irritation",
+      "hurt",
+      "disconnection",
+      "withdrawal"
+    ],
+    "tags": [
+      "misgendering",
+      "pronouns",
+      "name",
+      "honorifics",
+      "social-roles"
+    ],
+    "reportCount": 1,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Diagnosing Gender Dysphoria",
+        "https://genderdysphoria.fyi/en/diagnoses"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ],
+      [
+        "MSD Manual: Symptoms and diagnostic criteria",
+        "https://www.msdmanuals.com/professional/psychiatric-disorders/gender-incongruence-and-gender-dysphoria/gender-incongruence-and-gender-dysphoria",
+        "Clinical manual",
+        "Summarizes adult and childhood presentations together with DSM-5-TR and ICD-11 diagnostic features."
+      ],
+      [
+        "Utrecht Gender Dysphoria Scale–Gender Spectrum",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7430422/",
+        "Questionnaire",
+        "An 18-item gender-neutral measure covering affirmed-gender behavior, assigned-gender treatment, identity, and bodily experience."
+      ],
+      [
+        "Gender Identity/Gender Dysphoria Questionnaire for Adolescents and Adults",
+        "https://pubmed.ncbi.nlm.nih.gov/19396705/",
+        "Questionnaire",
+        "A 27-item dimensional measure of gender identity and gender dysphoria for adolescents and adults."
+      ],
+      [
+        "云欣 Akina (@rainchngshainn): 被 misgender 难受。 Being misgendered hurts.",
+        "https://x.com/rainchngshainn/status/2032163575075119343",
+        "Community report"
+      ]
+    ]
+  },
+  {
+    "slug": "gendered-records-feel-inaccurate",
+    "family": "gender-recognition-and-evaluation",
+    "domain": "social",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "privacy",
+      "avoidance",
+      "vigilance",
+      "disconnection"
+    ],
+    "tags": [
+      "personal-information",
+      "identity-documents",
+      "forms",
+      "profiles",
+      "name",
+      "sex-marker",
+      "disclosure"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "TransNavi: 日常生活で困ったとき",
+        "https://transnavi.jp/everyday/"
+      ]
+    ]
+  },
+  {
+    "slug": "relief-from-gender-recognition",
+    "family": "gender-recognition-and-evaluation",
+    "domain": "social",
+    "types": [
+      "euphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "relief",
+      "joy",
+      "calm",
+      "recognition"
+    ],
+    "tags": [
+      "gender-euphoria",
+      "pronouns",
+      "name",
+      "recognition",
+      "relief"
+    ],
+    "reportCount": 1,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ],
+      [
+        "Gender Congruence and Life Satisfaction Scale",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6831013/",
+        "Questionnaire",
+        "Covers genitalia, chest, other sex characteristics, social gender recognition, intimacy, psychological functioning, and life satisfaction."
+      ],
+      [
+        "Gender Euphoria Scale",
+        "https://doi.org/10.1080/26895269.2024.2447768",
+        "Questionnaire",
+        "A 26-item measure organized around social affirmation, self-affirmation, and community connection."
+      ],
+      [
+        "Lily!🏳️‍⚧️🩷🐶 (@GlassLilypad): I got ma’amed when I entered the plane today… I keep getting gendered correctly! I pass! Yay!",
+        "https://x.com/GlassLilypad/status/2027289567313764722",
+        "Community report"
+      ]
+    ]
+  },
+  {
+    "slug": "gender-policing-insults-feel-affirming",
+    "family": "gender-recognition-and-evaluation",
+    "domain": "social",
+    "types": [
+      "dysphoric",
+      "euphoric"
+    ],
+    "directions": [
+      "transfeminine",
+      "transmasculine"
+    ],
+    "variations": [
+      {
+        "direction": "transfeminine"
+      },
+      {
+        "direction": "transmasculine"
+      }
+    ],
+    "responses": [
+      "mixed-feelings",
+      "indifference",
+      "private-relief",
+      "gender-euphoria"
+    ],
+    "tags": [
+      "harassment",
+      "gender-policing",
+      "insults",
+      "slurs",
+      "recognition",
+      "assigned-gender-pride",
+      "language"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Societal Dysphoria",
+        "https://genderdysphoria.fyi/en/societal-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "relief-from-gender-affirming-expression",
+    "family": "gender-expression-and-assigned-expectations",
+    "domain": "presentation",
+    "types": [
+      "euphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "comfort",
+      "confidence",
+      "recognition",
+      "joy"
+    ],
+    "tags": [
+      "gender-euphoria",
+      "clothing",
+      "hair",
+      "appearance",
+      "self-recognition"
+    ],
+    "reportCount": 1,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ],
+      [
+        "Utrecht Gender Dysphoria Scale–Gender Spectrum",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7430422/",
+        "Questionnaire",
+        "An 18-item gender-neutral measure covering affirmed-gender behavior, assigned-gender treatment, identity, and bodily experience."
+      ],
+      [
+        "Gender Euphoria Scale",
+        "https://doi.org/10.1080/26895269.2024.2447768",
+        "Questionnaire",
+        "A 26-item measure organized around social affirmation, self-affirmation, and community connection."
+      ],
+      [
+        "haohao的宝宝 (@haohaodebaobao): 留了头发、修眉毛、化妆。很多人说没有男装时好看，开心就好了。 After growing out their hair, shaping their eyebrows, and using makeup, happiness mattered more than looking better in boymode.",
+        "https://x.com/haohaodebaobao/status/2056650624377213072",
+        "Community report"
+      ]
+    ]
+  },
+  {
+    "slug": "another-gender-in-games-and-imagined-roles",
+    "family": "exploring-gender-through-imagination-and-identification",
+    "domain": "self-understanding",
+    "types": [
+      "euphoric",
+      "preference"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "comfort",
+      "identification",
+      "escape",
+      "repetition"
+    ],
+    "tags": [
+      "avatars",
+      "video-games",
+      "role-play",
+      "cosplay",
+      "online-identity"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "gender-transformation-stories-feel-compelling",
+    "family": "exploring-gender-through-imagination-and-identification",
+    "domain": "self-understanding",
+    "types": [
+      "preference"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "fascination",
+      "identification",
+      "longing",
+      "curiosity"
+    ],
+    "tags": [
+      "transformation-stories",
+      "body-change",
+      "fantasy",
+      "fiction",
+      "self-recognition",
+      "exploration"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "assigned-gender-roles-feel-performed",
+    "family": "assigned-gender-roles-and-performance",
+    "domain": "social",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "effort",
+      "distance",
+      "masking",
+      "exhaustion"
+    ],
+    "tags": [
+      "masking",
+      "social-roles",
+      "dating",
+      "relationships",
+      "performance"
+    ],
+    "reportCount": 1,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Sexual Dysphoria",
+        "https://genderdysphoria.fyi/en/sexual-dysphoria"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ],
+      [
+        "WillowTheFoxΘΔ🏳️‍⚧️ (@Willowfoxxo): I’m so glad I dropped that mask of pretending five years ago. I love being a woman.",
+        "https://x.com/Willowfoxxo/status/2037300969327755631",
+        "Community report"
+      ]
+    ]
+  },
+  {
+    "slug": "same-gender-friendship-feels-socially-wrong",
+    "family": "assigned-gender-roles-and-performance",
+    "domain": "social",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "transfeminine",
+      "transmasculine",
+      "nonbinary"
+    ],
+    "variations": [
+      {
+        "direction": "transfeminine"
+      },
+      {
+        "direction": "transmasculine"
+      },
+      {
+        "direction": "nonbinary"
+      }
+    ],
+    "responses": [
+      "embarrassment",
+      "guilt",
+      "self-consciousness",
+      "distance",
+      "date-like-feeling"
+    ],
+    "tags": [
+      "friendship",
+      "one-to-one-interaction",
+      "peer-groups",
+      "social-roles",
+      "boymoding",
+      "girlmoding",
+      "dating-scripts",
+      "belonging"
+    ],
+    "reportCount": 1,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Sexual Dysphoria",
+        "https://genderdysphoria.fyi/en/sexual-dysphoria"
+      ],
+      [
+        "由依 (@yui_mymelodyy): 女子の友達からお泊まりに誘われて行った時、本当に気まずい。 Being invited to stay over with female friends felt deeply awkward while living as an MtF student.",
+        "https://x.com/yui_mymelodyy/status/2043674526517727656",
+        "Community report"
+      ]
+    ]
+  },
+  {
+    "slug": "overperforming-the-assigned-gender",
+    "family": "assigned-gender-roles-and-performance",
+    "domain": "social",
+    "types": [
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "overcompensation",
+      "control",
+      "repression",
+      "self-surveillance"
+    ],
+    "tags": [
+      "overcompensation",
+      "masking",
+      "denial",
+      "gender-roles"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ],
+      [
+        "MSD Manual: Symptoms in adults",
+        "https://www.msdmanuals.com/professional/psychiatric-disorders/gender-incongruence-and-gender-dysphoria/gender-incongruence-and-gender-dysphoria",
+        "Clinical manual",
+        "Describes retrospective avoidance of gender feelings and a reported flight into hypermasculinity among some AMAB adults."
+      ]
+    ]
+  },
+  {
+    "slug": "clothing-that-hides-the-body-silhouette",
+    "family": "clothing-and-body-silhouette",
+    "domain": "presentation",
+    "types": [
+      "preference",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "safety",
+      "concealment",
+      "relief",
+      "reduced-body-awareness"
+    ],
+    "tags": [
+      "oversized-clothing",
+      "hoodies",
+      "silhouette",
+      "body-shape",
+      "coping"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "voice-feels-unlike-oneself",
+    "family": "gendered-body-traits-and-changes",
+    "domain": "body",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "jarring-recognition",
+      "avoidance",
+      "embarrassment",
+      "wish-for-change"
+    ],
+    "tags": [
+      "voice",
+      "recordings",
+      "speech",
+      "self-recognition"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ]
+    ]
+  },
+  {
+    "slug": "grief-for-life-in-the-wrong-gender-role",
+    "family": "understanding-gender-across-time",
+    "domain": "self-understanding",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "grief",
+      "loss",
+      "envy",
+      "wish-to-recreate-experiences"
+    ],
+    "tags": [
+      "hindsight",
+      "grief",
+      "childhood",
+      "adolescence",
+      "missed-experiences"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Existential Dysphoria",
+        "https://genderdysphoria.fyi/en/existential-dysphoria"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ]
+    ]
+  },
+  {
+    "slug": "returning-to-gendered-childhood-interests",
+    "family": "understanding-gender-across-time",
+    "domain": "self-understanding",
+    "types": [
+      "dysphoric",
+      "euphoric",
+      "preference"
+    ],
+    "directions": [
+      "transfeminine",
+      "transmasculine"
+    ],
+    "variations": [
+      {
+        "direction": "transfeminine"
+      },
+      {
+        "direction": "transmasculine"
+      }
+    ],
+    "responses": [
+      "delight",
+      "nostalgia",
+      "longing",
+      "collecting"
+    ],
+    "tags": [
+      "childhood",
+      "toys",
+      "plush-toys",
+      "dolls",
+      "colors",
+      "childrens-fashion",
+      "collecting",
+      "missed-experiences"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Existential Dysphoria",
+        "https://genderdysphoria.fyi/en/existential-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "fear-of-aging-in-the-assigned-gender",
+    "family": "understanding-gender-across-time",
+    "domain": "self-understanding",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "fear",
+      "dread",
+      "disbelief",
+      "future-avoidance"
+    ],
+    "tags": [
+      "aging",
+      "future-self",
+      "assigned-gender",
+      "anticipation",
+      "identity"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Existential Dysphoria",
+        "https://genderdysphoria.fyi/en/existential-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ],
+      [
+        "Gender Identity/Gender Dysphoria Questionnaire for Adolescents and Adults",
+        "https://pubmed.ncbi.nlm.nih.gov/19396705/",
+        "Questionnaire",
+        "A 27-item dimensional measure of gender identity and gender dysphoria for adolescents and adults."
+      ]
+    ]
+  },
+  {
+    "slug": "fear-that-transition-began-too-late",
+    "family": "understanding-gender-across-time",
+    "domain": "self-understanding",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "regret",
+      "anxiety",
+      "hopelessness",
+      "urgency"
+    ],
+    "tags": [
+      "delayed-transition",
+      "age",
+      "puberty",
+      "passing",
+      "regret",
+      "body-changes"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Existential Dysphoria",
+        "https://genderdysphoria.fyi/en/existential-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "belonging-among-peers-of-another-gender",
+    "family": "gender-recognition-and-evaluation",
+    "domain": "social",
+    "types": [
+      "dysphoric",
+      "euphoric",
+      "preference"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "belonging",
+      "longing",
+      "exclusion",
+      "recognition"
+    ],
+    "tags": [
+      "friendship",
+      "peer-groups",
+      "belonging",
+      "exclusion",
+      "social-gender"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Existential Dysphoria",
+        "https://genderdysphoria.fyi/en/existential-dysphoria"
+      ],
+      [
+        "Utrecht Gender Dysphoria Scale–Gender Spectrum",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7430422/",
+        "Questionnaire",
+        "An 18-item gender-neutral measure covering affirmed-gender behavior, assigned-gender treatment, identity, and bodily experience."
+      ],
+      [
+        "Gender Congruence and Life Satisfaction Scale",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6831013/",
+        "Questionnaire",
+        "Covers genitalia, chest, other sex characteristics, social gender recognition, intimacy, psychological functioning, and life satisfaction."
+      ],
+      [
+        "Gender Euphoria Scale",
+        "https://doi.org/10.1080/26895269.2024.2447768",
+        "Questionnaire",
+        "A 26-item measure organized around social affirmation, self-affirmation, and community connection."
+      ]
+    ]
+  },
+  {
+    "slug": "belonging-among-transgender-and-lgbtq-people",
+    "family": "gender-recognition-and-evaluation",
+    "domain": "social",
+    "types": [
+      "euphoric",
+      "preference"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "belonging",
+      "relief",
+      "familiarity",
+      "solidarity",
+      "connection"
+    ],
+    "tags": [
+      "transgender-community",
+      "lgbtq-community",
+      "friendship",
+      "peer-support",
+      "belonging",
+      "boymoding"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "Puckett et al.: Transgender community connectedness and resilience",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7390536/",
+        "Research study"
+      ],
+      [
+        "Gender Euphoria Scale",
+        "https://doi.org/10.1080/26895269.2024.2447768",
+        "Questionnaire"
+      ]
+    ]
+  },
+  {
+    "slug": "gender-peer-friendship-mistaken-for-romantic-interest",
+    "family": "gender-recognition-and-evaluation",
+    "domain": "social",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "transfeminine",
+      "transmasculine"
+    ],
+    "variations": [
+      {
+        "direction": "transfeminine"
+      },
+      {
+        "direction": "transmasculine"
+      }
+    ],
+    "responses": [
+      "misrecognition",
+      "wariness",
+      "exclusion",
+      "loneliness"
+    ],
+    "tags": [
+      "friendship",
+      "peer-groups",
+      "romantic-assumptions",
+      "social-gender",
+      "misrecognition"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Existential Dysphoria",
+        "https://genderdysphoria.fyi/en/existential-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "moving-forward-after-gender-self-recognition",
+    "family": "understanding-gender-across-time",
+    "domain": "self-understanding",
+    "types": [
+      "euphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "release",
+      "energy",
+      "continuity",
+      "motivation"
+    ],
+    "tags": [
+      "self-recognition",
+      "acceptance",
+      "relief",
+      "life-planning",
+      "gender-euphoria"
+    ],
+    "reportCount": 1,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Existential Dysphoria",
+        "https://genderdysphoria.fyi/en/existential-dysphoria"
+      ],
+      [
+        "Gender Congruence and Life Satisfaction Scale",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6831013/",
+        "Questionnaire",
+        "Covers genitalia, chest, other sex characteristics, social gender recognition, intimacy, psychological functioning, and life satisfaction."
+      ],
+      [
+        "Gender Euphoria Scale",
+        "https://doi.org/10.1080/26895269.2024.2447768",
+        "Questionnaire",
+        "A 26-item measure organized around social affirmation, self-affirmation, and community connection."
+      ],
+      [
+        "さつきぽん (@nishiharasatsuk): 孤独で未来が見えず、耐えるだけの日々だった。今は仲間がいて、ここから始まる未来が見える。 The future once felt invisible; now companionship makes a future beginning here feel possible.",
+        "https://x.com/nishiharasatsuk/status/2029529608849379475",
+        "Community report"
+      ]
+    ]
+  },
+  {
+    "slug": "clothing-fit-highlights-body-shape",
+    "family": "clothing-and-body-silhouette",
+    "domain": "presentation",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "wrongness",
+      "sensory-discomfort",
+      "avoidance",
+      "relief-with-another-cut"
+    ],
+    "tags": [
+      "clothing-fit",
+      "jeans",
+      "silhouette",
+      "proportions",
+      "body-awareness"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "controlling-gendered-body-hair",
+    "family": "hair-and-grooming",
+    "domain": "presentation",
+    "types": [
+      "euphoric",
+      "preference",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "relief",
+      "compulsion",
+      "control",
+      "affirmation"
+    ],
+    "tags": [
+      "body-hair",
+      "facial-hair",
+      "shaving",
+      "grooming",
+      "presentation"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "hair-carries-unusual-importance",
+    "family": "hair-and-grooming",
+    "domain": "presentation",
+    "types": [
+      "euphoric",
+      "preference"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "longing",
+      "relief",
+      "fear",
+      "self-recognition"
+    ],
+    "tags": [
+      "hair",
+      "haircut",
+      "gender-expression",
+      "coping"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "identifying-with-characters-of-another-gender",
+    "family": "exploring-gender-through-imagination-and-identification",
+    "domain": "self-understanding",
+    "types": [
+      "preference"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "identification",
+      "longing",
+      "comfort",
+      "vicarious-experience"
+    ],
+    "tags": [
+      "fiction",
+      "film",
+      "literature",
+      "characters",
+      "identification"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "aligned-with-gender-concerns-before-self-recognition",
+    "family": "understanding-gender-across-time",
+    "domain": "self-understanding",
+    "types": [
+      "preference"
+    ],
+    "directions": [
+      "transfeminine",
+      "transmasculine"
+    ],
+    "variations": [
+      {
+        "direction": "transfeminine"
+      },
+      {
+        "direction": "transmasculine"
+      }
+    ],
+    "responses": [
+      "empathy",
+      "solidarity",
+      "belonging",
+      "retrospective-recognition"
+    ],
+    "tags": [
+      "advocacy",
+      "feminism",
+      "gender-politics",
+      "belonging",
+      "self-recognition"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Existential Dysphoria",
+        "https://genderdysphoria.fyi/en/existential-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "living-through-another-persons-presentation",
+    "family": "exploring-gender-through-imagination-and-identification",
+    "domain": "self-understanding",
+    "types": [
+      "preference"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "vicarious-joy",
+      "longing",
+      "expertise",
+      "envy"
+    ],
+    "tags": [
+      "shopping",
+      "styling",
+      "partners",
+      "vicarious-experience",
+      "clothing"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "envy-blends-appearance-identity-and-attraction",
+    "family": "exploring-gender-through-imagination-and-identification",
+    "domain": "self-understanding",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "envy",
+      "admiration",
+      "attraction",
+      "longing",
+      "confusion"
+    ],
+    "tags": [
+      "envy",
+      "attraction",
+      "appearance",
+      "identification"
+    ],
+    "reportCount": 1,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Sexual Dysphoria",
+        "https://genderdysphoria.fyi/en/sexual-dysphoria"
+      ],
+      [
+        "てちゃん (@Techan_desu): 性別移行前は女の子が好きと自分がなりたい女の子が混同してるカオスな状態でした。 Before transition, liking girls and wanting to become a girl were all mixed together.",
+        "https://x.com/Techan_desu/status/2071867901179760648",
+        "Community report"
+      ]
+    ]
+  },
+  {
+    "slug": "attuned-to-gender-variance-in-other-people",
+    "family": "exploring-gender-through-imagination-and-identification",
+    "domain": "self-understanding",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "recognition",
+      "familiarity",
+      "envy",
+      "attraction",
+      "hypervigilance",
+      "passing-anxiety"
+    ],
+    "tags": [
+      "transgender-recognition",
+      "gender-cues",
+      "attraction",
+      "envy",
+      "passing",
+      "self-recognition",
+      "privacy"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Existential Dysphoria",
+        "https://genderdysphoria.fyi/en/existential-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ],
+      [
+        "Cox et al.: Inferences about sexual orientation and the gaydar myth",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC4731319/",
+        "Related research",
+        "Research on sexual-orientation inference shows how perceived radar can rely on stereotypes; it does not establish reliable detection of transgender identity."
+      ],
+      [
+        "STRONG cohort: Visual conformity with affirmed gender",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7529975/",
+        "Research study"
+      ]
+    ]
+  },
+  {
+    "slug": "social-withdrawal-reduces-gendered-exposure",
+    "family": "suppressing-or-avoiding-gender-awareness",
+    "domain": "self-understanding",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "avoidance",
+      "isolation",
+      "temporary-relief",
+      "loneliness"
+    ],
+    "tags": [
+      "social-withdrawal",
+      "isolation",
+      "avoidance",
+      "coping"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "separate-online-identity-until-gender-disclosure-feels-safe",
+    "family": "gender-recognition-and-evaluation",
+    "domain": "social",
+    "types": [
+      "dysphoric",
+      "euphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "privacy",
+      "anxiety",
+      "concealment",
+      "relief",
+      "openness"
+    ],
+    "tags": [
+      "online-identity",
+      "privacy",
+      "disclosure",
+      "voice-chat",
+      "names",
+      "transition"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "staying-busy-to-avoid-gender-feelings",
+    "family": "suppressing-or-avoiding-gender-awareness",
+    "domain": "self-understanding",
+    "types": [
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "distraction",
+      "numbing",
+      "escape",
+      "exhaustion"
+    ],
+    "tags": [
+      "overwork",
+      "hobbies",
+      "gaming",
+      "sleep",
+      "coping"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Managed Dysphoria",
+        "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "gender-feelings-fluctuate-in-intensity",
+    "family": "understanding-gender-across-time",
+    "domain": "self-understanding",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "fluctuation",
+      "uncertainty",
+      "temporary-relief",
+      "sudden-distress"
+    ],
+    "tags": [
+      "fluctuation",
+      "intensity",
+      "genderfluidity",
+      "daily-variation"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Biochemical Dysphoria",
+        "https://genderdysphoria.fyi/en/biochemical-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "gender-expression-becomes-less-deliberate",
+    "family": "understanding-gender-across-time",
+    "domain": "self-understanding",
+    "types": [
+      "adaptation"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "effort",
+      "experimentation",
+      "familiarity",
+      "ease"
+    ],
+    "tags": [
+      "transition",
+      "gender-expression",
+      "adaptation",
+      "passing",
+      "social-recognition",
+      "preferences",
+      "gender-roles"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Presentational Dysphoria",
+        "https://genderdysphoria.fyi/en/presentational-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "intimacy-when-gendered-roles-align",
+    "family": "gendered-roles-in-intimacy-and-attraction",
+    "domain": "sexuality",
+    "types": [
+      "dysphoric",
+      "euphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "disconnection",
+      "shame",
+      "relief",
+      "desire",
+      "embodiment"
+    ],
+    "tags": [
+      "intimacy",
+      "dating",
+      "sexuality",
+      "relationships",
+      "gender-roles"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Sexual Dysphoria",
+        "https://genderdysphoria.fyi/en/sexual-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "Gender Congruence and Life Satisfaction Scale",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6831013/",
+        "Questionnaire",
+        "Covers genitalia, chest, other sex characteristics, social gender recognition, intimacy, psychological functioning, and life satisfaction."
+      ]
+    ]
+  },
+  {
+    "slug": "withdrawing-when-a-promising-date-becomes-real",
+    "family": "gendered-roles-in-intimacy-and-attraction",
+    "domain": "sexuality",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "withdrawal",
+      "confusion",
+      "avoidance",
+      "loss-of-interest"
+    ],
+    "tags": [
+      "dating",
+      "romance",
+      "mutual-attraction",
+      "being-desired",
+      "intimacy",
+      "assigned-gender-roles"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Sexual Dysphoria",
+        "https://genderdysphoria.fyi/en/sexual-dysphoria"
+      ],
+      [
+        "Gender Congruence and Life Satisfaction Scale",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6831013/",
+        "Questionnaire",
+        "Covers genitalia, chest, other sex characteristics, social gender recognition, intimacy, psychological functioning, and life satisfaction."
+      ]
+    ]
+  },
+  {
+    "slug": "body-changes-create-recognition-and-relief",
+    "family": "gendered-body-traits-and-changes",
+    "domain": "body",
+    "types": [
+      "euphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "recognition",
+      "relief",
+      "joy",
+      "increased-body-ownership"
+    ],
+    "tags": [
+      "gender-euphoria",
+      "body-changes",
+      "self-recognition",
+      "body-ownership"
+    ],
+    "reportCount": 1,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ],
+      [
+        "WHO ICD-11: Gender incongruence",
+        "https://www.who.int/standards/classifications/frequently-asked-questions/gender-incongruence-and-transgender-health-in-the-icd",
+        "Diagnostic classification",
+        "Describes persistent incongruence with assigned sex and desires to live, be accepted, or align the body with the experienced gender."
+      ],
+      [
+        "WPATH Standards of Care, Version 8",
+        "https://wpath.org/publications/soc8/",
+        "Care standard",
+        "Clinical recommendations for assessing gender incongruence and planning gender-affirming care."
+      ],
+      [
+        "Gender Congruence and Life Satisfaction Scale",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6831013/",
+        "Questionnaire",
+        "Covers genitalia, chest, other sex characteristics, social gender recognition, intimacy, psychological functioning, and life satisfaction."
+      ],
+      [
+        "ラミー (@rummy_chocolove): Started HRT at 29. It’s not even my face—my expressions changed, and that’s what I’m super happy about.",
+        "https://x.com/rummy_chocolove/status/2044032358467416508",
+        "Community report"
+      ]
+    ]
+  },
+  {
+    "slug": "seeing-yourself-shift-toward-recognition",
+    "family": "body-image-and-self-recognition",
+    "domain": "body",
+    "types": [
+      "euphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "alienation",
+      "surprise",
+      "recognition",
+      "joy"
+    ],
+    "tags": [
+      "mirrors",
+      "photographs",
+      "gender-euphoria",
+      "self-recognition"
+    ],
+    "reportCount": 1,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Biochemical Dysphoria",
+        "https://genderdysphoria.fyi/en/biochemical-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "さつきぽん (@nishiharasatsuk): 移行前は写真を見るたび苦しくなって消していた。今は望んだ姿や笑顔を残したくて、少しずつ自分の姿を好きになれている。 Before transition, photographs were painful; now they preserve a wanted appearance and a growing fondness for it.",
+        "https://x.com/nishiharasatsuk/status/2067216940440211610",
+        "Community report"
+      ]
+    ]
+  },
+  {
+    "slug": "libido-or-arousal-feels-alien",
+    "family": "sexual-responses-and-embodiment",
+    "domain": "sexuality",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "transfeminine"
+    ],
+    "responses": [
+      "revulsion",
+      "shame",
+      "loss-of-control",
+      "body-alienation",
+      "avoidance"
+    ],
+    "tags": [
+      "libido",
+      "arousal",
+      "genital-response",
+      "body-reaction",
+      "sexuality"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Sexual Dysphoria",
+        "https://genderdysphoria.fyi/en/sexual-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Physical Dysphoria",
+        "https://genderdysphoria.fyi/en/physical-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "libido-changes-make-friendship-with-women-easier",
+    "family": "sexual-responses-and-embodiment",
+    "domain": "sexuality",
+    "types": [
+      "euphoric"
+    ],
+    "directions": [
+      "transfeminine"
+    ],
+    "responses": [
+      "relief",
+      "ease",
+      "reduced-pressure",
+      "friendship",
+      "gender-euphoria"
+    ],
+    "tags": [
+      "libido-changes",
+      "hrt",
+      "female-friends",
+      "friendship",
+      "sexual-desire",
+      "transfeminine"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Sexual Dysphoria",
+        "https://genderdysphoria.fyi/en/sexual-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "UCSF Gender Affirming Health Program: Feminizing hormone therapy",
+        "https://transcare.ucsf.edu/guidelines/feminizing-hormone-therapy",
+        "Clinical guideline"
+      ],
+      [
+        "ENIGI study: Sexual desire changes after hormone treatment",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7207496/",
+        "Research study"
+      ]
+    ]
+  },
+  {
+    "slug": "attraction-to-women-and-the-imposed-male-role",
+    "family": "gendered-roles-in-intimacy-and-attraction",
+    "domain": "sexuality",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "transfeminine"
+    ],
+    "responses": [
+      "guilt",
+      "shame",
+      "fear-of-objectifying",
+      "self-monitoring",
+      "relief-in-a-sapphic-role"
+    ],
+    "tags": [
+      "gynephilia",
+      "female-friends",
+      "male-gaze",
+      "libido",
+      "sapphic-attraction",
+      "sexual-roles"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Sexual Dysphoria",
+        "https://genderdysphoria.fyi/en/sexual-dysphoria"
+      ]
+    ]
+  },
+  {
+    "slug": "assigned-gender-compliments-feel-wrong",
+    "family": "gender-recognition-and-evaluation",
+    "domain": "social",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "transfeminine",
+      "transmasculine"
+    ],
+    "variations": [
+      {
+        "direction": "transfeminine"
+      },
+      {
+        "direction": "transmasculine"
+      }
+    ],
+    "responses": [
+      "discomfort",
+      "deflation",
+      "irritation",
+      "feeling-unseen"
+    ],
+    "tags": [
+      "compliments",
+      "handsome",
+      "pretty",
+      "beautiful",
+      "gendered-language",
+      "social-recognition"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "TransNavi: 性別違和を知る",
+        "https://transnavi.jp/dysphoria/"
+      ]
+    ]
+  },
+  {
+    "slug": "masturbation-that-affirms-a-feminine-self",
+    "family": "sexual-responses-and-embodiment",
+    "domain": "sexuality",
+    "types": [
+      "euphoric",
+      "preference"
+    ],
+    "directions": [
+      "transfeminine"
+    ],
+    "responses": [
+      "relief",
+      "embodiment",
+      "pleasure",
+      "gender-euphoria",
+      "avoidance-of-male-coded-methods"
+    ],
+    "tags": [
+      "masturbation",
+      "solitary-sexuality",
+      "fantasy",
+      "touch",
+      "anatomy",
+      "sexual-role"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Sexual Dysphoria",
+        "https://genderdysphoria.fyi/en/sexual-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Euphoria",
+        "https://genderdysphoria.fyi/en/euphoria"
+      ]
+    ]
+  }
+];

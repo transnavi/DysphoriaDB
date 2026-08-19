@@ -2,14 +2,14 @@ export const evidenceRanking = {
   "Wanting to cover the bare upper torso despite being treated as male": 20,
   "Concealing chest development while boymoding": 1,
   "Envy blends appearance, identity, and attraction": 1,
-  "Seeing oneself can shift from alienation to recognition": 1,
+  "Seeing yourself can shift from alienation to recognition": 1,
   "Relief from gender-affirming expression": 1,
   "Body changes can create recognition and relief": 1,
   "Being treated as same-gender friends can feel socially wrong": 1,
   "Assigned-gender social roles feel performed": 1,
   "Discomfort being treated as the assigned gender": 1,
   "Feeling able to move forward after recognizing your gender": 1,
-  "Relief when one’s gender is recognized": 1
+  "Relief when your gender is recognized": 1
 };
 
 export const evidenceSamples = {
@@ -173,7 +173,7 @@ export const evidenceSamples = {
       "relation": ""
     }
   ],
-  "Seeing oneself can shift from alienation to recognition": [
+  "Seeing yourself can shift from alienation to recognition": [
     {
       "url": "https://x.com/nishiharasatsuk/status/2067216940440211610",
       "author": "さつきぽん",
@@ -236,7 +236,7 @@ export const evidenceSamples = {
       "relation": ""
     }
   ],
-  "Relief when one’s gender is recognized": [
+  "Relief when your gender is recognized": [
     {
       "url": "https://x.com/GlassLilypad/status/2027289567313764722",
       "author": "Lily!🏳️‍⚧️🩷🐶",

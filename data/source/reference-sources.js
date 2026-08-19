@@ -33,7 +33,7 @@ export const referenceSources = {
     UGDS_SOURCE,
     GIDYQ_SOURCE,
   ],
-  "Relief when one’s gender is recognized": [
+  "Relief when your gender is recognized": [
     GCLS_SOURCE,
     EUPHORIA_SOURCE,
   ],

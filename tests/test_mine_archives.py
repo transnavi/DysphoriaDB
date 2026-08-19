@@ -4,8 +4,17 @@ from pathlib import Path
 from scripts.mine_archives import PATTERNS, matches
 
 
+def test_experience_copy_addresses_the_reader_directly() -> None:
+    source = Path("data/source/claims.js").read_text(encoding="utf-8")
+    detached_reader_terms = re.compile(
+        r"\b(?:someone|a person|the person|some people|the individual)\b|\bone[’']s\b",
+        re.IGNORECASE,
+    )
+    assert detached_reader_terms.findall(source) == []
+
+
 def test_every_published_claim_has_archive_patterns() -> None:
-    source = Path("site/claim-slugs.js").read_text(encoding="utf-8")
+    source = Path("data/source/claim-slugs.js").read_text(encoding="utf-8")
     titles = set(re.findall(r'^\s+"([^"]+)":', source, re.MULTILINE))
     assert titles == set(PATTERNS)
 
@@ -50,6 +59,31 @@ def test_transmasculine_friendship_is_read_as_romantic_availability() -> None:
     assert "Seeking friendship with gender peers is mistaken for romantic interest" in matches(text)
 
 
+def test_group_outing_with_gender_peers_feels_euphoric() -> None:
+    text = "As a trans woman, going out with a group of women and being treated as one of them felt euphoric."
+    assert "Wanting to belong among peers of another gender" in matches(text)
+
+
+def test_lower_libido_makes_friendship_with_women_easier() -> None:
+    text = "As a trans woman, HRT lowered my libido and made friendship with women easier and more comfortable."
+    assert "Relief when libido changes make friendship with women easier" in matches(text)
+
+
+def test_belonging_in_a_transfeminine_group_while_boymoding() -> None:
+    text = "I was boymoding when I joined a transfeminine group and felt a strong sense of belonging, even though we had little in common."
+    assert "Finding belonging among transgender and other LGBTQ+ people" in matches(text)
+
+
+def test_subjective_transgender_radar_and_passing_anxiety() -> None:
+    text = "As a trans woman, I feel like I can spot other transgender people easily, and that makes me fear I will always be clocked."
+    assert "Feeling unusually attuned to gender variance in other people" in matches(text)
+
+
+def test_unexplained_attraction_precedes_self_recognition() -> None:
+    text = "Before I knew I was trans, I met a gender-nonconforming woman and felt strangely drawn to her without knowing why."
+    assert "Feeling unusually attuned to gender variance in other people" in matches(text)
+
+
 def test_feminism_precedes_transfeminine_self_recognition() -> None:
     text = "I was a feminist and felt women's issues were personal long before I realized I was a trans woman."
     assert "Feeling aligned with a gender’s concerns before recognizing it as your own" in matches(text)
@@ -63,6 +97,16 @@ def test_alignment_precedes_transmasculine_self_recognition() -> None:
 def test_gendered_details_are_hidden_from_close_online_friends() -> None:
     text = "As a trans person, I kept my gender and voice private from even my closest online friends."
     assert "Keeping an online identity separate until gender disclosure feels safe" in matches(text)
+
+
+def test_assigned_gender_restroom_feels_wrong() -> None:
+    text = "As a trans woman, the men's restroom I always used began to feel wrong, and I preferred gender-neutral bathrooms."
+    assert "Feeling out of place in gendered restrooms" in matches(text)
+
+
+def test_hiding_in_a_private_restroom_stall() -> None:
+    text = "As a trans man in a public restroom, I hide in a private stall and avoid conversation so nobody notices my body or voice."
+    assert "Feeling out of place in gendered restrooms" in matches(text)
 
 
 def test_online_identity_opens_after_transition() -> None:

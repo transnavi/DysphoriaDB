@@ -31,7 +31,7 @@ PATTERNS: dict[str, list[str]] = {
         r"(?:mirror|selfie|photo(?:graph)?|鏡|写真|自拍|镜子).{0,80}(?:ugly|unattractive|hate|avoid|醜|丑|嫌|苦手|自信)",
         r"(?:ugly|unattractive|醜|丑|自信).{0,80}(?:mirror|selfie|photo|鏡|写真|自拍|镜子)",
     ],
-    "The person in the mirror feels unfamiliar": [
+    "Your reflection feels unfamiliar": [
         r"(?:mirror|reflection|photo|鏡|写真|镜子).{0,80}(?:stranger|not me|unfamiliar|recognize|別人|自分.*ない|不像自己|陌生)",
     ],
     "Avoiding seeing your own unclothed body": [
@@ -39,6 +39,15 @@ PATTERNS: dict[str, list[str]] = {
     ],
     "Discomfort with other people seeing your body": [
         r"(?:seen naked|see me naked|changing room|locker room|見られ.{0,20}(?:裸|身体|体)|被看.{0,20}(?:裸体|身体)).{0,80}(?:hate|avoid|uncomfortable|嫌|避|不舒服)",
+    ],
+    "Feeling out of place in gendered restrooms": [
+        r"(?:restroom|bathroom|toilet|washroom|loo).{0,100}(?:wrong|uncomfortable|dysphori|anxi|unsafe|out of place).{0,80}(?:gender|men.s|women.s|male|female|trans)?",
+        r"(?:men.s|women.s|male|female|assigned.gender).{0,60}(?:restroom|bathroom|toilet|washroom).{0,100}(?:wrong|uncomfortable|dysphori|anxi|unsafe|avoid)",
+        r"(?:gender.neutral|all.gender|unisex|family|single.occupancy).{0,40}(?:restroom|bathroom|toilet).{0,100}(?:prefer|seek|find|relief|safe|comfortable|wish)",
+        r"(?:restroom|bathroom|toilet|washroom).{0,100}(?:stall|cubicle|private).{0,80}(?:hide|avoid|talk|conversation|eye contact|expos|voice|body)",
+        r"(?:hold it|delay urinat|avoid).{0,80}(?:public )?(?:restroom|bathroom|toilet|washroom).{0,100}(?:trans|gender|dysphori|unsafe|harass)",
+        r"(?:トイレ|便所|化粧室).{0,100}(?:性別|男性用|女性用|多目的|ジェンダーレス).{0,80}(?:違和感|居づら|怖|避け|個室|隠|話さ)",
+        r"(?:厕所|廁所|洗手间|洗手間).{0,100}(?:性别|性別|男厕|男廁|女厕|女廁|无性别|無性別).{0,80}(?:不对劲|不對勁|不自在|害怕|回避|隔间|隔間|隐藏|隱藏)",
     ],
     "Distress when your own body looks male or female": [
         r"(?:my body|自分の身体|自分の体|自己的身体).{0,100}(?:male|female|man|woman|男|女).{0,80}(?:wrong|hate|distress|嫌|違和|痛苦)",
@@ -92,7 +101,7 @@ PATTERNS: dict[str, list[str]] = {
         r"(?:身分証|戸籍|書類|フォーム|プロフィール|個人情報).{0,100}(?:性別|名前|戸籍名|写真).{0,60}(?:違|間違|嫌|出したく|見せたく)",
         r"(?:身份证|护照|证件|档案|表格|个人信息).{0,100}(?:性别|名字|照片).{0,60}(?:错误|不对|讨厌|不想出示|不像自己)",
     ],
-    "Relief when one’s gender is recognized": [
+    "Relief when your gender is recognized": [
         r"(?:gendered correctly|right pronoun|chosen name|called me (?:a )?(?:girl|boy|woman|man)|正しい性別|女の子.*呼|男の子.*呼|正确称呼|叫我女生|叫我男生).{0,80}(?:happy|euphori|嬉|喜|开心)?",
     ],
     "Assigned-gender compliments feel uncomfortable": [
@@ -181,8 +190,18 @@ PATTERNS: dict[str, list[str]] = {
     "Wanting to belong among peers of another gender": [
         r"(?:want|wish|long).{0,40}(?:one of the girls|one of the boys|belong with (?:girls|boys|women|men)|included with (?:girls|boys|women|men))",
         r"(?:girls|boys|women|men).{0,60}(?:excluded|left out|wouldn't let me|didn't see me).{0,50}(?:gender|trans|girl|boy|woman|man)?",
+        r"(?:going out|went out|hanging out|outing|trip|shopping|meal).{0,100}(?:group of (?:women|men|girls|boys)|with (?:women|men|girls|boys)).{0,100}(?:euphori|affirm|felt right|one of them|belong)",
+        r"(?:group of (?:women|men|girls|boys)|with (?:women|men|girls|boys)).{0,100}(?:going out|went out|hanging out|outing|trip|shopping|meal).{0,100}(?:euphori|affirm|felt right|one of them|belong)",
         r"(?:女子|男子|女性|男性).{0,40}(?:仲間|輪|グループ|友達).{0,60}(?:入り|混ざり|排除|羨ま|居場所)",
         r"(?:女生|男生|女性|男性).{0,40}(?:圈子|群体|朋友|姐妹|兄弟).{0,60}(?:加入|融入|排除|羡慕|归属)",
+    ],
+    "Finding belonging among transgender and other LGBTQ+ people": [
+        r"(?:trans|transgender|transfem|transmasc|lgbtq?|queer).{0,50}(?:group|friends|community|people).{0,100}(?:belong|relief|at home|connected|unified|euphori)",
+        r"(?:belong|relief|at home|connected|unified|euphori).{0,100}(?:trans|transgender|transfem|transmasc|lgbtq?|queer).{0,50}(?:group|friends|community|people)",
+        r"(?:many|most|all).{0,50}(?:friends|people around me).{0,80}(?:trans|transgender|lgbtq?|queer|gay|bisexual|sexual minorit)",
+        r"(?:boymod|girlmod|closeted|questioning).{0,120}(?:trans|transgender|transfem|transmasc|lgbtq?|queer).{0,50}(?:group|friends|community).{0,100}(?:belong|relief|at home|connected|unified)",
+        r"(?:トランス|LGBTQ|クィア|性的少数者).{0,50}(?:仲間|友達|コミュニティ|グループ).{0,100}(?:居場所|一体感|安心|つながり|仲間意識)",
+        r"(?:跨性别|跨性別|LGBTQ|酷儿|酷兒|性少数|性少數).{0,50}(?:朋友|社群|群体|群體|圈子).{0,100}(?:归属|歸屬|一体感|一體感|安心|联系|聯繫)",
     ],
     "Seeking friendship with gender peers is mistaken for romantic interest": [
         r"(?:friend|friendship|platonic).{0,80}(?:women|woman|girls|girl|men|man|boys|boy).{0,100}(?:flirt|romantic|sexual|hitting on|pursu|interest|guarded|wary|cautious)",
@@ -213,6 +232,14 @@ PATTERNS: dict[str, list[str]] = {
         r"(?:彼女|妻|彼氏|夫|パートナー).{0,50}(?:服|化粧|メイク|買い物|コーデ).{0,80}(?:代わり|自分も|羨ま|着せ)",
         r"(?:女友|妻子|男友|丈夫|伴侣).{0,50}(?:衣服|化妆|打扮|购物).{0,80}(?:替自己|羡慕|代偿|想穿)",
     ],
+    "Feeling unusually attuned to gender variance in other people": [
+        r"(?:trans radar|transdar|clock|spot|detect|tell).{0,100}(?:trans|transgender|transfem|transmasc|gender variant|gender nonconforming)",
+        r"(?:trans|transgender|transfem|transmasc|gender variant|gender nonconforming).{0,100}(?:radar|clock|spot|detect|could tell|sense)",
+        r"(?:met|saw|noticed).{0,80}(?:trans|transgender|transfem|transmasc|gender[- ]nonconforming).{0,100}(?:attract|envy|familiar|similar|same|drawn|couldn.t explain)",
+        r"(?:notice|spot|clock|detect).{0,80}(?:trans|transgender|transfem|transmasc).{0,100}(?:never pass|transition impossible|too obvious|always be clocked)",
+        r"(?:トランス|性別違和|ジェンダー).{0,80}(?:見抜|気づ|察知|分かる|似ている|同じ).{0,100}(?:惹かれ|羨ま|親近感|移行.*無理|パス.*無理)",
+        r"(?:跨性别|跨性別|性别气质|性別氣質).{0,80}(?:看出|认出|認出|察觉|察覺|相似|一样|一樣).{0,100}(?:吸引|羡慕|羨慕|亲近感|親近感|无法过关|無法過關)",
+    ],
     "Social withdrawal reduces gendered exposure": [
         r"(?:avoid|stopped|quit).{0,40}(?:socializing|going out|people|parties|photos|dating).{0,100}(?:gender|body|appearance|dysphori|misgender|trans)",
         r"(?:性別|身体|見た目|男|女).{0,50}(?:見られ|扱われ|写真).{0,80}(?:引きこも|人を避け|外出.*避|会わな)",
@@ -241,6 +268,13 @@ PATTERNS: dict[str, list[str]] = {
         r"(?:女性|男性|女|男).{0,30}(?:として).{0,60}(?:恋愛|交際|デート|セックス|性行為).{0,80}(?:自然|楽|嬉|しっくり)",
         r"(?:女人|男人|女生|男生).{0,30}(?:身份|角色).{0,60}(?:恋爱|约会|性爱|亲密).{0,80}(?:自然|舒服|开心|正确)",
     ],
+    "Relief when libido changes make friendship with women easier": [
+        r"(?:hrt|hormones?|estrogen|anti-?androgen).{0,80}(?:decreas|lower|quieter|chang).{0,50}(?:libido|sex drive|sexual desire).{0,120}(?:friendship|female friends?|women friends?).{0,80}(?:easier|relief|comfortable|calm)",
+        r"(?:hrt|hormones?|estrogen|anti-?androgen).{0,100}(?:libido|sex drive|sexual desire).{0,100}(?:decreas|lower|quieter|chang).{0,120}(?:friendship|female friends?|women friends?).{0,80}(?:easier|relief|comfortable|calm)",
+        r"(?:libido|sex drive|sexual desire).{0,100}(?:interfere|hinder|difficult|hard|intrusive).{0,100}(?:friend|friendship|women|female friends?)",
+        r"(?:HRT|ホルモン|エストロゲン|抗アンドロゲン).{0,100}(?:性欲|リビドー).{0,100}(?:減|弱|変化).{0,120}(?:女友達|女性との友情|友人関係).{0,80}(?:楽|安心|維持|続け)",
+        r"(?:HRT|激素|雌激素|抗雄激素).{0,100}(?:性欲).{0,100}(?:降低|减少|減少|变化|變化).{0,120}(?:女性朋友|和女性的友谊|和女性的友誼).{0,80}(?:轻松|輕鬆|安心|维持|維持)",
+    ],
     "Withdrawing when a promising date becomes real": [
         r"(?:date|dating|relationship|crush).{0,100}(?:liked|good|mutual|liked me back).{0,80}(?:left|ran|ghost|withdrew|lost interest|panic).{0,80}(?:gender|role|body|why)?",
         r"(?:デート|交際|恋愛|好きな人).{0,100}(?:うまく|両思い|好かれ).{0,80}(?:逃げ|断|冷め|怖く|理由.*分から)",
@@ -251,7 +285,7 @@ PATTERNS: dict[str, list[str]] = {
         r"(?:HRT|ホルモン|性別移行).{0,100}(?:身体|肌|顔|胸|声|髪|体型).{0,100}(?:自分.*感じ|しっくり|嬉|安心|好き)",
         r"(?:HRT|激素|性别转变).{0,100}(?:身体|皮肤|脸|胸|声音|头发|身材).{0,100}(?:像自己|正确|开心|舒服|喜欢)",
     ],
-    "Seeing oneself can shift from alienation to recognition": [
+    "Seeing yourself can shift from alienation to recognition": [
         r"(?:before|used to).{0,60}(?:hate|avoid|couldn't look).{0,30}(?:mirror|photo|selfie).{0,120}(?:now|after transition|hrt).{0,60}(?:love|like|recognize|happy|take photos)",
         r"(?:移行前|以前|从前).{0,60}(?:鏡|写真|自拍|镜子).{0,60}(?:嫌|苦手|讨厌|不看).{0,120}(?:今|現在|现在|移行後|转变后).{0,60}(?:好き|撮り|喜欢|爱拍)",
     ],

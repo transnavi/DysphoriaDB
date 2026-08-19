@@ -37,7 +37,7 @@ def build_module(records: list[dict[str, str]]) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=Path("data/approved-evidence.json"))
-    parser.add_argument("--output", type=Path, default=Path("site/approved-evidence.js"))
+    parser.add_argument("--output", type=Path, default=Path("data/source/approved-evidence.js"))
     args = parser.parse_args()
 
     records = json.loads(args.input.read_text(encoding="utf-8"))

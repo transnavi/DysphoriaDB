@@ -21,8 +21,6 @@ export function normalizeBrowseState(value, {
   validDomains,
   validFamilies,
   validFilters,
-  initialLimit,
-  itemCount,
 }) {
   const state = typeof value === "object" && value !== null ? value : {};
   const activeDomain = state.activeDomain === "all" || validDomains.has(state.activeDomain)
@@ -31,8 +29,6 @@ export function normalizeBrowseState(value, {
   const list = (candidate, allowed) => Array.isArray(candidate)
     ? [...new Set(candidate.filter((item) => typeof item === "string" && allowed.has(item)))]
     : [];
-  const numericLimit = Number.isFinite(state.visibleLimit) ? Math.trunc(state.visibleLimit) : initialLimit;
-
   return {
     activeDomain,
     activeFilters: list(state.activeFilters, validFilters),
@@ -40,6 +36,5 @@ export function normalizeBrowseState(value, {
     closedFamilies: list(state.closedFamilies, validFamilies),
     query: typeof state.query === "string" ? state.query.slice(0, 200) : "",
     scrollY: Number.isFinite(state.scrollY) ? Math.max(0, state.scrollY) : 0,
-    visibleLimit: Math.min(itemCount, Math.max(initialLimit, numericLimit)),
   };
 }

@@ -1,9 +1,7 @@
 import {
   buildSearchIndex,
-  CARD_BATCH_SIZE,
   escapeHtml,
   filterKey,
-  INITIAL_CARD_COUNT,
   renderCatalog,
   renderExperienceDetail,
   renderReaction,
@@ -36,9 +34,6 @@ const searchLabel = document.querySelector("#search-label");
 const searchButton = document.querySelector("#search-button");
 const count = document.querySelector("#result-count");
 const empty = document.querySelector("#empty");
-const loadMore = document.querySelector("#load-more");
-const loadMoreButton = document.querySelector("#load-more-button");
-const incrementalSkeleton = document.querySelector("#incremental-skeleton");
 const catalogLoadingLabel = document.querySelector("#catalog-loading-label");
 const domainTabs = document.querySelector("#domain-tabs");
 const activeFiltersElement = document.querySelector("#active-filters");
@@ -94,9 +89,6 @@ let stopLocalePositioning = null;
 let floatingUiPromise = null;
 let selectedReactions = loadSelectedReactions();
 let newSlugs = loadNewItems();
-let visibleLimit = restoredBrowseState.visibleLimit;
-let currentCatalogTotal = claims.length;
-let loadMorePending = false;
 let reactionCountsLoaded = false;
 let searchTimer = null;
 const searchIndex = buildSearchIndex(i18n, claims);
@@ -115,8 +107,6 @@ function loadBrowseState() {
     validDomains: validDomainIds,
     validFamilies: validFamilyIds,
     validFilters: validFilterKeys,
-    initialLimit: INITIAL_CARD_COUNT,
-    itemCount: claims.length,
   });
 }
 
@@ -130,7 +120,6 @@ function saveBrowseState() {
       closedFamilies: [...closedFamilies],
       query: search.value,
       scrollY: window.scrollY,
-      visibleLimit,
     }));
   } catch {
     // Browsing remains available when session storage is unavailable.
@@ -325,14 +314,10 @@ function syncNewCount() {
   newCount.hidden = newSlugs.size === 0;
 }
 
-function syncCatalogControls(total, shown) {
-  currentCatalogTotal = total;
+function syncCatalogControls(total) {
   count.textContent = t("ui.resultCount", { count: total });
   empty.textContent = t("ui.noMatches");
   empty.hidden = total !== 0;
-  loadMore.hidden = shown >= total;
-  loadMoreButton.textContent = t("ui.loadMore");
-  loadMoreButton.setAttribute("aria-label", t("ui.loadMoreLabel", { shown, total }));
   cards.setAttribute("aria-busy", "false");
 }
 
@@ -348,7 +333,6 @@ function renderCards({ reusePrerendered = false } = {}) {
     selectedReactions,
     pendingReactions,
     query: search.value,
-    limit: visibleLimit,
     searchIndex,
     collection: claims,
   });
@@ -356,33 +340,13 @@ function renderCards({ reusePrerendered = false } = {}) {
   cards.removeAttribute("data-prerendered-locale");
   attachCatalogListeners();
   sortCatalogByReactions();
-  syncCatalogControls(result.total, result.shown);
+  syncCatalogControls(result.total);
   syncNewCount();
 }
 
 function resetCatalogView() {
-  visibleLimit = INITIAL_CARD_COUNT;
   renderCards();
   saveBrowseState();
-}
-
-function showMoreExperiences() {
-  if (loadMorePending || visibleLimit >= currentCatalogTotal) return;
-  loadMorePending = true;
-  loadMoreButton.disabled = true;
-  incrementalSkeleton.hidden = false;
-  cards.setAttribute("aria-busy", "true");
-
-  const complete = () => {
-    visibleLimit += CARD_BATCH_SIZE;
-    loadMorePending = false;
-    loadMoreButton.disabled = false;
-    incrementalSkeleton.hidden = true;
-    renderCards();
-    saveBrowseState();
-  };
-  if ("requestIdleCallback" in window) window.requestIdleCallback(complete, { timeout: 180 });
-  else window.requestAnimationFrame(complete);
 }
 
 function renderDetail(claim) {
@@ -434,7 +398,6 @@ function applyStaticTranslations() {
   domainTabs.setAttribute("aria-label", t("ui.experienceAreas"));
   empty.textContent = t("ui.noMatches");
   if (catalogLoadingLabel) catalogLoadingLabel.textContent = t("ui.loadingExperiences");
-  loadMoreButton.textContent = t("ui.loadMore");
   localeLabel.textContent = t("ui.languageLabel");
   localeCurrent.textContent = localeDefinitions[locale].label;
   localeCurrent.dataset.shortLabel = localeShortLabels[locale];
@@ -605,7 +568,6 @@ activeFiltersElement.addEventListener("click", (event) => {
   renderActiveFilters();
   resetCatalogView();
 });
-loadMoreButton.addEventListener("click", showMoreExperiences);
 themeToggle.addEventListener("click", () => {
   const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   applyTheme(nextTheme, true);
@@ -668,7 +630,6 @@ renderActiveFilters();
 if (claimForCurrentRoute()) {
   cards.innerHTML = "";
   cards.setAttribute("aria-busy", "false");
-  loadMore.hidden = true;
 } else {
   const canReusePrerendered = cards.dataset.prerenderedLocale === locale
     && selectedReactions.size === 0
@@ -677,18 +638,11 @@ if (claimForCurrentRoute()) {
     && activeFilters.size === 0
     && closedDomains.size === 0
     && closedFamilies.size === 0
-    && search.value === ""
-    && visibleLimit === INITIAL_CARD_COUNT;
+    && search.value === "";
   renderCards({ reusePrerendered: canReusePrerendered });
 }
 renderRoute();
 void loadReactionCounts();
-if ("IntersectionObserver" in window) {
-  const loadMoreObserver = new IntersectionObserver((entries) => {
-    if (entries.some((entry) => entry.isIntersecting)) showMoreExperiences();
-  }, { rootMargin: "280px 0px" });
-  loadMoreObserver.observe(loadMore);
-}
 window.addEventListener("hashchange", () => {
   renderRoute();
   window.scrollTo({ top: 0, behavior: "instant" });

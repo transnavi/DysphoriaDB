@@ -27,7 +27,6 @@ export const zhCN = {
     experienceType: "体验类型",
     population: "相关群体",
     stage: "自我认识与性别过渡阶段",
-    stageNote: "这些阶段可能重叠；有些人会跳过部分阶段，性别过渡的形式也各不相同。",
     topic: "主题",
     resultCount: "{{count}} 项体验",
     newCount: "上次访问后新增 {{count}} 项体验",

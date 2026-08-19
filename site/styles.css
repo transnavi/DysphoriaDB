@@ -263,12 +263,6 @@ main { width: min(var(--content-width), 90vw); margin: 0 auto; }
 .domain-tabs button[data-domain="presentation"] { color: var(--domain-presentation-ink); background: var(--domain-presentation-bg); }
 .domain-tabs button[data-domain="self-understanding"] { color: var(--domain-understanding-ink); background: var(--domain-understanding-bg); }
 .domain-tabs button[data-domain="sexuality"] { color: var(--domain-sexuality-ink); background: var(--domain-sexuality-bg); }
-.stage-filter { display: grid; gap: 0.45rem; margin-top: 0.65rem; }
-.stage-filter-label { color: var(--muted); font-size: 0.74rem; font-weight: 720; }
-.stage-filter-note { color: var(--muted); font-size: 0.72rem; }
-.stage-filter-options { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.stage-filter-options button { min-height: 32px; cursor: pointer; border: 1px solid var(--filter-border); border-radius: 999px; background: var(--green-pale); padding: 0.3rem 0.6rem; color: var(--green); font-size: 0.72rem; font-weight: 650; }
-.stage-filter-options button[aria-pressed="true"] { border-color: currentColor; box-shadow: inset 0 0 0 1px currentColor; }
 .active-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin-top: 0.9rem; color: var(--muted); font-size: 0.72rem; }
 .active-filters:empty { display: none; }
 .active-filters button { min-height: 32px; cursor: pointer; border: 1px solid var(--filter-border); border-radius: 999px; background: var(--blue-pale); padding: 0.28rem 0.55rem; color: var(--blue); font-size: 0.72rem; }

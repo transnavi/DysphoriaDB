@@ -61,14 +61,15 @@ describe("SvelteKit rendering", () => {
     expect(html).toMatch(/data-family="body-image-and-self-recognition"(?![^>]* open)/);
   });
 
-  it("filters the catalog by recognition and transition context", async () => {
+  it("filters the catalog when a recognition or transition tag is selected", async () => {
     const response = await exports.default.fetch(`${baseUrl}/ja/?filter=stage:established`);
     const html = await response.text();
     const expected = experiences.filter(({ stages }) => stages.includes("established")).length;
     expect(response.status).toBe(200);
     expect(html.match(/class="card /g)).toHaveLength(expected);
-    expect(html).toContain('aria-pressed="true">性別移行後の生活が定着した時期</button>');
-    expect(html).toContain("時期は重なることがあり");
+    expect(html).toContain('class="category-tag stage-tag"');
+    expect(html).toContain('aria-pressed="true"');
+    expect(html).not.toContain('class="stage-filter"');
   });
 
   it("serves localized detail metadata, dataset metadata, and data exports", async () => {

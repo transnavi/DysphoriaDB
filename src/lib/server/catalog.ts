@@ -1,6 +1,6 @@
 import { organizeCatalog } from "$lib/catalog";
 import type { CatalogItem, CatalogTag, LocalizedSite } from "$lib/types";
-import { domains, experiences, journeyStages } from "$site/data/experiences.js";
+import { domains, experiences } from "$site/data/experiences.js";
 import {
   createI18n,
   localeDefinitions,
@@ -147,13 +147,6 @@ export async function localizedSite(
         label: taxonomyLabel("domains", domain.id),
       })),
     ],
-    stageFilters: journeyStages.map(({ id }) => ({
-      group: "stage",
-      value: id,
-      label: taxonomyLabel("stages", id),
-      className: "stage-tag",
-      categoryLabel: messages.stage,
-    })),
     experiences: localizedExperiences,
   };
 }

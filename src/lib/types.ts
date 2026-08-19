@@ -67,7 +67,6 @@ export type LocalizedSite = {
   messages: Record<string, string>;
   domains: CatalogDomain[];
   domainTabs: Array<{ id: string; label: string }>;
-  stageFilters: CatalogTag[];
   experiences: CatalogItem[];
 };
 

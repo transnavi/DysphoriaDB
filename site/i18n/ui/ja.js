@@ -27,7 +27,6 @@ export const ja = {
     experienceType: "体験の種類",
     population: "該当する人",
     stage: "自覚・性別移行の時期",
-    stageNote: "時期は重なることがあり、経験しない段階や、異なる形の性別移行もあります。",
     topic: "トピック",
     resultCount: "{{count}}件の体験",
     newCount: "前回以降の新しい体験 {{count}}件",

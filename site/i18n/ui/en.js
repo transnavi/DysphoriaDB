@@ -27,7 +27,6 @@ export const en = {
     experienceType: "Experience type",
     population: "Population",
     stage: "Recognition and transition context",
-    stageNote: "Stages can overlap. People may skip them or use different forms of transition.",
     topic: "Topic",
     resultCount_one: "{{count}} experience",
     resultCount_other: "{{count}} experiences",

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://db.transnavi.jp/schemas/source.schema.json",
+  "title": "Gender Experience Index source",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "sourceType",
+    "platform",
+    "nativeId",
+    "url",
+    "retrievedAt",
+    "text",
+    "contentHash",
+    "relations",
+    "collection"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "0.1.0" },
+    "id": { "type": "string", "pattern": "^src:[a-z0-9_-]+:.+$" },
+    "sourceType": {
+      "enum": ["social_post", "thread", "wiki_page", "article", "blog_post", "book", "paper", "video_transcript", "dataset_record"]
+    },
+    "platform": { "type": "string", "minLength": 1 },
+    "nativeId": { "type": "string", "minLength": 1 },
+    "url": { "type": "string", "format": "uri" },
+    "author": {
+      "type": "object",
+      "properties": {
+        "displayName": { "type": ["string", "null"] },
+        "handle": { "type": ["string", "null"] },
+        "nativeId": { "type": ["string", "null"] },
+        "url": { "type": ["string", "null"], "format": "uri" }
+      },
+      "additionalProperties": false
+    },
+    "publishedAt": { "type": ["string", "null"], "format": "date-time" },
+    "retrievedAt": { "type": "string", "format": "date-time" },
+    "language": { "type": ["string", "null"] },
+    "text": { "type": "string" },
+    "contentHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "targetSourceId"],
+        "properties": {
+          "type": { "enum": ["quotes", "replies_to", "reposts", "part_of_thread"] },
+          "targetSourceId": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "engagement": { "type": "object" },
+    "collection": {
+      "type": "object",
+      "required": ["collector", "collectorVersion", "runId"],
+      "properties": {
+        "collector": { "type": "string" },
+        "collectorVersion": { "type": "string" },
+        "runId": { "type": "string" },
+        "seedPostId": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "metadata": { "type": "object" }
+  },
+  "additionalProperties": false
+}

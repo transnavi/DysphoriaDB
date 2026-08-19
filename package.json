@@ -13,7 +13,7 @@
     "deploy": "npm run build && wrangler deploy --old-asset-ttl 604800",
     "test": "npm run build && npm run test:worker && npm run test:content",
     "test:worker": "vitest run",
-    "test:content": "node --test tests/i18n.test.mjs tests/reaction-ranking.test.mjs && uv run pytest -q",
+    "test:content": "node --test tests/i18n.test.mjs tests/reaction-ranking.test.mjs",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "types": "wrangler types --env-interface Env && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
   },

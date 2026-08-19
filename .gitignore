@@ -10,3 +10,13 @@ node_modules/
 .dev.vars*
 .env*
 !.env.example
+.private-research/
+archive/
+research/
+data/approved-evidence.json
+data/mined/
+data/normalized/
+data/raw/
+data/runs/
+data/source/approved-evidence.js
+seeds/

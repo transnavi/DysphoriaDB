@@ -123,6 +123,7 @@ export const experienceFamilies = [
       "returning-to-gendered-childhood-interests",
       "fear-of-aging-in-the-assigned-gender",
       "fear-that-transition-began-too-late",
+      "recurring-doubt-about-being-trans-enough",
       "gender-feelings-fluctuate-in-intensity",
       "gender-expression-becomes-less-deliberate",
       "moving-forward-after-gender-self-recognition",
@@ -2458,6 +2459,45 @@ export const experiences = [
       [
         "Gender Dysphoria Bible: Managed Dysphoria",
         "https://genderdysphoria.fyi/en/managed-dysphoria"
+      ]
+    ]
+  },
+  {
+    "id": "recurring-doubt-about-being-trans-enough",
+    "stages": ["before-realization","questioning","self-recognized","disclosed","transitioning"],
+    "family": "understanding-gender-across-time",
+    "domain": "self-understanding",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "uncertainty",
+      "confusion",
+      "self-criticism",
+      "fear",
+      "disbelief"
+    ],
+    "tags": [
+      "identity",
+      "exploration",
+      "childhood",
+      "gender-incongruence",
+      "denial",
+      "self-recognition"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Am I Trans?",
+        "https://genderdysphoria.fyi/en/am-i-trans"
+      ],
+      [
+        "Gender Dysphoria Bible: Impostor Syndrome",
+        "https://genderdysphoria.fyi/en/impostor-syndrome"
       ]
     ]
   },

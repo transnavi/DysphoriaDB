@@ -9,7 +9,8 @@ import { content as zhCN } from "../site/i18n/content/zh-CN.js";
 import { en as enUi } from "../site/i18n/ui/en.js";
 import { ja as jaUi } from "../site/i18n/ui/ja.js";
 import { zhCN as zhCNUi } from "../site/i18n/ui/zh-CN.js";
-import { experiencePath, localeFromPath, pathForLocale } from "../site/i18n/index.js";
+import { buildSearchIndex, INITIAL_CARD_COUNT, renderCatalog } from "../site/catalog-render.js";
+import { createI18n, experiencePath, localeFromPath, pathForLocale } from "../site/i18n/index.js";
 
 const contentByLocale = { en, ja, "zh-CN": zhCN };
 const uiByLocale = { en: enUi, ja: jaUi, "zh-CN": zhCNUi };
@@ -82,4 +83,19 @@ test("the browser runtime reads locale-neutral metadata", async () => {
   const app = await readFile(new URL("../site/app.js", import.meta.url), "utf8");
   assert.match(app, /\.\/data\/experiences\.js/);
   assert.doesNotMatch(app, /\.\/claims\.js|\.\/claim-slugs\.js|\.\/approved-evidence\.js/);
+});
+
+test("the initial catalog render is localized and bounded", async () => {
+  const i18n = await createI18n("ja");
+  const catalog = renderCatalog({
+    i18n,
+    locale: "ja",
+    limit: INITIAL_CARD_COUNT,
+    searchIndex: buildSearchIndex(i18n, experiences),
+  });
+  assert.equal(catalog.total, experiences.length);
+  assert.equal(catalog.shown, INITIAL_CARD_COUNT);
+  assert.equal((catalog.html.match(/class="card /g) ?? []).length, INITIAL_CARD_COUNT);
+  assert.match(catalog.html, /性別高揚感/);
+  assert.deepEqual(Object.keys(i18n.options.resources), ["ja"]);
 });

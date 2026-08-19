@@ -17,6 +17,10 @@ test("localized root pages include canonical metadata and visible actions", asyn
   assert.doesNotMatch(ja, /出典とともに探す|体験を探せる資料/);
   assert.match(ja, />体験を投稿する ↗<\/a>/);
   assert.match(ja, /id="search-button" type="submit">検索<\/button>/);
+  assert.match(ja, /data-prerendered-locale="ja"/);
+  assert.match(ja, /id="load-more-button"[^>]*>さらに表示<\/button>/);
+  assert.equal((ja.match(/class="card /g) ?? []).length, 16);
+  assert.doesNotMatch(ja, /class="catalog-skeleton"/);
   assert.match(ja, /og-image-ja\.png\?v=20260819/);
   assert.match(ja, /property="og:image:alt" content="ジェンダー体験事典。ジェンダー体験を分類・整理し/);
   assert.match(ja, /class="trans-pride-mark"/);

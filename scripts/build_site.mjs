@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { domains, experienceFamilies, experiences } from "../site/data/experiences.js";
+import { buildSearchIndex, INITIAL_CARD_COUNT, renderCatalog } from "../site/catalog-render.js";
 import {
   createI18n,
   experiencePath,
@@ -220,6 +221,8 @@ function localizeShell(baseHtml, i18n, locale, claim = null) {
   html = html.replace(/(<input id="search"[^>]*placeholder=")[^"]*(")/, `$1${escapeHtml(i18n.t("ui.searchPlaceholder"))}$2`);
   html = replaceTextById(html, "search-button", i18n.t("ui.searchButton"));
   html = html.replace(/(<nav class="domain-tabs" id="domain-tabs" aria-label=")[^"]*(")/, `$1${escapeHtml(i18n.t("ui.experienceAreas"))}$2`);
+  html = replaceTextById(html, "catalog-loading-label", i18n.t("ui.loadingExperiences"));
+  html = replaceTextById(html, "load-more-button", i18n.t("ui.loadMore"));
   html = replaceTextById(html, "empty", i18n.t("ui.noMatches"));
   html = replaceTextById(html, "footer-statement", i18n.t("ui.footerStatement"));
   html = html.replace(/(<span class="trans-pride-mark"[^>]*aria-label=")[^"]*(")/, `$1${escapeHtml(i18n.t("ui.footerFlagLabel"))}$2`);
@@ -233,7 +236,31 @@ function localizeShell(baseHtml, i18n, locale, claim = null) {
   html = replaceTextById(html, "footer-license", i18n.t("ui.contentLicense"));
   html = replaceTextById(html, "footer-copyright", i18n.t("ui.copyright"));
 
-  if (localized) {
+  if (!localized) {
+    const catalog = renderCatalog({
+      i18n,
+      locale,
+      limit: INITIAL_CARD_COUNT,
+      searchIndex: buildSearchIndex(i18n, experiences),
+      collection: experiences,
+    });
+    html = html.replace(
+      /<!-- catalog:start -->[\s\S]*?<!-- catalog:end -->/,
+      `<!-- catalog:start -->${catalog.html}<!-- catalog:end -->`,
+    );
+    html = html.replace(
+      '<div class="cards" id="cards" aria-busy="true">',
+      `<div class="cards" id="cards" aria-busy="false" data-prerendered-locale="${locale}">`,
+    );
+    html = replaceTextById(html, "result-count", i18n.t("ui.resultCount", { count: catalog.total }));
+    if (catalog.shown < catalog.total) {
+      html = html.replace('<div class="load-more" id="load-more" hidden>', '<div class="load-more" id="load-more">');
+      html = html.replace(
+        '<button class="load-more-button" id="load-more-button" type="button">',
+        `<button class="load-more-button" id="load-more-button" type="button" aria-label="${escapeHtml(i18n.t("ui.loadMoreLabel", { shown: catalog.shown, total: catalog.total }))}">`,
+      );
+    }
+  } else {
     html = html.replace('<div class="intro">', '<div class="intro" hidden>');
     html = html.replace('<div id="browse-view">', '<div id="browse-view" hidden>');
     html = html.replace(

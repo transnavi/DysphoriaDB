@@ -1,22 +1,24 @@
 import { createInstance } from "i18next";
 
-import { content as enContent } from "./content/en.js";
-import { content as jaContent } from "./content/ja.js";
-import { content as zhCNContent } from "./content/zh-CN.js";
-import { en } from "./ui/en.js";
-import { ja } from "./ui/ja.js";
-import { zhCN } from "./ui/zh-CN.js";
-
 export const localeDefinitions = {
   en: { path: "", htmlLang: "en", hreflang: "en", ogLocale: "en_US", label: "English" },
   ja: { path: "ja", htmlLang: "ja", hreflang: "ja", ogLocale: "ja_JP", label: "日本語" },
   "zh-CN": { path: "zh-cn", htmlLang: "zh-Hans", hreflang: "zh-Hans", ogLocale: "zh_CN", label: "简体中文" },
 };
 
-const resources = {
-  en: { translation: { ...en, ...enContent } },
-  ja: { translation: { ...ja, ...jaContent } },
-  "zh-CN": { translation: { ...zhCN, ...zhCNContent } },
+const localeLoaders = {
+  en: async () => {
+    const [{ en }, { content }] = await Promise.all([import("./ui/en.js"), import("./content/en.js")]);
+    return { ...en, ...content };
+  },
+  ja: async () => {
+    const [{ ja }, { content }] = await Promise.all([import("./ui/ja.js"), import("./content/ja.js")]);
+    return { ...ja, ...content };
+  },
+  "zh-CN": async () => {
+    const [{ zhCN }, { content }] = await Promise.all([import("./ui/zh-CN.js"), import("./content/zh-CN.js")]);
+    return { ...zhCN, ...content };
+  },
 };
 
 export function normalizeLocale(locale) {
@@ -48,12 +50,14 @@ export function pathForLocale(pathname, locale) {
 }
 
 export async function createI18n(locale = "en") {
+  const normalizedLocale = normalizeLocale(locale);
+  const translation = await localeLoaders[normalizedLocale]();
   const instance = createInstance();
   await instance.init({
-    lng: normalizeLocale(locale),
+    lng: normalizedLocale,
     fallbackLng: false,
     supportedLngs: Object.keys(localeDefinitions),
-    resources,
+    resources: { [normalizedLocale]: { translation } },
     interpolation: { escapeValue: false },
     returnNull: false,
   });

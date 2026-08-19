@@ -1,5 +1,15 @@
 import { autoUpdate, computePosition, flip, offset, shift } from "@floating-ui/dom";
-import { domains, experienceFamilies, experiences as claims } from "./data/experiences.js";
+import {
+  buildSearchIndex,
+  CARD_BATCH_SIZE,
+  filterKey,
+  INITIAL_CARD_COUNT,
+  renderCatalog,
+  renderReaction,
+  renderSourceItem,
+  renderTag,
+} from "./catalog-render.js";
+import { domains, experiences as claims } from "./data/experiences.js";
 import {
   createI18n,
   experiencePath,
@@ -7,14 +17,14 @@ import {
   localeFromPath,
   localeRoot,
   localizeClaim,
-  localizeSourceKind,
-  localizeSourceNote,
   localizeTaxonomy,
   localizeTerm,
   pathForLocale,
 } from "./i18n/index.js";
 
 const locale = localeFromPath(window.location.pathname);
+if (locale === "ja") void import("./fonts-ja.css");
+if (locale === "zh-CN") void import("./fonts-zh-cn.css");
 const i18n = await createI18n(locale);
 const t = (key, options) => i18n.t(key, options);
 
@@ -25,6 +35,10 @@ const searchLabel = document.querySelector("#search-label");
 const searchButton = document.querySelector("#search-button");
 const count = document.querySelector("#result-count");
 const empty = document.querySelector("#empty");
+const loadMore = document.querySelector("#load-more");
+const loadMoreButton = document.querySelector("#load-more-button");
+const incrementalSkeleton = document.querySelector("#incremental-skeleton");
+const catalogLoadingLabel = document.querySelector("#catalog-loading-label");
 const domainTabs = document.querySelector("#domain-tabs");
 const activeFiltersElement = document.querySelector("#active-filters");
 const browseView = document.querySelector("#browse-view");
@@ -62,6 +76,11 @@ const pendingReactions = new Set();
 const localeShortLabels = { en: "EN", ja: "JA", "zh-CN": "中文" };
 let stopLocalePositioning = null;
 let selectedReactions = loadSelectedReactions();
+let visibleLimit = INITIAL_CARD_COUNT;
+let currentCatalogTotal = claims.length;
+let loadMorePending = false;
+let searchTimer = null;
+const searchIndex = buildSearchIndex(i18n, claims);
 
 function loadSelectedReactions() {
   try {
@@ -142,49 +161,10 @@ function openLocaleMenu(focusFirst = false) {
   if (focusFirst) localeMenu.querySelector("a")?.focus();
 }
 
-function sourceKind(source) {
-  if (source[2]?.startsWith("Community report")) {
-    const relation = source[2].slice("Community report".length);
-    return `${t("ui.communityReport")}${relation}`;
-  }
-  if (source[2]) return localizeSourceKind(i18n, source[2]);
-  if (source[1].includes("genderdysphoria.fyi") || source[1].includes("transnavi.jp")) return t("ui.communityReference");
-  if (source[1].includes("x.com/") || source[1].includes("reddit.com/")) return t("ui.communityReport");
-  return t("ui.reference");
-}
-
-function renderSourceItem(source, detailed = false) {
-  const [label, url] = source;
-  const note = source[3] ? localizeSourceNote(i18n, source[3]) : "";
-  return `<li><span class="source-kind">${sourceKind(source)}</span><a href="${url}" target="_blank" rel="noreferrer">${label} ↗</a>${detailed && note ? `<span class="source-note">${note}</span>` : ""}</li>`;
-}
-
 function localizedFilter(group, value) {
   if (group === "type") return localizeTaxonomy(i18n, "types", value);
   if (group === "population") return localizeTaxonomy(i18n, "directions", value);
   return localizeTerm(i18n, value);
-}
-
-function renderTag(group, value, className, categoryKey) {
-  const key = filterKey(group, value);
-  const label = localizedFilter(group, value);
-  const categoryLabel = t(categoryKey);
-  return `<button type="button" class="category-tag ${className}" data-filter-group="${group}" data-filter-value="${value}" data-category-label="${categoryLabel}" aria-label="${label}; ${categoryLabel}" aria-pressed="${activeFilters.has(key)}">${label}</button>`;
-}
-
-function renderReaction(claim) {
-  const selected = selectedReactions.has(claim.slug);
-  const label = t(selected ? "ui.meTooSelectedLabel" : "ui.meTooLabel", {
-    title: localizeClaim(i18n, claim).title,
-    count: claim.reactionCount,
-  });
-  return `
-    <button class="reaction-button" type="button" data-reaction-slug="${claim.slug}" aria-label="${label}" aria-pressed="${selected}" ${pendingReactions.has(claim.slug) ? "disabled" : ""}>
-      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /></svg>
-      <span>${t("ui.meToo")}</span>
-      <span class="reaction-count">${new Intl.NumberFormat(locale).format(claim.reactionCount)}</span>
-    </button>
-  `;
 }
 
 function renderTabs() {
@@ -193,17 +173,6 @@ function renderTabs() {
     const label = id ? localizeTaxonomy(i18n, "domains", id) : t("ui.all");
     return `<button type="button" data-domain="${value}" aria-pressed="${value === activeDomain}">${label}</button>`;
   }).join("");
-}
-
-function filterKey(group, value) {
-  return `${group}:${value}`;
-}
-
-function claimHasFilter(claim, key) {
-  const [group, value] = key.split(":", 2);
-  if (group === "type") return claim.types.includes(value);
-  if (group === "population") return claim.directions.includes(value);
-  return claim.tags.includes(value);
 }
 
 function renderActiveFilters() {
@@ -221,114 +190,67 @@ function renderActiveFilters() {
   `;
 }
 
-function renderCards() {
-  const query = search.value.trim().toLocaleLowerCase();
-  const visible = claims.filter((claim) => {
-    const localized = localizeClaim(i18n, claim);
-    const searchable = [
-      localized.title,
-      localized.summary,
-      localizeTaxonomy(i18n, "families", claim.family),
-      localizeTaxonomy(i18n, "domains", claim.domain),
-      ...claim.types.map((type) => localizeTaxonomy(i18n, "types", type)),
-      ...claim.directions.map((direction) => localizeTaxonomy(i18n, "directions", direction)),
-      ...claim.responses.map((response) => localizeTerm(i18n, response)),
-      ...claim.tags.map((tag) => localizeTerm(i18n, tag)),
-      ...(localized.patterns ?? []).flat(),
-      ...(localized.variations ?? []).map((variation) => variation.text),
-    ]
-      .join(" ")
-      .toLocaleLowerCase();
-    return searchable.includes(query)
-      && (activeDomain === "all" || claim.domain === activeDomain)
-      && [...activeFilters].every((key) => claimHasFilter(claim, key));
-  });
-
-  const renderClaim = (claim) => {
-    const localized = localizeClaim(i18n, claim);
-    const tone = claim.types.includes("dysphoric") && claim.types.includes("euphoric")
-      ? "mixed"
-      : (claim.types[0] ?? "neutral").toLowerCase().replaceAll(" ", "-");
-    return `
-    <article class="card tone-${tone}" title="${claim.types.map((type) => localizeTaxonomy(i18n, "types", type)).join(" · ")}">
-      <h3><a class="claim-link" href="${experiencePath(locale, claim.slug)}">${localized.title}</a></h3>
-      <p class="summary">${localized.summary}</p>
-      <p class="report-count ${claim.reportCount ? "" : "report-count-empty"}" ${claim.reportCount ? "" : "aria-hidden=\"true\""}>${claim.reportCount ? t("ui.reviewedReports", { count: claim.reportCount }) : "&nbsp;"}</p>
-      <div class="categories" aria-label="${t("ui.tags")}">
-        ${claim.types.map((type) => renderTag("type", type, `type-${type.toLowerCase().replaceAll(" ", "-")}`, "ui.experienceType")).join("")}
-        ${claim.directions.filter((direction) => direction !== "cross-directional").map((direction) => renderTag("population", direction, "population-tag", "ui.population")).join("")}
-        ${claim.tags.slice(0, 3).map((tag) => renderTag("topic", tag, "topic-tag", "ui.topic")).join("")}
-      </div>
-      <div class="card-actions">
-        <details class="sources">
-          <summary>${t("ui.sourceCount", { count: claim.sources.length })}</summary>
-          <ul class="source-list">
-            ${claim.sources.map(renderSourceItem).join("")}
-          </ul>
-        </details>
-        ${renderReaction(claim)}
-      </div>
-    </article>
-  `;
-  };
-
-  const familyScore = (familyTitle) => visible
-    .filter((claim) => claim.family === familyTitle)
-    .reduce((score, claim) => ({
-      reactions: score.reactions + claim.reactionCount,
-      reports: score.reports + claim.reportCount,
-    }), { reactions: 0, reports: 0 });
-  const compareScore = (a, b) => b.reactions - a.reactions || b.reports - a.reports;
-  const renderFamily = (family) => {
-    const familyClaims = visible
-      .filter((claim) => claim.family === family.id)
-      .sort((a, b) => b.reactionCount - a.reactionCount || b.reportCount - a.reportCount);
-    if (familyClaims.length === 0) return "";
-    return `
-      <details class="experience-group" data-family="${family.id}" ${closedFamilies.has(family.id) ? "" : "open"}>
-        <summary><h2>${localizeTaxonomy(i18n, "families", family.id)}</h2></summary>
-        <div class="group-grid">${familyClaims.map(renderClaim).join("")}</div>
-      </details>
-    `;
-  };
-
-  const rankedDomains = [...domains].sort((a, b) => {
-    const domainScore = (domain) => domain.families.reduce((score, family) => {
-      const familyResult = familyScore(family);
-      return {
-        reactions: score.reactions + familyResult.reactions,
-        reports: score.reports + familyResult.reports,
-      };
-    }, { reactions: 0, reports: 0 });
-    return compareScore(domainScore(a), domainScore(b));
-  });
-
-  cards.innerHTML = rankedDomains.map((domain) => {
-    if (activeDomain !== "all" && domain.id !== activeDomain) return "";
-    const families = domain.families
-      .map((title) => experienceFamilies.find((family) => family.id === title))
-      .filter(Boolean)
-      .sort((a, b) => compareScore(familyScore(a.id), familyScore(b.id)));
-    const content = families.map(renderFamily).join("");
-    if (!content) return "";
-    return `
-      <section class="domain-section">
-        ${activeDomain === "all" ? `<h2 class="domain-title">${localizeTaxonomy(i18n, "domains", domain.id)}</h2>` : ""}
-        <div class="domain-content">${content}</div>
-      </section>
-    `;
-  }).join("");
-
+function attachFamilyListeners() {
   cards.querySelectorAll(".experience-group").forEach((group) => {
     group.addEventListener("toggle", () => {
       if (group.open) closedFamilies.delete(group.dataset.family);
       else closedFamilies.add(group.dataset.family);
     });
   });
+}
 
-  count.textContent = t("ui.resultCount", { count: visible.length });
+function syncCatalogControls(total, shown) {
+  currentCatalogTotal = total;
+  count.textContent = t("ui.resultCount", { count: total });
   empty.textContent = t("ui.noMatches");
-  empty.hidden = visible.length !== 0;
+  empty.hidden = total !== 0;
+  loadMore.hidden = shown >= total;
+  loadMoreButton.textContent = t("ui.loadMore");
+  loadMoreButton.setAttribute("aria-label", t("ui.loadMoreLabel", { shown, total }));
+  cards.setAttribute("aria-busy", "false");
+}
+
+function renderCards({ reusePrerendered = false } = {}) {
+  const result = renderCatalog({
+    i18n,
+    locale,
+    activeDomain,
+    activeFilters,
+    closedFamilies,
+    selectedReactions,
+    pendingReactions,
+    query: search.value,
+    limit: visibleLimit,
+    searchIndex,
+    collection: claims,
+  });
+  if (!reusePrerendered) cards.innerHTML = result.html;
+  cards.removeAttribute("data-prerendered-locale");
+  attachFamilyListeners();
+  syncCatalogControls(result.total, result.shown);
+}
+
+function resetCatalogView() {
+  visibleLimit = INITIAL_CARD_COUNT;
+  renderCards();
+}
+
+function showMoreExperiences() {
+  if (loadMorePending || visibleLimit >= currentCatalogTotal) return;
+  loadMorePending = true;
+  loadMoreButton.disabled = true;
+  incrementalSkeleton.hidden = false;
+  cards.setAttribute("aria-busy", "true");
+
+  const complete = () => {
+    visibleLimit += CARD_BATCH_SIZE;
+    loadMorePending = false;
+    loadMoreButton.disabled = false;
+    incrementalSkeleton.hidden = true;
+    renderCards();
+  };
+  if ("requestIdleCallback" in window) window.requestIdleCallback(complete, { timeout: 180 });
+  else window.requestAnimationFrame(complete);
 }
 
 function renderDetail(claim) {
@@ -345,11 +267,11 @@ function renderDetail(claim) {
       <p class="detail-summary">${localized.summary}</p>
       ${claim.reportCount ? `<p class="report-count">${t("ui.reviewedReports", { count: claim.reportCount })}</p>` : ""}
       <div class="categories detail-tags" aria-label="${t("ui.tags")}">
-        ${claim.types.map((type) => renderTag("type", type, `type-${type.toLowerCase().replaceAll(" ", "-")}`, "ui.experienceType")).join("")}
-        ${claim.directions.filter((direction) => direction !== "cross-directional").map((direction) => renderTag("population", direction, "population-tag", "ui.population")).join("")}
-        ${claim.tags.map((tag) => renderTag("topic", tag, "topic-tag", "ui.topic")).join("")}
+        ${claim.types.map((type) => renderTag(i18n, activeFilters, "type", type, `type-${type.toLowerCase().replaceAll(" ", "-")}`, "ui.experienceType")).join("")}
+        ${claim.directions.filter((direction) => direction !== "cross-directional").map((direction) => renderTag(i18n, activeFilters, "population", direction, "population-tag", "ui.population")).join("")}
+        ${claim.tags.map((tag) => renderTag(i18n, activeFilters, "topic", tag, "topic-tag", "ui.topic")).join("")}
       </div>
-      <div class="reaction-row detail-reaction">${renderReaction(claim)}</div>
+      <div class="reaction-row detail-reaction">${renderReaction(i18n, locale, claim, selectedReactions, pendingReactions)}</div>
       ${localized.patterns ? `
         <section class="detail-section">
           <h3>${t("ui.reportedVariations")}</h3>
@@ -366,7 +288,7 @@ function renderDetail(claim) {
       ` : ""}
       <section class="detail-section" id="sources">
         <h3>${t("ui.sources")}</h3>
-        <ul class="detail-source-list">${claim.sources.map((source) => renderSourceItem(source, true)).join("")}</ul>
+        <ul class="detail-source-list">${claim.sources.map((source) => renderSourceItem(i18n, source, true)).join("")}</ul>
       </section>
       ${related.length ? `
         <section class="detail-section">
@@ -413,6 +335,8 @@ function applyStaticTranslations() {
   searchButton.textContent = t("ui.searchButton");
   domainTabs.setAttribute("aria-label", t("ui.experienceAreas"));
   empty.textContent = t("ui.noMatches");
+  if (catalogLoadingLabel) catalogLoadingLabel.textContent = t("ui.loadingExperiences");
+  loadMoreButton.textContent = t("ui.loadMore");
   localeLabel.textContent = t("ui.languageLabel");
   localeCurrent.textContent = localeDefinitions[locale].label;
   localeCurrent.dataset.shortLabel = localeShortLabels[locale];
@@ -436,10 +360,14 @@ function applyStaticTranslations() {
   footerCopyright.textContent = t("ui.copyright");
 }
 
-function renderRoute() {
+function claimForCurrentRoute() {
   const match = window.location.pathname.match(/^\/(?:ja\/|zh-cn\/)?experience\/([^/]+)\/?$/i)
     ?? window.location.hash.match(/^#\/experience\/([^/]+)$/);
-  const claim = match ? claims.find((item) => item.slug === decodeURIComponent(match[1])) : null;
+  return match ? claims.find((item) => item.slug === decodeURIComponent(match[1])) : null;
+}
+
+function renderRoute() {
+  const claim = claimForCurrentRoute();
   if (claim) {
     browseView.hidden = true;
     intro.hidden = true;
@@ -455,7 +383,7 @@ function renderRoute() {
 }
 
 function rerenderForReactions(focusSlug = null) {
-  renderCards();
+  if (!claimForCurrentRoute()) renderCards();
   renderRoute();
   if (focusSlug) document.querySelector(`[data-reaction-slug="${focusSlug}"]`)?.focus();
 }
@@ -505,17 +433,21 @@ async function handleReaction(button) {
   rerenderForReactions(claim.slug);
 }
 
-search.addEventListener("input", renderCards);
+search.addEventListener("input", () => {
+  window.clearTimeout(searchTimer);
+  searchTimer = window.setTimeout(resetCatalogView, 120);
+});
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  renderCards();
+  window.clearTimeout(searchTimer);
+  resetCatalogView();
 });
 domainTabs.addEventListener("click", (event) => {
   const button = event.target.closest("[data-domain]");
   if (!button) return;
   activeDomain = button.dataset.domain;
   renderTabs();
-  renderCards();
+  resetCatalogView();
 });
 cards.addEventListener("click", (event) => {
   const reaction = event.target.closest("[data-reaction-slug]");
@@ -528,7 +460,7 @@ cards.addEventListener("click", (event) => {
   const key = filterKey(tag.dataset.filterGroup, tag.dataset.filterValue);
   activeFilters.has(key) ? activeFilters.delete(key) : activeFilters.add(key);
   renderActiveFilters();
-  renderCards();
+  resetCatalogView();
 });
 detailView.addEventListener("click", (event) => {
   const reaction = event.target.closest("[data-reaction-slug]");
@@ -540,7 +472,7 @@ detailView.addEventListener("click", (event) => {
   if (!tag) return;
   activeFilters.add(filterKey(tag.dataset.filterGroup, tag.dataset.filterValue));
   renderActiveFilters();
-  renderCards();
+  resetCatalogView();
   window.history.pushState(null, "", localeRoot(locale));
   renderRoute();
 });
@@ -549,8 +481,9 @@ activeFiltersElement.addEventListener("click", (event) => {
   if (remove) activeFilters.delete(remove.dataset.removeFilter);
   if (event.target.closest("[data-clear-filters]")) activeFilters.clear();
   renderActiveFilters();
-  renderCards();
+  resetCatalogView();
 });
+loadMoreButton.addEventListener("click", showMoreExperiences);
 themeToggle.addEventListener("click", () => {
   const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   applyTheme(nextTheme, true);
@@ -602,9 +535,21 @@ applyStaticTranslations();
 applyTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
 renderTabs();
 renderActiveFilters();
-renderCards();
+if (claimForCurrentRoute()) {
+  cards.innerHTML = "";
+  cards.setAttribute("aria-busy", "false");
+  loadMore.hidden = true;
+} else {
+  renderCards({ reusePrerendered: cards.dataset.prerenderedLocale === locale && selectedReactions.size === 0 });
+}
 renderRoute();
 void loadReactionCounts();
+if ("IntersectionObserver" in window) {
+  const loadMoreObserver = new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) showMoreExperiences();
+  }, { rootMargin: "280px 0px" });
+  loadMoreObserver.observe(loadMore);
+}
 window.addEventListener("hashchange", () => {
   renderRoute();
   window.scrollTo({ top: 0, behavior: "instant" });

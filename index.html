@@ -115,7 +115,27 @@
           <div class="active-filters" id="active-filters"></div>
           <p class="result-count" id="result-count" aria-live="polite"></p>
           <p class="visually-hidden" id="reaction-status" aria-live="polite"></p>
-          <div class="cards" id="cards"></div>
+          <div class="cards" id="cards" aria-busy="true">
+            <!-- catalog:start -->
+            <div class="catalog-skeleton" role="status">
+              <span class="visually-hidden" id="catalog-loading-label">Loading experiences…</span>
+              <div class="skeleton-heading"></div>
+              <div class="skeleton-grid" aria-hidden="true">
+                <div class="skeleton-card"><span></span><span></span><span></span><span></span></div>
+                <div class="skeleton-card"><span></span><span></span><span></span><span></span></div>
+                <div class="skeleton-card"><span></span><span></span><span></span><span></span></div>
+                <div class="skeleton-card"><span></span><span></span><span></span><span></span></div>
+              </div>
+            </div>
+            <!-- catalog:end -->
+          </div>
+          <div class="load-more" id="load-more" hidden>
+            <div class="incremental-skeleton" id="incremental-skeleton" aria-hidden="true" hidden>
+              <div class="skeleton-card"><span></span><span></span><span></span></div>
+              <div class="skeleton-card"><span></span><span></span><span></span></div>
+            </div>
+            <button class="load-more-button" id="load-more-button" type="button">Show more</button>
+          </div>
           <p class="empty" id="empty" hidden>No experiences match this search.</p>
         </div>
         <div class="experience-detail" id="experience-detail" hidden></div>

@@ -84,7 +84,7 @@ function structuredData(i18n, locale, claim, canonicalUrl) {
       "@type": "Dataset",
       "@id": `${siteUrl}/#dataset`,
       name: "Gender Experience Index data",
-      description: "Structured gender experience records with localized content and source links.",
+      description: i18n.t("ui.datasetDescription"),
       url: `${siteUrl}/data/experiences.json`,
       inLanguage: locales.map((item) => localeDefinitions[item].htmlLang),
       license: licenseUrl,

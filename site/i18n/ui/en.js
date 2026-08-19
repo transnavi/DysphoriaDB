@@ -1,9 +1,10 @@
 export const en = {
   ui: {
     siteName: "Gender Experience Index",
-    description: "A browsable reference of recurring gender experiences.",
+    description: "This reference categorizes recurring gender experiences for personal reflection and research.",
+    datasetDescription: "This dataset categorizes recurring gender experiences for personal reflection and research.",
     heading: "How people experience gender",
-    introduction: "The index documents how gender dysphoria and euphoria are felt, expressed, and understood across transgender and gender-diverse communities.",
+    introduction: "This reference organizes experiences repeatedly described in transgender and gender-diverse communities, including gender dysphoria, gender euphoria, and preferences. It can support personal reflection and research, including queer studies.",
     submitExperience: "Submit an experience",
     glossary: "TransNavi glossary",
     languageLabel: "Language",

@@ -53,6 +53,14 @@ test("localized terminology follows the TransNavi vocabulary", () => {
   assert.equal(zhCN.terms.passing, "过关");
 });
 
+test("site descriptions present the catalog as an organized reference", () => {
+  assert.match(enUi.ui.description, /categorizes recurring gender experiences/i);
+  assert.match(jaUi.ui.description, /分類・整理/);
+  assert.match(jaUi.ui.introduction, /クィア・スタディーズ/);
+  assert.doesNotMatch(jaUi.ui.description, /探せる|出典/);
+  assert.match(zhCNUi.ui.description, /分类整理/);
+});
+
 test("language-specific expressions remain in their localized content", () => {
   const english = JSON.stringify(en);
   assert.equal(english.includes("女々しい"), false);

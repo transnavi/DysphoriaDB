@@ -14,6 +14,10 @@ npm run dev
 
 Then open `http://localhost:4174`.
 
+## Experience data
+
+Each entry in `site/data/experiences.js` has a stable `id`. Routes, reference sources, exports, and reactions use this ID. Localized titles, summaries, patterns, and variations live in `site/i18n/content/<locale>.js`; every locale, including English, keys its content by the same ID.
+
 ## Production build
 
 ```sh

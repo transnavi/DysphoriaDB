@@ -36,13 +36,13 @@
   function saveSelection(nextSelected: boolean) {
     const match = document.cookie.match(/(?:^|; )gex_selected_v1=([^;]*)/);
     const values = new Set(decodeURIComponent(match?.[1] ?? "").split(",").filter(Boolean));
-    if (nextSelected) values.add(item.slug);
-    else values.delete(item.slug);
+    if (nextSelected) values.add(item.id);
+    else values.delete(item.id);
     document.cookie = `gex_selected_v1=${encodeURIComponent([...values].join(","))}; Path=/; Max-Age=31536000; SameSite=Lax${location.protocol === "https:" ? "; Secure" : ""}`;
     try {
       localStorage.setItem(
         reactionStorageKey,
-        updatedReactionStorageValue(localStorage.getItem(reactionStorageKey), item.slug, nextSelected),
+        updatedReactionStorageValue(localStorage.getItem(reactionStorageKey), item.id, nextSelected),
       );
     } catch {
       // The cookie preserves the selection when local storage is unavailable.
@@ -56,7 +56,7 @@
     } catch {
       return;
     }
-    if (!reactionIsSelected(selected, item.slug, storedValue)) return;
+    if (!reactionIsSelected(selected, item.id, storedValue)) return;
     selected = true;
     saveSelection(true);
   });
@@ -72,7 +72,7 @@
     saveSelection(selected);
 
     try {
-      const response = await fetch(`/api/reactions/${encodeURIComponent(item.slug)}`, {
+      const response = await fetch(`/api/reactions/${encodeURIComponent(item.id)}`, {
         method: "POST",
         headers: { "content-type": "application/json", accept: "application/json" },
         body: JSON.stringify({ voterId: voterId(), selected }),

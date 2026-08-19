@@ -5,15 +5,15 @@ export function filterKey(group: string, value: string) {
   return `${group}:${value}`;
 }
 
-export function claimHasFilter(
-  claim: { types: string[]; directions: string[]; stages: string[]; tags: string[] },
+export function experienceHasFilter(
+  experience: { types: string[]; directions: string[]; stages: string[]; tags: string[] },
   key: string,
 ) {
   const [group, value] = key.split(":", 2);
-  if (group === "type") return claim.types.includes(value);
-  if (group === "population") return claim.directions.includes(value);
-  if (group === "stage") return claim.stages.includes(value);
-  return claim.tags.includes(value);
+  if (group === "type") return experience.types.includes(value);
+  if (group === "population") return experience.directions.includes(value);
+  if (group === "stage") return experience.stages.includes(value);
+  return experience.tags.includes(value);
 }
 
 function stableHash(value: string, seed = 2166136261) {
@@ -43,39 +43,39 @@ function roundRobin<T>(queues: T[][]) {
   return ordered;
 }
 
-type CatalogClaim = {
-  slug: string;
+type CatalogExperience = {
+  id: string;
   family: string;
   reportCount: number;
   reactionCount: number;
   sources: unknown[];
 };
 
-export function organizeCatalog<T extends CatalogClaim>(collection: T[]) {
-  const familyClaims = new Map<string, T[]>();
-  for (const claim of collection) {
-    const items = familyClaims.get(claim.family) ?? [];
-    items.push(claim);
-    familyClaims.set(claim.family, items);
+export function organizeCatalog<T extends CatalogExperience>(collection: T[]) {
+  const familyExperiences = new Map<string, T[]>();
+  for (const experience of collection) {
+    const items = familyExperiences.get(experience.family) ?? [];
+    items.push(experience);
+    familyExperiences.set(experience.family, items);
   }
 
-  const seedMaterial = collection.map((claim) => [
-    claim.slug,
-    claim.reportCount,
-    ...claim.sources.map((source) => String(
+  const seedMaterial = collection.map((experience) => [
+    experience.id,
+    experience.reportCount,
+    ...experience.sources.map((source) => String(
       Array.isArray(source) ? (source[1] ?? "") : ((source as { url?: string }).url ?? ""),
     )),
   ].join("|")).join("\n");
   const seed = stableHash(seedMaterial);
 
-  for (const items of familyClaims.values()) {
-    items.sort((a, b) => stableHash(`${seed}:${a.slug}`) - stableHash(`${seed}:${b.slug}`));
+  for (const items of familyExperiences.values()) {
+    items.sort((a, b) => stableHash(`${seed}:${a.id}`) - stableHash(`${seed}:${b.id}`));
     const ranked = rankByReactionCount(items, (item: T) => item.reactionCount) as T[];
     items.splice(0, items.length, ...ranked);
   }
 
   const availableDomains = domains.filter((domain) =>
-    domain.families.some((family: string) => familyClaims.has(family))
+    domain.families.some((family: string) => familyExperiences.has(family))
   );
   const rankedDomains = rotate(availableDomains, seed);
   const rankedFamilies = new Map(rankedDomains.map((domain) => [
@@ -89,10 +89,10 @@ export function organizeCatalog<T extends CatalogClaim>(collection: T[]) {
   ]));
 
   const ordered = roundRobin(rankedDomains.map((domain) => roundRobin(
-    (rankedFamilies.get(domain.id) ?? []).map((family) => familyClaims.get(family!.id) ?? []),
+    (rankedFamilies.get(domain.id) ?? []).map((family) => familyExperiences.get(family!.id) ?? []),
   )));
 
-  return { familyClaims, ordered, rankedDomains, rankedFamilies };
+  return { familyExperiences, ordered, rankedDomains, rankedFamilies };
 }
 
 export function formatMessage(

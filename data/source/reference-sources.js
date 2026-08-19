@@ -15,65 +15,65 @@ const GIDYQ_SOURCE = ["Gender Identity/Gender Dysphoria Questionnaire for Adoles
 const EUPHORIA_SOURCE = ["Gender Euphoria Scale", GENDER_EUPHORIA_SCALE, "Questionnaire", "A 26-item measure organized around social affirmation, self-affirmation, and community connection."];
 
 export const referenceSources = {
-  "Discomfort with sex characteristics": [
+  "discomfort-with-sex-characteristics": [
     WHO_SOURCE,
     MSD_SOURCE,
     UGDS_SOURCE,
     GCLS_SOURCE,
   ],
-  "Distress when your own body looks male or female": [
+  "body-looks-like-the-wrong-gender": [
     UGDS_SOURCE,
     GCLS_SOURCE,
   ],
-  "Feeling ugly or unphotogenic in mirrors and photographs": [
+  "mirrors-and-photographs-feel-unflattering": [
     GCLS_SOURCE,
   ],
-  "Discomfort being treated as the assigned gender": [
+  "being-treated-as-the-assigned-gender-feels-wrong": [
     MSD_SOURCE,
     UGDS_SOURCE,
     GIDYQ_SOURCE,
   ],
-  "Relief when your gender is recognized": [
+  "relief-from-gender-recognition": [
     GCLS_SOURCE,
     EUPHORIA_SOURCE,
   ],
-  "Discomfort presenting as the assigned gender": [
+  "assigned-gender-presentation-feels-wrong": [
     MSD_SOURCE,
     UGDS_SOURCE,
     GIDYQ_SOURCE,
   ],
-  "Gravitating away from assigned-gender expectations": [
+  "gravitating-away-from-assigned-gender-expectations": [
     WHO_SOURCE,
     ["MSD Manual: Symptoms in children", MSD, "Clinical manual", "Describes childhood gender expression, play, clothing preferences, and distress around pubertal change."],
   ],
-  "Overperforming the assigned gender": [
+  "overperforming-the-assigned-gender": [
     ["MSD Manual: Symptoms in adults", MSD, "Clinical manual", "Describes retrospective avoidance of gender feelings and a reported flight into hypermasculinity among some AMAB adults."],
   ],
-  "Body changes can create recognition and relief": [
+  "body-changes-create-recognition-and-relief": [
     WHO_SOURCE,
     SOC8_SOURCE,
     GCLS_SOURCE,
   ],
-  "Relief from gender-affirming expression": [
+  "relief-from-gender-affirming-expression": [
     UGDS_SOURCE,
     EUPHORIA_SOURCE,
   ],
-  "Fear of growing older in the assigned gender": [
+  "fear-of-aging-in-the-assigned-gender": [
     GIDYQ_SOURCE,
   ],
-  "Wanting to belong among peers of another gender": [
+  "belonging-among-peers-of-another-gender": [
     UGDS_SOURCE,
     GCLS_SOURCE,
     EUPHORIA_SOURCE,
   ],
-  "Feeling able to move forward after recognizing your gender": [
+  "moving-forward-after-gender-self-recognition": [
     GCLS_SOURCE,
     EUPHORIA_SOURCE,
   ],
-  "Intimacy feels different when gendered roles align": [
+  "intimacy-when-gendered-roles-align": [
     GCLS_SOURCE,
   ],
-  "Withdrawing when a promising date becomes real": [
+  "withdrawing-when-a-promising-date-becomes-real": [
     GCLS_SOURCE,
   ],
 };

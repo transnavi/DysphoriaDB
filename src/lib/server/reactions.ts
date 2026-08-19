@@ -1,6 +1,6 @@
 import { experiences } from "$site/data/experiences.js";
 
-const validSlugs = new Set(experiences.map(({ slug }) => slug));
+const validExperienceIds = new Set(experiences.map(({ id }) => id));
 const voterIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const maximumBodyBytes = 1024;
 const apiSecurityHeaders = {
@@ -63,17 +63,17 @@ async function limitedJson(request: Request): Promise<{ value: unknown } | { res
 export async function getReactionCounts(env?: RuntimeEnv) {
   if (!env?.REACTIONS_DB) return {};
   const result = await env.REACTIONS_DB
-    .prepare("SELECT experience_slug, COUNT(*) AS count FROM experience_reactions GROUP BY experience_slug")
-    .all<{ experience_slug: string; count: number }>();
+    .prepare("SELECT experience_id, COUNT(*) AS count FROM experience_reactions GROUP BY experience_id")
+    .all<{ experience_id: string; count: number }>();
 
   return Object.fromEntries(result.results
-    .filter((row) => validSlugs.has(row.experience_slug))
-    .map((row) => [row.experience_slug, Number(row.count)]));
+    .filter((row) => validExperienceIds.has(row.experience_id))
+    .map((row) => [row.experience_id, Number(row.count)]));
 }
 
-export async function updateReaction(request: Request, env: RuntimeEnv | undefined, slug: string) {
+export async function updateReaction(request: Request, env: RuntimeEnv | undefined, id: string) {
   if (!env?.REACTIONS_DB) return jsonResponse({ error: "Service unavailable" }, 503);
-  if (!validSlugs.has(slug)) return jsonResponse({ error: "Unknown experience" }, 404);
+  if (!validExperienceIds.has(id)) return jsonResponse({ error: "Unknown experience" }, 404);
   if (!sameOrigin(request)) return jsonResponse({ error: "Origin is not allowed" }, 403);
   if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
     return jsonResponse({ error: "Expected JSON" }, 415);
@@ -100,18 +100,18 @@ export async function updateReaction(request: Request, env: RuntimeEnv | undefin
 
   const write = body.selected
     ? env.REACTIONS_DB.prepare(
-      "INSERT OR IGNORE INTO experience_reactions (experience_slug, voter_id) VALUES (?, ?)",
-    ).bind(slug, body.voterId)
+      "INSERT OR IGNORE INTO experience_reactions (experience_id, voter_id) VALUES (?, ?)",
+    ).bind(id, body.voterId)
     : env.REACTIONS_DB.prepare(
-      "DELETE FROM experience_reactions WHERE experience_slug = ? AND voter_id = ?",
-    ).bind(slug, body.voterId);
+      "DELETE FROM experience_reactions WHERE experience_id = ? AND voter_id = ?",
+    ).bind(id, body.voterId);
   const count = env.REACTIONS_DB.prepare(
-    "SELECT COUNT(*) AS count FROM experience_reactions WHERE experience_slug = ?",
-  ).bind(slug);
+    "SELECT COUNT(*) AS count FROM experience_reactions WHERE experience_id = ?",
+  ).bind(id);
   const [, countResult] = await env.REACTIONS_DB.batch<{ count: number }>([write, count]);
 
   return jsonResponse({
-    slug,
+    id,
     selected: body.selected,
     count: Number(countResult.results[0]?.count ?? 0),
   });

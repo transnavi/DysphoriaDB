@@ -1,7 +1,7 @@
 <script lang="ts">
   import { replaceState } from "$app/navigation";
   import { onMount, untrack } from "svelte";
-  import { claimHasFilter, filterKey, formatMessage } from "$lib/catalog";
+  import { experienceHasFilter, filterKey, formatMessage } from "$lib/catalog";
   import type { CatalogDomain, CatalogPageData, CatalogTag, LocalizedSite } from "$lib/types";
   import ExperienceCard from "$lib/components/ExperienceCard.svelte";
   import Seo from "$lib/components/Seo.svelte";
@@ -16,8 +16,8 @@
   let closedDomains = $state<string[]>(untrack(() => [...data.browse.closedDomains]));
   let closedFamilies = $state<string[]>(untrack(() => [...data.browse.closedFamilies]));
   let selectedReactions = $state<string[]>(untrack(() => [...data.browse.selectedReactions]));
-  let newSlugs = $state<string[]>(untrack(() => [...data.browse.newSlugs]));
-  let openSourceSlug = $state("");
+  let newExperienceIds = $state<string[]>(untrack(() => [...data.browse.newExperienceIds]));
+  let openSourceExperienceId = $state("");
   let reactionStatus = $state("");
   let searchTimer: ReturnType<typeof setTimeout>;
 
@@ -32,7 +32,7 @@
             ...family,
             items: family.items.filter((item) =>
               item.searchText.includes(normalizedQuery)
-              && activeFilters.every((key) => claimHasFilter(item, key))
+              && activeFilters.every((key) => experienceHasFilter(item, key))
             ),
           }))
           .filter((family) => family.items.length > 0),
@@ -85,10 +85,10 @@
     }
   }
 
-  function markSeen(slug: string) {
-    if (!newSlugs.includes(slug)) return;
-    newSlugs = newSlugs.filter((item) => item !== slug);
-    setCookie("gex_unread_v1", newSlugs);
+  function markSeen(id: string) {
+    if (!newExperienceIds.includes(id)) return;
+    newExperienceIds = newExperienceIds.filter((item) => item !== id);
+    setCookie("gex_unread_v1", newExperienceIds);
   }
 
   onMount(() => {
@@ -164,8 +164,8 @@
   </div>
   <div class="catalog-status">
     <p class="result-count" aria-live="polite">{formatMessage(messages, "resultCount", { count: resultCount })}</p>
-    {#if newSlugs.length}
-      <p class="new-count" aria-live="polite">{formatMessage(messages, "newCount", { count: newSlugs.length })}</p>
+    {#if newExperienceIds.length}
+      <p class="new-count" aria-live="polite">{formatMessage(messages, "newCount", { count: newExperienceIds.length })}</p>
     {/if}
   </div>
   <p class="visually-hidden" aria-live="polite">{reactionStatus}</p>
@@ -190,19 +190,19 @@
               >
                 <summary><h3>{family.label}</h3></summary>
                 <div class="group-grid">
-                  {#each family.items as item (item.slug)}
+                  {#each family.items as item (item.id)}
                     <ExperienceCard
                       {item}
                       locale={site.locale}
                       {messages}
                       {rootPath}
                       {activeFilters}
-                      isNew={newSlugs.includes(item.slug)}
-                      initiallySelected={selectedReactions.includes(item.slug)}
-                      openSource={openSourceSlug === item.slug}
+                      isNew={newExperienceIds.includes(item.id)}
+                      initiallySelected={selectedReactions.includes(item.id)}
+                      openSource={openSourceExperienceId === item.id}
                       ontag={toggleFilter}
                       onseen={markSeen}
-                      onsource={(slug, open) => { openSourceSlug = open ? slug : (openSourceSlug === slug ? "" : openSourceSlug); }}
+                      onsource={(id, open) => { openSourceExperienceId = open ? id : (openSourceExperienceId === id ? "" : openSourceExperienceId); }}
                       onstatus={(message) => { reactionStatus = message; }}
                     />
                   {/each}
@@ -224,19 +224,19 @@
               >
                 <summary><h3>{family.label}</h3></summary>
                 <div class="group-grid">
-                  {#each family.items as item (item.slug)}
+                  {#each family.items as item (item.id)}
                     <ExperienceCard
                       {item}
                       locale={site.locale}
                       {messages}
                       {rootPath}
                       {activeFilters}
-                      isNew={newSlugs.includes(item.slug)}
-                      initiallySelected={selectedReactions.includes(item.slug)}
-                      openSource={openSourceSlug === item.slug}
+                      isNew={newExperienceIds.includes(item.id)}
+                      initiallySelected={selectedReactions.includes(item.id)}
+                      openSource={openSourceExperienceId === item.id}
                       ontag={toggleFilter}
                       onseen={markSeen}
-                      onsource={(slug, open) => { openSourceSlug = open ? slug : (openSourceSlug === slug ? "" : openSourceSlug); }}
+                      onsource={(id, open) => { openSourceExperienceId = open ? id : (openSourceExperienceId === id ? "" : openSourceExperienceId); }}
                       onstatus={(message) => { reactionStatus = message; }}
                     />
                   {/each}

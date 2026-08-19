@@ -18,9 +18,9 @@ const escapeXml = (value: string) => value
 
 const absoluteUrl = (path: string) => new URL(path, catalogMetadata.siteUrl).href;
 
-function pagePath(locale: SitemapLocale, slug?: string) {
+function pagePath(locale: SitemapLocale, id?: string) {
   const prefix = sitemapLocales[locale].path;
-  return `${prefix ? `/${prefix}` : ""}${slug ? `/experience/${slug}` : ""}/`;
+  return `${prefix ? `/${prefix}` : ""}${id ? `/experience/${id}` : ""}/`;
 }
 
 export function renderSitemapIndex() {
@@ -36,16 +36,16 @@ ${sitemaps.map((locale) => `  <sitemap>
 }
 
 export function renderLocaleSitemap(locale: SitemapLocale) {
-  const entries = [undefined, ...experiences.map(({ slug }) => slug)];
+  const entries = [undefined, ...experiences.map(({ id }) => id)];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${entries.map((slug) => `  <url>
-    <loc>${escapeXml(absoluteUrl(pagePath(locale, slug)))}</loc>
-${slug ? "" : `    <lastmod>${catalogMetadata.dateModified}</lastmod>\n`}    <priority>${slug ? "0.8" : "1.0"}</priority>
+${entries.map((id) => `  <url>
+    <loc>${escapeXml(absoluteUrl(pagePath(locale, id)))}</loc>
+${id ? "" : `    <lastmod>${catalogMetadata.dateModified}</lastmod>\n`}    <priority>${id ? "0.8" : "1.0"}</priority>
 ${(Object.keys(sitemapLocales) as SitemapLocale[]).map((alternateLocale) =>
-    `    <xhtml:link rel="alternate" hreflang="${sitemapLocales[alternateLocale].hreflang}" href="${escapeXml(absoluteUrl(pagePath(alternateLocale, slug)))}" />`
+    `    <xhtml:link rel="alternate" hreflang="${sitemapLocales[alternateLocale].hreflang}" href="${escapeXml(absoluteUrl(pagePath(alternateLocale, id)))}" />`
   ).join("\n")}
-    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(absoluteUrl(pagePath("en", slug)))}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(absoluteUrl(pagePath("en", id)))}" />
   </url>`).join("\n")}
 </urlset>
 `;

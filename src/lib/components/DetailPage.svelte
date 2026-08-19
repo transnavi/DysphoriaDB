@@ -20,7 +20,7 @@
 
   onMount(() => {
     const match = document.cookie.match(/(?:^|; )gex_unread_v1=([^;]*)/);
-    const unread = decodeURIComponent(match?.[1] ?? "").split(",").filter((slug) => slug && slug !== item.slug);
+    const unread = decodeURIComponent(match?.[1] ?? "").split(",").filter((id) => id && id !== item.id);
     document.cookie = `gex_unread_v1=${encodeURIComponent(unread.join(","))}; Path=/; Max-Age=31536000; SameSite=Lax${location.protocol === "https:" ? "; Secure" : ""}`;
   });
 </script>
@@ -55,7 +55,7 @@
           {item}
           locale={site.locale}
           {messages}
-          initiallySelected={data.selectedReactions.includes(item.slug)}
+          initiallySelected={data.selectedReactions.includes(item.id)}
           onstatus={(message) => { reactionStatus = message; }}
         />
       </div>
@@ -101,7 +101,7 @@
           <h2>{messages.relatedExperiences}</h2>
           <ul class="related-list">
             {#each related as relatedItem}
-              <li><a href={`${rootPath}experience/${relatedItem.slug}/`}>{relatedItem.title}</a></li>
+              <li><a href={`${rootPath}experience/${relatedItem.id}/`}>{relatedItem.title}</a></li>
             {/each}
           </ul>
         </section>

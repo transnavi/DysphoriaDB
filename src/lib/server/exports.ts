@@ -4,14 +4,14 @@ import { createI18n, localeDefinitions, localeRoot } from "$site/i18n/index.js";
 
 const locales = Object.keys(localeDefinitions) as Array<keyof typeof localeDefinitions>;
 type TranslationMap = Record<string, string>;
-type ExportClaimText = {
+type ExportExperienceText = {
   title?: string;
   summary?: string;
   patterns?: string[][];
   variations?: string[];
 };
 type ExportTranslations = {
-  claims: Record<string, ExportClaimText>;
+  experiences: Record<string, ExportExperienceText>;
   taxonomy: Record<string, TranslationMap>;
   terms: TranslationMap;
 };
@@ -20,7 +20,7 @@ async function translationsByLocale() {
   return Object.fromEntries(await Promise.all(locales.map(async (locale) => {
     const i18n = await createI18n(locale);
     return [locale, {
-      claims: i18n.t("experiences", { returnObjects: true }) as Record<string, ExportClaimText>,
+      experiences: i18n.t("experiences", { returnObjects: true }) as Record<string, ExportExperienceText>,
       taxonomy: i18n.t("taxonomy", { returnObjects: true }) as Record<string, TranslationMap>,
       terms: i18n.t("terms", { returnObjects: true }) as TranslationMap,
     } satisfies ExportTranslations];
@@ -32,7 +32,7 @@ const translated = (map: TranslationMap | undefined, value: string) => map?.[val
 export async function exportData() {
   const translations = await translationsByLocale();
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     dateModified: catalogMetadata.dateModified,
     license: catalogMetadata.license,
     attribution: "TransNavi contributors",
@@ -41,7 +41,7 @@ export async function exportData() {
       path: localeRoot(locale),
     }])),
     experiences: experiences.map((experience) => ({
-      slug: experience.slug,
+      id: experience.id,
       family: experience.family,
       domain: experience.domain,
       types: experience.types,
@@ -57,9 +57,9 @@ export async function exportData() {
         ...(note ? { note } : {}),
       })),
       content: Object.fromEntries(locales.map((locale) => {
-        const localized = translations[locale].claims[experience.slug] ?? {};
+        const localized = translations[locale].experiences[experience.id] ?? {};
         return [locale, {
-          title: localized.title ?? experience.slug,
+          title: localized.title ?? experience.id,
           summary: localized.summary ?? "",
           patterns: localized.patterns ?? [],
           variations: localized.variations ?? [],
@@ -74,14 +74,14 @@ const csvCell = (value: unknown) => `"${String(value).replaceAll('"', '""')}"`;
 
 export async function exportCsv() {
   const translations = await translationsByLocale();
-  const headers = ["slug", "locale", "title", "summary", "domain", "family", "types", "directions", "stages", "tags", "report_count", "sources"];
+  const headers = ["id", "locale", "title", "summary", "domain", "family", "types", "directions", "stages", "tags", "report_count", "sources"];
   const rows = [headers, ...experiences.flatMap((experience) => locales.map((locale) => {
     const bundle = translations[locale];
-    const localized = bundle.claims[experience.slug] ?? {};
+    const localized = bundle.experiences[experience.id] ?? {};
     return [
-      experience.slug,
+      experience.id,
       locale,
-      localized.title ?? experience.slug,
+      localized.title ?? experience.id,
       localized.summary ?? "",
       translated(bundle.taxonomy.domains, experience.domain),
       translated(bundle.taxonomy.families, experience.family),

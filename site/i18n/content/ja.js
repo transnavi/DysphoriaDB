@@ -1,11 +1,11 @@
-const claim = (title, summary, patterns = [], variations = []) => ({ title, summary, patterns, variations });
+const localizedExperience = (title, summary, patterns = [], variations = []) => ({ title, summary, patterns, variations });
 
 const experiences = {
-  "mirrors-and-photographs-feel-unflattering": claim(
+  "mirrors-and-photographs-feel-unflattering": localizedExperience(
     "鏡や写真に映る自分を醜いと感じ、写真写りが悪いと思う",
     "周囲から外見をどう評価されても、自分の見た目をいつも嫌い、写真を避け、魅力や自信がないと感じることがあります。",
   ),
-  "feeling-out-of-place-in-gendered-restrooms": claim(
+  "feeling-out-of-place-in-gendered-restrooms": localizedExperience(
     "性別で分けられたトイレに居づらさを感じる",
     "出生時に割り当てられた性別のトイレを自分に合わないと感じ、自分のジェンダーに合うトイレには人目や安全面の不安から入りづらいことがあります。オールジェンダートイレを探す、個室を使う、利用を帰宅まで我慢するといった対応につながります。",
     [
@@ -17,7 +17,7 @@ const experiences = {
       ["トイレを避ける", "排尿を我慢する、飲食を控える、使える設備に合わせて外出を計画する、帰宅まで待つといった行動につながることがあります。"],
     ],
   ),
-  "belonging-among-transgender-and-lgbtq-people": claim(
+  "belonging-among-transgender-and-lgbtq-people": localizedExperience(
     "トランスジェンダーやLGBTQ+の人々の間に居場所を感じる",
     "トランスジェンダーの人や性的・性別マイノリティの人と過ごすと、安堵や親しみ、共通するアイデンティティの感覚が生まれることがあります。性別を開示していない時期にも感じられ、性格や関心が近いかどうかとは別に生じます。",
     [
@@ -28,7 +28,7 @@ const experiences = {
       ["一人ひとりとの関係は異なる", "コミュニティへの親しみと、個別の関係での気まずさや意見の違い、親しい友人関係を望まない気持ちは同時に存在します。"],
     ],
   ),
-  "attuned-to-gender-variance-in-other-people": claim(
+  "attuned-to-gender-variance-in-other-people": localizedExperience(
     "他者の性別の多様さに人一倍気づきやすい",
     "声、服装、体形、しぐさなど、男性・女性という典型的な枠に収まらない特徴が人一倍目に留まることがあります。自分のジェンダーを理解した後に、以前から抱いていた親しみ、羨望、惹かれの意味がわかる場合もあります。",
     [
@@ -39,11 +39,11 @@ const experiences = {
       ["推測には限界がある", "見た目や声からの推測は誤ることがあり、他者の性別を断定する根拠にはなりません。本人が自分のタイミングで開示できるよう、プライバシーを尊重することが大切です。"],
     ],
   ),
-  "unfamiliar-reflection": claim(
+  "unfamiliar-reflection": localizedExperience(
     "鏡の中の人が自分に見えない",
     "鏡や写真、録画に映る姿が別人のように見え、普段ならあるはずの「自分だ」という感覚が得られないことがあります。",
   ),
-  "difficulty-picturing-your-current-body-shape": claim(
+  "difficulty-picturing-your-current-body-shape": localizedExperience(
     "今の自分の体形を思い浮かべたり思い出したりしにくい",
     "自分の身体について頭に浮かぶ像が曖昧だったり、なかったり、昔の姿のままだったり、鏡や写真の身体とは違う形をしていたりして、今の体の比率を思い出しにくいことがあります。",
     [
@@ -53,11 +53,11 @@ const experiences = {
       ["想像上の形が違う", "現在とは異なる曲線、比率、性的特徴を備えた身体を自然に思い描くことがあります。"],
     ],
   ),
-  "avoiding-your-own-unclothed-body": claim(
+  "avoiding-your-own-unclothed-body": localizedExperience(
     "服を着ていない自分の身体を見ないようにする",
     "シャワーや着替え、鏡を見るときに自分の身体が目に入ると、目をそらす、特定の部分を隠す、急いで済ませるといった行動につながることがあります。",
   ),
-  "discomfort-with-your-body-being-seen": claim(
+  "discomfort-with-your-body-being-seen": localizedExperience(
     "自分の身体を人に見られることがつらい",
     "裸や露出の多い服装を人に見られると強く無防備に感じ、身体を覆う、身体を見せる必要のある場所を避ける、特定の部分を隠すことがあります。",
     [
@@ -67,7 +67,7 @@ const experiences = {
       ["割り当てられた性別によるグループ分け", "出生時に割り当てられた性別に基づいて利用場所を決められると、本人にとって異なる性別の人と一緒になる場合があります。その人たちに身体を見られることが、特につらく感じられることがあります。"],
     ],
   ),
-  "body-looks-like-the-wrong-gender": claim(
+  "body-looks-like-the-wrong-gender": localizedExperience(
     "自分の身体が男性的・女性的に見えるとつらい",
     "身体の形や性的特徴によって、望まない形で男性または女性に見えると、自分の身体を見ることが苦痛になる場合があります。",
     [],
@@ -77,7 +77,7 @@ const experiences = {
       "身体が強く男性的・女性的に見えることや、望む中性的・複合的な特徴がないことに、苦痛や疎外感を覚えることがあります。",
     ],
   ),
-  "covering-the-bare-upper-torso": claim(
+  "covering-the-bare-upper-torso": localizedExperience(
     "男性として扱われていても上半身を隠したくなる",
     "男性として扱われ、上半身を裸にすることを周囲から当然と思われる場面でも、実際に脱ぐと強く人目が気になることがあります。乳首や胸元を見られることや、上半身をさらすこと自体につらさや違和感を覚える場合があります。",
     [
@@ -89,15 +89,15 @@ const experiences = {
       ["複数の要因", "体重や身体イメージ、からかい、胸がふくらむこと（女性化乳房）、感覚過敏、慎み深さが、ジェンダーに関わる不快感と重なることがあります。"],
     ],
   ),
-  "concealing-chest-development-while-boymoding": claim(
+  "concealing-chest-development-while-boymoding": localizedExperience(
     "ボーイモード中に発達した胸を隠す",
     "女性やノンバイナリーであることを伏せ、周囲から男性として見られる服装や生活を続けることは、ボーイモードと呼ばれます。発達してきた胸は一人でいるときには嬉しくても、男性の身体を期待する人の前では、シャツ越しに見えること、着替え、水泳への不安につながることがあります。",
   ),
-  "minimizing-or-binding-an-unwanted-chest": claim(
+  "minimizing-or-binding-an-unwanted-chest": localizedExperience(
     "望まない胸を目立たなくする、またはバインディングする",
     "胸を圧迫して平らに見せることを、バインディングと呼びます。圧迫、重ね着、姿勢、服装によって、乳房や胸部組織の輪郭と身体感覚を弱めようとすることがあります。",
   ),
-  "discomfort-with-sex-characteristics": claim(
+  "discomfort-with-sex-characteristics": localizedExperience(
     "性的特徴に違和感がある",
     "性器など、生まれたときからある身体的特徴や、思春期以降に現れる声、体形、体毛、胸などの変化を、望まないもの、自分のものではないようなもの、目につきすぎるものとして感じることがあります。特に思春期や身体の変化の時期には、認めることさえ難しい場合があります。",
     [
@@ -108,7 +108,7 @@ const experiences = {
       ["褒め言葉や注目", "外見、身長、運動能力などを肯定的に評されることで、すでに不快な特徴をいっそう意識する場合があります。"],
     ],
   ),
-  "extreme-body-shape-and-gendered-silhouette": claim(
+  "extreme-body-shape-and-gendered-silhouette": localizedExperience(
     "男性的・女性的に見える体の輪郭を変えるため、極端な体形を望む",
     "とても痩せたい、太りたい、筋肉をつけたい、華奢になりたいと望むことがあります。体組成を変えることで望まない特徴を隠し、出生時に割り当てられた性別の美の基準から離れ、自分にとって過ごしやすい輪郭を得られると感じるためです。",
     [
@@ -118,11 +118,11 @@ const experiences = {
       ["筋肉を減らすこと", "筋肉をつけないようにする、華奢な体つきを望むことで、望まない男性的な輪郭を弱めようとする場合があります。"],
     ],
   ),
-  "feeling-detached-from-the-body": claim(
+  "feeling-detached-from-the-body": localizedExperience(
     "身体が自分から切り離されているように感じる",
     "鏡に映る身体を他人のもののように感じたり、自分は身体を遠隔操作しているだけだと感じたりすることがあります。食事、運動、身だしなみ、受診など、自分の身体を手入れする意味も感じにくくなる場合があります。",
   ),
-  "assigned-gender-presentation-feels-wrong": claim(
+  "assigned-gender-presentation-feels-wrong": localizedExperience(
     "割り当てられた性別として装うことに違和感がある",
     "出生時に割り当てられた性別と結びつく服装、髪形、身だしなみ、振る舞いなどが、押しつけられたものや自分に合わないものに感じられることがあります。",
     [
@@ -131,19 +131,19 @@ const experiences = {
       ["より中性的な選択肢", "実用上の差が小さくても、ユニセックス、無地、別の性別向けの品のほうが身につけやすい場合があります。"],
     ],
   ),
-  "plain-clothes-over-assigned-gender-beauty": claim(
+  "plain-clothes-over-assigned-gender-beauty": localizedExperience(
     "割り当てられた性別として着飾るより、地味な服を選ぶ",
     "ファッションや視覚デザイン、他人のおしゃれには関心があっても、自分には無地や暗い色、手早く着られる目立たない服装や身だしなみを選ぶことがあります。割り当てられた性別の役割の中で魅力的になることに、喜びや納得感を得にくいためです。",
   ),
-  "gravitating-away-from-assigned-gender-expectations": claim(
+  "gravitating-away-from-assigned-gender-expectations": localizedExperience(
     "性別を理由に勧められる遊びや役割に興味を持てない",
     "男児向け・女児向けとして勧められる玩具、ゲーム、趣味、ごっこの役、友人関係、活動に惹かれず、出生時に割り当てられた性別と結びついていない遊び方や表現を自然に感じることがあります。",
   ),
-  "being-treated-as-the-assigned-gender-feels-wrong": claim(
+  "being-treated-as-the-assigned-gender-feels-wrong": localizedExperience(
     "割り当てられた性別として扱われることがつらい",
     "性別を示す名前、彼・彼女などの呼び方、さん・くんなどの敬称、グループ分け、期待、呼びかけによって、理由を理解する前から不快感が生じることがあります。",
   ),
-  "gendered-records-feel-inaccurate": claim(
+  "gendered-records-feel-inaccurate": localizedExperience(
     "性別が記載された記録を、自分についての誤った情報に感じる",
     "書類やアカウントにある名前、写真、性別欄、敬称、過去の性別が分かる記録を、自分についての不正確な情報に感じることがあります。身分証の提示、本人確認、自己紹介などの日常的な場面にも強い緊張が伴う場合があります。",
     [
@@ -153,7 +153,7 @@ const experiences = {
       ["訂正による安心", "名前、写真、性別表記、呼ばれ方を更新すると、普段の事務手続きに伴う負担が軽くなることがあります。"],
     ],
   ),
-  "hesitating-over-gender-fields": claim(
+  "hesitating-over-gender-fields": localizedExperience(
     "性別の記入・選択を求められると迷う",
     "書類で性別の記入・選択を求められると、まず自分に合う性別を選ぼうとすることがあります。迷った末に割り当てられた性別へ戻す、可能なら空欄にする、記入した回答を見てつらくなるといった反応は、自分がトランスジェンダーだと認識する前から生じる場合があります。",
     [
@@ -164,7 +164,7 @@ const experiences = {
       ["自覚する前から", "自分がトランスジェンダーだと理解したり、自分の性別を言葉にしたりする前から、この衝動や迷いが現れることがあります。"],
     ],
   ),
-  "relief-from-gender-recognition": claim(
+  "relief-from-gender-recognition": localizedExperience(
     "自分のジェンダーを認識されるとほっとする",
     "自分に合う名前、彼・彼女などの呼び方、さん・くんなどの敬称、社会的役割によって、安心、喜び、落ち着きや、きちんと見てもらえたという予想以上に強い感覚が生まれることがあります。",
     [
@@ -174,7 +174,7 @@ const experiences = {
       ["社会的に仲間に入る", "説明を求められず、ジェンダーで分かれた集団や活動に迎え入れられることも、認識される体験になります。"],
     ],
   ),
-  "gender-policing-insults-feel-affirming": claim(
+  "gender-policing-insults-feel-affirming": localizedExperience(
     "「女々しい」「男みたい」などの悪口に、傷つきながら肯定感も覚える",
     "出生時に男性と割り当てられた人が「女々しい」「女みたい」「男らしくない」と侮辱されたとき、敵意には傷ついても、女性的に見られたことに安堵や、自分のジェンダーを認められたような喜びを覚える場合があります。出生時に女性と割り当てられた人が「男みたい」「女らしくない」と言われた場合にも起こります。",
     [
@@ -189,11 +189,11 @@ const experiences = {
       "「男みたい」「女らしくない」「おてんば」「女ではない」などの言葉に、予想ほど傷つかず、肯定的に感じることがあります。",
     ],
   ),
-  "relief-from-gender-affirming-expression": claim(
+  "relief-from-gender-affirming-expression": localizedExperience(
     "自分のジェンダーに合う表現でほっとする",
     "自分のジェンダーに合う服装、髪、メイク、身だしなみ、動き、スタイリングによって心地よさが生まれ、鏡の中の自分を認識しやすくなることがあります。",
   ),
-  "another-gender-in-games-and-imagined-roles": claim(
+  "another-gender-in-games-and-imagined-roles": localizedExperience(
     "ゲームや想像上の役で別のジェンダーを選ぶ",
     "アバター、ロールプレイ、コスプレ、創作、オンライン上の人格を通して、割り当てられた性別とは異なるジェンダーで繰り返し過ごすことがあります。",
     [
@@ -202,7 +202,7 @@ const experiences = {
       ["オンライン上の人格", "プロフィール、名前、アイコン、ボイスチャットが、別のジェンダーで社会生活を続けられる場になることがあります。"],
     ],
   ),
-  "gender-transformation-stories-feel-compelling": claim(
+  "gender-transformation-stories-feel-compelling": localizedExperience(
     "ジェンダーが変わる物語に強く惹かれる",
     "ジェンダーが変わることや、異なる性的特徴が発達することを描いた物語、画像、空想に、理由を理解する前から繰り返し惹かれる場合があります。",
     [
@@ -212,11 +212,11 @@ const experiences = {
       ["後から捉え直す", "自分のジェンダーを認識すると、ほかの創作より個人的に感じられた理由が明確になることがあります。"],
     ],
   ),
-  "assigned-gender-roles-feel-performed": claim(
+  "assigned-gender-roles-feel-performed": localizedExperience(
     "割り当てられた性別らしい振る舞いを、演技のように感じる",
     "周囲が期待する「男友達」「女友達」「彼氏」「彼女」などの役をこなすために、話し方、しぐさ、反応を考えて演じているように感じることがあります。うまく振る舞えても、強い疲れ、自分を偽っている感覚、人との心の距離が残る場合があります。",
   ),
-  "same-gender-friendship-feels-socially-wrong": claim(
+  "same-gender-friendship-feels-socially-wrong": localizedExperience(
     "割り当てられた性別が同じ相手から、同性の友人として扱われると違和感がある",
     "出生時に割り当てられた性別と自分のジェンダーが一致するシスジェンダーの友人は、普通の同性間の友情だと捉えている場合があります。トランスやノンバイナリーの本人には違うジェンダー同士の関係に感じられ、二人きりになることや、男性だけ・女性だけの集団に入ることで、気まずさ、罪悪感、警戒、理由のわからないデートのような感覚が生じることがあります。",
     [
@@ -232,19 +232,19 @@ const experiences = {
       "二元的なジェンダーでまとまった集団が、ノンバイナリーの人を割り当てられた性別の一員として扱っていても、本人は別の社会的立場からその場と人間関係を体験していることがあります。",
     ],
   ),
-  "overperforming-the-assigned-gender": claim(
+  "overperforming-the-assigned-gender": localizedExperience(
     "自分に割り当てられた性別らしさを、無理に強める",
     "自分のジェンダーに関する感情を抑え込むため、また周囲や自分を納得させるために、苦痛や無理を感じながら出生時に割り当てられた性別らしさを強めることがあります。たとえば、出生時に男性と割り当てられた人が、ひげ、筋肉、スポーツ、「強い男」らしい振る舞いに力を入れたり、出生時に女性と割り当てられた人が、化粧、女性的な服装、「女らしい」振る舞いを徹底したりします。ジェンダーに関する感情を抑え込む目的や、本人が感じる無理と苦痛が、この体験の中心です。",
   ),
-  "clothing-that-hides-the-body-silhouette": claim(
+  "clothing-that-hides-the-body-silhouette": localizedExperience(
     "身体の輪郭を隠す服を好む",
     "ゆったりした服、大きめの服、重ね着、柔らかい服、だぶついた服、とりわけパーカーやスウェットパンツは、望まない身体的特徴に布が沿わないため安心できることがあります。",
   ),
-  "voice-feels-unlike-oneself": claim(
+  "voice-feels-unlike-oneself": localizedExperience(
     "自分の声が自分らしく感じられない",
     "話すときや録音を聞いたときに、声の高さ、響き、話し方、周囲からの性別の捉えられ方が自己認識と食い違い、強い違和感を覚えることがあります。",
   ),
-  "grief-for-life-in-the-wrong-gender-role": claim(
+  "grief-for-life-in-the-wrong-gender-role": localizedExperience(
     "自分に合わない性別役割で過ごした年月を、悲しく思い返す",
     "子ども時代、思春期、人間関係、儀式、日常の出来事を振り返り、自分のジェンダーでは得られなかった体験を悲しく思うことがあります。",
     [
@@ -254,7 +254,7 @@ const experiences = {
       ["認識が遅れたこと", "後になって一連の体験を理解し、望まない役割に適応して過ごした年月を悔やむことがあります。"],
     ],
   ),
-  "returning-to-gendered-childhood-interests": claim(
+  "returning-to-gendered-childhood-interests": localizedExperience(
     "大人になってから、ジェンダーに結びつく子ども時代の関心に戻る",
     "ぬいぐるみ、人形、乗り物、色、服、趣味など、自分のジェンダーと結びつく子ども時代の品や活動が、後年になって特に魅力的に感じられることがあります。子どものころに欲しくても得られなかった場合、その傾向が強くなることがあります。",
     [
@@ -269,7 +269,7 @@ const experiences = {
       "複数の性別区分にまたがる品や、特定の性別と結びつかない品に特に惹かれることがあります。",
     ],
   ),
-  "fear-of-aging-in-the-assigned-gender": claim(
+  "fear-of-aging-in-the-assigned-gender": localizedExperience(
     "割り当てられた性別のまま年を取ることが怖い",
     "割り当てられた性別の年配の男性または女性として将来の自分を想像すると、恐ろしく、耐えがたく、自分と結びつけられないと感じることがあります。",
     [
@@ -278,7 +278,7 @@ const experiences = {
       ["さらに進む男性化・女性化", "声、髪、顔、体組成、社会的役割に予想される変化が、恐れを強めることがあります。"],
     ],
   ),
-  "fear-that-transition-began-too-late": claim(
+  "fear-that-transition-began-too-late": localizedExperience(
     "性別移行を始めるのが遅すぎたと感じる",
     "思春期後や成人してから性別移行を始めると、それまでの身体変化によって望む身体や社会的な認識に届かなくなったのではないかと不安になることがあります。",
     [
@@ -288,7 +288,7 @@ const experiences = {
       ["認識されることへの不安", "自分のジェンダーを周囲がいつか一貫して認識してくれるかどうかに、不安の中心がある場合があります。"],
     ],
   ),
-  "belonging-among-peers-of-another-gender": claim(
+  "belonging-among-peers-of-another-gender": localizedExperience(
     "割り当てられた性別とは違うジェンダーの仲間に加わりたい",
     "たとえば、出生時に男性と割り当てられた女性が女性同士の友人グループに、出生時に女性と割り当てられた男性が男性同士の友人グループに、自分の居場所を感じることがあります。ノンバイナリーの人が、男女どちらかに決めつけられずに過ごせる友人グループに居場所を感じる場合もあります。そこで普通の友人として会話や外出をしたいのに、周囲から仲間とは別の性別と見なされて輪から外されると、強い疎外感を覚えることがあります。",
     [
@@ -298,7 +298,7 @@ const experiences = {
       ["一緒に出かける", "自分と同じジェンダーの仲間との外出、食事、旅行、気軽な活動で、普通の一員として扱われることに肯定感を覚える場合があります。"],
     ],
   ),
-  "singled-out-around-gendered-privacy": claim(
+  "singled-out-around-gendered-privacy": localizedExperience(
     "言葉ではジェンダーを認められても、プライバシーや親しさの場面で排除される",
     "友人が言葉では本人のジェンダーを認めていても、プライバシーや親しさが関わると、出生時に割り当てられた性別に基づいて扱うことがあります。トイレや更衣場所から自分だけ退出を求められる、自宅へ招く・相手の家を訪ねる機会や宿泊から外される、ほかの仲間同士にはある何気ない触れ合いを避けられる、二人きりになることを拒まれる、といった形で現れます。相手のプライバシーや境界を尊重していても、認識や信頼を取り下げられたように感じ、深く傷つく場合があります。",
     [
@@ -312,7 +312,7 @@ const experiences = {
       ["後に残る傷つき", "その出来事によって悲しさや拒絶感が生じ、それまでの認識が本心だったのか疑うことがあります。"],
     ],
   ),
-  "gender-peer-friendship-mistaken-for-romantic-interest": claim(
+  "gender-peer-friendship-mistaken-for-romantic-interest": localizedExperience(
     "同じジェンダーの人と友達になろうとして、恋愛感情だと誤解される",
     "自分と同じジェンダーの人と普通の友情を築こうとしても、周囲から別のジェンダーとして見られているため、恋愛や性的な関心だと受け取られることがあります。",
     [
@@ -326,7 +326,7 @@ const experiences = {
       "男性への親しげな態度が、女性として恋愛・性的な誘いを受け入れる意思だと捉えられ、口説かれる、追いかけられる、扱いが変わることがあります。",
     ],
   ),
-  "moving-forward-after-gender-self-recognition": claim(
+  "moving-forward-after-gender-self-recognition": localizedExperience(
     "自分のジェンダーに気づき、前へ進めるように感じる",
     "自分のジェンダーを認識し受け入れることで、緊張がほどけ、活力が増し、計画、人間関係、自己表現に再び関心を持てることがあります。",
     [
@@ -337,15 +337,15 @@ const experiences = {
       ["安心と悲しみが並ぶ", "気づくまでに時間がかかったことや失われた時間への悲しみと、安心が同時に存在する場合があります。"],
     ],
   ),
-  "clothing-fit-highlights-body-shape": claim(
+  "clothing-fit-highlights-body-shape": localizedExperience(
     "服のフィット感によって体形が目立つ",
     "男性的または女性的な比率に合わせた裁断によって、腰、臀部、胸、肩、股間、全体の輪郭を強く意識することがあります。",
   ),
-  "controlling-gendered-body-hair": claim(
+  "controlling-gendered-body-hair": localizedExperience(
     "体毛を剃る・伸ばすことで、外見のジェンダーを調整する",
     "ひげや腕・脚・胸などの毛によって、外見が男性的・女性的に見える度合いを自分に合う方向へ変えようとすることがあります。毎日剃る、脱毛する、ひげを伸ばす、薄い毛も剃らずに残す、形を念入りに整えるといった習慣につながります。",
   ),
-  "hair-carries-unusual-importance": claim(
+  "hair-carries-unusual-importance": localizedExperience(
     "髪の長さや髪形が特別に重要になる",
     "髪を伸ばす、切る、整えることが、自分で選べる数少ないジェンダー表現の手段に感じられることがあります。本当の希望を言いにくく、周囲に説明しやすい実用上の理由を用意する場合もあります。",
     [
@@ -355,11 +355,11 @@ const experiences = {
       ["望まない性別を示す仕上がり", "技術的によい髪形でも、望まない性別を表す言葉で褒められるとつらく感じることがあります。"],
     ],
   ),
-  "identifying-with-characters-of-another-gender": claim(
+  "identifying-with-characters-of-another-gender": localizedExperience(
     "別のジェンダーの登場人物に強く自分を重ねる",
     "出生時に割り当てられた性別とは違うジェンダーの登場人物を見て、「この人の物語は自分のことのようだ」「この人に強く自分を重ねる」と感じることがあります。性別の決まりを越えて生きる登場人物に、同じような親近感を覚える場合もあります。",
   ),
-  "aligned-with-gender-concerns-before-self-recognition": claim(
+  "aligned-with-gender-concerns-before-self-recognition": localizedExperience(
     "自覚する前から、自分と同じジェンダーの人々の課題を身近に感じる",
     "自分のジェンダーを言葉にする前から、そのジェンダーの人々の体験や権利を、自分に直接関わる問題のように感じることがあります。たとえば、自分をまだ男性だと考えていたトランス女性が女性の体験やフェミニズムを身近に感じたり、後になってノンバイナリーだと気づく人が男女どちらかに決めつけられる問題を身近に感じたりします。後になって、自分もそのジェンダーに属しているという感覚が関心の一部にあったと気づくことがあります。",
     [
@@ -373,19 +373,19 @@ const experiences = {
       "出生時に女性と割り当てられた人が少年・男性の視点に強く共感し、後から、その関心の一部が自分も男性であることにつながっていたと理解する場合があります。",
     ],
   ),
-  "living-through-another-persons-presentation": claim(
+  "living-through-another-persons-presentation": localizedExperience(
     "他人の外見表現を通して、自分の望みを間接的に体験する",
     "自分では着られない、または似合わないと思っている服、髪形、メイクを、パートナーや友人に選ぶことで間接的に楽しむことがあります。たとえば、自分が望んでいるドレスや化粧を恋人に勧めたり、自分が着たいスーツや男性的な髪形を友人に選んだりします。",
   ),
-  "envy-blends-appearance-identity-and-attraction": claim(
+  "envy-blends-appearance-identity-and-attraction": localizedExperience(
     "その人に惹かれているのか、その人のようになりたいのか分かりにくい",
     "誰かを見て強く心を奪われたとき、恋愛的・性的に好きなのか、その人の身体、服装、声、ジェンダーとしての扱われ方を自分も得たいのか、両方なのかを切り分けにくいことがあります。自分のジェンダーに気づいた後で、以前の「好み」の一部が羨望だったと分かる場合があります。",
   ),
-  "social-withdrawal-reduces-gendered-exposure": claim(
+  "social-withdrawal-reduces-gendered-exposure": localizedExperience(
     "人との関わりを減らし、ジェンダーを意識する場面を避ける",
     "集まり、人間関係、写真、人前で注目されることを避けると、身体、名前、外見表現、割り当てられた社会的役割が目立つ場面を減らせることがあります。",
   ),
-  "separate-online-identity-until-gender-disclosure-feels-safe": claim(
+  "separate-online-identity-until-gender-disclosure-feels-safe": localizedExperience(
     "安全にジェンダーを明かせるまで、オンライン上の自分を日常の自分から切り離す",
     "親しい友人に対しても、オンラインではジェンダー、声、名前、外見、好みを隠すことがあります。自分のジェンダーを認識した後や性別移行後に、アカウント上の自分と日常の自分を結びつけられると、安心を感じる場合があります。",
     [
@@ -398,15 +398,15 @@ const experiences = {
       ["プライバシーと安全", "オンライン上のプライバシーは、嫌がらせ、本人が望まない形でジェンダーを周囲に明かされること、追跡から身を守ります。ジェンダーに関する情報が露出することへの不安が繰り返し生じる点が、この体験の中心です。"],
     ],
   ),
-  "staying-busy-to-avoid-gender-feelings": claim(
+  "staying-busy-to-avoid-gender-feelings": localizedExperience(
     "常に何かをして、ジェンダーに関する感情を意識しないようにする",
     "仕事、趣味、ゲーム、メディア、掃除、睡眠、飲酒や薬物で空き時間を埋め、繰り返し生じるジェンダーに関する感情へ注意を向ける時期を先延ばしにすることがあります。",
   ),
-  "gender-feelings-fluctuate-in-intensity": claim(
+  "gender-feelings-fluctuate-in-intensity": localizedExperience(
     "ジェンダーに関する感情の強さが変動する",
     "同じ鏡像、身体的特徴、人とのやり取り、呼ばれ方でも、ある日は気にならず、別の日には強い苦痛や肯定感を覚えることがあります。",
   ),
-  "gender-expression-becomes-less-deliberate": claim(
+  "gender-expression-becomes-less-deliberate": localizedExperience(
     "時間とともに、ジェンダーらしさを意識して作り込む必要が減る",
     "性別移行の初期には、自分を肯定する、慣れない表現方法を学ぶ、周囲にジェンダーを認識してもらうために、性別規範を強く意識することがあります。認識される機会と慣れが増えるにつれ、表現は力の抜けた個人的なものになっていく場合があります。",
     [
@@ -418,11 +418,11 @@ const experiences = {
       ["日常的な幅に落ち着く", "時間がたつと、ジェンダー表現にほとんど関心を持たない場合も含め、出生時に割り当てられた性別と自分のジェンダーが一致する人々に見られる幅広い好みに近づくことがあります。"],
     ],
   ),
-  "intimacy-when-gendered-roles-align": claim(
+  "intimacy-when-gendered-roles-align": localizedExperience(
     "ジェンダー役割が自分に合うと、親密さの感じ方が変わる",
     "デート、触れ合い、セックス、パートナー関係では、「彼氏」「彼女」など、相手から期待されるジェンダー上の役割が体験を左右することがあります。割り当てられた性別の役割では不快だった親密さが、自分の名前やジェンダーで認識され、自分に合う役割で接してもらうと、心地よく胸が高鳴るものになる場合があります。",
   ),
-  "withdrawing-when-a-promising-date-becomes-real": claim(
+  "withdrawing-when-a-promising-date-becomes-real": localizedExperience(
     "うまくいきそうなデートが現実味を帯びると身を引く",
     "人と付き合いたいと思いデートを楽しんでいても、互いの好意が明らかになった途端、望まれる、触れられる、交際相手になる、割り当てられた性別役割を期待されることに理由のわからない違和感が生じ、急に関係から離れる場合があります。",
     [
@@ -432,7 +432,7 @@ const experiences = {
       ["身体と親密さが意識に上る", "触れられること、セックス、間近で身体を見られる可能性によって、それまで曖昧だった不快感がはっきりすることがあります。"],
     ],
   ),
-  "body-changes-create-recognition-and-relief": claim(
+  "body-changes-create-recognition-and-relief": localizedExperience(
     "身体の変化によって、自分らしさと安心が生まれる",
     "体形、肌、毛髪、声、胸などの特徴が変わることで、身体がより親しみやすく、自分のものとして受け入れやすく、意味のあるものに感じられることがあります。",
     [
@@ -442,11 +442,11 @@ const experiences = {
       ["変化する時期のずれ", "特徴ごとに変化の速度が違うため、同じ時期に安心、焦り、不安が生じることがあります。"],
     ],
   ),
-  "seeing-yourself-shift-toward-recognition": claim(
+  "seeing-yourself-shift-toward-recognition": localizedExperience(
     "鏡や写真の自分を、次第に自分だと感じられるようになる",
     "以前は他人のように感じた鏡像や写真も、外見表現や身体が自分のジェンダーに近づくと、自分だと認識でき、喜びを感じられるようになることがあります。",
   ),
-  "libido-or-arousal-feels-alien": claim(
+  "libido-or-arousal-feels-alien": localizedExperience(
     "性欲や、意思に関係なく起こる性的反応を、自分のものと思えない",
     "性的なことを望んでいないときにも起こる興奮、目に見える性器反応、強い性欲を、身体に起こる邪魔な反応のように感じることがあります。誰かに惹かれる気持ちはあっても、その反応や、反応から連想する男性的・女性的な性的役割が自分に合わず、苦痛になる場合があります。性的・恋愛的な親密さを望んでいても、禁欲や、性的な関係を持たない生き方、強い感情抑制を自分に課すことがあります。",
     [
@@ -464,7 +464,7 @@ const experiences = {
       "男性・女性のどちらの性的な筋書きにも制約を感じ、中立的な言葉、役割を固定しない関係、複数のジェンダー要素を含む親密さのほうが合う場合があります。",
     ],
   ),
-  "libido-changes-make-friendship-with-women-easier": claim(
+  "libido-changes-make-friendship-with-women-easier": localizedExperience(
     "性欲の変化で女性との友情が楽になり、ほっとする",
     "一部のトランス女性など、トランスフェミニンの人は、ホルモン療法（HRT）などによって性欲が弱まったり質が変わったりすると、望まない性的な圧力が軽くなり、女性との友情をより心地よく続けられるように感じます。",
     [
@@ -475,7 +475,7 @@ const experiences = {
       ["個人差", "性欲の変化には個人差があり、性欲の強さにかかわらず誠実な友情を築けます。ここでは、望まない性的な圧力が減ることによる安心を扱っています。"],
     ],
   ),
-  "attraction-to-women-and-the-imposed-male-role": claim(
+  "attraction-to-women-and-the-imposed-male-role": localizedExperience(
     "惹かれる気持ちに、望まないジェンダー役割を当てはめられるとつらい",
     "誰かに惹かれる気持ちが確かにあっても、周囲の見方や身につけてきた規範によって、男性、女性、誘う側、受け身の側、彼氏、彼女など、自分のジェンダーに合わない役割へ置かれることがあります。その役割によって、罪悪感、恥、自己監視、回避が生じる場合があります。",
     [
@@ -490,7 +490,7 @@ const experiences = {
       "二元的な性的指向の呼び方やパートナー役割によって、関係の中の男性または女性として扱われることがあります。中立的、クィア、複合的、本人が定めた言葉のほうが合う場合があります。",
     ],
   ),
-  "assigned-gender-compliments-feel-wrong": claim(
+  "assigned-gender-compliments-feel-wrong": localizedExperience(
     "割り当てられた性別に沿う褒め言葉が不快に感じられる",
     "「かっこいい」「男らしい」「きれい」「美人」「かわいい」など、割り当てられた性別に結びつく褒め言葉が、不快感や疎外感につながることがあります。",
     [],
@@ -500,7 +500,7 @@ const experiences = {
       "男性的・女性的にはっきり見えるという褒め方など、どちらかの二元的な性別に強く位置づける言葉に違和感を覚えることがあります。",
     ],
   ),
-  "masturbation-that-affirms-a-feminine-self": claim(
+  "masturbation-that-affirms-a-feminine-self": localizedExperience(
     "自分のジェンダー感覚を肯定する性体験",
     "ポルノ、空想、マスターベーション、パートナーとの性行為では、身体、視点、言葉、役割が自分のジェンダーに合うと、心地よく感じられることがあります。望まない身体部位やジェンダー役割を強く意識させる体験は、疎外感や性別違和につながる場合があります。",
     [

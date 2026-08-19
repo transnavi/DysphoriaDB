@@ -6,8 +6,8 @@ const baseUrl = "https://example.com";
 
 describe("SvelteKit rendering", () => {
   it("renders the complete localized catalog with reaction totals in its first response", async () => {
-    const slug = "unfamiliar-reflection";
-    await exports.default.fetch(new Request(`${baseUrl}/api/reactions/${slug}`, {
+    const id = "unfamiliar-reflection";
+    await exports.default.fetch(new Request(`${baseUrl}/api/reactions/${id}`, {
       method: "POST",
       headers: { "content-type": "application/json", origin: baseUrl },
       body: JSON.stringify({
@@ -24,9 +24,9 @@ describe("SvelteKit rendering", () => {
     expect(html.match(/class="card /g)).toHaveLength(60);
     expect(html).not.toContain("catalog-skeleton");
     expect(html).not.toContain("load-more-button");
-    expect(html).toMatch(/data-card-slug="unfamiliar-reflection"[\s\S]*?class="reaction-count">1</);
-    expect(html.indexOf('data-card-slug="unfamiliar-reflection"')).toBeLessThan(
-      html.indexOf('data-card-slug="mirrors-and-photographs-feel-unflattering"'),
+    expect(html).toMatch(/data-card-id="unfamiliar-reflection"[\s\S]*?class="reaction-count">1</);
+    expect(html.indexOf('data-card-id="unfamiliar-reflection"')).toBeLessThan(
+      html.indexOf('data-card-id="mirrors-and-photographs-feel-unflattering"'),
     );
   });
 
@@ -84,7 +84,8 @@ describe("SvelteKit rendering", () => {
     ]);
     expect(dataset.distribution).toHaveLength(2);
     expect(json.experiences).toHaveLength(60);
-    expect(json.schemaVersion).toBe(2);
+    expect(json.schemaVersion).toBe(3);
+    expect(json.experiences.every((experience) => experience.id && !("slug" in experience))).toBe(true);
     expect(json.experiences.every((experience) => experience.stages.length > 0)).toBe(true);
     expect(json.dateModified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(data.headers.get("x-robots-tag")).toBe("noindex");

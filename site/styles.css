@@ -303,8 +303,8 @@ main { width: min(var(--content-width), 90vw); margin: 0 auto; }
 .card.tone-adaptation { border-top: 4px solid var(--tone-adaptation); }
 .card.tone-mixed { border-top: 4px solid var(--tone-mixed); }
 .card-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 0.5rem; margin: 0 0 0.55rem; color: var(--ink); font-size: 1.12rem; font-weight: 720; line-height: 1.34; letter-spacing: -0.012em; }
-.claim-link { text-decoration: none; }
-.claim-link:hover { color: var(--purple); text-decoration: underline; text-decoration-color: var(--link-decoration); text-decoration-thickness: 0.16em; }
+.experience-link { text-decoration: none; }
+.experience-link:hover { color: var(--purple); text-decoration: underline; text-decoration-color: var(--link-decoration); text-decoration-thickness: 0.16em; }
 .new-badge { border: 1px solid var(--tag-euphoric-border); border-radius: 999px; background: var(--green-pale); padding: 0.13rem 0.4rem; color: var(--green); font-size: 0.62rem; font-weight: 760; letter-spacing: 0; }
 .summary { display: -webkit-box; margin: 0; overflow: hidden; color: var(--body-copy); line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 4; }
 .report-count { margin: 0.75rem 0 0; color: var(--muted); font-size: 0.76rem; }

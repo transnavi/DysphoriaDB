@@ -39,8 +39,8 @@ export function localeRoot(locale) {
   return path ? `/${path}/` : "/";
 }
 
-export function experiencePath(locale, slug) {
-  return `${localeRoot(locale)}experience/${slug}/`;
+export function experiencePath(locale, id) {
+  return `${localeRoot(locale)}experience/${id}/`;
 }
 
 export function pathForLocale(pathname, locale) {
@@ -85,14 +85,14 @@ export function localizeSourceNote(instance, value, locale) {
   return translatedObject(instance, "sourceNotes", locale)[value] ?? value;
 }
 
-export function localizeClaim(instance, claim, locale = instance.resolvedLanguage) {
-  const localized = translatedObject(instance, "experiences", locale)[claim.slug] ?? {};
+export function localizeExperience(instance, experience, locale = instance.resolvedLanguage) {
+  const localized = translatedObject(instance, "experiences", locale)[experience.id] ?? {};
   return {
-    ...claim,
-    title: localized.title ?? claim.slug,
+    ...experience,
+    title: localized.title ?? experience.id,
     summary: localized.summary ?? "",
     patterns: localized.patterns?.length ? localized.patterns : undefined,
-    variations: claim.variations?.map((variation, index) => ({
+    variations: experience.variations?.map((variation, index) => ({
       ...variation,
       text: localized.variations?.[index] ?? "",
     })),

@@ -27,8 +27,8 @@
     initiallySelected: boolean;
     openSource: boolean;
     ontag: (tag: CatalogTag) => void;
-    onseen: (slug: string) => void;
-    onsource: (slug: string, open: boolean) => void;
+    onseen: (id: string) => void;
+    onsource: (id: string, open: boolean) => void;
     onstatus: (message: string) => void;
   }>();
   let tone = $derived(item.types.includes("dysphoric") && item.types.includes("euphoric")
@@ -39,11 +39,11 @@
 
 <article
   class="card tone-{tone}"
-  data-card-slug={item.slug}
+  data-card-id={item.id}
   title={item.typeTags.map(({ label }: CatalogTag) => label).join(" · ")}
 >
   <h4 class="card-title">
-    <a class="claim-link" href={`${rootPath}experience/${item.slug}/`} onclick={() => onseen(item.slug)}>
+    <a class="experience-link" href={`${rootPath}experience/${item.id}/`} onclick={() => onseen(item.id)}>
       {item.title}
     </a>
     {#if isNew}<span class="new-badge">{messages.newBadge}</span>{/if}
@@ -65,7 +65,7 @@
     <details
       class="sources"
       open={openSource}
-      ontoggle={(event) => onsource(item.slug, event.currentTarget.open)}
+      ontoggle={(event) => onsource(item.id, event.currentTarget.open)}
     >
       <summary>{formatMessage(messages, "sourceCount", { count: item.sources.length })}</summary>
       <ul class="source-list">

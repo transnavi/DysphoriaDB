@@ -15,12 +15,12 @@ const cookieOptions = (secure: boolean) => ({
 });
 const validDomains = new Set(domains.map(({ id }) => id));
 const validFamilies = new Set(experienceFamilies.map(({ id }) => id));
-const validSlugs = new Set(experiences.map(({ slug }) => slug));
-const validFilters = new Set(experiences.flatMap((claim) => [
-  ...claim.types.map((value) => filterKey("type", value)),
-  ...claim.directions.map((value) => filterKey("population", value)),
-  ...claim.stages.map((value) => filterKey("stage", value)),
-  ...claim.tags.map((value) => filterKey("topic", value)),
+const validExperienceIds = new Set(experiences.map(({ id }) => id));
+const validFilters = new Set(experiences.flatMap((experience) => [
+  ...experience.types.map((value) => filterKey("type", value)),
+  ...experience.directions.map((value) => filterKey("population", value)),
+  ...experience.stages.map((value) => filterKey("stage", value)),
+  ...experience.tags.map((value) => filterKey("topic", value)),
 ]));
 
 function parseList(value: string | undefined, allowed: Set<string>) {
@@ -29,12 +29,12 @@ function parseList(value: string | undefined, allowed: Set<string>) {
 
 function syncNewItems(event: RequestEvent) {
   const secure = event.url.protocol === "https:";
-  const current = experiences.map(({ slug }) => slug);
-  const known = new Set(parseList(event.cookies.get("gex_known_v1"), validSlugs));
-  const unread = new Set(parseList(event.cookies.get("gex_unread_v1"), validSlugs));
+  const current = experiences.map(({ id }) => id);
+  const known = new Set(parseList(event.cookies.get("gex_known_v1"), validExperienceIds));
+  const unread = new Set(parseList(event.cookies.get("gex_unread_v1"), validExperienceIds));
   if (known.size > 0) {
-    for (const slug of current) {
-      if (!known.has(slug)) unread.add(slug);
+    for (const id of current) {
+      if (!known.has(id)) unread.add(id);
     }
   }
   event.cookies.set("gex_known_v1", current.join(","), cookieOptions(secure));
@@ -50,8 +50,8 @@ function browseState(event: RequestEvent) {
     activeFilters: [...new Set(event.url.searchParams.getAll("filter").filter((key) => validFilters.has(key)))],
     closedDomains: parseList(event.cookies.get("gex_closed_domains_v1"), validDomains),
     closedFamilies: parseList(event.cookies.get("gex_closed_families_v1"), validFamilies),
-    selectedReactions: parseList(event.cookies.get("gex_selected_v1"), validSlugs),
-    newSlugs: syncNewItems(event),
+    selectedReactions: parseList(event.cookies.get("gex_selected_v1"), validExperienceIds),
+    newExperienceIds: syncNewItems(event),
   };
 }
 
@@ -80,11 +80,11 @@ export async function loadCatalogPage(event: RequestEvent, locale: string): Prom
 }
 
 export async function loadDetailPage(event: RequestEvent, locale: string): Promise<DetailPageData> {
-  const claim = experiences.find(({ slug }) => slug === event.params.slug);
-  if (!claim) error(404, "Experience not found");
+  const sourceExperience = experiences.find(({ id }) => id === event.params.id);
+  if (!sourceExperience) error(404, "Experience not found");
   event.setHeaders({ "cache-control": "private, no-store", vary: "Cookie" });
   const site = await localizedSite(locale, await countsFor(event));
-  const experience = site.experiences.find(({ slug }) => slug === claim.slug)!;
+  const experience = site.experiences.find(({ id }) => id === sourceExperience.id)!;
   const family = site.domains
     .flatMap(({ families }) => families)
     .find(({ id }) => id === experience.family);
@@ -100,8 +100,8 @@ export async function loadDetailPage(event: RequestEvent, locale: string): Promi
       family: family?.label ?? experience.family,
     },
     related: (family?.items ?? [])
-      .filter(({ slug }) => slug !== experience.slug)
-      .map(({ slug, title }) => ({ slug, title })),
-    selectedReactions: parseList(event.cookies.get("gex_selected_v1"), validSlugs),
+      .filter(({ id }) => id !== experience.id)
+      .map(({ id, title }) => ({ id, title })),
+    selectedReactions: parseList(event.cookies.get("gex_selected_v1"), validExperienceIds),
   };
 }

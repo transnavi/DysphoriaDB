@@ -58,6 +58,10 @@ test("site descriptions present the catalog as an organized reference", () => {
   assert.match(jaUi.ui.introduction, /クィア・スタディーズ/);
   assert.doesNotMatch(jaUi.ui.description, /探せる|出典/);
   assert.match(zhCNUi.ui.description, /分类整理/);
+  for (const [locale, ui] of Object.entries(uiByLocale)) {
+    assert.ok([...ui.ui.datasetDescription].length >= 50, `${locale}:datasetDescription`);
+    assert.ok(ui.ui.datasetKeywords.split(",").length >= 5, `${locale}:datasetKeywords`);
+  }
 });
 
 test("language-specific expressions remain in their localized content", () => {

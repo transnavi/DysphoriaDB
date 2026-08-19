@@ -104,7 +104,7 @@
   });
 </script>
 
-<Seo {site} />
+<Seo {site} terms={site.experiences} />
 
 <div class="intro">
   <h1>{messages.heading}</h1>

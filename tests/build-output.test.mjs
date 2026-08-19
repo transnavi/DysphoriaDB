@@ -55,3 +55,13 @@ test("the sitemap lists localized alternates", async () => {
   assert.match(sitemap, /hreflang="x-default"/);
   assert.equal((sitemap.match(/<url>/g) ?? []).length, 59 * 3);
 });
+
+test("missing asset paths return the static 404 page", async () => {
+  const [notFound, workerConfig] = await Promise.all([
+    readFile(output("404.html"), "utf8"),
+    readFile(new URL("../dist/transnavi_db_site/wrangler.json", import.meta.url), "utf8").then(JSON.parse),
+  ]);
+  assert.match(notFound, /<meta name="robots" content="noindex"/);
+  assert.equal(workerConfig.assets.not_found_handling, "404-page");
+  assert.equal(workerConfig.assets.html_handling, "auto-trailing-slash");
+});

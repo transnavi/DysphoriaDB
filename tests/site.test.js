@@ -48,6 +48,20 @@ describe("SvelteKit rendering", () => {
     ]);
   });
 
+  it("shows newly added experiences first", async () => {
+    const newExperience = experiences.at(-1);
+    const knownIds = experiences
+      .filter(({ id }) => id !== newExperience.id)
+      .map(({ id }) => id)
+      .join(",");
+    const response = await exports.default.fetch(new Request(`${baseUrl}/`, {
+      headers: { cookie: `gex_known_v1=${knownIds}` },
+    }));
+    const html = await response.text();
+    const firstCardId = html.match(/data-card-id="([^"]+)"/)?.[1];
+    expect(firstCardId).toBe(newExperience.id);
+  });
+
   it("renders URL filters and saved collapse state on the server", async () => {
     const response = await exports.default.fetch(new Request(
       `${baseUrl}/ja/?q=${encodeURIComponent("鏡")}&domain=body`,

@@ -21,23 +21,31 @@
   let reactionStatus = $state("");
   let searchTimer: ReturnType<typeof setTimeout>;
 
+  function prioritizeNew<T>(items: T[], isNew: (item: T) => boolean) {
+    return [...items.filter(isNew), ...items.filter((item) => !isNew(item))];
+  }
+
   let visibleDomains: CatalogDomain[] = $derived.by(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase(site.locale);
-    return site.domains
+    const newIds = new Set(newExperienceIds);
+    const visible = site.domains
       .filter((domain) => activeDomain === "all" || domain.id === activeDomain)
       .map((domain) => ({
         ...domain,
-        families: domain.families
+        families: prioritizeNew(domain.families
           .map((family) => ({
             ...family,
-            items: family.items.filter((item) =>
+            items: prioritizeNew(family.items.filter((item) =>
               item.searchText.includes(normalizedQuery)
               && activeFilters.every((key) => experienceHasFilter(item, key))
-            ),
+            ), (item) => newIds.has(item.id)),
           }))
-          .filter((family) => family.items.length > 0),
+          .filter((family) => family.items.length > 0), (family) =>
+            family.items.some((item) => newIds.has(item.id))),
       }))
       .filter((domain) => domain.families.length > 0);
+    return prioritizeNew(visible, (domain) => domain.families.some((family) =>
+      family.items.some((item) => newIds.has(item.id))));
   });
   let resultCount: number = $derived(visibleDomains.reduce(
     (total, domain) =>

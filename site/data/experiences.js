@@ -1804,7 +1804,9 @@ export const experiences = [
       "social-gender",
       "privacy",
       "body-exposure",
-      "recognition"
+      "recognition",
+      "restrooms",
+      "touch"
     ],
     "reportCount": 0,
     "reactionCount": 0,

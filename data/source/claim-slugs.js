@@ -33,7 +33,7 @@ export const claimSlugs = {
   "Fear of growing older in the assigned gender": "fear-of-aging-in-the-assigned-gender",
   "Fear that transition began too late": "fear-that-transition-began-too-late",
   "Wanting to belong among peers of another gender": "belonging-among-peers-of-another-gender",
-  "Being the only person asked to leave when gender peers need privacy": "singled-out-around-gendered-privacy",
+  "Being excluded from privacy and closeness despite verbal gender recognition": "singled-out-around-gendered-privacy",
   "Finding belonging among transgender and other LGBTQ+ people": "belonging-among-transgender-and-lgbtq-people",
   "Seeking friendship with gender peers is mistaken for romantic interest": "gender-peer-friendship-mistaken-for-romantic-interest",
   "Feeling able to move forward after recognizing your gender": "moving-forward-after-gender-self-recognition",

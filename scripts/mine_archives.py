@@ -216,10 +216,14 @@ PATTERNS: dict[str, list[str]] = {
         r"(?:女子|男子|女性|男性).{0,40}(?:仲間|輪|グループ|友達).{0,60}(?:入り|混ざり|排除|羨ま|居場所)",
         r"(?:女生|男生|女性|男性).{0,40}(?:圈子|群体|朋友|姐妹|兄弟).{0,60}(?:加入|融入|排除|羡慕|归属)",
     ],
-    "Being the only person asked to leave when gender peers need privacy": [
+    "Being excluded from privacy and closeness despite verbal gender recognition": [
         r"(?:change clothes|changing|undress|getting dressed|privacy).{0,120}(?:only me|asked me to leave|made me leave|sent me out|kicked me out|excluded).{0,80}(?:trans|gender|girl|woman|boy|man)?",
+        r"(?:accept|recogniz|respect).{0,80}(?:gender|pronoun).{0,180}(?:toilet|restroom|bathroom|touch|hug|home|house|alone|one-on-one|overnight|sleepover).{0,120}(?:avoid|refus|exclude|leave|different)",
+        r"(?:accept|recogniz|respect).{0,80}(?:gender|pronoun).{0,180}(?:avoid|refus|exclude|leave|different).{0,120}(?:toilet|restroom|bathroom|touch|hug|home|house|alone|one-on-one|overnight|sleepover)",
         r"(?:着替|更衣|入浴|プライバシー).{0,100}(?:自分だけ|私だけ|僕だけ).{0,50}(?:退室|外に|出て|追い出|別室)",
+        r"(?:性別|ジェンダー).{0,80}(?:認め|尊重).{0,180}(?:トイレ|更衣|触れ|ハグ|家|自宅|二人きり|宿泊).{0,120}(?:避け|断|拒|外|退出|退室|別扱い)",
         r"(?:换衣|換衣|更衣|洗澡|隐私|隱私).{0,100}(?:只有我|只把我|就把我|我一个人|我一個人).{0,60}(?:出去|离开|離開|赶出|趕出|排除)",
+        r"(?:性别|性別|性别认同|性別認同).{0,80}(?:认可|認可|尊重).{0,180}(?:厕所|廁所|卫生间|衛生間|更衣|触碰|觸碰|拥抱|擁抱|家里|家裡|单独|單獨|过夜|過夜).{0,120}(?:避开|避開|拒绝|拒絕|排除|离开|離開|区别对待|區別對待)",
     ],
     "Finding belonging among transgender and other LGBTQ+ people": [
         r"(?:trans|transgender|transfem|transmasc|lgbtq?|queer).{0,50}(?:group|friends|community|people).{0,100}(?:belong|relief|at home|connected|unified|euphori)",

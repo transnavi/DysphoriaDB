@@ -71,7 +71,17 @@ def test_group_outing_with_gender_peers_feels_euphoric() -> None:
 
 def test_singled_out_while_a_bride_changes() -> None:
     text = "我是跨女。新娘换衣服时，其他伴娘都可以留下，就把我一个人赶出去了。"
-    assert "Being the only person asked to leave when gender peers need privacy" in matches(text)
+    assert "Being excluded from privacy and closeness despite verbal gender recognition" in matches(text)
+
+
+def test_excluded_from_toilet_and_home_visits() -> None:
+    text = "My friends say they accept my gender as a trans man. They avoid sharing the men's restroom, inviting me home, or being alone with me."
+    assert "Being excluded from privacy and closeness despite verbal gender recognition" in matches(text)
+
+
+def test_touch_avoided_despite_gender_recognition() -> None:
+    text = "They recognize my gender and use my pronouns. They hug every other woman while avoiding touch with me because I am trans."
+    assert "Being excluded from privacy and closeness despite verbal gender recognition" in matches(text)
 
 
 def test_lower_libido_makes_friendship_with_women_easier() -> None:

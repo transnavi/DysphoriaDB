@@ -1,6 +1,7 @@
 export const en = {
   ui: {
     siteName: "Gender Experience Index",
+    seoTitle: "Gender Experience Index | Categorized Gender Experiences",
     description: "This reference categorizes recurring gender experiences for personal reflection and research.",
     ogImageAlt: "Gender Experience Index. Gender experiences are categorized for personal reflection and research.",
     datasetDescription: "This dataset categorizes recurring experiences described in transgender and gender-diverse communities for personal reflection, reference, and research, including queer studies.",

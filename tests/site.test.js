@@ -20,7 +20,7 @@ describe("SvelteKit rendering", () => {
     const html = await response.text();
     expect(response.status).toBe(200);
     expect(html).toContain('<html lang="ja"');
-    expect(html).toContain("<title>ジェンダー体験事典</title>");
+    expect(html).toContain("<title>ジェンダー体験事典｜ジェンダー体験を分類・整理した資料</title>");
     expect(html.match(/class="card /g)).toHaveLength(60);
     expect(html).not.toContain("catalog-skeleton");
     expect(html).not.toContain("load-more-button");
@@ -28,6 +28,24 @@ describe("SvelteKit rendering", () => {
     expect(html.indexOf('data-card-slug="unfamiliar-reflection"')).toBeLessThan(
       html.indexOf('data-card-slug="mirrors-and-photographs-feel-unflattering"'),
     );
+  });
+
+  it("renders descriptive catalog titles for every locale", async () => {
+    const pages = await Promise.all([
+      exports.default.fetch(`${baseUrl}/`),
+      exports.default.fetch(`${baseUrl}/ja/`),
+      exports.default.fetch(`${baseUrl}/zh-cn/`),
+    ]);
+    const titles = await Promise.all(pages.map(async (response) => {
+      const html = await response.text();
+      return html.match(/<title>([^<]+)<\/title>/)?.[1];
+    }));
+
+    expect(titles).toEqual([
+      "Gender Experience Index | Categorized Gender Experiences",
+      "ジェンダー体験事典｜ジェンダー体験を分類・整理した資料",
+      "性别体验索引｜分类整理性别体验的参考资料",
+    ]);
   });
 
   it("renders URL filters and saved collapse state on the server", async () => {

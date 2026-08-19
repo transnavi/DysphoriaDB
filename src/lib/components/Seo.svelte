@@ -18,7 +18,7 @@
     : "/");
   let pathname = $derived(experience ? `${rootPath}experience/${experience.slug}/` : rootPath);
   let canonical = $derived(new URL(pathname, catalogMetadata.siteUrl).href);
-  let title = $derived(experience ? `${experience.title} — ${site.messages.siteName}` : site.messages.siteName);
+  let title = $derived(experience ? `${experience.title} — ${site.messages.siteName}` : site.messages.seoTitle);
   let description = $derived(experience?.summary ?? site.messages.description);
   let image = $derived(new URL(localeInfo[site.locale as keyof typeof localeInfo].image, catalogMetadata.siteUrl).href);
   let alternates = $derived(Object.entries(localeInfo).map(([locale, info]) => ({

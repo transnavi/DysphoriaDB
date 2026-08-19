@@ -96,6 +96,41 @@ test("the initial catalog render is localized and bounded", async () => {
   assert.equal(catalog.total, experiences.length);
   assert.equal(catalog.shown, INITIAL_CARD_COUNT);
   assert.equal((catalog.html.match(/class="card /g) ?? []).length, INITIAL_CARD_COUNT);
+  for (const domain of domains) {
+    assert.match(catalog.html, new RegExp(`data-domain-section="${domain.id}"`));
+  }
   assert.match(catalog.html, /性別高揚感/);
   assert.deepEqual(Object.keys(i18n.options.resources), ["ja"]);
+});
+
+test("Me too totals do not change fair exposure order", async () => {
+  const i18n = await createI18n("en");
+  const before = renderCatalog({ i18n, locale: "en", collection: experiences }).html;
+  const withReactions = experiences.map((experience, index) => ({
+    ...experience,
+    reactionCount: index === experiences.length - 1 ? 10000 : index,
+  }));
+  const after = renderCatalog({ i18n, locale: "en", collection: withReactions }).html;
+  const slugs = (html) => [...html.matchAll(/data-card-slug="([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(slugs(after), slugs(before));
+});
+
+test("catalog domains can collapse and rendered source data is escaped", async () => {
+  const i18n = await createI18n("en");
+  const sample = {
+    ...experiences[0],
+    sources: [["<img src=x onerror=alert(1)>", "javascript:alert(1)", "Community report"]],
+  };
+  const catalog = renderCatalog({
+    i18n,
+    locale: "en",
+    closedDomains: new Set([sample.domain]),
+    newSlugs: new Set([sample.slug]),
+    collection: [sample],
+  });
+  assert.match(catalog.html, new RegExp(`data-domain-section="${sample.domain}"`));
+  assert.doesNotMatch(catalog.html, new RegExp(`data-domain-section="${sample.domain}" open`));
+  assert.match(catalog.html, /class="new-badge">New/);
+  assert.match(catalog.html, /&lt;img src=x onerror=alert\(1\)&gt;/);
+  assert.doesNotMatch(catalog.html, /href="javascript:/);
 });

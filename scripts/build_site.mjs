@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { domains, experienceFamilies, experiences } from "../site/data/experiences.js";
-import { buildSearchIndex, INITIAL_CARD_COUNT, renderCatalog } from "../site/catalog-render.js";
+import { buildSearchIndex, INITIAL_CARD_COUNT, renderCatalog, renderExperienceDetail } from "../site/catalog-render.js";
 import {
   createI18n,
   experiencePath,
@@ -204,6 +204,7 @@ function localizeShell(baseHtml, i18n, locale, claim = null) {
   );
 
   html = html.replace(/<a class="wordmark" href="[^"]*">[\s\S]*?<\/a>/, `<a class="wordmark" href="${localeRoot(locale)}">${escapeHtml(siteName)}</a>`);
+  html = replaceTextById(html, "skip-link", i18n.t("ui.skipToExperiences"));
   html = replaceTextById(html, "locale-label", i18n.t("ui.languageLabel"));
   html = html.replace(/(<span id="locale-current" data-short-label=")[^"]*(">)[\s\S]*?(<\/span>)/, `$1${localeShortLabels[locale]}$2${escapeHtml(definition.label)}$3`);
   for (const targetLocale of locales) {
@@ -216,7 +217,7 @@ function localizeShell(baseHtml, i18n, locale, claim = null) {
   html = html.replace(/(<div class="intro">[\s\S]*?<h1>)[\s\S]*?(<\/h1>)/, `$1${escapeHtml(i18n.t("ui.heading"))}$2`);
   html = html.replace(/(<div class="intro">[\s\S]*?<p>)[\s\S]*?(<\/p>)/, `$1${escapeHtml(i18n.t("ui.introduction"))}$2`);
   html = replaceTextById(html, "submit-experience", `${i18n.t("ui.submitExperience")} ↗`);
-  html = html.replace(/(<section class="browser" aria-label=")[^"]*(")/, `$1${escapeHtml(i18n.t("ui.browseExperiences"))}$2`);
+  html = html.replace(/(<section class="browser"[^>]*aria-label=")[^"]*(")/, `$1${escapeHtml(i18n.t("ui.browseExperiences"))}$2`);
   html = replaceTextById(html, "search-label", i18n.t("ui.searchLabel"));
   html = html.replace(/(<input id="search"[^>]*placeholder=")[^"]*(")/, `$1${escapeHtml(i18n.t("ui.searchPlaceholder"))}$2`);
   html = replaceTextById(html, "search-button", i18n.t("ui.searchButton"));
@@ -265,7 +266,7 @@ function localizeShell(baseHtml, i18n, locale, claim = null) {
     html = html.replace('<div id="browse-view">', '<div id="browse-view" hidden>');
     html = html.replace(
       '<div class="experience-detail" id="experience-detail" hidden></div>',
-      `<div class="experience-detail" id="experience-detail"><a class="detail-back" href="${localeRoot(locale)}">← ${escapeHtml(i18n.t("ui.allExperiences"))}</a><article><h1>${escapeHtml(localized.title)}</h1><p class="detail-summary">${escapeHtml(localized.summary)}</p></article></div>`,
+      `<div class="experience-detail" id="experience-detail">${renderExperienceDetail({ i18n, locale, claim, collection: experiences })}</div>`,
     );
   }
   return html;

@@ -20,7 +20,7 @@ describe("SvelteKit rendering", () => {
     expect(response.status).toBe(200);
     expect(html).toContain('<html lang="ja"');
     expect(html).toContain("<title>ジェンダー体験事典</title>");
-    expect(html.match(/class="card /g)).toHaveLength(58);
+    expect(html.match(/class="card /g)).toHaveLength(60);
     expect(html).not.toContain("catalog-skeleton");
     expect(html).not.toContain("load-more-button");
     expect(html).toMatch(/data-card-slug="unfamiliar-reflection"[\s\S]*?class="reaction-count">1</);
@@ -37,7 +37,7 @@ describe("SvelteKit rendering", () => {
     const html = await response.text();
     const cards = html.match(/class="card /g) ?? [];
     expect(cards.length).toBeGreaterThan(0);
-    expect(cards.length).toBeLessThan(58);
+    expect(cards.length).toBeLessThan(60);
     expect(html).toContain('value="鏡"');
     expect(html).toMatch(/data-family="body-image-and-self-recognition"(?![^>]* open)/);
   });
@@ -59,7 +59,7 @@ describe("SvelteKit rendering", () => {
     expect(detailHtml).not.toContain('"@type":"Dataset"');
     expect(catalogHtml).toContain('"@type":"Dataset"');
     expect(catalogHtml).toContain('"isAccessibleForFree":true');
-    expect(catalogHtml.match(/#experience"/g)).toHaveLength(58);
+    expect(catalogHtml.match(/#experience"/g)).toHaveLength(60);
     const jsonLdMatch = catalogHtml.match(/<script type="application\/ld\+json">([^<]+)<\/script>/);
     expect(jsonLdMatch).not.toBeNull();
     const jsonLd = JSON.parse(jsonLdMatch[1]);
@@ -71,10 +71,10 @@ describe("SvelteKit rendering", () => {
       "https://db.transnavi.jp/zh-cn/",
     ]);
     expect(dataset.distribution).toHaveLength(2);
-    expect(json.experiences).toHaveLength(58);
+    expect(json.experiences).toHaveLength(60);
     expect(json.dateModified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(data.headers.get("x-robots-tag")).toBe("noindex");
-    expect((await csv.text()).trim().split("\n")).toHaveLength(1 + 58 * 3);
+    expect((await csv.text()).trim().split("\n")).toHaveLength(1 + 60 * 3);
     expect(csv.headers.get("x-robots-tag")).toBe("noindex");
   });
 
@@ -95,10 +95,10 @@ describe("SvelteKit rendering", () => {
     for (const response of [english, japanese, chinese]) {
       const xml = await response.text();
       expect(response.status).toBe(200);
-      expect(xml.match(/<url>/g)).toHaveLength(59);
+      expect(xml.match(/<url>/g)).toHaveLength(61);
       expect(xml.match(/<lastmod>/g)).toHaveLength(1);
-      expect(xml.match(/hreflang="x-default"/g)).toHaveLength(59);
-      expect(xml.match(/hreflang="zh-Hans"/g)).toHaveLength(59);
+      expect(xml.match(/hreflang="x-default"/g)).toHaveLength(61);
+      expect(xml.match(/hreflang="zh-Hans"/g)).toHaveLength(61);
     }
     expect(missing.status).toBe(404);
   });

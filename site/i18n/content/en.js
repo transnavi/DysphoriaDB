@@ -42,8 +42,25 @@ const experiences = {
   },
   "discomfort-with-your-body-being-seen": {
     "title": "Discomfort with other people seeing your body",
-    "summary": "Being seen undressed or in revealing clothing can feel intensely exposing, leading to covering up, avoiding changing rooms, or hiding particular parts of your body.",
-    "patterns": [],
+    "summary": "Being seen undressed or in revealing clothing can feel intensely exposing, leading to covering up, avoiding places where your body must be visible, or hiding particular parts of your body.",
+    "patterns": [
+      [
+        "Communal bathing and changing",
+        "Public baths, hot springs, shared showers, and changing rooms can require undressing or washing in front of other people."
+      ],
+      [
+        "Pools and beaches",
+        "Swimwear can expose body contours or sex characteristics, making pools, beaches, swimming lessons, and water activities difficult to attend."
+      ],
+      [
+        "Health examinations",
+        "Changing clothes, exposing parts of the body, or being touched during a health examination or medical appointment can intensify anxiety or dysphoria."
+      ],
+      [
+        "Assigned-gender grouping",
+        "Being directed to facilities based on your assigned gender can place you among people you experience as another gender. Having them see your body can be especially distressing."
+      ]
+    ],
     "variations": []
   },
   "feeling-out-of-place-in-gendered-restrooms": {
@@ -83,7 +100,8 @@ const experiences = {
     "patterns": [],
     "variations": [
       "Seeing a male-looking body when looking at yourself can feel painful or alien.",
-      "Seeing a female-looking body when looking at yourself can feel painful or alien."
+      "Seeing a female-looking body when looking at yourself can feel painful or alien.",
+      "Seeing a body that looks strongly male or female, or lacks the androgynous or mixed traits you expect, can feel painful or alien."
     ]
   },
   "covering-the-bare-upper-torso": {
@@ -241,6 +259,33 @@ const experiences = {
       [
         "Correction brings relief",
         "Updating a name, photograph, marker, or form of address can make ordinary administrative tasks feel more manageable."
+      ]
+    ],
+    "variations": []
+  },
+  "hesitating-over-gender-fields": {
+    "title": "Hesitating when asked to state your gender",
+    "summary": "When a form requires you to write or select a gender, your first impulse may be to choose the gender that feels like yours. You may hesitate, change the answer to your assigned gender, leave it blank when possible, and feel unhappy when you see the recorded answer. This can happen before you recognize yourself as transgender.",
+    "patterns": [
+      [
+        "The first answer that comes to mind",
+        "You may instinctively reach for the gender that feels like yours when you see a gender field."
+      ],
+      [
+        "Changing the answer",
+        "You may feel expected to provide legal information or the answer other people use for you, then change the choice to your assigned gender after a long pause."
+      ],
+      [
+        "Hesitation and omission",
+        "The gender field may take longer than the rest of the form. You may leave it blank, choose “prefer not to say,” or avoid answering when possible."
+      ],
+      [
+        "Distress after answering",
+        "Writing your assigned gender can leave you unhappy, and seeing the recorded answer later can renew the discomfort."
+      ],
+      [
+        "Before self-recognition",
+        "This impulse and conflict can occur before you recognize yourself as transgender or have language for your gender."
       ]
     ],
     "variations": []
@@ -511,6 +556,33 @@ const experiences = {
       [
         "Going out together",
         "Joining a group outing, meal, trip, or casual activity with peers of your gender can feel affirming, especially when you are treated as an ordinary member."
+      ]
+    ],
+    "variations": []
+  },
+  "singled-out-around-gendered-privacy": {
+    "title": "Being the only person asked to leave when gender peers need privacy",
+    "summary": "Friends may recognize your gender in words, then single you out when people of your gender change clothes or enter another privacy-sensitive situation. Being the only person asked to leave can feel like a painful withdrawal of recognition and trust, even when you have no interest in seeing anyone’s body.",
+    "patterns": [
+      [
+        "Selective exclusion",
+        "Other friends may remain while only you are asked to leave during changing, bathing, sleeping arrangements, or another private moment."
+      ],
+      [
+        "Recognition becomes conditional",
+        "A privacy rule that singles you out can reveal that others still place you in a different gender category despite respecting your name and pronouns in ordinary situations."
+      ],
+      [
+        "Respecting privacy",
+        "You may readily leave when anyone asks for privacy and have no wish to watch them change. The pain centers on the unequal rule and the loss of ordinary trust."
+      ],
+      [
+        "Weddings and group preparation",
+        "For example, a transgender bridesmaid may be sent away while every other bridesmaid remains with the bride as she changes."
+      ],
+      [
+        "Afterward",
+        "The incident can bring sadness, rejection, and doubt about whether earlier recognition was sincere."
       ]
     ],
     "variations": []
@@ -841,7 +913,7 @@ const experiences = {
   },
   "libido-or-arousal-feels-alien": {
     "title": "Libido or involuntary arousal feels alien or unwanted",
-    "summary": "Sexual drive, spontaneous arousal, or visible genital response can feel intrusive, upsetting, or disconnected from your actual wishes and sense of self.",
+    "summary": "Sexual drive, spontaneous arousal, or visible genital response can feel intrusive, upsetting, or disconnected from your actual wishes and sense of self. You may respond by imposing strict celibacy or emotional restraint on yourself, even when you want sexual or romantic intimacy.",
     "patterns": [
       [
         "Desire feels wrongly gendered",
@@ -852,6 +924,18 @@ const experiences = {
         "You may avoid initiating, expressing attraction, or acting on consensual desire because the expected role feels wrong."
       ],
       [
+        "Asceticism, celibacy, or stoic restraint",
+        "You may impose rigid rules against sex, dating, fantasy, or expressing desire and treat celibacy, asceticism, or stoic self-control as a personal requirement."
+      ],
+      [
+        "The wish for closeness remains",
+        "You may still experience sexual attraction and genuinely want romance or intimacy while denying yourself permission to pursue them."
+      ],
+      [
+        "Guilt and feeling unqualified",
+        "Desire may trigger guilt or a sense that you have failed an internal requirement. You may feel unfit for romance, sex, or partnership despite wanting closeness."
+      ],
+      [
         "Desire and body response diverge",
         "Attraction may feel genuine while arousal, genital response, or the role attached to it feels alien."
       ],
@@ -860,7 +944,11 @@ const experiences = {
         "Changes in libido or spontaneous arousal during transition may reduce a repeated source of distress."
       ]
     ],
-    "variations": []
+    "variations": [
+      "Erections, androgen-linked libido, or expectations to initiate or penetrate may feel tied to an unwanted male role.",
+      "Lubrication, genital sensations, reproductive associations, or expectations to be receptive may feel tied to an unwanted female role. Changes in libido or response during transition may feel affirming, unfamiliar, or both.",
+      "Masculine and feminine sexual scripts may both feel restrictive; neutral language, mixed roles, or intimacy without a fixed binary position may fit better."
+    ]
   },
   "libido-changes-make-friendship-with-women-easier": {
     "title": "Relief when libido changes make friendship with women easier",
@@ -890,10 +978,31 @@ const experiences = {
     "variations": []
   },
   "attraction-to-women-and-the-imposed-male-role": {
-    "title": "Attraction to women feels contaminated by an imposed male role",
-    "summary": "If you are transfeminine, you may genuinely be attracted to women while feeling guilt, shame, or disgust when friendship and attraction are interpreted through male libido or the male gaze.",
-    "patterns": [],
-    "variations": []
+    "title": "Attraction feels wrong when it is assigned an unwanted gender role",
+    "summary": "Your attraction can be genuine while other people or learned expectations cast you as a man, woman, pursuer, receptive partner, boyfriend, or girlfriend in a role that conflicts with your gender. The imposed role can produce guilt, shame, self-monitoring, or avoidance.",
+    "patterns": [
+      [
+        "The attraction is genuine",
+        "You can feel genuine attraction and still experience conflict with the gendered meaning attached to it."
+      ],
+      [
+        "A role is assigned to you",
+        "Other people may cast you as the man, woman, pursuer, receptive partner, boyfriend, or girlfriend according to your assigned gender."
+      ],
+      [
+        "Orientation labels can misplace you",
+        "Straight, gay, lesbian, or bisexual labels may be applied according to your assigned gender and place you in a role that feels inaccurate."
+      ],
+      [
+        "A fitting frame brings relief",
+        "Understanding attraction through your own gender and relationship role can reduce shame and make closeness easier."
+      ]
+    ],
+    "variations": [
+      "Attraction to women may feel shameful when it is framed as male heterosexual desire or the male gaze. A sapphic, queer, or female role may fit the same attraction more closely.",
+      "Attraction to men may feel wrong when it is framed as female heterosexual desire or a feminine receptive role. A gay, bisexual, queer, or male role may fit more closely.",
+      "Binary orientation labels and partner roles may force you into being the man or woman in a relationship. Neutral, queer, mixed, or personally defined language may fit more closely."
+    ]
   },
   "assigned-gender-compliments-feel-wrong": {
     "title": "Assigned-gender compliments feel uncomfortable",
@@ -901,39 +1010,44 @@ const experiences = {
     "patterns": [],
     "variations": [
       "Compliments such as handsome, manly, or a fine young man may feel wrong.",
-      "Compliments such as pretty, beautiful, cute, girly, or ladylike may feel wrong."
+      "Compliments such as pretty, beautiful, cute, girly, or ladylike may feel wrong.",
+      "Compliments that place you firmly in either binary gender, including praise for looking distinctly masculine or feminine, may feel wrong."
     ]
   },
   "masturbation-that-affirms-a-feminine-self": {
-    "title": "Sexual experiences that affirm a feminine sense of self",
-    "summary": "If you are transfeminine, pornography, fantasy, masturbation, or partnered sex may feel more comfortable when you can inhabit a feminine or female point of view. Sexual acts that emphasize unwanted anatomy or place you in an unwanted gendered role, including penetration, can feel alienating or dysphoric.",
+    "title": "Sexual experiences can affirm your gendered sense of self",
+    "summary": "Pornography, fantasy, masturbation, or partnered sex may feel more comfortable when your body, viewpoint, language, and role align with your gender. Experiences that emphasize unwanted anatomy or an unwanted gendered role can feel alienating or dysphoric.",
     "patterns": [
       [
         "Sexual media and viewpoint",
-        "You may identify with women in pornography, follow their point of view, or imagine having their body or role."
+        "You may identify with a figure whose body, viewpoint, or role aligns with your gender and imagine the experience as your own."
       ],
       [
         "Fantasy and self-placement",
-        "Your fantasies may place you in a feminine body, role, or point of view, including before you understand why this feels right."
+        "Your fantasies may place you in a body, role, or point of view that feels gender-congruent, including before you understand why it feels right."
       ],
       [
         "Masturbation and anatomy",
-        "Language, touch, positions, toys, or ways of understanding your anatomy may help solitary sex feel feminine and embodied."
+        "Language, touch, positions, toys, or ways of understanding your anatomy may help solitary sex feel embodied and personally congruent."
       ],
       [
         "Partnered sex",
-        "Being desired, addressed, touched, or positioned as a woman can make partnered intimacy feel more comfortable, present, or pleasurable."
+        "Being desired, addressed, touched, or positioned in a way that recognizes your gender can make intimacy feel more comfortable, present, or pleasurable."
       ],
       [
-        "Penetration and sexual role",
-        "You may dislike penetrating a partner, being penetrated, or penetration in general when the act emphasizes unwanted anatomy or an unwanted gendered role."
+        "Acts and sexual roles",
+        "Penetration, receptivity, initiation, and other acts may feel affirming, neutral, or dysphoric according to the anatomy and gendered role they emphasize for you."
       ],
       [
         "Individual variation",
         "Any sexual act can be compatible with any gender. The relevant experience is the gendered meaning that a viewpoint, role, or act has for you."
       ]
     ],
-    "variations": []
+    "variations": [
+      "A feminine or female body, viewpoint, form of address, or role may make sexual experience feel more embodied and affirming.",
+      "A masculine or male body, viewpoint, form of address, or role may make sexual experience feel more embodied and affirming.",
+      "Neutral, mixed, fluid, or personally defined language and roles may feel affirming when binary sexual scripts do not fit."
+    ]
   }
 };
 

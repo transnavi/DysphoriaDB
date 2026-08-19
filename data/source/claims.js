@@ -50,9 +50,15 @@ export const claims = [
   },
   {
     title: "Discomfort with other people seeing your body",
-    summary: "Being seen undressed or in revealing clothing can feel intensely exposing, leading to covering up, avoiding changing rooms, or hiding particular parts of your body.",
+    summary: "Being seen undressed or in revealing clothing can feel intensely exposing, leading to covering up, avoiding places where your body must be visible, or hiding particular parts of your body.",
     responses: ["covering up", "privacy", "changing-room avoidance", "anxiety"],
     tags: ["own body", "being seen", "nudity", "changing rooms", "body exposure"],
+    patterns: [
+      ["Communal bathing and changing", "Public baths, hot springs, shared showers, and changing rooms can require undressing or washing in front of other people."],
+      ["Pools and beaches", "Swimwear can expose body contours or sex characteristics, making pools, beaches, swimming lessons, and water activities difficult to attend."],
+      ["Health examinations", "Changing clothes, exposing parts of the body, or being touched during a health examination or medical appointment can intensify anxiety or dysphoria."],
+      ["Assigned-gender grouping", "Being directed to facilities based on your assigned gender can place you among people you experience as another gender. Having them see your body can be especially distressing."],
+    ],
     sources: [
       ["TransNavi: 日常生活で困ったとき", "https://transnavi.jp/everyday/"],
     ],
@@ -85,6 +91,7 @@ export const claims = [
     variations: [
       { direction: "Transfeminine-associated", text: "Seeing a male-looking body when looking at yourself can feel painful or alien." },
       { direction: "Transmasculine-associated", text: "Seeing a female-looking body when looking at yourself can feel painful or alien." },
+      { direction: "Nonbinary-associated", text: "Seeing a body that looks strongly male or female, or lacks the androgynous or mixed traits you expect, can feel painful or alien." },
     ],
     sources: [
       ["Gender Dysphoria Bible: Physical Dysphoria", `${GDB}/physical-dysphoria`],
@@ -228,6 +235,23 @@ export const claims = [
       ["Routine disclosure", "Introductions, registrations, and identity checks can feel exposing because they ask you to present details that do not feel accurate."],
       ["Privacy and avoidance", "You may reveal less information, postpone paperwork, or avoid settings where the record will be read aloud or compared with your appearance."],
       ["Correction brings relief", "Updating a name, photograph, marker, or form of address can make ordinary administrative tasks feel more manageable."],
+    ],
+    sources: [
+      ["Gender Dysphoria Bible: Social Dysphoria", `${GDB}/social-dysphoria`],
+      ["TransNavi: 日常生活で困ったとき", "https://transnavi.jp/everyday/"],
+    ],
+  },
+  {
+    title: "Hesitating when asked to state your gender",
+    summary: "When a form requires you to write or select a gender, your first impulse may be to choose the gender that feels like yours. You may hesitate, change the answer to your assigned gender, leave it blank when possible, and feel unhappy when you see the recorded answer. This can happen before you recognize yourself as transgender.",
+    responses: ["hesitation", "conflict", "avoidance", "distress"],
+    tags: ["forms", "sex marker", "assigned gender", "self-recognition", "avoidance"],
+    patterns: [
+      ["The first answer that comes to mind", "You may instinctively reach for the gender that feels like yours when you see a gender field."],
+      ["Changing the answer", "You may feel expected to provide legal information or the answer other people use for you, then change the choice to your assigned gender after a long pause."],
+      ["Hesitation and omission", "The gender field may take longer than the rest of the form. You may leave it blank, choose “prefer not to say,” or avoid answering when possible."],
+      ["Distress after answering", "Writing your assigned gender can leave you unhappy, and seeing the recorded answer later can renew the discomfort."],
+      ["Before self-recognition", "This impulse and conflict can occur before you recognize yourself as transgender or have language for your gender."],
     ],
     sources: [
       ["Gender Dysphoria Bible: Social Dysphoria", `${GDB}/social-dysphoria`],
@@ -405,6 +429,7 @@ export const claims = [
     variations: [
       { direction: "Transfeminine-associated", text: "Plush toys, dolls such as Barbie, pink or cute items, accessories, and girls’ or children’s fashion may become especially appealing." },
       { direction: "Transmasculine-associated", text: "Items marketed to boys, action toys, vehicles, sports or adventure themes, and boys’ clothing may become especially appealing." },
+      { direction: "Nonbinary-associated", text: "Items from more than one gendered category, or items without a clear gender category, may become especially appealing." },
     ],
     sources: [
       ["Gender Dysphoria Bible: Existential Dysphoria", `${GDB}/existential-dysphoria`],
@@ -457,6 +482,23 @@ export const claims = [
     sources: [
       ["Gender Dysphoria Bible: Social Dysphoria", `${GDB}/social-dysphoria`],
       ["Gender Dysphoria Bible: Existential Dysphoria", `${GDB}/existential-dysphoria`],
+    ],
+  },
+  {
+    title: "Being the only person asked to leave when gender peers need privacy",
+    summary: "Friends may recognize your gender in words, then single you out when people of your gender change clothes or enter another privacy-sensitive situation. Being the only person asked to leave can feel like a painful withdrawal of recognition and trust, even when you have no interest in seeing anyone’s body.",
+    responses: ["sadness", "rejection", "misrecognition", "exclusion"],
+    tags: ["friendship", "peer groups", "exclusion", "social gender", "privacy", "body exposure", "recognition"],
+    patterns: [
+      ["Selective exclusion", "Other friends may remain while only you are asked to leave during changing, bathing, sleeping arrangements, or another private moment."],
+      ["Recognition becomes conditional", "A privacy rule that singles you out can reveal that others still place you in a different gender category despite respecting your name and pronouns in ordinary situations."],
+      ["Respecting privacy", "You may readily leave when anyone asks for privacy and have no wish to watch them change. The pain centers on the unequal rule and the loss of ordinary trust."],
+      ["Weddings and group preparation", "For example, a transgender bridesmaid may be sent away while every other bridesmaid remains with the bride as she changes."],
+      ["Afterward", "The incident can bring sadness, rejection, and doubt about whether earlier recognition was sincere."],
+    ],
+    sources: [
+      ["Gender Dysphoria Bible: Social Dysphoria", `${GDB}/social-dysphoria`],
+      ["TransNavi: 日常生活で困ったとき", "https://transnavi.jp/everyday/"],
     ],
   },
   {
@@ -724,14 +766,22 @@ export const claims = [
   },
   {
     title: "Libido or involuntary arousal feels alien or unwanted",
-    summary: "Sexual drive, spontaneous arousal, or visible genital response can feel intrusive, upsetting, or disconnected from your actual wishes and sense of self.",
+    summary: "Sexual drive, spontaneous arousal, or visible genital response can feel intrusive, upsetting, or disconnected from your actual wishes and sense of self. You may respond by imposing strict celibacy or emotional restraint on yourself, even when you want sexual or romantic intimacy.",
     responses: ["revulsion", "shame", "loss of control", "body alienation", "avoidance"],
     tags: ["libido", "arousal", "genital response", "body reaction", "sexuality"],
     patterns: [
       ["Desire feels wrongly gendered", "Sexual desire may be interpreted through an unwanted masculine, feminine, or anatomical role."],
       ["Deliberate suppression", "You may avoid initiating, expressing attraction, or acting on consensual desire because the expected role feels wrong."],
+      ["Asceticism, celibacy, or stoic restraint", "You may impose rigid rules against sex, dating, fantasy, or expressing desire and treat celibacy, asceticism, or stoic self-control as a personal requirement."],
+      ["The wish for closeness remains", "You may still experience sexual attraction and genuinely want romance or intimacy while denying yourself permission to pursue them."],
+      ["Guilt and feeling unqualified", "Desire may trigger guilt or a sense that you have failed an internal requirement. You may feel unfit for romance, sex, or partnership despite wanting closeness."],
       ["Desire and body response diverge", "Attraction may feel genuine while arousal, genital response, or the role attached to it feels alien."],
       ["A change can bring relief", "Changes in libido or spontaneous arousal during transition may reduce a repeated source of distress."],
+    ],
+    variations: [
+      { direction: "Transfeminine-associated", text: "Erections, androgen-linked libido, or expectations to initiate or penetrate may feel tied to an unwanted male role." },
+      { direction: "Transmasculine-associated", text: "Lubrication, genital sensations, reproductive associations, or expectations to be receptive may feel tied to an unwanted female role. Changes in libido or response during transition may feel affirming, unfamiliar, or both." },
+      { direction: "Nonbinary-associated", text: "Masculine and feminine sexual scripts may both feel restrictive; neutral language, mixed roles, or intimacy without a fixed binary position may fit better." },
     ],
     sources: [
       ["Gender Dysphoria Bible: Sexual Dysphoria", `${GDB}/sexual-dysphoria`],
@@ -758,10 +808,21 @@ export const claims = [
     ],
   },
   {
-    title: "Attraction to women feels contaminated by an imposed male role",
-    summary: "If you are transfeminine, you may genuinely be attracted to women while feeling guilt, shame, or disgust when friendship and attraction are interpreted through male libido or the male gaze.",
-    responses: ["guilt", "shame", "fear of objectifying", "self-monitoring", "relief in a sapphic role"],
-    tags: ["gynephilia", "female friends", "male gaze", "libido", "sapphic attraction", "sexual roles"],
+    title: "Attraction feels wrong when it is assigned an unwanted gender role",
+    summary: "Your attraction can be genuine while other people or learned expectations cast you as a man, woman, pursuer, receptive partner, boyfriend, or girlfriend in a role that conflicts with your gender. The imposed role can produce guilt, shame, self-monitoring, or avoidance.",
+    responses: ["guilt", "shame", "self-monitoring", "misrecognition", "relief"],
+    tags: ["attraction", "sexual roles", "relationships", "sexuality", "misrecognition"],
+    patterns: [
+      ["The attraction is genuine", "You can feel genuine attraction and still experience conflict with the gendered meaning attached to it."],
+      ["A role is assigned to you", "Other people may cast you as the man, woman, pursuer, receptive partner, boyfriend, or girlfriend according to your assigned gender."],
+      ["Orientation labels can misplace you", "Straight, gay, lesbian, or bisexual labels may be applied according to your assigned gender and place you in a role that feels inaccurate."],
+      ["A fitting frame brings relief", "Understanding attraction through your own gender and relationship role can reduce shame and make closeness easier."],
+    ],
+    variations: [
+      { direction: "Transfeminine-associated", text: "Attraction to women may feel shameful when it is framed as male heterosexual desire or the male gaze. A sapphic, queer, or female role may fit the same attraction more closely." },
+      { direction: "Transmasculine-associated", text: "Attraction to men may feel wrong when it is framed as female heterosexual desire or a feminine receptive role. A gay, bisexual, queer, or male role may fit more closely." },
+      { direction: "Nonbinary-associated", text: "Binary orientation labels and partner roles may force you into being the man or woman in a relationship. Neutral, queer, mixed, or personally defined language may fit more closely." },
+    ],
     sources: [["Gender Dysphoria Bible: Sexual Dysphoria", `${GDB}/sexual-dysphoria`]],
   },
   {
@@ -771,6 +832,7 @@ export const claims = [
     variations: [
       { direction: "Transfeminine-associated", text: "Compliments such as handsome, manly, or a fine young man may feel wrong." },
       { direction: "Transmasculine-associated", text: "Compliments such as pretty, beautiful, cute, girly, or ladylike may feel wrong." },
+      { direction: "Nonbinary-associated", text: "Compliments that place you firmly in either binary gender, including praise for looking distinctly masculine or feminine, may feel wrong." },
     ],
     tags: ["compliments", "handsome", "pretty", "beautiful", "gendered language", "social recognition"],
     sources: [
@@ -779,21 +841,27 @@ export const claims = [
     ],
   },
   {
-    title: "Sexual experiences that affirm a feminine sense of self",
-    summary: "If you are transfeminine, pornography, fantasy, masturbation, or partnered sex may feel more comfortable when you can inhabit a feminine or female point of view. Sexual acts that emphasize unwanted anatomy or place you in an unwanted gendered role, including penetration, can feel alienating or dysphoric.",
+    title: "Sexual experiences can affirm your gendered sense of self",
+    summary: "Pornography, fantasy, masturbation, or partnered sex may feel more comfortable when your body, viewpoint, language, and role align with your gender. Experiences that emphasize unwanted anatomy or an unwanted gendered role can feel alienating or dysphoric.",
     responses: ["comfort", "embodiment", "pleasure", "gender euphoria", "sexual-role dysphoria", "avoidance"],
     patterns: [
-      ["Sexual media and viewpoint", "You may identify with women in pornography, follow their point of view, or imagine having their body or role."],
-      ["Fantasy and self-placement", "Your fantasies may place you in a feminine body, role, or point of view, including before you understand why this feels right."],
-      ["Masturbation and anatomy", "Language, touch, positions, toys, or ways of understanding your anatomy may help solitary sex feel feminine and embodied."],
-      ["Partnered sex", "Being desired, addressed, touched, or positioned as a woman can make partnered intimacy feel more comfortable, present, or pleasurable."],
-      ["Penetration and sexual role", "You may dislike penetrating a partner, being penetrated, or penetration in general when the act emphasizes unwanted anatomy or an unwanted gendered role."],
+      ["Sexual media and viewpoint", "You may identify with a figure whose body, viewpoint, or role aligns with your gender and imagine the experience as your own."],
+      ["Fantasy and self-placement", "Your fantasies may place you in a body, role, or point of view that feels gender-congruent, including before you understand why it feels right."],
+      ["Masturbation and anatomy", "Language, touch, positions, toys, or ways of understanding your anatomy may help solitary sex feel embodied and personally congruent."],
+      ["Partnered sex", "Being desired, addressed, touched, or positioned in a way that recognizes your gender can make intimacy feel more comfortable, present, or pleasurable."],
+      ["Acts and sexual roles", "Penetration, receptivity, initiation, and other acts may feel affirming, neutral, or dysphoric according to the anatomy and gendered role they emphasize for you."],
       ["Individual variation", "Any sexual act can be compatible with any gender. The relevant experience is the gendered meaning that a viewpoint, role, or act has for you."],
+    ],
+    variations: [
+      { direction: "Transfeminine-associated", text: "A feminine or female body, viewpoint, form of address, or role may make sexual experience feel more embodied and affirming." },
+      { direction: "Transmasculine-associated", text: "A masculine or male body, viewpoint, form of address, or role may make sexual experience feel more embodied and affirming." },
+      { direction: "Nonbinary-associated", text: "Neutral, mixed, fluid, or personally defined language and roles may feel affirming when binary sexual scripts do not fit." },
     ],
     tags: ["pornography", "sexual media", "fantasy", "masturbation", "partnered sex", "penetration", "touch", "anatomy", "sexual role"],
     sources: [
       ["Gender Dysphoria Bible: Sexual Dysphoria", `${GDB}/sexual-dysphoria`],
       ["Gender Dysphoria Bible: Euphoria", `${GDB}/euphoria`],
+      ["Gender Euphoria Scale", "https://doi.org/10.1080/26895269.2024.2447768", "Questionnaire"],
       ["Sexual behavior and sexual health of transgender adults before treatment", "https://pmc.ncbi.nlm.nih.gov/articles/PMC8118227/", "Research study"],
       ["Transfeminine adolescents’ online sexual experiences", "https://www.frontiersin.org/journals/reproductive-health/articles/10.3389/frph.2022.1034747/full", "Qualitative study"],
     ],

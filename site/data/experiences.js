@@ -58,10 +58,12 @@ export const experienceFamilies = [
     "experiences": [
       "being-treated-as-the-assigned-gender-feels-wrong",
       "gendered-records-feel-inaccurate",
+      "hesitating-over-gender-fields",
       "relief-from-gender-recognition",
       "gender-policing-insults-feel-affirming",
       "assigned-gender-compliments-feel-wrong",
       "belonging-among-peers-of-another-gender",
+      "singled-out-around-gendered-privacy",
       "gender-peer-friendship-mistaken-for-romantic-interest",
       "belonging-among-transgender-and-lgbtq-people",
       "separate-online-identity-until-gender-disclosure-feels-safe"
@@ -411,7 +413,8 @@ export const experiences = [
     ],
     "directions": [
       "transfeminine",
-      "transmasculine"
+      "transmasculine",
+      "nonbinary"
     ],
     "variations": [
       {
@@ -419,6 +422,9 @@ export const experiences = [
       },
       {
         "direction": "transmasculine"
+      },
+      {
+        "direction": "nonbinary"
       }
     ],
     "responses": [
@@ -1064,6 +1070,43 @@ export const experiences = [
     ]
   },
   {
+    "slug": "hesitating-over-gender-fields",
+    "family": "gender-recognition-and-evaluation",
+    "domain": "social",
+    "types": [
+      "dysphoric",
+      "avoidance-or-control"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "hesitation",
+      "conflict",
+      "avoidance",
+      "distress"
+    ],
+    "tags": [
+      "forms",
+      "sex-marker",
+      "assigned-gender",
+      "self-recognition",
+      "avoidance"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "TransNavi: 日常生活で困ったとき",
+        "https://transnavi.jp/everyday/"
+      ]
+    ]
+  },
+  {
     "slug": "relief-from-gender-recognition",
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
@@ -1555,7 +1598,8 @@ export const experiences = [
     ],
     "directions": [
       "transfeminine",
-      "transmasculine"
+      "transmasculine",
+      "nonbinary"
     ],
     "variations": [
       {
@@ -1563,6 +1607,9 @@ export const experiences = [
       },
       {
         "direction": "transmasculine"
+      },
+      {
+        "direction": "nonbinary"
       }
     ],
     "responses": [
@@ -1731,6 +1778,44 @@ export const experiences = [
         "https://doi.org/10.1080/26895269.2024.2447768",
         "Questionnaire",
         "A 26-item measure organized around social affirmation, self-affirmation, and community connection."
+      ]
+    ]
+  },
+  {
+    "slug": "singled-out-around-gendered-privacy",
+    "family": "gender-recognition-and-evaluation",
+    "domain": "social",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "sadness",
+      "rejection",
+      "misrecognition",
+      "exclusion"
+    ],
+    "tags": [
+      "friendship",
+      "peer-groups",
+      "exclusion",
+      "social-gender",
+      "privacy",
+      "body-exposure",
+      "recognition"
+    ],
+    "reportCount": 0,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Social Dysphoria",
+        "https://genderdysphoria.fyi/en/social-dysphoria"
+      ],
+      [
+        "TransNavi: 日常生活で困ったとき",
+        "https://transnavi.jp/everyday/"
       ]
     ]
   },
@@ -2563,7 +2648,20 @@ export const experiences = [
       "dysphoric"
     ],
     "directions": [
-      "transfeminine"
+      "transfeminine",
+      "transmasculine",
+      "nonbinary"
+    ],
+    "variations": [
+      {
+        "direction": "transfeminine"
+      },
+      {
+        "direction": "transmasculine"
+      },
+      {
+        "direction": "nonbinary"
+      }
     ],
     "responses": [
       "revulsion",
@@ -2648,22 +2746,34 @@ export const experiences = [
       "dysphoric"
     ],
     "directions": [
-      "transfeminine"
+      "transfeminine",
+      "transmasculine",
+      "nonbinary"
+    ],
+    "variations": [
+      {
+        "direction": "transfeminine"
+      },
+      {
+        "direction": "transmasculine"
+      },
+      {
+        "direction": "nonbinary"
+      }
     ],
     "responses": [
       "guilt",
       "shame",
-      "fear-of-objectifying",
       "self-monitoring",
-      "relief-in-a-sapphic-role"
+      "misrecognition",
+      "relief"
     ],
     "tags": [
-      "gynephilia",
-      "female-friends",
-      "male-gaze",
-      "libido",
-      "sapphic-attraction",
-      "sexual-roles"
+      "attraction",
+      "sexual-roles",
+      "relationships",
+      "sexuality",
+      "misrecognition"
     ],
     "reportCount": 0,
     "reactionCount": 0,
@@ -2683,7 +2793,8 @@ export const experiences = [
     ],
     "directions": [
       "transfeminine",
-      "transmasculine"
+      "transmasculine",
+      "nonbinary"
     ],
     "variations": [
       {
@@ -2691,6 +2802,9 @@ export const experiences = [
       },
       {
         "direction": "transmasculine"
+      },
+      {
+        "direction": "nonbinary"
       }
     ],
     "responses": [
@@ -2730,7 +2844,20 @@ export const experiences = [
       "preference"
     ],
     "directions": [
-      "transfeminine"
+      "transfeminine",
+      "transmasculine",
+      "nonbinary"
+    ],
+    "variations": [
+      {
+        "direction": "transfeminine"
+      },
+      {
+        "direction": "transmasculine"
+      },
+      {
+        "direction": "nonbinary"
+      }
     ],
     "responses": [
       "comfort",
@@ -2761,6 +2888,11 @@ export const experiences = [
       [
         "Gender Dysphoria Bible: Euphoria",
         "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "Gender Euphoria Scale",
+        "https://doi.org/10.1080/26895269.2024.2447768",
+        "Questionnaire"
       ],
       [
         "Sexual behavior and sexual health of transgender adults before treatment",

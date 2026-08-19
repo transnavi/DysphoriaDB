@@ -76,5 +76,6 @@ test("missing asset paths return the static 404 page", async () => {
   assert.equal(workerConfig.ratelimits[0].name, "REACTION_RATE_LIMITER");
   assert.equal(workerConfig.observability.logs.enabled, true);
   assert.match(headers, /Content-Security-Policy:/);
+  assert.match(headers, /script-src 'self' 'unsafe-inline' https:\/\/static\.cloudflareinsights\.com/);
   assert.match(headers, /X-Content-Type-Options: nosniff/);
 });

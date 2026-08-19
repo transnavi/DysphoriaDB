@@ -442,8 +442,29 @@ const experiences = {
   },
   "voice-feels-unlike-oneself": {
     "title": "The voice feels unlike oneself",
-    "summary": "Speaking or hearing a recording can feel jarring when vocal pitch, resonance, speech patterns, or gendered interpretation conflict with your sense of self.",
-    "patterns": [],
+    "summary": "Speaking, hearing a recording, or noticing the voice change during puberty or testosterone therapy can feel jarring when pitch, resonance, speech patterns, or gendered interpretation conflict with your sense of self.",
+    "patterns": [
+      [
+        "Fear before a voice change",
+        "Approaching puberty or the first signs of an unwanted voice drop can bring dread, grief, or despair when the expected change feels lasting."
+      ],
+      [
+        "The voice changes",
+        "Cracking, a changing pitch, a new resonance, or reduced control can make speaking and singing feel unstable or unfamiliar."
+      ],
+      [
+        "Avoiding voice use",
+        "You may withdraw from conversation, calls, recordings, public speaking, or singing because hearing the voice or having it gendered by others feels painful."
+      ],
+      [
+        "Uncertainty about a wanted change",
+        "When a testosterone-related voice drop is desired, fear that it will happen slowly, only slightly, or never can become intense."
+      ],
+      [
+        "Concern about losing a familiar voice",
+        "A wanted change can still bring anxiety about vocal range, singing ability, professional skills, or losing a voice that has become familiar."
+      ]
+    ],
     "variations": []
   },
   "grief-for-life-in-the-wrong-gender-role": {

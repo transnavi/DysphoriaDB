@@ -1,6 +1,6 @@
-import { claimSlugs } from "../site/claim-slugs.js";
+import { experiences } from "../site/data/experiences.js";
 
-const validSlugs = new Set(Object.values(claimSlugs));
+const validSlugs = new Set(experiences.map(({ slug }) => slug));
 const voterIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const jsonHeaders = { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" };
 

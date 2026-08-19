@@ -20,7 +20,7 @@ describe("SvelteKit rendering", () => {
     expect(response.status).toBe(200);
     expect(html).toContain('<html lang="ja"');
     expect(html).toContain("<title>ジェンダー体験事典</title>");
-    expect(html.match(/class="card /g)).toHaveLength(58);
+    expect(html.match(/class="card /g)).toHaveLength(60);
     expect(html).not.toContain("catalog-skeleton");
     expect(html).not.toContain("load-more-button");
     expect(html).toMatch(/data-card-slug="unfamiliar-reflection"[\s\S]*?class="reaction-count">1</);
@@ -37,7 +37,7 @@ describe("SvelteKit rendering", () => {
     const html = await response.text();
     const cards = html.match(/class="card /g) ?? [];
     expect(cards.length).toBeGreaterThan(0);
-    expect(cards.length).toBeLessThan(58);
+    expect(cards.length).toBeLessThan(60);
     expect(html).toContain('value="鏡"');
     expect(html).toMatch(/data-family="body-image-and-self-recognition"(?![^>]* open)/);
   });
@@ -54,9 +54,9 @@ describe("SvelteKit rendering", () => {
     expect(detailHtml).toContain('<html lang="zh-Hans"');
     expect(detailHtml).toContain('rel="canonical" href="https://db.transnavi.jp/zh-cn/experience/unfamiliar-reflection/"');
     expect(detailHtml).toContain('"@type":"DefinedTerm"');
-    expect(json.experiences).toHaveLength(58);
-    expect((await csv.text()).trim().split("\n")).toHaveLength(1 + 58 * 3);
-    expect((await sitemap.text()).match(/<url>/g)).toHaveLength(59 * 3);
+    expect(json.experiences).toHaveLength(60);
+    expect((await csv.text()).trim().split("\n")).toHaveLength(1 + 60 * 3);
+    expect((await sitemap.text()).match(/<url>/g)).toHaveLength(61 * 3);
   });
 
   it("applies defensive headers to rendered pages", async () => {

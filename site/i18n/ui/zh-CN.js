@@ -16,8 +16,6 @@ export const zhCN = {
     searchButton: "搜索",
     experienceAreas: "体验领域",
     loadingExperiences: "正在加载体验…",
-    loadMore: "显示更多",
-    loadMoreLabel: "显示更多体验（已显示 {{shown}} / {{total}} 项）",
     noMatches: "没有符合条件的体验。",
     all: "全部",
     filteredBy: "筛选条件",

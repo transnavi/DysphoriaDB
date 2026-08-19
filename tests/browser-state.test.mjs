@@ -26,13 +26,10 @@ test("stored browsing state is bounded to current catalog values", () => {
     closedFamilies: ["family-a", "missing"],
     query: "x".repeat(240),
     scrollY: -20,
-    visibleLimit: 999,
   }, {
     validDomains: new Set(["body"]),
     validFamilies: new Set(["family-a"]),
     validFilters: new Set(["type:dysphoric"]),
-    initialLimit: 16,
-    itemCount: 58,
   });
 
   assert.equal(normalized.activeDomain, "body");
@@ -41,5 +38,4 @@ test("stored browsing state is bounded to current catalog values", () => {
   assert.deepEqual(normalized.closedFamilies, ["family-a"]);
   assert.equal(normalized.query.length, 200);
   assert.equal(normalized.scrollY, 0);
-  assert.equal(normalized.visibleLimit, 58);
 });

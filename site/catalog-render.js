@@ -9,9 +9,6 @@ import {
   localizeTerm,
 } from "./i18n/index.js";
 
-export const INITIAL_CARD_COUNT = 16;
-export const CARD_BATCH_SIZE = 12;
-
 export const escapeHtml = (value) => String(value)
   .replaceAll("&", "&amp;")
   .replaceAll('"', "&quot;")
@@ -238,13 +235,13 @@ export function renderCatalog({
   selectedReactions = new Set(),
   pendingReactions = new Set(),
   query = "",
-  limit = INITIAL_CARD_COUNT,
+  limit = Number.POSITIVE_INFINITY,
   searchIndex = buildSearchIndex(i18n),
   collection = experiences,
 }) {
   const visible = visibleClaims({ activeDomain, activeFilters, query, searchIndex, collection });
   const ranked = fairCatalog(visible, collection);
-  const shown = ranked.ordered.slice(0, limit);
+  const shown = ranked.ordered.slice(0, Math.max(0, limit));
   const shownSlugs = new Set(shown.map((claim) => claim.slug));
 
   const renderClaim = (claim) => {

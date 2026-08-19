@@ -16,8 +16,6 @@ export const en = {
     searchButton: "Search",
     experienceAreas: "Experience areas",
     loadingExperiences: "Loading experiences…",
-    loadMore: "Show more",
-    loadMoreLabel: "Show more experiences. {{shown}} of {{total}} shown.",
     noMatches: "No experiences match this search.",
     all: "All",
     filteredBy: "Filtered by",

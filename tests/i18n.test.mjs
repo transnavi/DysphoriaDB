@@ -9,7 +9,7 @@ import { content as zhCN } from "../site/i18n/content/zh-CN.js";
 import { en as enUi } from "../site/i18n/ui/en.js";
 import { ja as jaUi } from "../site/i18n/ui/ja.js";
 import { zhCN as zhCNUi } from "../site/i18n/ui/zh-CN.js";
-import { buildSearchIndex, INITIAL_CARD_COUNT, renderCatalog } from "../site/catalog-render.js";
+import { buildSearchIndex, renderCatalog } from "../site/catalog-render.js";
 import { createI18n, experiencePath, localeFromPath, pathForLocale } from "../site/i18n/index.js";
 
 const contentByLocale = { en, ja, "zh-CN": zhCN };
@@ -85,17 +85,17 @@ test("the browser runtime reads locale-neutral metadata", async () => {
   assert.doesNotMatch(app, /\.\/claims\.js|\.\/claim-slugs\.js|\.\/approved-evidence\.js/);
 });
 
-test("the initial catalog render is localized and bounded", async () => {
+test("catalog rendering supports localized bounded previews", async () => {
   const i18n = await createI18n("ja");
   const catalog = renderCatalog({
     i18n,
     locale: "ja",
-    limit: INITIAL_CARD_COUNT,
+    limit: 16,
     searchIndex: buildSearchIndex(i18n, experiences),
   });
   assert.equal(catalog.total, experiences.length);
-  assert.equal(catalog.shown, INITIAL_CARD_COUNT);
-  assert.equal((catalog.html.match(/class="card /g) ?? []).length, INITIAL_CARD_COUNT);
+  assert.equal(catalog.shown, 16);
+  assert.equal((catalog.html.match(/class="card /g) ?? []).length, 16);
   for (const domain of domains) {
     assert.match(catalog.html, new RegExp(`data-domain-section="${domain.id}"`));
   }

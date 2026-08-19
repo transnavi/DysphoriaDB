@@ -39,6 +39,11 @@ def test_gendered_record_feels_inaccurate() -> None:
     assert "Gendered records can feel like inaccurate personal information" in matches(text)
 
 
+def test_hesitating_over_a_gender_field() -> None:
+    text = "Before I knew I was trans, I would hesitate over the gender field, choose female first, then change it back to my assigned gender."
+    assert "Hesitating when asked to state your gender" in matches(text)
+
+
 def test_gender_transformation_story_interest() -> None:
     text = "I am trans and loved gender transformation stories long before I understood why."
     assert "Gender transformation stories feel unusually compelling" in matches(text)
@@ -64,9 +69,19 @@ def test_group_outing_with_gender_peers_feels_euphoric() -> None:
     assert "Wanting to belong among peers of another gender" in matches(text)
 
 
+def test_singled_out_while_a_bride_changes() -> None:
+    text = "我是跨女。新娘换衣服时，其他伴娘都可以留下，就把我一个人赶出去了。"
+    assert "Being the only person asked to leave when gender peers need privacy" in matches(text)
+
+
 def test_lower_libido_makes_friendship_with_women_easier() -> None:
     text = "As a trans woman, HRT lowered my libido and made friendship with women easier and more comfortable."
     assert "Relief when libido changes make friendship with women easier" in matches(text)
+
+
+def test_celibacy_used_to_control_alien_desire() -> None:
+    text = "As a trans woman, I forced myself to be celibate and avoid romance because desire made me feel guilty and unworthy."
+    assert "Libido or involuntary arousal feels alien or unwanted" in matches(text)
 
 
 def test_belonging_in_a_transfeminine_group_while_boymoding() -> None:
@@ -116,12 +131,22 @@ def test_online_identity_opens_after_transition() -> None:
 
 def test_female_viewpoint_in_pornography_affirms_transfeminine_self() -> None:
     text = "As a trans woman, I identify with the woman's perspective in pornography and imagine myself as her."
-    assert "Sexual experiences that affirm a feminine sense of self" in matches(text)
+    assert "Sexual experiences can affirm your gendered sense of self" in matches(text)
 
 
 def test_insertive_role_feels_dysphoric() -> None:
     text = "As a trans woman, penetrating a partner feels dysphoric and alien to me."
-    assert "Sexual experiences that affirm a feminine sense of self" in matches(text)
+    assert "Sexual experiences can affirm your gendered sense of self" in matches(text)
+
+
+def test_masculine_fantasy_affirms_transmasculine_self() -> None:
+    text = "As a trans man, sexual fantasy feels affirming when I imagine myself in a masculine role."
+    assert "Sexual experiences can affirm your gendered sense of self" in matches(text)
+
+
+def test_neutral_language_affirms_nonbinary_intimacy() -> None:
+    text = "As a nonbinary person, intimacy with gender-neutral terms feels comfortable and affirming."
+    assert "Sexual experiences can affirm your gendered sense of self" in matches(text)
 
 
 def test_unrelated_fashion_post_is_ignored() -> None:

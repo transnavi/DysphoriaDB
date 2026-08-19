@@ -101,6 +101,11 @@ PATTERNS: dict[str, list[str]] = {
         r"(?:身分証|戸籍|書類|フォーム|プロフィール|個人情報).{0,100}(?:性別|名前|戸籍名|写真).{0,60}(?:違|間違|嫌|出したく|見せたく)",
         r"(?:身份证|护照|证件|档案|表格|个人信息).{0,100}(?:性别|名字|照片).{0,60}(?:错误|不对|讨厌|不想出示|不像自己)",
     ],
+    "Hesitating when asked to state your gender": [
+        r"(?:gender|sex).{0,30}(?:field|box|form|question|write|select|choose).{0,120}(?:hesitat|pause|struggl|leave (?:it )?blank|omit|prefer not to say|assigned gender|birth sex|change(?:d)? (?:it )?back)",
+        r"(?:性別欄|性別.{0,20}(?:記入|選択|回答)).{0,100}(?:迷|ためら|書き直|選び直|空欄|回答しない|指定性別|割り当てられた性別)",
+        r"(?:性别栏|性别.{0,20}(?:填写|选择|回答)).{0,100}(?:犹豫|迟疑|改填|重新选择|留空|不愿透露|出生指派性别)",
+    ],
     "Relief when your gender is recognized": [
         r"(?:gendered correctly|right pronoun|chosen name|called me (?:a )?(?:girl|boy|woman|man)|正しい性別|女の子.*呼|男の子.*呼|正确称呼|叫我女生|叫我男生).{0,80}(?:happy|euphori|嬉|喜|开心)?",
     ],
@@ -126,17 +131,24 @@ PATTERNS: dict[str, list[str]] = {
     ],
     "Libido or involuntary arousal feels alien or unwanted": [
         r"(?:libido|sex drive|erection|arousal|性欲|勃起|リビドー|性欲|勃起).{0,100}(?:hate|unwanted|dysphori|disgust|嫌|違和|気持ち悪|讨厌|恶心)",
+        r"(?:celibat|abstinen|ascetic|stoic|swore off).{0,120}(?:sex|dating|romance|relationship|desire).{0,120}(?:shame|guilt|unworthy|unfit|not good enough|dysphori)",
+        r"(?:禁欲|独身|恋愛を避|性的関係を避|ストイック).{0,120}(?:罪悪感|自信がない|ふさわしくない|資格がない|性別違和)",
+        r"(?:禁欲|独身|不谈恋爱|不談戀愛|克制欲望).{0,120}(?:内疚|愧疚|没有自信|沒有自信|不配|不够资格|不夠資格|性别焦虑|性別焦慮)",
     ],
-    "Attraction to women feels contaminated by an imposed male role": [
+    "Attraction feels wrong when it is assigned an unwanted gender role": [
         r"(?:male gaze|predator|objectify|creep|男性の目|男性目線|加害者|男凝|凝视).{0,100}(?:woman|women|girl|女性|女)",
+        r"(?:attraction|dating|relationship|sex).{0,120}(?:cast|treated|seen).{0,50}(?:as (?:a )?(?:man|woman|boy|girl)|male role|female role).{0,80}(?:wrong|guilt|shame|dysphori|uncomfortable)",
     ],
-    "Sexual experiences that affirm a feminine sense of self": [
+    "Sexual experiences can affirm your gendered sense of self": [
         r"(?:masturbat|jerk off|オナニ|自慰|手淫).{0,100}(?:like a (?:girl|woman)|female way|feminine|女の子|女性として|像女生|女性方式)",
         r"(?:porn|pornography|sexual media).{0,160}(?:identify with|imagine (?:myself|being)|perspective|point of view|viewpoint).{0,80}(?:woman|female|feminine|her)",
         r"(?:identify with|imagine (?:myself|being)|perspective|point of view|viewpoint).{0,100}(?:woman|female|feminine|her).{0,160}(?:porn|pornography|sexual media)",
         r"(?:penetrat|insertive|top(?:ping)?).{0,120}(?:hate|dislike|avoid|wrong|alien|dysphori|uncomfortable|distress)",
         r"(?:hate|dislike|avoid|wrong|alien|dysphori|uncomfortable|distress).{0,120}(?:penetrat|insertive|top(?:ping)?)",
         r"(?:sex|sexual|intimacy|partner).{0,120}(?:as a woman|treated as a woman|female perspective|feminine role).{0,100}(?:right|affirm|comfortable|present|pleasur|euphori)",
+        r"(?:sex|sexual|intimacy|partner|fantas).{0,120}(?:as a man|treated as a man|male perspective|masculine role).{0,100}(?:right|affirm|comfortable|present|pleasur|euphori)",
+        r"(?:sex|sexual|intimacy|partner|fantas).{0,120}(?:right|affirm|comfortable|present|pleasur|euphori).{0,100}(?:as a man|treated as a man|male perspective|masculine role)",
+        r"(?:sex|sexual|intimacy|partner).{0,120}(?:nonbinary|neutral terms|gender-neutral|mixed role).{0,100}(?:right|affirm|comfortable|present|pleasur|euphori)",
         r"(?:ポルノ|性的コンテンツ).{0,120}(?:女性の視点|女性に自分を重ね|女性として|女性の身体|女性の役割)",
         r"(?:挿入|挿入する役割).{0,100}(?:嫌|避け|違和|苦痛|ディスフォリア)",
         r"(?:色情|成人视频|性内容).{0,120}(?:女性视角|代入女性|想象自己是女性|女性身体|女性角色)",
@@ -203,6 +215,11 @@ PATTERNS: dict[str, list[str]] = {
         r"(?:group of (?:women|men|girls|boys)|with (?:women|men|girls|boys)).{0,100}(?:going out|went out|hanging out|outing|trip|shopping|meal).{0,100}(?:euphori|affirm|felt right|one of them|belong)",
         r"(?:女子|男子|女性|男性).{0,40}(?:仲間|輪|グループ|友達).{0,60}(?:入り|混ざり|排除|羨ま|居場所)",
         r"(?:女生|男生|女性|男性).{0,40}(?:圈子|群体|朋友|姐妹|兄弟).{0,60}(?:加入|融入|排除|羡慕|归属)",
+    ],
+    "Being the only person asked to leave when gender peers need privacy": [
+        r"(?:change clothes|changing|undress|getting dressed|privacy).{0,120}(?:only me|asked me to leave|made me leave|sent me out|kicked me out|excluded).{0,80}(?:trans|gender|girl|woman|boy|man)?",
+        r"(?:着替|更衣|入浴|プライバシー).{0,100}(?:自分だけ|私だけ|僕だけ).{0,50}(?:退室|外に|出て|追い出|別室)",
+        r"(?:换衣|換衣|更衣|洗澡|隐私|隱私).{0,100}(?:只有我|只把我|就把我|我一个人|我一個人).{0,60}(?:出去|离开|離開|赶出|趕出|排除)",
     ],
     "Finding belonging among transgender and other LGBTQ+ people": [
         r"(?:trans|transgender|transfem|transmasc|lgbtq?|queer).{0,50}(?:group|friends|community|people).{0,100}(?:belong|relief|at home|connected|unified|euphori)",

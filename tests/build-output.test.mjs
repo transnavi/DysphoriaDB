@@ -52,16 +52,16 @@ test("JSON and CSV exports contain every experience in every locale", async () =
   const data = JSON.parse(await readFile(output("data/experiences.json"), "utf8"));
   const csv = await readFile(output("data/experiences.csv"), "utf8");
   assert.equal(data.license, "https://creativecommons.org/licenses/by/4.0/");
-  assert.equal(data.experiences.length, 58);
+  assert.equal(data.experiences.length, 60);
   for (const experience of data.experiences) assert.deepEqual(Object.keys(experience.content), ["en", "ja", "zh-CN"]);
-  assert.equal(csv.trim().split("\n").length, 1 + 58 * 3);
+  assert.equal(csv.trim().split("\n").length, 1 + 60 * 3);
 });
 
 test("the sitemap lists localized alternates", async () => {
   const sitemap = await readFile(output("sitemap.xml"), "utf8");
   assert.match(sitemap, /xmlns:xhtml="http:\/\/www\.w3\.org\/1999\/xhtml"/);
   assert.match(sitemap, /hreflang="x-default"/);
-  assert.equal((sitemap.match(/<url>/g) ?? []).length, 59 * 3);
+  assert.equal((sitemap.match(/<url>/g) ?? []).length, 61 * 3);
 });
 
 test("missing asset paths return the static 404 page", async () => {

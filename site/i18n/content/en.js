@@ -833,6 +833,37 @@ const experiences = {
     "patterns": [],
     "variations": []
   },
+  "recurring-doubt-about-being-trans-enough": {
+    "title": "Recurring doubt about being trans enough",
+    "summary": "You may repeatedly question whether your gender experience is strong, clear, early, physical, or typical enough to count, even while gender-related wishes, relief, or distress keep returning.",
+    "patterns": [
+      [
+        "Comparing experiences",
+        "Other people’s certainty, dysphoria, childhood memories, or transition goals may seem more convincing than your own."
+      ],
+      [
+        "No early certainty",
+        "You may doubt yourself because you did not know from childhood or because earlier signs only became meaningful in hindsight."
+      ],
+      [
+        "Dysphoria seems too mild",
+        "Limited, intermittent, social, or hard-to-name discomfort may feel insufficient when compared with accounts of severe physical dysphoria."
+      ],
+      [
+        "A stereotype does not fit",
+        "Interests, appearance, sexuality, gender expression, or a nonbinary identity may differ from the trans narratives you first encountered."
+      ],
+      [
+        "Fear of a mistake",
+        "Concern about regret, transition, relationships, safety, or appearance may turn into a recurring belief that your identity must be false."
+      ],
+      [
+        "Room for exploration",
+        "Self-doubt does not determine a person’s gender. Time, low-pressure exploration, and attention to recurring experiences can help clarify what feels fitting."
+      ]
+    ],
+    "variations": []
+  },
   "gender-feelings-fluctuate-in-intensity": {
     "title": "Gender-related feelings fluctuate in intensity",
     "summary": "The same mirror image, body feature, social interaction, or form of address may feel manageable on one day and sharply distressing or affirming on another.",

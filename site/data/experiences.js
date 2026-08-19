@@ -222,6 +222,10 @@ export const experiences = [
         "https://genderdysphoria.fyi/en/physical-dysphoria"
       ],
       [
+        "Gender Dysphoria Bible: Androgenic Puberty",
+        "https://genderdysphoria.fyi/en/second-puberty-masc"
+      ],
+      [
         "TransNavi: 性別違和を知る",
         "https://transnavi.jp/dysphoria/"
       ],
@@ -1581,13 +1585,25 @@ export const experiences = [
       "jarring-recognition",
       "avoidance",
       "embarrassment",
-      "wish-for-change"
+      "wish-for-change",
+      "fear",
+      "dread",
+      "grief",
+      "withdrawal",
+      "hopelessness",
+      "loss-of-control",
+      "urgency"
     ],
     "tags": [
       "voice",
       "recordings",
       "speech",
-      "self-recognition"
+      "self-recognition",
+      "puberty",
+      "body-change",
+      "anticipation",
+      "hrt",
+      "avoidance"
     ],
     "reportCount": 0,
     "reactionCount": 0,

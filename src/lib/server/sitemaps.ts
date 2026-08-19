@@ -41,8 +41,7 @@ export function renderLocaleSitemap(locale: SitemapLocale) {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${entries.map((slug) => `  <url>
     <loc>${escapeXml(absoluteUrl(pagePath(locale, slug)))}</loc>
-    <lastmod>${catalogMetadata.dateModified}</lastmod>
-    <priority>${slug ? "0.8" : "1.0"}</priority>
+${slug ? "" : `    <lastmod>${catalogMetadata.dateModified}</lastmod>\n`}    <priority>${slug ? "0.8" : "1.0"}</priority>
 ${(Object.keys(sitemapLocales) as SitemapLocale[]).map((alternateLocale) =>
     `    <xhtml:link rel="alternate" hreflang="${sitemapLocales[alternateLocale].hreflang}" href="${escapeXml(absoluteUrl(pagePath(alternateLocale, slug)))}" />`
   ).join("\n")}

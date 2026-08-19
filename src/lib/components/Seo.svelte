@@ -78,7 +78,6 @@
           isPartOf: { "@id": websiteId },
           mainEntity: { "@id": `${canonical}#experience` },
           primaryImageOfPage: { "@type": "ImageObject", url: image },
-          dateModified: catalogMetadata.dateModified,
           keywords: topicLabels,
           about: topicLabels.map((name) => ({ "@type": "Thing", name })),
           license: catalogMetadata.license,

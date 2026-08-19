@@ -96,6 +96,7 @@ describe("SvelteKit rendering", () => {
       const xml = await response.text();
       expect(response.status).toBe(200);
       expect(xml.match(/<url>/g)).toHaveLength(59);
+      expect(xml.match(/<lastmod>/g)).toHaveLength(1);
       expect(xml.match(/hreflang="x-default"/g)).toHaveLength(59);
       expect(xml.match(/hreflang="zh-Hans"/g)).toHaveLength(59);
     }

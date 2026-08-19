@@ -1,8 +1,8 @@
 import { experiences } from "$site/data/experiences.js";
+import { catalogMetadata } from "$site/data/catalog-metadata.js";
 import { createI18n, localeDefinitions, localeRoot } from "$site/i18n/index.js";
 
 const locales = Object.keys(localeDefinitions) as Array<keyof typeof localeDefinitions>;
-const license = "https://creativecommons.org/licenses/by/4.0/";
 type TranslationMap = Record<string, string>;
 type ExportClaimText = {
   title?: string;
@@ -33,7 +33,8 @@ export async function exportData() {
   const translations = await translationsByLocale();
   return {
     schemaVersion: 1,
-    license,
+    dateModified: catalogMetadata.dateModified,
+    license: catalogMetadata.license,
     attribution: "TransNavi contributors",
     locales: Object.fromEntries(locales.map((locale) => [locale, {
       language: localeDefinitions[locale].htmlLang,

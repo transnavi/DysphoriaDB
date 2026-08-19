@@ -7,9 +7,9 @@
 </script>
 
 <svelte:head>
-  <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
   <link rel="alternate" type="application/json" href="/data/experiences.json" title="Gender Experience Index data" />
+  <link rel="alternate" type="text/csv" href="/data/experiences.csv" title="Gender Experience Index data (CSV)" />
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="icon" href="/favicon.ico" sizes="any" />

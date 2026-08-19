@@ -42,21 +42,77 @@ describe("SvelteKit rendering", () => {
     expect(html).toMatch(/data-family="body-image-and-self-recognition"(?![^>]* open)/);
   });
 
-  it("serves localized detail metadata and data exports", async () => {
-    const [detail, data, csv, sitemap] = await Promise.all([
+  it("serves localized detail metadata, dataset metadata, and data exports", async () => {
+    const [detail, catalog, data, csv] = await Promise.all([
       exports.default.fetch(`${baseUrl}/zh-cn/experience/unfamiliar-reflection/`),
+      exports.default.fetch(`${baseUrl}/zh-cn/`),
       exports.default.fetch(`${baseUrl}/data/experiences.json`),
       exports.default.fetch(`${baseUrl}/data/experiences.csv`),
-      exports.default.fetch(`${baseUrl}/sitemap.xml`),
     ]);
     const detailHtml = await detail.text();
+    const catalogHtml = await catalog.text();
     const json = await data.json();
     expect(detailHtml).toContain('<html lang="zh-Hans"');
+    expect(detail.headers.get("content-language")).toBe("zh-Hans");
     expect(detailHtml).toContain('rel="canonical" href="https://db.transnavi.jp/zh-cn/experience/unfamiliar-reflection/"');
     expect(detailHtml).toContain('"@type":"DefinedTerm"');
+    expect(detailHtml).not.toContain('"@type":"Dataset"');
+    expect(catalogHtml).toContain('"@type":"Dataset"');
+    expect(catalogHtml).toContain('"isAccessibleForFree":true');
+    expect(catalogHtml.match(/#experience"/g)).toHaveLength(60);
+    const jsonLdMatch = catalogHtml.match(/<script type="application\/ld\+json">([^<]+)<\/script>/);
+    expect(jsonLdMatch).not.toBeNull();
+    const jsonLd = JSON.parse(jsonLdMatch[1]);
+    const dataset = jsonLd["@graph"].find((node) => node["@type"] === "Dataset");
+    expect([...dataset.description].length).toBeGreaterThanOrEqual(50);
+    expect(dataset.sameAs).toEqual([
+      "https://db.transnavi.jp/",
+      "https://db.transnavi.jp/ja/",
+      "https://db.transnavi.jp/zh-cn/",
+    ]);
+    expect(dataset.distribution).toHaveLength(2);
     expect(json.experiences).toHaveLength(60);
+    expect(json.dateModified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(data.headers.get("x-robots-tag")).toBe("noindex");
     expect((await csv.text()).trim().split("\n")).toHaveLength(1 + 60 * 3);
-    expect((await sitemap.text()).match(/<url>/g)).toHaveLength(61 * 3);
+    expect(csv.headers.get("x-robots-tag")).toBe("noindex");
+  });
+
+  it("serves a sitemap index with complete localized child sitemaps", async () => {
+    const [index, english, japanese, chinese, missing] = await Promise.all([
+      exports.default.fetch(`${baseUrl}/sitemap.xml`),
+      exports.default.fetch(`${baseUrl}/sitemaps/en.xml`),
+      exports.default.fetch(`${baseUrl}/sitemaps/ja.xml`),
+      exports.default.fetch(`${baseUrl}/sitemaps/zh-cn.xml`),
+      exports.default.fetch(`${baseUrl}/sitemaps/unknown.xml`),
+    ]);
+    const indexXml = await index.text();
+    expect(index.status).toBe(200);
+    expect(index.headers.get("content-type")).toContain("application/xml");
+    expect(indexXml).toContain("<sitemapindex");
+    expect(indexXml.match(/<sitemap>/g)).toHaveLength(3);
+    expect(indexXml).toContain("https://db.transnavi.jp/sitemaps/zh-cn.xml");
+    for (const response of [english, japanese, chinese]) {
+      const xml = await response.text();
+      expect(response.status).toBe(200);
+      expect(xml.match(/<url>/g)).toHaveLength(61);
+      expect(xml.match(/<lastmod>/g)).toHaveLength(1);
+      expect(xml.match(/hreflang="x-default"/g)).toHaveLength(61);
+      expect(xml.match(/hreflang="zh-Hans"/g)).toHaveLength(61);
+    }
+    expect(missing.status).toBe(404);
+  });
+
+  it("keeps crawler traps and non-public endpoints out of crawl queues", async () => {
+    const [robots, missing] = await Promise.all([
+      exports.default.fetch(`${baseUrl}/robots.txt`),
+      exports.default.fetch(`${baseUrl}/missing-page`),
+    ]);
+    const text = await robots.text();
+    expect(text).toContain("Disallow: /api/");
+    expect(text).toContain("Disallow: /*?*q=");
+    expect(text).toContain("Sitemap: https://db.transnavi.jp/sitemap.xml");
+    expect(await missing.text()).toContain('content="noindex,follow"');
   });
 
   it("applies defensive headers to rendered pages", async () => {

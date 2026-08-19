@@ -20,6 +20,10 @@ export const handle: Handle = async ({ event, resolve }) => {
       .replace("%theme%", theme),
   });
 
+  if (response.headers.get("content-type")?.startsWith("text/html")) {
+    response.headers.set("content-language", localeDefinitions[locale].htmlLang);
+  }
+
   if (!event.url.pathname.startsWith("/api/")) {
     for (const [name, value] of Object.entries(pageSecurityHeaders)) {
       response.headers.set(name, value);

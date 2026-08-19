@@ -25,6 +25,8 @@ export const ja = {
     tags: "タグ",
     experienceType: "体験の種類",
     population: "該当する人",
+    stage: "自覚・性別移行の時期",
+    stageNote: "時期は重なることがあり、経験しない段階や、異なる形の性別移行もあります。",
     topic: "トピック",
     resultCount: "{{count}}件の体験",
     newCount: "前回以降の新しい体験 {{count}}件",
@@ -95,6 +97,14 @@ export const ja = {
       transmasculine: "トランスマスキュリン",
       nonbinary: "ノンバイナリー",
       "cross-directional": "性別を問わず",
+    },
+    stages: {
+      "before-realization": "自覚前",
+      questioning: "模索中・まだ確信がない",
+      "self-recognized": "自分のジェンダーを自覚した後",
+      disclosed: "周囲へ開示した後",
+      transitioning: "性別移行中",
+      established: "性別移行後の生活が定着した時期",
     },
   },
   sourceKinds: {

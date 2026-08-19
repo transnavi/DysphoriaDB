@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { domains, experienceFamilies, experiences } from "../site/data/experiences.js";
+import { domains, experienceFamilies, experiences, journeyStages } from "../site/data/experiences.js";
 import { content as en } from "../site/i18n/content/en.js";
 import { content as ja } from "../site/i18n/content/ja.js";
 import { content as zhCN } from "../site/i18n/content/zh-CN.js";
@@ -36,9 +36,20 @@ test("all visible tags and taxonomy IDs are localized", () => {
   for (const [locale, ui] of Object.entries(uiByLocale)) {
     for (const { id } of domains) assert.ok(ui.taxonomy.domains[id], `${locale}:domain:${id}`);
     for (const { id } of experienceFamilies) assert.ok(ui.taxonomy.families[id], `${locale}:family:${id}`);
+    for (const { id } of journeyStages) assert.ok(ui.taxonomy.stages[id], `${locale}:stage:${id}`);
     for (const experience of experiences) {
       for (const type of experience.types) assert.ok(ui.taxonomy.types[type], `${locale}:type:${type}`);
       for (const direction of experience.directions) assert.ok(ui.taxonomy.directions[direction], `${locale}:direction:${direction}`);
+    }
+  }
+});
+
+test("journey stages classify every experience", () => {
+  const stageIds = new Set(journeyStages.map(({ id }) => id));
+  for (const experience of experiences) {
+    assert.ok(experience.stages.length > 0, experience.slug);
+    for (const stage of experience.stages) {
+      assert.ok(stageIds.has(stage), `${experience.slug}:${stage}`);
     }
   }
 });

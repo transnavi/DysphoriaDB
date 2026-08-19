@@ -41,7 +41,7 @@
         <p class="report-count">{formatMessage(messages, "reviewedReports", { count: item.reportCount })}</p>
       {/if}
       <div class="categories detail-tags" role="group" aria-label={messages.tags}>
-        {#each [...item.typeTags, ...item.populationTags, ...item.topicTags] as tag}
+        {#each [...item.typeTags, ...item.populationTags, ...item.stageTags, ...item.topicTags] as tag}
           <a
             href={filterHref(tag)}
             class="category-tag {tag.className}"

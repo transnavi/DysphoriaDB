@@ -19,6 +19,7 @@ const validSlugs = new Set(experiences.map(({ slug }) => slug));
 const validFilters = new Set(experiences.flatMap((claim) => [
   ...claim.types.map((value) => filterKey("type", value)),
   ...claim.directions.map((value) => filterKey("population", value)),
+  ...claim.stages.map((value) => filterKey("stage", value)),
   ...claim.tags.map((value) => filterKey("topic", value)),
 ]));
 

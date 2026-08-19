@@ -3,21 +3,29 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import json
 import re
+import sys
 import urllib.error
 import urllib.request
 import zipfile
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 from bs4 import BeautifulSoup
+from collectors.private_storage import ensure_private_path, write_private_text
 
 
 STATUS_ID = re.compile(r"(?:x|twitter|fxtwitter|fixupx)\.com/(?:i/web/|[^/]+/)?status/(\d+)", re.I)
+MINER_VERSION = "0.1.0"
 GENDER_CONTEXT = re.compile(
     r"(?:\btrans(?:gender|fem(?:inine)?|masc(?:uline)?)?\b|\bmt[fx]\b|\bft[mo]\b|\bamab\b|\bafab\b|"
     r"non-?binary|gender|dysphori|euphori|boymod|girlmod|\bhrt\b|"
@@ -303,6 +311,24 @@ PATTERNS: dict[str, list[str]] = {
 COMPILED = {title: [re.compile(pattern, re.I | re.S) for pattern in patterns] for title, patterns in PATTERNS.items()}
 
 
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as source:
+        for chunk in iter(lambda: source.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def telegram_export_fingerprint(directory: Path) -> dict[str, Any]:
+    digest = hashlib.sha256()
+    files = sorted(directory.glob("messages*.html"))
+    for path in files:
+        digest.update(path.name.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(bytes.fromhex(sha256_file(path)))
+    return {"fileCount": len(files), "contentHash": digest.hexdigest()}
+
+
 def load_archive_array(archive: zipfile.ZipFile, name: str) -> list[dict[str, Any]]:
     raw = archive.read(name).decode("utf-8")
     start = raw.find("[")
@@ -342,11 +368,15 @@ def fetch_x_metadata(post_id: str) -> tuple[str, dict[str, str] | None]:
     tweet = payload.get("tweet")
     if payload.get("code") != 200 or not isinstance(tweet, dict):
         return post_id, None
+    if str(tweet.get("id") or "") != post_id:
+        return post_id, None
     author = tweet.get("author") or {}
     return post_id, {
         "author": str(author.get("name") or author.get("screen_name") or "X user"),
         "handle": str(author.get("screen_name") or ""),
         "text": str(tweet.get("text") or ""),
+        "provider": "fxtwitter",
+        "hydratedAt": datetime.now(tz=UTC).isoformat(timespec="seconds"),
     }
 
 
@@ -354,12 +384,34 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--x-archive", type=Path, required=True)
     parser.add_argument("--telegram", type=Path, required=True)
-    parser.add_argument("--data-dir", type=Path, default=Path("data/mined"))
+    parser.add_argument(
+        "--data-dir", type=Path, default=Path(".private-research/mined")
+    )
     parser.add_argument("--hydrate-samples", action="store_true")
     parser.add_argument("--hydrate-telegram", action="store_true")
+    parser.add_argument(
+        "--acknowledge-third-party-disclosure",
+        action="store_true",
+        help=(
+            "Confirm that hydration sends IDs selected from private archives "
+            "to the public metadata provider"
+        ),
+    )
     parser.add_argument("--max-hydrate", type=int, default=500)
     args = parser.parse_args()
+    if (
+        args.hydrate_samples or args.hydrate_telegram
+    ) and not args.acknowledge_third_party_disclosure:
+        parser.error(
+            "hydration discloses the selected private-archive post IDs to a "
+            "third-party provider; pass --acknowledge-third-party-disclosure"
+        )
+    ensure_private_path(args.data_dir)
     args.data_dir.mkdir(parents=True, exist_ok=True)
+    started_at = datetime.now(tz=UTC).isoformat(timespec="microseconds")
+    run_id = f"run:archive-miner:{started_at.replace(':', '-')}"
+    x_archive_hash = sha256_file(args.x_archive)
+    telegram_fingerprint = telegram_export_fingerprint(args.telegram)
 
     telegram_ids = telegram_status_ids(args.telegram)
     metadata_path = args.data_dir / "x-metadata.json"
@@ -379,7 +431,10 @@ def main() -> int:
                 post_id, item = future.result()
                 if item:
                     metadata[post_id] = item
-        metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        write_private_text(
+            metadata_path,
+            json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
+        )
     records: dict[str, dict[str, Any]] = {}
 
     with zipfile.ZipFile(args.x_archive) as archive:
@@ -453,7 +508,10 @@ def main() -> int:
                 post_id, item = future.result()
                 if item:
                     metadata[post_id] = item
-        metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        write_private_text(
+            metadata_path,
+            json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
+        )
 
     record_by_id = {record["id"]: record for record in relevant}
     samples: dict[str, list[dict[str, str]]] = defaultdict(list)
@@ -471,16 +529,57 @@ def main() -> int:
                 "excerpt": excerpt,
             })
 
-    with (args.data_dir / "x-relevant.jsonl").open("w", encoding="utf-8") as output:
-        for record in relevant:
-            output.write(json.dumps(record, ensure_ascii=False) + "\n")
-    (args.data_dir / "ranking.json").write_text(
-        json.dumps(ranking, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
+    write_private_text(
+        args.data_dir / "x-relevant.jsonl",
+        "".join(
+            json.dumps(record, ensure_ascii=False) + "\n" for record in relevant
+        ),
     )
-    (args.data_dir / "candidate-samples.json").write_text(
+    write_private_text(
+        args.data_dir / "ranking.json",
+        json.dumps(ranking, ensure_ascii=False, indent=2) + "\n",
+    )
+    write_private_text(
+        args.data_dir / "candidate-samples.json",
         json.dumps(samples, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
+    )
+
+    completed_at = datetime.now(tz=UTC).isoformat(timespec="microseconds")
+    pattern_hash = hashlib.sha256(
+        json.dumps(PATTERNS, ensure_ascii=False, sort_keys=True).encode("utf-8")
+    ).hexdigest()
+    manifest = {
+        "schemaVersion": "0.1.0",
+        "id": run_id,
+        "collector": "private_archive_miner",
+        "collectorVersion": MINER_VERSION,
+        "startedAt": started_at,
+        "completedAt": completed_at,
+        "inputs": {
+            "xArchive": {
+                "name": args.x_archive.name,
+                "contentHash": x_archive_hash,
+                "size": args.x_archive.stat().st_size,
+            },
+            "telegramExport": telegram_fingerprint,
+        },
+        "matcher": {"patternHash": pattern_hash, "experienceCount": len(PATTERNS)},
+        "hydration": {
+            "provider": "fxtwitter",
+            "telegramRequested": args.hydrate_telegram,
+            "samplesRequested": args.hydrate_samples,
+            "maximum": args.max_hydrate,
+        },
+        "results": {
+            "xRecords": len(records),
+            "telegramStatusLinks": len(telegram_ids),
+            "relevantPosts": len(relevant),
+            "rankedExperiences": len(ranking),
+        },
+    }
+    write_private_text(
+        args.data_dir / "runs" / f"{started_at.replace(':', '-')}.json",
+        json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
     )
 
     print(json.dumps({

@@ -9,3 +9,9 @@ node_modules/
 .dev.vars*
 .env*
 !.env.example
+.private-research/
+data/raw/
+data/normalized/
+data/mined/
+data/runs/
+seeds/

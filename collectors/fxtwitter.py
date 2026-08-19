@@ -44,6 +44,20 @@ def api_url(ref: StatusRef) -> str:
     return f"{API_ROOT}/{ref.handle}/status/{ref.post_id}"
 
 
+def _tweet_from_payload(payload: dict[str, Any], ref: StatusRef) -> dict[str, Any]:
+    tweet = payload.get("tweet")
+    if payload.get("code") != 200 or not isinstance(tweet, dict):
+        message = payload.get("message", "missing tweet object")
+        raise CollectionError(
+            f"FxTwitter returned an invalid response for {ref.post_id}: {message}"
+        )
+    if str(tweet.get("id") or "") != ref.post_id:
+        raise CollectionError(
+            f"FxTwitter returned a different post for {ref.post_id}"
+        )
+    return tweet
+
+
 def fetch_status(ref: StatusRef, timeout: float = 20.0) -> dict[str, Any]:
     request = urllib.request.Request(
         api_url(ref),
@@ -58,9 +72,7 @@ def fetch_status(ref: StatusRef, timeout: float = 20.0) -> dict[str, Any]:
     except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as error:
         raise CollectionError(f"FxTwitter request failed for {ref.post_id}: {error}") from error
 
-    if payload.get("code") != 200 or not isinstance(payload.get("tweet"), dict):
-        message = payload.get("message", "missing tweet object")
-        raise CollectionError(f"FxTwitter returned an invalid response for {ref.post_id}: {message}")
+    _tweet_from_payload(payload, ref)
     return payload
 
 
@@ -109,9 +121,12 @@ def fetch_quotes_page(
     *,
     cursor: str | None = None,
     count: int = 20,
+    language: str | None = None,
     timeout: float = 30.0,
 ) -> dict[str, Any]:
-    params = {"count": str(count), "lang": "en"}
+    params = {"count": str(count)}
+    if language:
+        params["lang"] = language
     if cursor:
         params["cursor"] = cursor
     return _fetch_api_page(f"/2/status/{post_id}/quotes", params, timeout)
@@ -145,6 +160,52 @@ def _author(tweet: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _media_metadata(tweet: dict[str, Any]) -> list[dict[str, str]]:
+    media = tweet.get("media")
+    items: list[dict[str, Any]] = []
+    if isinstance(media, list):
+        items = [item for item in media if isinstance(item, dict)]
+    elif isinstance(media, dict):
+        preferred = media.get("all")
+        if isinstance(preferred, list):
+            items = [item for item in preferred if isinstance(item, dict)]
+        else:
+            for key in ("photos", "videos", "gifs"):
+                values = media.get(key)
+                if isinstance(values, list):
+                    items.extend(item for item in values if isinstance(item, dict))
+
+    results: list[dict[str, str]] = []
+    seen: set[str] = set()
+    for item in items:
+        alt_text = str(
+            item.get("altText")
+            or item.get("alt_text")
+            or item.get("alt")
+            or ""
+        )[:1000]
+        identity = str(
+            item.get("id")
+            or item.get("url")
+            or item.get("media_url_https")
+            or item.get("thumbnail_url")
+            or ""
+        )
+        identity_hash = hashlib.sha256(identity.encode("utf-8")).hexdigest()
+        key = f"{identity_hash}:{alt_text}"
+        if key in seen:
+            continue
+        seen.add(key)
+        results.append(
+            {
+                "type": str(item.get("type") or "unknown"),
+                "altText": alt_text,
+                "mediaIdentityHash": identity_hash,
+            }
+        )
+    return results
+
+
 def normalize_tweet(
     tweet: dict[str, Any],
     *,
@@ -153,7 +214,19 @@ def normalize_tweet(
     seed_post_id: str,
 ) -> dict[str, Any]:
     post_id = str(tweet["id"])
-    text = str(tweet.get("text") or "")
+    thread_root_id = str(
+        tweet.get("conversation_id")
+        or tweet.get("conversation_id_str")
+        or seed_post_id
+    )
+    post_text = str(tweet.get("text") or "")
+    media = _media_metadata(tweet)
+    alt_text = "\n\n".join(
+        item["altText"] for item in media if item["altText"]
+    )
+    text = post_text
+    if alt_text:
+        text = f"{post_text}\n\n[Image alt text]\n{alt_text}".strip()
     quoted = tweet.get("quote") if isinstance(tweet.get("quote"), dict) else None
     replying_to = tweet.get("replying_to")
     relations: list[dict[str, str]] = []
@@ -169,6 +242,13 @@ def normalize_tweet(
         )
         if parent_id:
             relations.append({"type": "replies_to", "targetSourceId": f"src:x:{parent_id}"})
+    if thread_root_id != post_id:
+        relations.append(
+            {
+                "type": "part_of_thread",
+                "targetSourceId": f"src:x:{thread_root_id}",
+            }
+        )
 
     return {
         "schemaVersion": "0.1.0",
@@ -194,13 +274,13 @@ def normalize_tweet(
             "collector": COLLECTOR_NAME,
             "collectorVersion": COLLECTOR_VERSION,
             "runId": run_id,
-            "seedPostId": seed_post_id,
+            "seedPostId": thread_root_id,
         },
         "metadata": {
             "possiblySensitive": tweet.get("possibly_sensitive"),
-            "mediaCount": len(tweet.get("media") or {})
-            if isinstance(tweet.get("media"), dict)
-            else len(tweet.get("media") or []),
+            "mediaCount": len(media),
+            "media": media,
+            "conversationId": thread_root_id,
         },
     }
 

@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "Collectors and data pipeline for recurring gender-related phenomena"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["beautifulsoup4>=4.13,<5"]
+dependencies = [
+  "beautifulsoup4>=4.13,<5",
+  "jsonschema[format]>=4.25,<5",
+]
 
 [dependency-groups]
 dev = [

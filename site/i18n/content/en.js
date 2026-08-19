@@ -905,9 +905,34 @@ const experiences = {
     ]
   },
   "masturbation-that-affirms-a-feminine-self": {
-    "title": "Preferring masturbation that affirms a feminine sense of self",
-    "summary": "If you are transfeminine, you may prefer fantasies, language, touch, positions, toys, or ways of understanding your anatomy that let you experience masturbation from a feminine or female perspective.",
-    "patterns": [],
+    "title": "Sexual experiences that affirm a feminine sense of self",
+    "summary": "If you are transfeminine, pornography, fantasy, masturbation, or partnered sex may feel more comfortable when you can inhabit a feminine or female point of view. Sexual acts that emphasize unwanted anatomy or place you in an unwanted gendered role, including penetration, can feel alienating or dysphoric.",
+    "patterns": [
+      [
+        "Sexual media and viewpoint",
+        "You may identify with women in pornography, follow their point of view, or imagine having their body or role."
+      ],
+      [
+        "Fantasy and self-placement",
+        "Your fantasies may place you in a feminine body, role, or point of view, including before you understand why this feels right."
+      ],
+      [
+        "Masturbation and anatomy",
+        "Language, touch, positions, toys, or ways of understanding your anatomy may help solitary sex feel feminine and embodied."
+      ],
+      [
+        "Partnered sex",
+        "Being desired, addressed, touched, or positioned as a woman can make partnered intimacy feel more comfortable, present, or pleasurable."
+      ],
+      [
+        "Penetration and sexual role",
+        "You may dislike penetrating a partner, being penetrated, or penetration in general when the act emphasizes unwanted anatomy or an unwanted gendered role."
+      ],
+      [
+        "Individual variation",
+        "Any sexual act can be compatible with any gender. The relevant experience is the gendered meaning that a viewpoint, role, or act has for you."
+      ]
+    ],
     "variations": []
   }
 };
@@ -1240,8 +1265,12 @@ const terms = {
   "pretty": "pretty",
   "beautiful": "beautiful",
   "gendered-language": "gendered language",
+  "pornography": "pornography",
+  "sexual-media": "sexual media",
+  "partnered-sex": "partnered sex",
+  "penetration": "penetration",
   "pleasure": "pleasure",
-  "avoidance-of-male-coded-methods": "avoidance of male-coded methods",
+  "sexual-role-dysphoria": "sexual-role dysphoria",
   "masturbation": "masturbation",
   "solitary-sexuality": "solitary sexuality",
   "touch": "touch",

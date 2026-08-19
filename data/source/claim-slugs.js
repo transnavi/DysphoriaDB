@@ -56,5 +56,5 @@ export const claimSlugs = {
   "Relief when libido changes make friendship with women easier": "libido-changes-make-friendship-with-women-easier",
   "Attraction to women feels contaminated by an imposed male role": "attraction-to-women-and-the-imposed-male-role",
   "Assigned-gender compliments feel uncomfortable": "assigned-gender-compliments-feel-wrong",
-  "Preferring masturbation that affirms a feminine sense of self": "masturbation-that-affirms-a-feminine-self",
+  "Sexual experiences that affirm a feminine sense of self": "masturbation-that-affirms-a-feminine-self",
 };

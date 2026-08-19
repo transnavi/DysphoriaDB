@@ -779,13 +779,23 @@ export const claims = [
     ],
   },
   {
-    title: "Preferring masturbation that affirms a feminine sense of self",
-    summary: "If you are transfeminine, you may prefer fantasies, language, touch, positions, toys, or ways of understanding your anatomy that let you experience masturbation from a feminine or female perspective.",
-    responses: ["relief", "embodiment", "pleasure", "gender euphoria", "avoidance of male-coded methods"],
-    tags: ["masturbation", "solitary sexuality", "fantasy", "touch", "anatomy", "sexual role"],
+    title: "Sexual experiences that affirm a feminine sense of self",
+    summary: "If you are transfeminine, pornography, fantasy, masturbation, or partnered sex may feel more comfortable when you can inhabit a feminine or female point of view. Sexual acts that emphasize unwanted anatomy or place you in an unwanted gendered role, including penetration, can feel alienating or dysphoric.",
+    responses: ["comfort", "embodiment", "pleasure", "gender euphoria", "sexual-role dysphoria", "avoidance"],
+    patterns: [
+      ["Sexual media and viewpoint", "You may identify with women in pornography, follow their point of view, or imagine having their body or role."],
+      ["Fantasy and self-placement", "Your fantasies may place you in a feminine body, role, or point of view, including before you understand why this feels right."],
+      ["Masturbation and anatomy", "Language, touch, positions, toys, or ways of understanding your anatomy may help solitary sex feel feminine and embodied."],
+      ["Partnered sex", "Being desired, addressed, touched, or positioned as a woman can make partnered intimacy feel more comfortable, present, or pleasurable."],
+      ["Penetration and sexual role", "You may dislike penetrating a partner, being penetrated, or penetration in general when the act emphasizes unwanted anatomy or an unwanted gendered role."],
+      ["Individual variation", "Any sexual act can be compatible with any gender. The relevant experience is the gendered meaning that a viewpoint, role, or act has for you."],
+    ],
+    tags: ["pornography", "sexual media", "fantasy", "masturbation", "partnered sex", "penetration", "touch", "anatomy", "sexual role"],
     sources: [
       ["Gender Dysphoria Bible: Sexual Dysphoria", `${GDB}/sexual-dysphoria`],
       ["Gender Dysphoria Bible: Euphoria", `${GDB}/euphoria`],
+      ["Sexual behavior and sexual health of transgender adults before treatment", "https://pmc.ncbi.nlm.nih.gov/articles/PMC8118227/", "Research study"],
+      ["Transfeminine adolescents’ online sexual experiences", "https://www.frontiersin.org/journals/reproductive-health/articles/10.3389/frph.2022.1034747/full", "Qualitative study"],
     ],
   },
 ];

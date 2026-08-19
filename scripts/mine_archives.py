@@ -130,8 +130,17 @@ PATTERNS: dict[str, list[str]] = {
     "Attraction to women feels contaminated by an imposed male role": [
         r"(?:male gaze|predator|objectify|creep|男性の目|男性目線|加害者|男凝|凝视).{0,100}(?:woman|women|girl|女性|女)",
     ],
-    "Preferring masturbation that affirms a feminine sense of self": [
+    "Sexual experiences that affirm a feminine sense of self": [
         r"(?:masturbat|jerk off|オナニ|自慰|手淫).{0,100}(?:like a (?:girl|woman)|female way|feminine|女の子|女性として|像女生|女性方式)",
+        r"(?:porn|pornography|sexual media).{0,160}(?:identify with|imagine (?:myself|being)|perspective|point of view|viewpoint).{0,80}(?:woman|female|feminine|her)",
+        r"(?:identify with|imagine (?:myself|being)|perspective|point of view|viewpoint).{0,100}(?:woman|female|feminine|her).{0,160}(?:porn|pornography|sexual media)",
+        r"(?:penetrat|insertive|top(?:ping)?).{0,120}(?:hate|dislike|avoid|wrong|alien|dysphori|uncomfortable|distress)",
+        r"(?:hate|dislike|avoid|wrong|alien|dysphori|uncomfortable|distress).{0,120}(?:penetrat|insertive|top(?:ping)?)",
+        r"(?:sex|sexual|intimacy|partner).{0,120}(?:as a woman|treated as a woman|female perspective|feminine role).{0,100}(?:right|affirm|comfortable|present|pleasur|euphori)",
+        r"(?:ポルノ|性的コンテンツ).{0,120}(?:女性の視点|女性に自分を重ね|女性として|女性の身体|女性の役割)",
+        r"(?:挿入|挿入する役割).{0,100}(?:嫌|避け|違和|苦痛|ディスフォリア)",
+        r"(?:色情|成人视频|性内容).{0,120}(?:女性视角|代入女性|想象自己是女性|女性身体|女性角色)",
+        r"(?:插入|插入方).{0,100}(?:讨厌|回避|不适|疏离|性别焦虑)",
     ],
     "Gender-related feelings fluctuate in intensity": [
         r"(?:dysphori|gender feeling|性別違和|性别焦虑).{0,100}(?:some days|fluctuat|comes and goes|日によ|波|时有时无|有时)",

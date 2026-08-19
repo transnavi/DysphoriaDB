@@ -2725,6 +2725,7 @@ export const experiences = [
     "family": "sexual-responses-and-embodiment",
     "domain": "sexuality",
     "types": [
+      "dysphoric",
       "euphoric",
       "preference"
     ],
@@ -2732,16 +2733,20 @@ export const experiences = [
       "transfeminine"
     ],
     "responses": [
-      "relief",
+      "comfort",
       "embodiment",
       "pleasure",
       "gender-euphoria",
-      "avoidance-of-male-coded-methods"
+      "sexual-role-dysphoria",
+      "avoidance"
     ],
     "tags": [
-      "masturbation",
-      "solitary-sexuality",
+      "pornography",
+      "sexual-media",
       "fantasy",
+      "masturbation",
+      "partnered-sex",
+      "penetration",
       "touch",
       "anatomy",
       "sexual-role"
@@ -2756,6 +2761,16 @@ export const experiences = [
       [
         "Gender Dysphoria Bible: Euphoria",
         "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "Sexual behavior and sexual health of transgender adults before treatment",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC8118227/",
+        "Research study"
+      ],
+      [
+        "Transfeminine adolescents’ online sexual experiences",
+        "https://www.frontiersin.org/journals/reproductive-health/articles/10.3389/frph.2022.1034747/full",
+        "Qualitative study"
       ]
     ]
   }

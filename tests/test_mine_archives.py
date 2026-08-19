@@ -114,5 +114,15 @@ def test_online_identity_opens_after_transition() -> None:
     assert "Keeping an online identity separate until gender disclosure feels safe" in matches(text)
 
 
+def test_female_viewpoint_in_pornography_affirms_transfeminine_self() -> None:
+    text = "As a trans woman, I identify with the woman's perspective in pornography and imagine myself as her."
+    assert "Sexual experiences that affirm a feminine sense of self" in matches(text)
+
+
+def test_insertive_role_feels_dysphoric() -> None:
+    text = "As a trans woman, penetrating a partner feels dysphoric and alien to me."
+    assert "Sexual experiences that affirm a feminine sense of self" in matches(text)
+
+
 def test_unrelated_fashion_post_is_ignored() -> None:
     assert matches("New fashion guide: browse clothes, makeup, and styling tips.") == []

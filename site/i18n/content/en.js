@@ -492,7 +492,8 @@ const experiences = {
     ],
     "variations": [
       "Plush toys, dolls such as Barbie, pink or cute items, accessories, and girls’ or children’s fashion may become especially appealing.",
-      "Items marketed to boys, action toys, vehicles, sports or adventure themes, and boys’ clothing may become especially appealing."
+      "Items marketed to boys, action toys, vehicles, sports or adventure themes, and boys’ clothing may become especially appealing.",
+      "Items from more than one gendered category, or items without a clear gender category, may become especially appealing."
     ]
   },
   "fear-of-aging-in-the-assigned-gender": {
@@ -798,6 +799,10 @@ const experiences = {
       [
         "Separate identities",
         "You may keep accounts and social circles apart to prevent online activity from being connected with your offline identity."
+      ],
+      [
+        "An unwanted connection between identities",
+        "Being outed or having an account accidentally linked to your offline identity can bring intense sadness, fear, anger, or distress. You may withdraw from friends, leave the account, remove content, or avoid online spaces afterward."
       ],
       [
         "Openness after recognition or transition",

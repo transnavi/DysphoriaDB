@@ -53,7 +53,7 @@
     {item.reportCount ? formatMessage(messages, "reviewedReports", { count: item.reportCount }) : " "}
   </p>
   <div class="categories" role="group" aria-label={messages.tags}>
-    {#each [...item.typeTags, ...item.populationTags, ...item.topicTags.slice(0, 3)] as tag}
+    {#each [...item.typeTags, ...item.populationTags, ...item.stageTags, ...item.topicTags.slice(0, 3)] as tag}
       <TagButton
         {tag}
         active={activeFilters.includes(filterId(tag))}

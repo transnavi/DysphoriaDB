@@ -142,25 +142,11 @@
     {/each}
   </nav>
 
-  <div class="stage-filter">
-    <span class="stage-filter-label" id="stage-filter-label">{messages.stage}</span>
-    <span class="stage-filter-note" id="stage-filter-note">{messages.stageNote}</span>
-    <div class="stage-filter-options" role="group" aria-labelledby="stage-filter-label" aria-describedby="stage-filter-note">
-      {#each site.stageFilters as tag}
-        <button
-          type="button"
-          aria-pressed={activeFilters.includes(filterKey(tag.group, tag.value))}
-          onclick={() => toggleFilter(tag)}
-        >{tag.label}</button>
-      {/each}
-    </div>
-  </div>
-
   <div class="active-filters">
     {#if activeFilters.length}
       <span>{messages.filteredBy}</span>
       {#each activeFilters as key}
-        {@const item = [...site.stageFilters, ...site.experiences.flatMap((experience) => [...experience.typeTags, ...experience.populationTags, ...experience.topicTags])].find((tag) => filterKey(tag.group, tag.value) === key)}
+        {@const item = site.experiences.flatMap((experience) => [...experience.typeTags, ...experience.populationTags, ...experience.stageTags, ...experience.topicTags]).find((tag) => filterKey(tag.group, tag.value) === key)}
         {#if item}
           <button type="button" aria-label={formatMessage(messages, "removeFilter", { label: item.label })} onclick={() => { activeFilters = activeFilters.filter((value) => value !== key); syncUrl(); }}>
             {item.label} ×

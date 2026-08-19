@@ -801,6 +801,10 @@ const experiences = {
         "You may keep accounts and social circles apart to prevent online activity from being connected with your offline identity."
       ],
       [
+        "An unwanted connection between identities",
+        "Being outed or having an account accidentally linked to your offline identity can bring intense sadness, fear, anger, or distress. You may withdraw from friends, leave the account, remove content, or avoid online spaces afterward."
+      ],
+      [
         "Openness after recognition or transition",
         "A fitting name, voice, appearance, or social role can make sharing profiles and connecting identities feel safer and more comfortable."
       ],

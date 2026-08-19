@@ -1,9 +1,10 @@
 export const zhCN = {
   ui: {
     siteName: "性别体验索引",
-    description: "一份可浏览的常见性别体验参考资料。",
+    description: "本资料分类整理常见性别体验，可用于自我理解与相关研究。",
+    datasetDescription: "将常见性别体验分类整理，供自我理解与相关研究使用的数据集。",
     heading: "人们如何体验性别",
-    introduction: "本索引整理了跨性别与多元性别社群中，性别焦虑和性别欣快的感受、表现与理解方式。",
+    introduction: "本资料分类整理跨性别与多元性别社群反复提及的体验，涵盖性别焦虑、性别欣快、偏好等类别，可用于自我理解、资料查阅和酷儿研究。",
     submitExperience: "提交体验",
     glossary: "TransNavi 术语表",
     languageLabel: "显示语言",

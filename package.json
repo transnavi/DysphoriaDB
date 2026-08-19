@@ -7,6 +7,7 @@
   },
   "scripts": {
     "build": "vite build && node scripts/build_site.mjs",
+    "build:og": "bash scripts/build_og_images.sh",
     "dev": "vite --host 0.0.0.0 --port 4174",
     "preview": "vite preview --host 0.0.0.0 --port 4174",
     "deploy": "npm run build && wrangler deploy",

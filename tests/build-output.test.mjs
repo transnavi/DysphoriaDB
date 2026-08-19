@@ -13,6 +13,8 @@ test("localized root pages include canonical metadata and visible actions", asyn
   assert.match(en, /hreflang="ja" href="https:\/\/db\.transnavi\.jp\/ja\/"/);
   assert.match(ja, /<html lang="ja"/);
   assert.match(ja, /性別高揚感/);
+  assert.match(ja, /繰り返し語られるジェンダー体験を分類・整理し/);
+  assert.doesNotMatch(ja, /出典とともに探す|体験を探せる資料/);
   assert.match(ja, />体験を投稿する ↗<\/a>/);
   assert.match(ja, /id="search-button" type="submit">検索<\/button>/);
   assert.match(ja, /og-image-ja\.png/);

@@ -21,9 +21,9 @@ const licenseUrl = "https://creativecommons.org/licenses/by/4.0/";
 const lastModified = "2026-08-19";
 const locales = Object.keys(localeDefinitions);
 const ogImages = {
-  en: "/og-image-en.png",
-  ja: "/og-image-ja.png",
-  "zh-CN": "/og-image-zh-cn.png",
+  en: "/og-image-en.png?v=20260819",
+  ja: "/og-image-ja.png?v=20260819",
+  "zh-CN": "/og-image-zh-cn.png?v=20260819",
 };
 const localeShortLabels = { en: "EN", ja: "JA", "zh-CN": "中文" };
 
@@ -172,7 +172,7 @@ function localizeShell(baseHtml, i18n, locale, claim = null) {
   html = replaceMeta(html, "property", "og:image", ogImage);
   html = replaceMeta(html, "property", "og:image:width", "1200");
   html = replaceMeta(html, "property", "og:image:height", "630");
-  html = replaceMeta(html, "property", "og:image:alt", pageTitle);
+  html = replaceMeta(html, "property", "og:image:alt", i18n.t("ui.ogImageAlt"));
   html = replaceMeta(html, "name", "twitter:card", "summary_large_image");
   html = replaceMeta(html, "name", "twitter:title", pageTitle);
   html = replaceMeta(html, "name", "twitter:description", description);

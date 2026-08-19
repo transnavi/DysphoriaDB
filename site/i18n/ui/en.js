@@ -2,6 +2,7 @@ export const en = {
   ui: {
     siteName: "Gender Experience Index",
     description: "This reference categorizes recurring gender experiences for personal reflection and research.",
+    ogImageAlt: "Gender Experience Index. Gender experiences are categorized for personal reflection and research.",
     datasetDescription: "This dataset categorizes recurring gender experiences for personal reflection and research.",
     heading: "How people experience gender",
     introduction: "This reference organizes experiences repeatedly described in transgender and gender-diverse communities, including gender dysphoria, gender euphoria, and preferences. It can support personal reflection and research, including queer studies.",

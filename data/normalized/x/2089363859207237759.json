@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "Piralis",
+    "handle": "PiralisArt",
+    "nativeId": "1991089223919906816",
+    "url": "https://x.com/PiralisArt"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "b9cb9c868a187d97c95a7c91aeec802a31c59fc8a75b17ba6e264c8cc9016c15",
+  "engagement": {
+    "likes": 78,
+    "replies": 2,
+    "reposts": 1,
+    "views": 5322
+  },
+  "id": "src:x:2089363859207237759",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089363859207237759",
+  "platform": "x",
+  "publishedAt": "2026-08-17T14:48:57+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@polen_ball I feel more comfortable topless today then I did as a kid",
+  "url": "https://x.com/PiralisArt/status/2089363859207237759"
+}

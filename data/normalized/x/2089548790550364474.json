@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "m",
+    "handle": "mariisme68",
+    "nativeId": "1232907106489004033",
+    "url": "https://x.com/mariisme68"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "e9143a29033d9145afc1854ad835b976814bf560b245685a801450f52c288aec",
+  "engagement": {
+    "likes": 1,
+    "replies": 0,
+    "reposts": 0,
+    "views": 193
+  },
+  "id": "src:x:2089548790550364474",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089548790550364474",
+  "platform": "x",
+  "publishedAt": "2026-08-18T03:03:48+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "quotes"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "damn",
+  "url": "https://x.com/mariisme68/status/2089548790550364474"
+}

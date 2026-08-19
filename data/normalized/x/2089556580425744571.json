@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "Boijimmer",
+    "handle": "MeowieMeowers",
+    "nativeId": "2051833024204226560",
+    "url": "https://x.com/MeowieMeowers"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "c0b20e00688a88879a3930dae0f792d07cbb48c2f862f2fc6612d92d41a216e5",
+  "engagement": {
+    "likes": 0,
+    "replies": 0,
+    "reposts": 0,
+    "views": 40
+  },
+  "id": "src:x:2089556580425744571",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089556580425744571",
+  "platform": "x",
+  "publishedAt": "2026-08-18T03:34:45+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "quotes"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "this is why I never went to any swimming classes",
+  "url": "https://x.com/MeowieMeowers/status/2089556580425744571"
+}

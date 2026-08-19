@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "GVTTRMVTT",
+    "handle": "gvttrmvttmvsic",
+    "nativeId": "2002757684106612736",
+    "url": "https://x.com/gvttrmvttmvsic"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "97756b6a7fd02893f41a8b3282ea8af24fbde2740514b935a4666a57ee193475",
+  "engagement": {
+    "likes": 205,
+    "replies": 2,
+    "reposts": 2,
+    "views": 6814
+  },
+  "id": "src:x:2089384435737362757",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089384435737362757",
+  "platform": "x",
+  "publishedAt": "2026-08-17T16:10:43+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@polen_ball If I were walking around with a towel on I would have it up to my armpits covering my chest. Seemed natural, even if my cousins gave me hell for it 🤷‍♀️",
+  "url": "https://x.com/gvttrmvttmvsic/status/2089384435737362757"
+}

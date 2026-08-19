@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "michelle",
+    "handle": "fluffygirlpaws",
+    "nativeId": "1996642504733794304",
+    "url": "https://x.com/fluffygirlpaws"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "029582aaac1d583e67234271b51483bec8935bd3f3c4f74e215daa74599da873",
+  "engagement": {
+    "likes": 61,
+    "replies": 1,
+    "reposts": 0,
+    "views": 1000
+  },
+  "id": "src:x:2089386246686617735",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089386246686617735",
+  "platform": "x",
+  "publishedAt": "2026-08-17T16:17:54+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@polen_ball i didn't necessarily feel bad or uncomfortable i just felt. weird. idk like it was just weird i can't describe it any other way i didn't really like it",
+  "url": "https://x.com/fluffygirlpaws/status/2089386246686617735"
+}

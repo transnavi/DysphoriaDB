@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "e. slug",
+    "handle": "em0c0r3slugma",
+    "nativeId": "1638324000224051200",
+    "url": "https://x.com/em0c0r3slugma"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "bb1c23ee9d89be5250a8e9225de1680ffc47f04f059547737eea1f0ce34e95b2",
+  "engagement": {
+    "likes": 5,
+    "replies": 0,
+    "reposts": 0,
+    "views": 112
+  },
+  "id": "src:x:2089377437830529314",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089377437830529314",
+  "platform": "x",
+  "publishedAt": "2026-08-17T15:42:54+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@polen_ball personally its difficult for me to say what was gender dysphoria and what was fatphobia i learnt from my mother/skinny cishet kulture",
+  "url": "https://x.com/em0c0r3slugma/status/2089377437830529314"
+}

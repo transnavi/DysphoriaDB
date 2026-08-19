@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "AsbestosDealer",
+    "handle": "Asbestosdealer1",
+    "nativeId": "1768596900885008384",
+    "url": "https://x.com/Asbestosdealer1"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "c9922e9a80fff1870d0d6b7c654b10add71a5b04e340c9c5706993e36c87b4f0",
+  "engagement": {
+    "likes": 29,
+    "replies": 0,
+    "reposts": 0,
+    "views": 873
+  },
+  "id": "src:x:2089369646998970724",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089369646998970724",
+  "platform": "x",
+  "publishedAt": "2026-08-17T15:11:57+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@polen_ball i used to love swimming until I turned 13 & then i literally didn't ever go again without a swimming shirt on lmao I should've realised",
+  "url": "https://x.com/Asbestosdealer1/status/2089369646998970724"
+}

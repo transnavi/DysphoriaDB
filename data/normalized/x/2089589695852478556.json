@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "Psychopathos",
+    "handle": "Psychopathos_",
+    "nativeId": "1406122274906800128",
+    "url": "https://x.com/Psychopathos_"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "85eb1f9ab4b315d9b699b2a60f961d2f981c8de91f3eb45c57d0919e319c0365",
+  "engagement": {
+    "likes": 3,
+    "replies": 0,
+    "reposts": 0,
+    "views": 30
+  },
+  "id": "src:x:2089589695852478556",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089589695852478556",
+  "platform": "x",
+  "publishedAt": "2026-08-18T05:46:20+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "quotes"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "i became really particular about covering my chest around 13. also always went out wearing hoodies or jackets around 15 till now (though tropical heat made this difficult)",
+  "url": "https://x.com/Psychopathos_/status/2089589695852478556"
+}

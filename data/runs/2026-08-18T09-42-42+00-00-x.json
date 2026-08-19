@@ -1,0 +1,19 @@
+{
+  "capturedCount": 2,
+  "capturedSourceIds": [
+    "src:x:2089362325619007865",
+    "src:x:2089617233387663403"
+  ],
+  "collector": "fxtwitter",
+  "collectorVersion": "0.1.0",
+  "completedAt": "2026-08-18T09:42:43+00:00",
+  "failures": [],
+  "id": "run:x:2026-08-18T09:42:42+00:00:1ec49e8e",
+  "schemaVersion": "0.1.0",
+  "seeds": [
+    "https://x.com/mkpoli/status/2089617233387663403",
+    "https://x.com/polen_ball/status/2089362325619007865"
+  ],
+  "startedAt": "2026-08-18T09:42:42+00:00",
+  "status": "success"
+}

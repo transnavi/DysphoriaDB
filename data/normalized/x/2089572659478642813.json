@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "ArmchairAbi ⚧️⚢🔻",
+    "handle": "ArmchairAbi",
+    "nativeId": "1902865349059497984",
+    "url": "https://x.com/ArmchairAbi"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "f374235a53d8a99044cbad530b2d2abe9978bfe804550b7356cb024d0ffb19ab",
+  "engagement": {
+    "likes": 3,
+    "replies": 2,
+    "reposts": 0,
+    "views": 49
+  },
+  "id": "src:x:2089572659478642813",
+  "language": "es",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089572659478642813",
+  "platform": "x",
+  "publishedAt": "2026-08-18T04:38:39+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "quotes"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "Desde que tengo memoria me molesta bañarme sin polera",
+  "url": "https://x.com/ArmchairAbi/status/2089572659478642813"
+}

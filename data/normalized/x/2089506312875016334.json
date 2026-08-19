@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "Saltine (again) of #okaytwt",
+    "handle": "salted_bus_alt",
+    "nativeId": "1194842120776900608",
+    "url": "https://x.com/salted_bus_alt"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "73496dd6dba990acdffb9269bd01d23948f14d11107c58670e7508d9ea0a215d",
+  "engagement": {
+    "likes": 1,
+    "replies": 1,
+    "reposts": 0,
+    "views": 27
+  },
+  "id": "src:x:2089506312875016334",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089506312875016334",
+  "platform": "x",
+  "publishedAt": "2026-08-18T00:15:00+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "quotes"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "I never even connected that they might be related, I might be stupid (probably because it extends to my arms and thighs so I thought I just didn't like being exposed, I hate summer)",
+  "url": "https://x.com/salted_bus_alt/status/2089506312875016334"
+}

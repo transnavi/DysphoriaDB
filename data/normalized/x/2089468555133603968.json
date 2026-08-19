@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "Cassie 🔞",
+    "handle": "NoidedNomad",
+    "nativeId": "2039635461119823872",
+    "url": "https://x.com/NoidedNomad"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "4f4067c540439215e8f9b870627f420a84e56f5197716176651915b1a534c36e",
+  "engagement": {
+    "likes": 7,
+    "replies": 0,
+    "reposts": 0,
+    "views": 107
+  },
+  "id": "src:x:2089468555133603968",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089468555133603968",
+  "platform": "x",
+  "publishedAt": "2026-08-17T21:44:58+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "quotes"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "I always worse a tshirt",
+  "url": "https://x.com/NoidedNomad/status/2089468555133603968"
+}

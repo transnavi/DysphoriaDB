@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "Purgatory's Equal",
+    "handle": "LLxLosers",
+    "nativeId": "1186790048928325632",
+    "url": "https://x.com/LLxLosers"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "b99fb3d953b641ab8a9fe9aba3f2aa09447d77c121474a20131c06819a9e10af",
+  "engagement": {
+    "likes": 1,
+    "replies": 0,
+    "reposts": 0,
+    "views": 16
+  },
+  "id": "src:x:2089552897860120995",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089552897860120995",
+  "platform": "x",
+  "publishedAt": "2026-08-18T03:20:07+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "quotes"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "Yeah ngl I still struggle with it now to the point that I'm just willing to accept id rather be covered up all the time regardless of the weather. I love long sleeves and pants",
+  "url": "https://x.com/LLxLosers/status/2089552897860120995"
+}

@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "🦊🔞 𝕰𝖑𝖊𝖆𝖓𝖔𝖗 𝕯𝖊𝖑𝖆𝖎𝖗𝖊 🤍💙💛",
+    "handle": "EleanorDrapeaux",
+    "nativeId": "712239885311197184",
+    "url": "https://x.com/EleanorDrapeaux"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "9b55ab8eab10a6df61942deceffdd7afab739819cac2c6d04dee2f8af2ad322b",
+  "engagement": {
+    "likes": 0,
+    "replies": 1,
+    "reposts": 0,
+    "views": 76
+  },
+  "id": "src:x:2089475711476081124",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089475711476081124",
+  "platform": "x",
+  "publishedAt": "2026-08-17T22:13:24+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "quotes"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "Am I the ONLY person that didn't ever feel this",
+  "url": "https://x.com/EleanorDrapeaux/status/2089475711476081124"
+}

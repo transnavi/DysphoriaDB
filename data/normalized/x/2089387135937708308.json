@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "sol",
+    "handle": "duccline_",
+    "nativeId": "1340753540676014083",
+    "url": "https://x.com/duccline_"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "f58bd4470052b9fd229b969ddd0cabdf905ac9a6ac4196f8010178b4fc76880f",
+  "engagement": {
+    "likes": 4,
+    "replies": 0,
+    "reposts": 0,
+    "views": 183
+  },
+  "id": "src:x:2089387135937708308",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089387135937708308",
+  "platform": "x",
+  "publishedAt": "2026-08-17T16:21:26+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@polen_ball ABSOLUTELY I FUCKING HATED THAT SHIT",
+  "url": "https://x.com/duccline_/status/2089387135937708308"
+}

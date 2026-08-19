@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "Aster",
+    "handle": "Aster_ie",
+    "nativeId": "1421862942266429440",
+    "url": "https://x.com/Aster_ie"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "0d08f2f1eb33fefecc7ee20ab852fc7c691b787ce59b2bda63a2623888edd303",
+  "engagement": {
+    "likes": 4,
+    "replies": 0,
+    "reposts": 0,
+    "views": 170
+  },
+  "id": "src:x:2089373912089924040",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089373912089924040",
+  "platform": "x",
+  "publishedAt": "2026-08-17T15:28:53+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@polen_ball i was always just self conscious of my body i think, i still don’t like having my tummy out. wasn’t about my (lack of) boobs tho",
+  "url": "https://x.com/Aster_ie/status/2089373912089924040"
+}

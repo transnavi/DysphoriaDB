@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "lannabel",
+    "handle": "lannabaei",
+    "nativeId": "2018723904135598081",
+    "url": "https://x.com/lannabaei"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "0c7ff014467afdb031f8f50729119c242419a26ca20859bf6c1ac16de162529f",
+  "engagement": {
+    "likes": 9,
+    "replies": 0,
+    "reposts": 0,
+    "views": 631
+  },
+  "id": "src:x:2089376174552088686",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089376174552088686",
+  "platform": "x",
+  "publishedAt": "2026-08-17T15:37:53+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@polen_ball yeah I hated short sleeves, I hated shorts, I hated being topless, the idea of going to pools a beaches, hated jeans or any other leg wear of comparable tightness, hated tops with graphics or any form of lettering (didn't want people to have a reason to perceive me) and many more",
+  "url": "https://x.com/lannabaei/status/2089376174552088686"
+}

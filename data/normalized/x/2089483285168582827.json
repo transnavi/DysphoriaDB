@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "DigitalMess 🏳️‍⚧️🆓️🍉 (CriticalRole Era)",
+    "handle": "d1g1talmess",
+    "nativeId": "1019043989113188353",
+    "url": "https://x.com/d1g1talmess"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "c61d5eb00bf2242e21d0cb0acf72cba73bc99c6fb86507dba6fdd7009a1eb26b",
+  "engagement": {
+    "likes": 0,
+    "replies": 0,
+    "reposts": 0,
+    "views": 40
+  },
+  "id": "src:x:2089483285168582827",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089483285168582827",
+  "platform": "x",
+  "publishedAt": "2026-08-17T22:43:30+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "quotes"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "I struggle with going to bed without a top on, like I feel incredibly exposed if I don't at least have a blanket or something covering my chest",
+  "url": "https://x.com/d1g1talmess/status/2089483285168582827"
+}

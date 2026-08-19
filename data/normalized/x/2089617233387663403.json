@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "♪ まくぽり ☆彡",
+    "handle": "mkpoli",
+    "nativeId": "1439962362",
+    "url": "https://x.com/mkpoli"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "cc6c6166796c36db12d2dabe211b7f4efc5502b9c73af366fdaf300713720b15",
+  "engagement": {
+    "likes": 1,
+    "replies": 0,
+    "reposts": 0,
+    "views": 110
+  },
+  "id": "src:x:2089617233387663403",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089617233387663403",
+  "platform": "x",
+  "publishedAt": "2026-08-18T07:35:46+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "quotes"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "I want to make a database/checklist for those commonly and frequently rediscovered possibly Dysphoria-induced symptoms/phenoemenon/realizations\n\nSo it could be a basis for research/screening/early-discovery etc.",
+  "url": "https://x.com/mkpoli/status/2089617233387663403"
+}

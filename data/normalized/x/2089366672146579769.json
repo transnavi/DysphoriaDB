@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "Doctor Sex",
+    "handle": "DOCTOR_SEX6996",
+    "nativeId": "1525882118441684995",
+    "url": "https://x.com/DOCTOR_SEX6996"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "27b9146a32ef96c1afac36e670a6bbe5c36574edc46b35de09620b6125b1f50b",
+  "engagement": {
+    "likes": 95,
+    "replies": 1,
+    "reposts": 1,
+    "views": 848
+  },
+  "id": "src:x:2089366672146579769",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089366672146579769",
+  "platform": "x",
+  "publishedAt": "2026-08-17T15:00:07+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089365732358549618",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@polen_ball up to the readers interpretation",
+  "url": "https://x.com/DOCTOR_SEX6996/status/2089366672146579769"
+}

@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "Queso ＞_＜☭🏳️‍⚧️🏴‍☠️🐔🦕",
+    "handle": "QVXSX_64",
+    "nativeId": "1671182427216117764",
+    "url": "https://x.com/QVXSX_64"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "d2ec50bed67ec10718cca80368f329bdd08b281a572528f05712fc7976d443ae",
+  "engagement": {
+    "likes": 3,
+    "replies": 1,
+    "reposts": 0,
+    "views": 104
+  },
+  "id": "src:x:2089426278805901810",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089426278805901810",
+  "platform": "x",
+  "publishedAt": "2026-08-17T18:56:59+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@polen_ball yeah matter of fact still do, i'm always covered from the upper body",
+  "url": "https://x.com/QVXSX_64/status/2089426278805901810"
+}

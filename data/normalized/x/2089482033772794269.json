@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "dyluna. 🌙⚧️",
+    "handle": "dylunaverse",
+    "nativeId": "1333578553292689411",
+    "url": "https://x.com/dylunaverse"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "b24f0f5390c0f0190d19e1092601c660e6a36466b5ea8f22d6c2779c28c96f71",
+  "engagement": {
+    "likes": 0,
+    "replies": 0,
+    "reposts": 0,
+    "views": 75
+  },
+  "id": "src:x:2089482033772794269",
+  "language": "pt",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089482033772794269",
+  "platform": "x",
+  "publishedAt": "2026-08-17T22:38:32+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "quotes"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "euuuuu mas acho que foi porque eu sempre fui gordinha aí eu ficava com vergonha de mostrar meu corpo meus peitos e tal",
+  "url": "https://x.com/dylunaverse/status/2089482033772794269"
+}

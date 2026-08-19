@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "polen",
+    "handle": "polen_ball",
+    "nativeId": "1325353249008877569",
+    "url": "https://x.com/polen_ball"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "0e7e299666422808579f0f1972ecfa5c33269274403f7400e977767a0952e106",
+  "engagement": {
+    "likes": 33,
+    "replies": 0,
+    "reposts": 0,
+    "views": 4784
+  },
+  "id": "src:x:2089364396955033682",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089364396955033682",
+  "platform": "x",
+  "publishedAt": "2026-08-17T14:51:05+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089363859207237759",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@PiralisArt Me too. It's not that I don't still feel some level of discomfort, but I guess I've gotten used to it more or less.",
+  "url": "https://x.com/polen_ball/status/2089364396955033682"
+}

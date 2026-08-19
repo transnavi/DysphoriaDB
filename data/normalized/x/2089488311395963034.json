@@ -1,0 +1,41 @@
+{
+  "author": {
+    "displayName": "Qwarzu🏳️‍⚧️👽",
+    "handle": "Qwarz_Atarz",
+    "nativeId": "1929015109579345920",
+    "url": "https://x.com/Qwarz_Atarz"
+  },
+  "collection": {
+    "collector": "fxtwitter",
+    "collectorVersion": "0.2.0",
+    "runId": "run:x-discussion:2089362325619007865:2026-08-18T12:26:51+00:00",
+    "seedPostId": "2089362325619007865"
+  },
+  "contentHash": "cbd7ee11f263f1fc0c05ffaf29dd8b00019b365e2acf7732093c41af8a5a37d7",
+  "engagement": {
+    "likes": 136,
+    "replies": 2,
+    "reposts": 9,
+    "views": 2010
+  },
+  "id": "src:x:2089488311395963034",
+  "language": "en",
+  "metadata": {
+    "mediaCount": 0,
+    "possiblySensitive": null
+  },
+  "nativeId": "2089488311395963034",
+  "platform": "x",
+  "publishedAt": "2026-08-17T23:03:28+00:00",
+  "relations": [
+    {
+      "targetSourceId": "src:x:2089362325619007865",
+      "type": "replies_to"
+    }
+  ],
+  "retrievedAt": "2026-08-18T12:26:51+00:00",
+  "schemaVersion": "0.1.0",
+  "sourceType": "social_post",
+  "text": "@polen_ball In a fair and just society this would trigger a screening for dysphoria, yet in current cissiety nobody gaf and we have to retroactively discover dysphoria symptoms on our own",
+  "url": "https://x.com/Qwarz_Atarz/status/2089488311395963034"
+}

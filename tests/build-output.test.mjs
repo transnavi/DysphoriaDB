@@ -17,6 +17,7 @@ test("localized root pages include canonical metadata and visible actions", asyn
   assert.doesNotMatch(ja, /出典とともに探す|体験を探せる資料/);
   assert.match(ja, />体験を投稿する ↗<\/a>/);
   assert.match(ja, /id="search-button" type="submit">検索<\/button>/);
+  assert.match(ja, /id="skip-link"[^>]*>体験一覧へ移動<\/a>/);
   assert.match(ja, /data-prerendered-locale="ja"/);
   assert.match(ja, /id="load-more-button"[^>]*>さらに表示<\/button>/);
   assert.equal((ja.match(/class="card /g) ?? []).length, 16);
@@ -24,6 +25,10 @@ test("localized root pages include canonical metadata and visible actions", asyn
   assert.match(ja, /og-image-ja\.png\?v=20260819/);
   assert.match(ja, /property="og:image:alt" content="ジェンダー体験事典。ジェンダー体験を分類・整理し/);
   assert.match(ja, /class="trans-pride-mark"/);
+  assert.match(ja, /<summary class="domain-summary"><h2 class="domain-title">身体<\/h2><\/summary>/);
+  assert.match(ja, /<summary><h3>/);
+  assert.match(ja, /<h4 class="card-title">/);
+  assert.match(ja, /class="categories" role="group" aria-label="タグ"/);
   assert.match(ja, /id="footer-reference-title">資料<\/p>/);
   assert.match(ja, /id="footer-data-title">オープンデータ<\/p>/);
   assert.match(ja, /id="footer-submit">体験を投稿する<\/span>/);
@@ -38,6 +43,9 @@ test("localized detail pages point to their language equivalents", async () => {
   assert.match(html, /<link rel="canonical" href="https:\/\/db\.transnavi\.jp\/ja\/experience\/unfamiliar-reflection\/"/);
   assert.match(html, /hreflang="zh-Hans" href="https:\/\/db\.transnavi\.jp\/zh-cn\/experience\/unfamiliar-reflection\/"/);
   assert.match(html, /"@type":"DefinedTerm"/);
+  assert.match(html, /class="detail-section" id="sources"/);
+  assert.match(html, /class="reaction-button"/);
+  assert.match(html, /<h2>/);
 });
 
 test("JSON and CSV exports contain every experience in every locale", async () => {
@@ -57,11 +65,16 @@ test("the sitemap lists localized alternates", async () => {
 });
 
 test("missing asset paths return the static 404 page", async () => {
-  const [notFound, workerConfig] = await Promise.all([
+  const [notFound, workerConfig, headers] = await Promise.all([
     readFile(output("404.html"), "utf8"),
     readFile(new URL("../dist/transnavi_db_site/wrangler.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(output("_headers"), "utf8"),
   ]);
   assert.match(notFound, /<meta name="robots" content="noindex"/);
   assert.equal(workerConfig.assets.not_found_handling, "404-page");
   assert.equal(workerConfig.assets.html_handling, "auto-trailing-slash");
+  assert.equal(workerConfig.ratelimits[0].name, "REACTION_RATE_LIMITER");
+  assert.equal(workerConfig.observability.logs.enabled, true);
+  assert.match(headers, /Content-Security-Policy:/);
+  assert.match(headers, /X-Content-Type-Options: nosniff/);
 });

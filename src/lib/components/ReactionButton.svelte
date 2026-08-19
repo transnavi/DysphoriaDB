@@ -1,7 +1,13 @@
 <script lang="ts">
-  import { untrack } from "svelte";
+  import { onMount, untrack } from "svelte";
   import { formatMessage } from "$lib/catalog";
   import type { CatalogItem } from "$lib/types";
+  import {
+    reactionIsSelected,
+    reactionStorageKey,
+    toggledReactionState,
+    updatedReactionStorageValue,
+  } from "$site/reaction-state.js";
 
   let { item, locale, messages, initiallySelected = false, onstatus = () => {} } = $props<{
     item: CatalogItem;
@@ -27,22 +33,43 @@
     }
   }
 
-  function selectedCookie(nextSelected: boolean) {
+  function saveSelection(nextSelected: boolean) {
     const match = document.cookie.match(/(?:^|; )gex_selected_v1=([^;]*)/);
     const values = new Set(decodeURIComponent(match?.[1] ?? "").split(",").filter(Boolean));
     if (nextSelected) values.add(item.slug);
     else values.delete(item.slug);
     document.cookie = `gex_selected_v1=${encodeURIComponent([...values].join(","))}; Path=/; Max-Age=31536000; SameSite=Lax${location.protocol === "https:" ? "; Secure" : ""}`;
+    try {
+      localStorage.setItem(
+        reactionStorageKey,
+        updatedReactionStorageValue(localStorage.getItem(reactionStorageKey), item.slug, nextSelected),
+      );
+    } catch {
+      // The cookie preserves the selection when local storage is unavailable.
+    }
   }
+
+  onMount(() => {
+    let storedValue = null;
+    try {
+      storedValue = localStorage.getItem(reactionStorageKey);
+    } catch {
+      return;
+    }
+    if (!reactionIsSelected(selected, item.slug, storedValue)) return;
+    selected = true;
+    saveSelection(true);
+  });
 
   async function toggleReaction() {
     if (pending) return;
     const previousSelected = selected;
     const previousCount = count;
-    selected = !selected;
-    count = Math.max(0, count + (selected ? 1 : -1));
+    const next = toggledReactionState(count, selected);
+    selected = next.selected;
+    count = next.count;
     pending = true;
-    selectedCookie(selected);
+    saveSelection(selected);
 
     try {
       const response = await fetch(`/api/reactions/${encodeURIComponent(item.slug)}`, {
@@ -61,7 +88,7 @@
     } catch (error) {
       selected = previousSelected;
       count = previousCount;
-      selectedCookie(selected);
+      saveSelection(selected);
       if ((error as Error).message !== "rate_limited") onstatus(messages.reactionError);
     } finally {
       pending = false;

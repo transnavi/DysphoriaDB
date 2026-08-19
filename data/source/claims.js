@@ -429,6 +429,7 @@ export const claims = [
     variations: [
       { direction: "Transfeminine-associated", text: "Plush toys, dolls such as Barbie, pink or cute items, accessories, and girls’ or children’s fashion may become especially appealing." },
       { direction: "Transmasculine-associated", text: "Items marketed to boys, action toys, vehicles, sports or adventure themes, and boys’ clothing may become especially appealing." },
+      { direction: "Nonbinary-associated", text: "Items from more than one gendered category, or items without a clear gender category, may become especially appealing." },
     ],
     sources: [
       ["Gender Dysphoria Bible: Existential Dysphoria", `${GDB}/existential-dysphoria`],

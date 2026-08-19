@@ -492,7 +492,8 @@ const experiences = {
     ],
     "variations": [
       "Plush toys, dolls such as Barbie, pink or cute items, accessories, and girls’ or children’s fashion may become especially appealing.",
-      "Items marketed to boys, action toys, vehicles, sports or adventure themes, and boys’ clothing may become especially appealing."
+      "Items marketed to boys, action toys, vehicles, sports or adventure themes, and boys’ clothing may become especially appealing.",
+      "Items from more than one gendered category, or items without a clear gender category, may become especially appealing."
     ]
   },
   "fear-of-aging-in-the-assigned-gender": {

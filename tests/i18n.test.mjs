@@ -23,6 +23,10 @@ test("every locale supplies peer content for every experience", () => {
       assert.ok(localized.summary.trim(), `${locale}:${experience.slug}:summary`);
       assert.equal(localized.patterns.length, en.experiences[experience.slug].patterns.length, `${locale}:${experience.slug}:patterns`);
       assert.equal(localized.variations.length, en.experiences[experience.slug].variations.length, `${locale}:${experience.slug}:variations`);
+      assert.equal(localized.variations.length, experience.variations?.length ?? 0, `${locale}:${experience.slug}:variation-directions`);
+      for (const [index, variation] of localized.variations.entries()) {
+        assert.ok(variation.trim(), `${locale}:${experience.slug}:variation:${index}`);
+      }
     }
   }
 });
@@ -66,6 +70,10 @@ test("language-specific expressions remain in their localized content", () => {
   assert.equal(english.includes("娘娘腔"), false);
   assert.match(JSON.stringify(ja), /女々しい/);
   assert.match(JSON.stringify(zhCN), /娘娘腔/);
+  assert.match(ja.experiences["gender-policing-insults-feel-affirming"].summary, /女々しい/);
+  assert.match(zhCN.experiences["gender-policing-insults-feel-affirming"].summary, /娘娘腔/);
+  assert.match(ja.experiences["belonging-among-peers-of-another-gender"].summary, /女性同士の友人グループ/);
+  assert.match(ja.experiences["overperforming-the-assigned-gender"].summary, /ひげ/);
 });
 
 test("locale routes preserve equivalent experience paths", () => {

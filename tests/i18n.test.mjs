@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+import { referenceSources } from "../data/source/reference-sources.js";
 import { domains, experienceFamilies, experiences, journeyStages } from "../site/data/experiences.js";
 import { content as en } from "../site/i18n/content/en.js";
 import { content as ja } from "../site/i18n/content/ja.js";
@@ -13,19 +14,33 @@ import { experiencePath, localeFromPath, pathForLocale } from "../site/i18n/inde
 const contentByLocale = { en, ja, "zh-CN": zhCN };
 const uiByLocale = { en: enUi, ja: jaUi, "zh-CN": zhCNUi };
 
+test("experience IDs are stable data keys", () => {
+  const ids = experiences.map(({ id }) => id);
+  const validIds = new Set(ids);
+  assert.equal(validIds.size, ids.length);
+  for (const experience of experiences) {
+    assert.match(experience.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    assert.equal("title" in experience, false, experience.id);
+    assert.equal("summary" in experience, false, experience.id);
+  }
+  for (const id of Object.keys(referenceSources)) {
+    assert.ok(validIds.has(id), `reference:${id}`);
+  }
+});
+
 test("every locale supplies peer content for every experience", () => {
-  const slugs = experiences.map(({ slug }) => slug).sort();
+  const ids = experiences.map(({ id }) => id).sort();
   for (const [locale, content] of Object.entries(contentByLocale)) {
-    assert.deepEqual(Object.keys(content.experiences).sort(), slugs, locale);
+    assert.deepEqual(Object.keys(content.experiences).sort(), ids, locale);
     for (const experience of experiences) {
-      const localized = content.experiences[experience.slug];
-      assert.ok(localized.title.trim(), `${locale}:${experience.slug}:title`);
-      assert.ok(localized.summary.trim(), `${locale}:${experience.slug}:summary`);
-      assert.equal(localized.patterns.length, en.experiences[experience.slug].patterns.length, `${locale}:${experience.slug}:patterns`);
-      assert.equal(localized.variations.length, en.experiences[experience.slug].variations.length, `${locale}:${experience.slug}:variations`);
-      assert.equal(localized.variations.length, experience.variations?.length ?? 0, `${locale}:${experience.slug}:variation-directions`);
+      const localized = content.experiences[experience.id];
+      assert.ok(localized.title.trim(), `${locale}:${experience.id}:title`);
+      assert.ok(localized.summary.trim(), `${locale}:${experience.id}:summary`);
+      assert.equal(localized.patterns.length, en.experiences[experience.id].patterns.length, `${locale}:${experience.id}:patterns`);
+      assert.equal(localized.variations.length, en.experiences[experience.id].variations.length, `${locale}:${experience.id}:variations`);
+      assert.equal(localized.variations.length, experience.variations?.length ?? 0, `${locale}:${experience.id}:variation-directions`);
       for (const [index, variation] of localized.variations.entries()) {
-        assert.ok(variation.trim(), `${locale}:${experience.slug}:variation:${index}`);
+        assert.ok(variation.trim(), `${locale}:${experience.id}:variation:${index}`);
       }
     }
   }
@@ -51,9 +66,9 @@ test("all visible tags and taxonomy IDs are localized", () => {
 test("journey stages classify every experience", () => {
   const stageIds = new Set(journeyStages.map(({ id }) => id));
   for (const experience of experiences) {
-    assert.ok(experience.stages.length > 0, experience.slug);
+    assert.ok(experience.stages.length > 0, experience.id);
     for (const stage of experience.stages) {
-      assert.ok(stageIds.has(stage), `${experience.slug}:${stage}`);
+      assert.ok(stageIds.has(stage), `${experience.id}:${stage}`);
     }
   }
 });
@@ -92,10 +107,10 @@ test("language-specific expressions remain in their localized content", () => {
 });
 
 test("locale routes preserve equivalent experience paths", () => {
-  const slug = experiences[0].slug;
-  assert.equal(experiencePath("en", slug), `/experience/${slug}/`);
-  assert.equal(experiencePath("ja", slug), `/ja/experience/${slug}/`);
-  assert.equal(experiencePath("zh-CN", slug), `/zh-cn/experience/${slug}/`);
-  assert.equal(pathForLocale(`/ja/experience/${slug}/`, "zh-CN"), `/zh-cn/experience/${slug}/`);
+  const id = experiences[0].id;
+  assert.equal(experiencePath("en", id), `/experience/${id}/`);
+  assert.equal(experiencePath("ja", id), `/ja/experience/${id}/`);
+  assert.equal(experiencePath("zh-CN", id), `/zh-cn/experience/${id}/`);
+  assert.equal(pathForLocale(`/ja/experience/${id}/`, "zh-CN"), `/zh-cn/experience/${id}/`);
   assert.equal(localeFromPath("/zh-cn/"), "zh-CN");
 });

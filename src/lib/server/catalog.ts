@@ -9,13 +9,13 @@ import {
 
 type TranslationMap = Record<string, string>;
 type TaxonomyMap = Record<string, TranslationMap>;
-type LocalizedClaimText = {
+type LocalizedExperienceText = {
   title?: string;
   summary?: string;
   patterns?: string[][];
   variations?: string[];
 };
-type ClaimVariation = Record<string, unknown> & { direction: string };
+type ExperienceVariation = Record<string, unknown> & { direction: string };
 
 function safeExternalUrl(value: string) {
   try {
@@ -51,20 +51,20 @@ export async function localizedSite(
   const terms = i18n.t("terms", { returnObjects: true }) as TranslationMap;
   const sourceKinds = i18n.t("sourceKinds", { returnObjects: true }) as TranslationMap;
   const sourceNotes = i18n.t("sourceNotes", { returnObjects: true }) as TranslationMap;
-  const claimTexts = i18n.t("experiences", { returnObjects: true }) as Record<string, LocalizedClaimText>;
+  const experienceTexts = i18n.t("experiences", { returnObjects: true }) as Record<string, LocalizedExperienceText>;
   const taxonomyLabel = (group: string, value: string) => taxonomy[group]?.[value] ?? value;
   const termLabel = (value: string) => terms[value] ?? value;
-  const localizedExperiences: CatalogItem[] = experiences.map((claim): CatalogItem => {
-    const localized = claimTexts[claim.slug] ?? {};
-    const variations = (claim.variations ?? []) as ClaimVariation[];
-    const types: CatalogTag[] = claim.types.map((value) => ({
+  const localizedExperiences: CatalogItem[] = experiences.map((experience): CatalogItem => {
+    const localized = experienceTexts[experience.id] ?? {};
+    const variations = (experience.variations ?? []) as ExperienceVariation[];
+    const types: CatalogTag[] = experience.types.map((value) => ({
       group: "type",
       value,
       label: taxonomyLabel("types", value),
       className: `type-${value.toLowerCase().replaceAll(" ", "-")}`,
       categoryLabel: messages.experienceType,
     }));
-    const populations: CatalogTag[] = claim.directions
+    const populations: CatalogTag[] = experience.directions
       .filter((value) => value !== "cross-directional")
       .map((value) => ({
         group: "population",
@@ -73,14 +73,14 @@ export async function localizedSite(
         className: "population-tag",
         categoryLabel: messages.population,
       }));
-    const stages: CatalogTag[] = claim.stages.map((value) => ({
+    const stages: CatalogTag[] = experience.stages.map((value) => ({
       group: "stage",
       value,
       label: taxonomyLabel("stages", value),
       className: "stage-tag",
       categoryLabel: messages.stage,
     }));
-    const topics: CatalogTag[] = claim.tags.map((value) => ({
+    const topics: CatalogTag[] = experience.tags.map((value) => ({
       group: "topic",
       value,
       label: termLabel(value),
@@ -88,23 +88,23 @@ export async function localizedSite(
       categoryLabel: messages.topic,
     }));
     const searchText = [
-      localized.title ?? claim.slug,
+      localized.title ?? experience.id,
       localized.summary ?? "",
-      taxonomyLabel("families", claim.family),
-      taxonomyLabel("domains", claim.domain),
+      taxonomyLabel("families", experience.family),
+      taxonomyLabel("domains", experience.domain),
       ...types.map(({ label }) => label),
-      ...claim.directions.map((value) => taxonomyLabel("directions", value)),
+      ...experience.directions.map((value) => taxonomyLabel("directions", value)),
       ...stages.map(({ label }) => label),
-      ...claim.responses.map(termLabel),
+      ...experience.responses.map(termLabel),
       ...topics.map(({ label }) => label),
       ...(localized.patterns ?? []).flat(),
       ...(localized.variations ?? []),
     ].join(" ").toLocaleLowerCase(locale);
 
     return {
-      ...claim,
-      reactionCount: Number(counts[claim.slug] ?? 0),
-      title: localized.title ?? claim.slug,
+      ...experience,
+      reactionCount: Number(counts[experience.id] ?? 0),
+      title: localized.title ?? experience.id,
       summary: localized.summary ?? "",
       patterns: localized.patterns ?? [],
       variations: variations.map((variation, index) => ({
@@ -117,7 +117,7 @@ export async function localizedSite(
       stageTags: stages,
       topicTags: topics,
       searchText,
-      sources: claim.sources.map((source) => ({
+      sources: experience.sources.map((source) => ({
         title: source[0],
         url: safeExternalUrl(source[1]),
         kind: sourceKind(source, messages, sourceKinds),
@@ -137,7 +137,7 @@ export async function localizedSite(
       families: (organized.rankedFamilies.get(domain.id) ?? []).map((family) => ({
         id: family!.id,
         label: taxonomyLabel("families", family!.id),
-        items: organized.familyClaims.get(family!.id) ?? [],
+        items: organized.familyExperiences.get(family!.id) ?? [],
       })),
     })),
     domainTabs: [

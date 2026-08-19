@@ -28,7 +28,7 @@ export type CatalogVariation = Record<string, unknown> & {
 };
 
 export type CatalogItem = {
-  slug: string;
+  id: string;
   family: string;
   domain: string;
   types: string[];
@@ -78,7 +78,7 @@ export type BrowseState = {
   closedDomains: string[];
   closedFamilies: string[];
   selectedReactions: string[];
-  newSlugs: string[];
+  newExperienceIds: string[];
 };
 
 export type CatalogPageData = {
@@ -90,6 +90,6 @@ export type DetailPageData = {
   site: Pick<LocalizedSite, "locale" | "localeDefinition" | "messages">;
   experience: CatalogItem;
   context: { domain: string; family: string };
-  related: Array<{ slug: string; title: string }>;
+  related: Array<{ id: string; title: string }>;
   selectedReactions: string[];
 };

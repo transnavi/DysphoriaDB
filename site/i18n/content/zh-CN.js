@@ -1,11 +1,11 @@
-const claim = (title, summary, patterns = [], variations = []) => ({ title, summary, patterns, variations });
+const localizedExperience = (title, summary, patterns = [], variations = []) => ({ title, summary, patterns, variations });
 
 const experiences = {
-  "mirrors-and-photographs-feel-unflattering": claim(
+  "mirrors-and-photographs-feel-unflattering": localizedExperience(
     "觉得镜子或照片里的自己难看、不上镜",
     "无论别人怎样评价自己的外貌，一个人都可能长期不喜欢自己的样子、躲避拍照，并觉得自己缺乏吸引力或自信。",
   ),
-  "feeling-out-of-place-in-gendered-restrooms": claim(
+  "feeling-out-of-place-in-gendered-restrooms": localizedExperience(
     "在按性别划分的卫生间里感到无所适从",
     "与出生指派性别对应的卫生间可能让人觉得不适合自己，自我认同性别对应的卫生间又可能难以进入或存在风险。人们可能会寻找性别中立设施、使用独立隔间、遮挡身体，并尽量减少与他人接触。",
     [
@@ -17,7 +17,7 @@ const experiences = {
       ["回避使用卫生间", "人们可能憋尿、少吃少喝、围绕已知设施安排出行，或一直等到回家。"],
     ],
   ),
-  "belonging-among-transgender-and-lgbtq-people": claim(
+  "belonging-among-transgender-and-lgbtq-people": localizedExperience(
     "在跨性别者和其他 LGBTQ+ 人群中感到归属",
     "与跨性别者或其他性与性别少数群体相处时，可能会感到放松、熟悉，并产生共享身份的感觉。即使尚未公开自己的性别，这种感受也可能出现，彼此的性格和兴趣也无须高度相似。",
     [
@@ -28,7 +28,7 @@ const experiences = {
       ["人与人之间的关系各不相同", "对社群的亲近感可以与个别关系中的尴尬、分歧或不想进一步深交同时存在。"],
     ],
   ),
-  "attuned-to-gender-variance-in-other-people": claim(
+  "attuned-to-gender-variance-in-other-people": localizedExperience(
     "对他人的性别多样性格外敏锐",
     "人们可能觉得自己很快就会注意到他人身上的性别多样性线索。认识自己的性别之后，过去感到的熟悉、羡慕或吸引有时也会变得容易理解。",
     [
@@ -39,11 +39,11 @@ const experiences = {
       ["印象可能出错", "从外表和声音得出的判断可能有误，也无法确定他人的性别。尊重隐私意味着让每个人自行决定何时公开自己的身份。"],
     ],
   ),
-  "unfamiliar-reflection": claim(
+  "unfamiliar-reflection": localizedExperience(
     "觉得镜子里的人很陌生",
     "镜子、照片或录像中的形象可能像另一个人，也可能无法带来平常那种“这就是我”的自我识别感。",
   ),
-  "difficulty-picturing-your-current-body-shape": claim(
+  "difficulty-picturing-your-current-body-shape": localizedExperience(
     "难以想象或记住自己现在的体形",
     "脑海中的身体形象可能模糊、缺失、停留在过去，或与镜子和照片中的身体形状不同，使人难以回想或想象自己现在的身体比例。",
     [
@@ -53,11 +53,11 @@ const experiences = {
       ["想象中的形状不同", "想象中的身体可能拥有与现实不同的曲线、比例或性征。"],
     ],
   ),
-  "avoiding-your-own-unclothed-body": claim(
+  "avoiding-your-own-unclothed-body": localizedExperience(
     "回避看到自己裸露的身体",
     "洗澡、换衣或照镜子时看到自己的身体，可能会让人移开视线、遮住某些部位，或匆忙结束。",
   ),
-  "discomfort-with-your-body-being-seen": claim(
+  "discomfort-with-your-body-being-seen": localizedExperience(
     "不愿让别人看到自己的身体",
     "裸体或穿着暴露时被人看见，可能让人感到强烈的不安与暴露感，从而遮住身体、回避必须露出身体的场所，或隐藏某些部位。",
     [
@@ -67,7 +67,7 @@ const experiences = {
       ["按出生指派性别分组", "按出生指派性别被安排使用某项设施时，身边的人可能是本人所体验的另一性别。让这些人看到自己的身体可能尤其令人痛苦。"],
     ],
   ),
-  "body-looks-like-the-wrong-gender": claim(
+  "body-looks-like-the-wrong-gender": localizedExperience(
     "看到自己的身体显得男性化或女性化时感到痛苦",
     "当身体形状或性征使自己呈现出不符合内在感受的男性或女性特征时，直视自己的身体可能带来痛苦。",
     [],
@@ -77,7 +77,7 @@ const experiences = {
       "身体显得强烈男性化或女性化，或缺少本人期待的中性、混合特征时，可能会感到痛苦或陌生。",
     ],
   ),
-  "covering-the-bare-upper-torso": claim(
+  "covering-the-bare-upper-torso": localizedExperience(
     "即使被当作男性，也想遮住裸露的上半身",
     "即使周围的人允许或期待自己赤裸上身，这样做仍可能令人觉得暴露或不合适，乳头、胸部以及被人看见尤其容易引起不适。",
     [
@@ -89,15 +89,15 @@ const experiences = {
       ["多种可能影响", "体重、身体意象、嘲笑、男性乳房发育、感官不适和羞怯，都可能与性别相关的不适交织。"],
     ],
   ),
-  "concealing-chest-development-while-boymoding": claim(
+  "concealing-chest-development-while-boymoding": localizedExperience(
     "在男装模式下隐藏发育中的胸部",
     "胸部发育在独处时可能令人欣喜；面对期待男性身体的人时，衬衫下的轮廓、换衣、游泳或被人看见也可能引起焦虑。",
   ),
-  "minimizing-or-binding-an-unwanted-chest": claim(
+  "minimizing-or-binding-an-unwanted-chest": localizedExperience(
     "压低或束缚不想要的胸部",
     "人们可能通过加压、叠穿、调整姿势或选择衣物，减弱乳房或胸部组织的轮廓与身体感。",
   ),
-  "discomfort-with-sex-characteristics": claim(
+  "discomfort-with-sex-characteristics": localizedExperience(
     "对性征感到不适",
     "第一性征或第二性征可能令人觉得多余、陌生、过于显眼，甚至难以承认其存在，在青春期或其他身体变化阶段尤其如此。",
     [
@@ -108,7 +108,7 @@ const experiences = {
       ["赞美与关注", "别人对外貌、身高或运动潜力的正面评价，可能让本已令人不适的特征更加显眼。"],
     ],
   ),
-  "extreme-body-shape-and-gendered-silhouette": claim(
+  "extreme-body-shape-and-gendered-silhouette": localizedExperience(
     "想用极端体形改变带有性别意味的轮廓",
     "一个人可能想变得非常瘦、胖、强壮或纤细，因为身体组成的变化可以遮盖不想要的特征、远离出生指派性别的审美标准，或形成更容易自在生活的轮廓。",
     [
@@ -118,11 +118,11 @@ const experiences = {
       ["减少肌肉", "避免锻炼肌肉或希望身形更纤细，可能减弱不想要的男性化轮廓。"],
     ],
   ),
-  "feeling-detached-from-the-body": claim(
+  "feeling-detached-from-the-body": localizedExperience(
     "感觉自己与身体相互分离",
     "身体可能像一个被操控的物体、陌生人的身体，或一件很难让自己在意和照料的东西。",
   ),
-  "assigned-gender-presentation-feels-wrong": claim(
+  "assigned-gender-presentation-feels-wrong": localizedExperience(
     "以出生指派性别的方式打扮会感到不适",
     "与出生指派性别相关的衣物、发型、仪容、举止等表达方式，可能像外界强加的要求，也可能让人觉得不适合自己。",
     [
@@ -131,19 +131,19 @@ const experiences = {
       ["更中性的选择", "即使实际差别很小，中性、朴素或面向另一性别的物品也可能更容易穿用。"],
     ],
   ),
-  "plain-clothes-over-assigned-gender-beauty": claim(
+  "plain-clothes-over-assigned-gender-beauty": localizedExperience(
     "宁愿穿朴素衣服，也不愿美化出生指派性别的形象",
     "一个人可能喜欢时尚、视觉设计和别人的穿搭，却为自己选择朴素、深色、省事或刻意不起眼的衣物与仪容，因为在出生指派性别的角色中变得更有吸引力，难以带来满足感。",
   ),
-  "gravitating-away-from-assigned-gender-expectations": claim(
+  "gravitating-away-from-assigned-gender-expectations": localizedExperience(
     "自然远离出生指派性别的期待",
     "社会为出生指派性别安排的玩具、游戏、爱好、扮演角色、友谊或活动可能缺乏吸引力，其他玩法与表达方式则更自然。",
   ),
-  "being-treated-as-the-assigned-gender-feels-wrong": claim(
+  "being-treated-as-the-assigned-gender-feels-wrong": localizedExperience(
     "被当作出生指派性别对待时感到不适",
     "带有性别含义的名字、代词、称谓、分组、期待或称呼方式，可能在本人理解原因以前就带来不适。",
   ),
-  "gendered-records-feel-inaccurate": claim(
+  "gendered-records-feel-inaccurate": localizedExperience(
     "觉得记录中的性别信息无法准确描述自己",
     "表格或账号中的姓名、照片、性别标记、称谓和带有性别含义的经历可能显得不准确，使日常身份核验与信息披露变得格外紧张。",
     [
@@ -153,7 +153,7 @@ const experiences = {
       ["更正带来放松", "更新姓名、照片、性别标记或称呼方式后，普通行政事务可能更容易应对。"],
     ],
   ),
-  "hesitating-over-gender-fields": claim(
+  "hesitating-over-gender-fields": localizedExperience(
     "被要求填写或选择性别时感到犹豫",
     "表格要求填写或选择性别时，第一反应可能是选择自己认同的性别。经过犹豫后，有些人会改填出生指派性别，在允许时留空，并在看到已经填写的答案时感到难过。这些反应可能早在认识到自己是跨性别者之前出现。",
     [
@@ -164,7 +164,7 @@ const experiences = {
       ["自我认识之前", "这种冲动与矛盾可能出现在认识到自己是跨性别者或能够描述自身性别之前。"],
     ],
   ),
-  "relief-from-gender-recognition": claim(
+  "relief-from-gender-recognition": localizedExperience(
     "自己的性别得到承认时感到放松",
     "合适的姓名、代词、称呼或社会角色可能带来放松、喜悦、平静，以及一种意外强烈的“终于被看见”的感觉。",
     [
@@ -174,7 +174,7 @@ const experiences = {
       ["在社交中被接纳", "无需解释就能进入以性别区分的群体或活动，也能带来被承认的感觉。"],
     ],
   ),
-  "gender-policing-insults-feel-affirming": claim(
+  "gender-policing-insults-feel-affirming": localizedExperience(
     "被骂“娘娘腔”或“像男人”时，受伤之余也感到性别被肯定",
     "出生时被指派为男性的人遭到“娘娘腔”“像女生”“不像男人”等侮辱时，敌意会带来伤害，被看作女性化这一点也可能让人感到放松，仿佛自身性别得到了承认。出生时被指派为女性的人听到“像男人”“没有女人味”等话时，也可能产生这种复杂感受。",
     [
@@ -189,11 +189,11 @@ const experiences = {
       "“像男人”“没有女人味”“假小子”“不像女人”等说法，可能让人意外地觉得无所谓，甚至感到被肯定。",
     ],
   ),
-  "relief-from-gender-affirming-expression": claim(
+  "relief-from-gender-affirming-expression": localizedExperience(
     "通过符合自身性别的表达获得放松",
     "符合自身性别的衣物、发型、妆容、仪容、动作或造型可以带来舒适感，也能让镜中的自己更容易被认出来。",
   ),
-  "another-gender-in-games-and-imagined-roles": claim(
+  "another-gender-in-games-and-imagined-roles": localizedExperience(
     "在游戏与想象的角色中选择另一种性别",
     "头像、角色扮演、Cosplay、虚构故事或网络身份，可以让人反复体验与出生指派性别不同的生活。",
     [
@@ -202,7 +202,7 @@ const experiences = {
       ["网络身份", "个人资料、姓名、头像和语音聊天可以成为长期以另一性别参与社交的空间。"],
     ],
   ),
-  "gender-transformation-stories-feel-compelling": claim(
+  "gender-transformation-stories-feel-compelling": localizedExperience(
     "格外着迷于性别变化的故事",
     "在明白原因以前，有关改变性别或长出不同性征的故事、图像和幻想，可能一直具有特殊吸引力。",
     [
@@ -212,11 +212,11 @@ const experiences = {
       ["后来重新理解", "认识自己的性别后，可能终于明白这类题材为何比其他故事更贴近自己。"],
     ],
   ),
-  "assigned-gender-roles-feel-performed": claim(
+  "assigned-gender-roles-feel-performed": localizedExperience(
     "觉得自己一直在表演出生指派性别的社会角色",
     "在社会交往、约会、友谊或亲密关系中扮演被期待的性别角色，可能像排练好的表演，令人费力、虚假或疏离。",
   ),
-  "same-gender-friendship-feels-socially-wrong": claim(
+  "same-gender-friendship-feels-socially-wrong": localizedExperience(
     "被当作同性朋友相处时，觉得社会关系并不合适",
     "与本人出生指派性别相同的顺性别人，可能把互动理解为普通的同性友谊；跨性别或非二元本人却可能经历着另一种性别关系。因此，两人独处或进入全男性、全女性群体时，可能出现尴尬、内疚、警惕，或难以解释的约会感。",
     [
@@ -232,19 +232,19 @@ const experiences = {
       "二元性别群体可能把非二元者当作出生指派性别群体的普通一员，而本人会从另一种社会位置理解自己的在场与关系。",
     ],
   ),
-  "overperforming-the-assigned-gender": claim(
+  "overperforming-the-assigned-gender": localizedExperience(
     "过度表现出生指派性别",
     "有些人会强化与出生指派性别相关的男性气质或女性气质，借此压住反复出现的性别感受，并让自己扮演的角色显得可信。",
   ),
-  "clothing-that-hides-the-body-silhouette": claim(
+  "clothing-that-hides-the-body-silhouette": localizedExperience(
     "偏爱能遮住身体轮廓的衣物",
     "宽松、超大、叠穿、柔软或肥大的衣物，尤其是连帽衫和运动裤，能避免面料勾勒不想要的身体特征，因此更有安全感。",
   ),
-  "voice-feels-unlike-oneself": claim(
+  "voice-feels-unlike-oneself": localizedExperience(
     "觉得自己的声音不像自己",
     "说话或听录音时，如果音高、共鸣、说话方式或别人对声音的性别判断与自我感受冲突，可能产生强烈的不协调感。",
   ),
-  "grief-for-life-in-the-wrong-gender-role": claim(
+  "grief-for-life-in-the-wrong-gender-role": localizedExperience(
     "为在不合适的性别角色中度过的经历感到悲伤",
     "回望童年、青春期、人际关系、仪式或普通生活时，一个人可能会为没能以自身性别经历这些事情而悲伤。",
     [
@@ -254,7 +254,7 @@ const experiences = {
       ["较晚才认识自己", "后来理解整段经历时，可能会后悔多年都在适应不想要的角色。"],
     ],
   ),
-  "returning-to-gendered-childhood-interests": claim(
+  "returning-to-gendered-childhood-interests": localizedExperience(
     "成年后重新接近带有性别意味的童年兴趣",
     "与自身性别相关的玩具、颜色、衣物、装饰或爱好，成年后可能格外有吸引力，童年时想要却无法获得的人尤其如此。",
     [
@@ -269,7 +269,7 @@ const experiences = {
       "来自多个性别分类的物品，或没有明确性别分类的物品，可能格外有吸引力。",
     ],
   ),
-  "fear-of-aging-in-the-assigned-gender": claim(
+  "fear-of-aging-in-the-assigned-gender": localizedExperience(
     "害怕以出生指派性别逐渐老去",
     "想象自己将来成为出生指派性别的老年男性或女性，可能令人恐惧、难以承受，或完全无法认同。",
     [
@@ -278,7 +278,7 @@ const experiences = {
       ["进一步男性化或女性化", "声音、毛发、面孔、身体组成或社会角色的预期变化，可能加重恐惧。"],
     ],
   ),
-  "fear-that-transition-began-too-late": claim(
+  "fear-that-transition-began-too-late": localizedExperience(
     "担心开始性别过渡时已经太晚",
     "青春期后或成年较晚时开始性别过渡，可能让人担心早先的身体变化已经使理想中的身体或社会承认遥不可及。",
     [
@@ -288,7 +288,7 @@ const experiences = {
       ["对能否被认出的焦虑", "恐惧可能集中在别人能否始终认出本人的性别。"],
     ],
   ),
-  "belonging-among-peers-of-another-gender": claim(
+  "belonging-among-peers-of-another-gender": localizedExperience(
     "想融入另一性别的同龄伙伴",
     "与另一性别相关的朋友圈可能像自己本应属于的地方，因此因性别被排除在外会格外痛苦。",
     [
@@ -298,7 +298,7 @@ const experiences = {
       ["一起外出", "与同性别伙伴共同外出、吃饭、旅行或参加日常活动，并被当作普通成员，可能带来性别肯定。"],
     ],
   ),
-  "singled-out-around-gendered-privacy": claim(
+  "singled-out-around-gendered-privacy": localizedExperience(
     "言语上认可性别，涉及隐私或亲近时却把本人排除在外",
     "朋友在言语上认可本人的性别，涉及隐私或亲近关系时，却可能按照出生指派性别对待本人。具体表现包括：只要求本人离开卫生间或更衣区域；拒绝互相到家中做客或共同过夜；避开其他伙伴之间常见的日常接触；拒绝与本人单独相处。即使本人尊重他人的隐私和界限，无意越界，这些不平等的做法也会让人感到性别认可和信任被收回。",
     [
@@ -312,7 +312,7 @@ const experiences = {
       ["事后的伤痛", "这件事可能带来难过、被拒绝的感觉，也会让人怀疑此前得到的性别认可是否真诚。"],
     ],
   ),
-  "gender-peer-friendship-mistaken-for-romantic-interest": claim(
+  "gender-peer-friendship-mistaken-for-romantic-interest": localizedExperience(
     "想与同性别伙伴做朋友，却被误解为恋爱兴趣",
     "当别人把本人看作另一性别时，与同性别的人建立普通友谊的尝试，可能被理解为恋爱或性方面的兴趣。",
     [
@@ -326,7 +326,7 @@ const experiences = {
       "对男性表达友谊可能被理解为女性愿意发展恋爱或性关系，从而引来调情、追求或不同的对待。",
     ],
   ),
-  "moving-forward-after-gender-self-recognition": claim(
+  "moving-forward-after-gender-self-recognition": localizedExperience(
     "认识自己的性别后，觉得生活终于可以向前",
     "认识或接纳自己的性别可以带来释放感、更多精力，也能让人重新对计划、人际关系和自我表达产生兴趣。",
     [
@@ -337,15 +337,15 @@ const experiences = {
       ["悲伤与放松同时出现", "放松也可能伴随对较晚才认识自己或错过时光的悲伤。"],
     ],
   ),
-  "clothing-fit-highlights-body-shape": claim(
+  "clothing-fit-highlights-body-shape": localizedExperience(
     "衣物版型让身体形状更加显眼",
     "按男性或女性比例设计的剪裁，可能加重对腰、臀、胸、肩、裆部或整体轮廓的注意。",
   ),
-  "controlling-gendered-body-hair": claim(
+  "controlling-gendered-body-hair": localizedExperience(
     "调整带有性别意味的面部与身体毛发",
     "剃除、留长、拒绝剃除或仔细修整面部与身体毛发，可能成为减轻不适或控制外在表达的习惯。",
   ),
-  "hair-carries-unusual-importance": claim(
+  "hair-carries-unusual-importance": localizedExperience(
     "头发长度或发型显得格外重要",
     "留长、剪短或打理头发可能像少数可用的性别表达途径，有时还会伴随一整套实用理由来解释选择。",
     [
@@ -355,11 +355,11 @@ const experiences = {
       ["带有性别判断的结果", "一次技术上很好的理发，如果被用不想要的性别词语称赞，仍可能令人难过。"],
     ],
   ),
-  "identifying-with-characters-of-another-gender": claim(
+  "identifying-with-characters-of-another-gender": localizedExperience(
     "强烈认同另一性别的角色",
     "与自身体验性别相同，或打破预期性别角色的人物，可能显得格外亲切、重要，也更容易引起强烈情绪。",
   ),
-  "aligned-with-gender-concerns-before-self-recognition": claim(
+  "aligned-with-gender-concerns-before-self-recognition": localizedExperience(
     "认识自己以前，就觉得某一性别面对的问题与自己有关",
     "认识自己的性别以前，一个人可能对该性别人群的经历、权利和社会待遇投入强烈的个人关切，之后才明白其中的归属感。",
     [
@@ -373,19 +373,19 @@ const experiences = {
       "一位 AFAB 者可能强烈认同男孩或男性视角，之后明白这份投入也与自己是男性有关。",
     ],
   ),
-  "living-through-another-persons-presentation": claim(
+  "living-through-another-persons-presentation": localizedExperience(
     "通过另一个人的外在表达间接体验自己的愿望",
     "为伴侣或朋友购物、做造型、挑选衣物，可以让人间接接触自己觉得无法亲自采用的性别表达。",
   ),
-  "envy-blends-appearance-identity-and-attraction": claim(
+  "envy-blends-appearance-identity-and-attraction": localizedExperience(
     "对外貌的羡慕、自我认同与吸引交织在一起",
     "对另一个人的欣赏或吸引，可能很难与想拥有对方的身体、衣物、社会位置或性别待遇区分开来。",
   ),
-  "social-withdrawal-reduces-gendered-exposure": claim(
+  "social-withdrawal-reduces-gendered-exposure": localizedExperience(
     "减少社交，降低性别特征暴露的机会",
     "回避聚会、人际关系、照片或公众关注，可以减少身体、姓名、外在表达或出生指派性别角色变得显眼的场合。",
   ),
-  "separate-online-identity-until-gender-disclosure-feels-safe": claim(
+  "separate-online-identity-until-gender-disclosure-feels-safe": localizedExperience(
     "觉得公开性别安全以前，让网络身份与现实生活保持分离",
     "一个人可能在网上隐藏性别、声音、姓名、外貌或偏好，甚至不向亲密朋友透露；认识自己的性别或完成一段性别过渡后，把网络身份与现实中的自己连接起来，可能带来放松。",
     [
@@ -398,15 +398,15 @@ const experiences = {
       ["隐私与安全", "网络隐私可以防止骚扰、被迫出柜和不必要的追踪。这段性别经历的核心，是对暴露性别信息的反复担忧。"],
     ],
   ),
-  "staying-busy-to-avoid-gender-feelings": claim(
+  "staying-busy-to-avoid-gender-feelings": localizedExperience(
     "让自己一直忙碌，避免意识到性别感受",
     "工作、爱好、游戏、媒体、清洁、睡眠或物质使用可以填满空闲时间，让人继续推迟面对反复出现的性别感受。",
   ),
-  "gender-feelings-fluctuate-in-intensity": claim(
+  "gender-feelings-fluctuate-in-intensity": localizedExperience(
     "性别感受的强度会发生波动",
     "同一幅镜中形象、身体特征、社交互动或称呼方式，某天可能可以承受，另一天却会引起强烈痛苦或肯定感。",
   ),
-  "gender-expression-becomes-less-deliberate": claim(
+  "gender-expression-becomes-less-deliberate": localizedExperience(
     "性别表达会随时间变得自然，不再需要处处用力",
     "性别过渡初期，一个人可能会仔细遵循性别规范，以肯定自己、学习陌生的表达方式，或帮助别人认出自己的性别。随着得到更多承认，也越来越熟悉自己，表达方式可能变得轻松而个人化。",
     [
@@ -418,11 +418,11 @@ const experiences = {
       ["回到普通的多样性", "随着时间推移，偏好可能接近同一性别顺性别同伴中常见的广泛差异，其中也包括对性别化表达兴趣很少的人。"],
     ],
   ),
-  "intimacy-when-gendered-roles-align": claim(
+  "intimacy-when-gendered-roles-align": localizedExperience(
     "当性别角色与自己一致时，亲密关系的感受会改变",
     "吸引、约会、触摸、性或伴侣关系，在出生指派性别角色下可能令人不适；当自身性别得到承认时，这些经历也可能变得舒适、令人期待。",
   ),
-  "withdrawing-when-a-promising-date-becomes-real": claim(
+  "withdrawing-when-a-promising-date-becomes-real": localizedExperience(
     "一段顺利的约会变得真实时突然退缩",
     "一个人可能渴望陪伴，也享受约会；当双方好感变得明确，被渴望、被触摸、成为伴侣或被要求扮演出生指派性别角色，却会引起难以解释的不适，让人突然退出关系。",
     [
@@ -432,7 +432,7 @@ const experiences = {
       ["身体与亲密变得突出", "触摸、性或被近距离看见的可能性，会让过去模糊的不适突然清晰。"],
     ],
   ),
-  "body-changes-create-recognition-and-relief": claim(
+  "body-changes-create-recognition-and-relief": localizedExperience(
     "身体变化可以带来自我识别与放松",
     "体形、皮肤、毛发、声音、胸部等特征的变化，可能让身体变得更熟悉、更容易安住其中，也更有个人意义。",
     [
@@ -442,11 +442,11 @@ const experiences = {
       ["变化速度不一", "不同特征以不同速度改变，同一时期可能同时出现放松、焦急与不确定。"],
     ],
   ),
-  "seeing-yourself-shift-toward-recognition": claim(
+  "seeing-yourself-shift-toward-recognition": localizedExperience(
     "看见自己时的感受从疏离转向认同",
     "当外在表达或身体更贴近自身性别时，过去显得陌生的镜中形象或照片，可能逐渐变得熟悉，甚至带来喜悦。",
   ),
-  "libido-or-arousal-feels-alien": claim(
+  "libido-or-arousal-feels-alien": localizedExperience(
     "觉得性欲或不由自主的兴奋陌生、令人厌烦",
     "性欲、自发兴奋或明显的生殖器反应，可能显得侵入、令人不安，也与本人真正的意愿和自我感受相互分离。即使本人渴望性或恋爱方面的亲密关系，也可能强迫自己严格禁欲、避免发生性关系或压抑情感。",
     [
@@ -464,7 +464,7 @@ const experiences = {
       "男性与女性的性脚本都可能带来束缚；中性语言、混合角色或不固定二元位置的亲密关系可能更合适。",
     ],
   ),
-  "libido-changes-make-friendship-with-women-easier": claim(
+  "libido-changes-make-friendship-with-women-easier": localizedExperience(
     "性欲变化让与女性的友谊更轻松，并带来放松",
     "对一些跨女性者来说，HRT 或其他情况带来的性欲降低与改变，可以减轻不想要的性压力，使与女性的友谊更舒适、更容易维持。",
     [
@@ -475,7 +475,7 @@ const experiences = {
       ["个体差异", "每个人的性欲反应都不同，任何性欲水平的人都能建立真诚友谊。这里描述的是不想要的性压力减少后产生的放松。"],
     ],
   ),
-  "attraction-to-women-and-the-imposed-male-role": claim(
+  "attraction-to-women-and-the-imposed-male-role": localizedExperience(
     "吸引被套入不想要的性别角色时感到痛苦",
     "本人可能真诚地被某个人吸引，周围人的看法或过去习得的规范却可能把本人放进男人、女人、主动追求者、接受方、男朋友或女朋友等不符合自身性别的角色。这种强加的角色可能带来内疚、羞耻、自我监视或回避。",
     [
@@ -490,7 +490,7 @@ const experiences = {
       "二元性取向标签和伴侣角色可能强迫本人在关系中充当男人或女人。中性、酷儿、混合或自行定义的语言可能更贴合本人。",
     ],
   ),
-  "assigned-gender-compliments-feel-wrong": claim(
+  "assigned-gender-compliments-feel-wrong": localizedExperience(
     "符合出生指派性别的赞美令人不适",
     "当赞美强调的是出生指派性别相关的特征，而非本人实际体验的性别时，它可能令人不快或产生疏离感。",
     [],
@@ -500,7 +500,7 @@ const experiences = {
       "把本人明确归入任一二元性别的赞美，包括称赞外表非常男性化或女性化，都可能让人觉得不合适。",
     ],
   ),
-  "masturbation-that-affirms-a-feminine-self": claim(
+  "masturbation-that-affirms-a-feminine-self": localizedExperience(
     "性体验可以肯定自身的性别感受",
     "色情内容、幻想、自慰或与伴侣的性行为，在身体、视角、语言和角色符合自身性别时可能更舒适。强调不想关注的身体部位或不想承担的性别角色，可能带来疏离感或性别焦虑。",
     [

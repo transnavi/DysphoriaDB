@@ -10,13 +10,13 @@
 
   let { site, experience = null, terms = [] } = $props<{
     site: Pick<LocalizedSite, "locale" | "messages">;
-    experience?: Pick<CatalogItem, "slug" | "title" | "summary"> | null;
-    terms?: Array<Pick<CatalogItem, "slug">>;
+    experience?: Pick<CatalogItem, "id" | "title" | "summary"> | null;
+    terms?: Array<Pick<CatalogItem, "id">>;
   }>();
   let rootPath = $derived(localeInfo[site.locale as keyof typeof localeInfo].path
     ? `/${localeInfo[site.locale as keyof typeof localeInfo].path}/`
     : "/");
-  let pathname = $derived(experience ? `${rootPath}experience/${experience.slug}/` : rootPath);
+  let pathname = $derived(experience ? `${rootPath}experience/${experience.id}/` : rootPath);
   let canonical = $derived(new URL(pathname, catalogMetadata.siteUrl).href);
   let title = $derived(experience ? `${experience.title} — ${site.messages.siteName}` : site.messages.seoTitle);
   let description = $derived(experience?.summary ?? site.messages.description);
@@ -24,7 +24,7 @@
   let alternates = $derived(Object.entries(localeInfo).map(([locale, info]) => ({
     locale,
     hreflang: info.hreflang,
-    href: new URL(`${info.path ? `/${info.path}` : ""}${experience ? `/experience/${experience.slug}` : ""}/`, catalogMetadata.siteUrl).href,
+    href: new URL(`${info.path ? `/${info.path}` : ""}${experience ? `/experience/${experience.id}` : ""}/`, catalogMetadata.siteUrl).href,
   })));
   let structuredData = $derived.by(() => {
     const rootUrl = new URL(rootPath, catalogMetadata.siteUrl).href;
@@ -88,7 +88,7 @@
           url: canonical,
           name: experience.title,
           description: experience.summary,
-          termCode: experience.slug,
+          termCode: experience.id,
           inLanguage: localeInfo[site.locale as keyof typeof localeInfo].htmlLang,
           inDefinedTermSet: { "@id": indexId },
         },
@@ -151,8 +151,8 @@
           description,
           inLanguage: localeInfo[site.locale as keyof typeof localeInfo].htmlLang,
           isPartOf: { "@id": websiteId },
-          hasDefinedTerm: terms.map(({ slug }: Pick<CatalogItem, "slug">) => ({
-            "@id": `${new URL(`${rootPath}experience/${slug}/`, catalogMetadata.siteUrl).href}#experience`,
+          hasDefinedTerm: terms.map(({ id }: Pick<CatalogItem, "id">) => ({
+            "@id": `${new URL(`${rootPath}experience/${id}/`, catalogMetadata.siteUrl).href}#experience`,
           })),
           dateModified: catalogMetadata.dateModified,
           license: catalogMetadata.license,

@@ -5,27 +5,27 @@ import { rankByReactionCount } from "../site/reaction-ranking.js";
 
 test("cards rank by Me too count while ties keep their fair order", () => {
   const cards = [
-    { slug: "first", count: 3 },
-    { slug: "low", count: 1 },
-    { slug: "same", count: 3 },
-    { slug: "middle", count: 2 },
+    { id: "first", count: 3 },
+    { id: "low", count: 1 },
+    { id: "same", count: 3 },
+    { id: "middle", count: 2 },
   ];
 
   assert.deepEqual(
-    rankByReactionCount(cards, (card) => card.count).map(({ slug }) => slug),
+    rankByReactionCount(cards, (card) => card.count).map(({ id }) => id),
     ["first", "same", "middle", "low"],
   );
 });
 
 test("missing reaction counts sort as zero", () => {
   const cards = [
-    { slug: "missing" },
-    { slug: "ranked", count: 1 },
-    { slug: "invalid", count: "unknown" },
+    { id: "missing" },
+    { id: "ranked", count: 1 },
+    { id: "invalid", count: "unknown" },
   ];
 
   assert.deepEqual(
-    rankByReactionCount(cards, (card) => card.count).map(({ slug }) => slug),
+    rankByReactionCount(cards, (card) => card.count).map(({ id }) => id),
     ["ranked", "missing", "invalid"],
   );
 });

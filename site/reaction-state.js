@@ -1,23 +1,23 @@
 export const reactionStorageKey = "gender-experience-reactions-v1";
 
-export function storedReactionSlugs(storedValue) {
+export function storedReactionIds(storedValue) {
   try {
-    const slugs = JSON.parse(storedValue ?? "[]");
-    return new Set(Array.isArray(slugs) ? slugs.filter((slug) => typeof slug === "string") : []);
+    const ids = JSON.parse(storedValue ?? "[]");
+    return new Set(Array.isArray(ids) ? ids.filter((id) => typeof id === "string") : []);
   } catch {
     return new Set();
   }
 }
 
-export function reactionIsSelected(initiallySelected, slug, storedValue) {
-  return initiallySelected || storedReactionSlugs(storedValue).has(slug);
+export function reactionIsSelected(initiallySelected, id, storedValue) {
+  return initiallySelected || storedReactionIds(storedValue).has(id);
 }
 
-export function updatedReactionStorageValue(storedValue, slug, selected) {
-  const slugs = storedReactionSlugs(storedValue);
-  if (selected) slugs.add(slug);
-  else slugs.delete(slug);
-  return JSON.stringify([...slugs]);
+export function updatedReactionStorageValue(storedValue, id, selected) {
+  const ids = storedReactionIds(storedValue);
+  if (selected) ids.add(id);
+  else ids.delete(id);
+  return JSON.stringify([...ids]);
 }
 
 export function toggledReactionState(count, selected) {

@@ -10,6 +10,7 @@ import {
 } from "./catalog-render.js";
 import { normalizeBrowseState, reconcileCatalogItems } from "./browser-state.js";
 import { domains, experienceFamilies, experiences as claims } from "./data/experiences.js";
+import { rankByReactionCount } from "./reaction-ranking.js";
 import {
   createI18n,
   experiencePath,
@@ -76,6 +77,7 @@ const unseenItemsStorageKey = "gender-experience-unseen-items-v1";
 const browseStateStorageKey = `gender-experience-browser-v1:${locale}`;
 const validDomainIds = new Set(domains.map(({ id }) => id));
 const validFamilyIds = new Set(experienceFamilies.map(({ id }) => id));
+const claimsBySlug = new Map(claims.map((claim) => [claim.slug, claim]));
 const validFilterKeys = new Set(claims.flatMap((claim) => [
   ...claim.types.map((value) => filterKey("type", value)),
   ...claim.directions.map((value) => filterKey("population", value)),
@@ -95,6 +97,7 @@ let newSlugs = loadNewItems();
 let visibleLimit = restoredBrowseState.visibleLimit;
 let currentCatalogTotal = claims.length;
 let loadMorePending = false;
+let reactionCountsLoaded = false;
 let searchTimer = null;
 const searchIndex = buildSearchIndex(i18n, claims);
 search.value = restoredBrowseState.query;
@@ -306,6 +309,17 @@ function attachCatalogListeners() {
   });
 }
 
+function sortCatalogByReactions() {
+  if (!reactionCountsLoaded) return;
+  cards.querySelectorAll(".group-grid").forEach((grid) => {
+    const rankedCards = rankByReactionCount(
+      [...grid.querySelectorAll(":scope > [data-card-slug]")],
+      (card) => claimsBySlug.get(card.dataset.cardSlug)?.reactionCount,
+    );
+    for (const card of rankedCards) grid.append(card);
+  });
+}
+
 function syncNewCount() {
   newCount.textContent = t("ui.newCount", { count: newSlugs.size });
   newCount.hidden = newSlugs.size === 0;
@@ -341,6 +355,7 @@ function renderCards({ reusePrerendered = false } = {}) {
   if (!reusePrerendered) cards.innerHTML = result.html;
   cards.removeAttribute("data-prerendered-locale");
   attachCatalogListeners();
+  sortCatalogByReactions();
   syncCatalogControls(result.total, result.shown);
   syncNewCount();
 }
@@ -488,6 +503,8 @@ async function loadReactionCounts() {
       claim.reactionCount = nextCount;
       if (changed) updateReactionControls(claim.slug);
     }
+    reactionCountsLoaded = true;
+    sortCatalogByReactions();
   } catch {
     // The index remains available if the reaction service is offline.
   }

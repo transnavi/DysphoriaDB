@@ -675,7 +675,6 @@ const terms = {
   embodiment: "身体融入感",
   pleasure: "愉悦",
   "sexual-role-dysphoria": "性角色带来的性别焦虑",
-  avoidance: "回避",
   masturbation: "自慰",
   "solitary-sexuality": "独处时的性体验",
   touch: "触摸",

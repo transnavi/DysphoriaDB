@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 .DS_Store
 dist/
+.svelte-kit/
 node_modules/
 .wrangler/
 .dev.vars*

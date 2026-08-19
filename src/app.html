@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="%lang%" data-theme="%theme%">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" id="theme-color" content="#fffdf8" />
+    <script>
+      (() => {
+        const cookieTheme = document.cookie.match(/(?:^|; )gex_theme_v1=(light|dark)(?:;|$)/)?.[1];
+        let storedTheme = cookieTheme;
+        try {
+          storedTheme ||= localStorage.getItem("gender-experience-theme");
+        } catch {}
+        const theme = storedTheme === "light" || storedTheme === "dark"
+          ? storedTheme
+          : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+        document.querySelector("#theme-color").content = theme === "dark" ? "#1a1624" : "#fffdf8";
+      })();
+    </script>
+    %sveltekit.head%
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents">%sveltekit.body%</div>
+  </body>
+</html>

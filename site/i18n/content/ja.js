@@ -675,7 +675,6 @@ const terms = {
   embodiment: "身体との一体感",
   pleasure: "快感",
   "sexual-role-dysphoria": "性的役割に関するディスフォリア",
-  avoidance: "回避",
   masturbation: "マスターベーション",
   "solitary-sexuality": "一人での性行為",
   touch: "触れ方",

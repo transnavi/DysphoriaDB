@@ -1,4 +1,4 @@
-import { experiences } from "../site/data/experiences.js";
+import { experiences } from "$site/data/experiences.js";
 
 const validSlugs = new Set(experiences.map(({ slug }) => slug));
 const voterIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -10,14 +10,16 @@ const apiSecurityHeaders = {
   "x-content-type-options": "nosniff",
 };
 
-function json(data: unknown, status = 200, headers: Record<string, string> = {}): Response {
+type RuntimeEnv = Pick<Env, "REACTIONS_DB" | "REACTION_RATE_LIMITER">;
+
+export function jsonResponse(data: unknown, status = 200, headers: Record<string, string> = {}) {
   return Response.json(data, {
     status,
     headers: { ...apiSecurityHeaders, "cache-control": "no-store", ...headers },
   });
 }
 
-function sameOrigin(request: Request): boolean {
+function sameOrigin(request: Request) {
   const origin = request.headers.get("origin");
   const fetchSite = request.headers.get("sec-fetch-site");
   return (origin === null || origin === new URL(request.url).origin)
@@ -27,9 +29,9 @@ function sameOrigin(request: Request): boolean {
 async function limitedJson(request: Request): Promise<{ value: unknown } | { response: Response }> {
   const declaredLength = request.headers.get("content-length");
   if (declaredLength !== null && Number(declaredLength) > maximumBodyBytes) {
-    return { response: json({ error: "Request body is too large" }, 413) };
+    return { response: jsonResponse({ error: "Request body is too large" }, 413) };
   }
-  if (!request.body) return { response: json({ error: "Invalid JSON" }, 400) };
+  if (!request.body) return { response: jsonResponse({ error: "Invalid JSON" }, 400) };
 
   const reader = request.body.getReader();
   const chunks: Uint8Array[] = [];
@@ -40,7 +42,7 @@ async function limitedJson(request: Request): Promise<{ value: unknown } | { res
     length += value.byteLength;
     if (length > maximumBodyBytes) {
       await reader.cancel();
-      return { response: json({ error: "Request body is too large" }, 413) };
+      return { response: jsonResponse({ error: "Request body is too large" }, 413) };
     }
     chunks.push(value);
   }
@@ -54,17 +56,12 @@ async function limitedJson(request: Request): Promise<{ value: unknown } | { res
   try {
     return { value: JSON.parse(new TextDecoder().decode(bytes)) };
   } catch {
-    return { response: json({ error: "Invalid JSON" }, 400) };
+    return { response: jsonResponse({ error: "Invalid JSON" }, 400) };
   }
 }
 
-async function reactionAllowed(request: Request, env: Env): Promise<boolean> {
-  const key = request.headers.get("cf-connecting-ip") ?? "local";
-  const { success } = await env.REACTION_RATE_LIMITER.limit({ key });
-  return success;
-}
-
-async function reactionCounts(env: Env): Promise<Record<string, number>> {
+export async function getReactionCounts(env?: RuntimeEnv) {
+  if (!env?.REACTIONS_DB) return {};
   const result = await env.REACTIONS_DB
     .prepare("SELECT experience_slug, COUNT(*) AS count FROM experience_reactions GROUP BY experience_slug")
     .all<{ experience_slug: string; count: number }>();
@@ -74,20 +71,21 @@ async function reactionCounts(env: Env): Promise<Record<string, number>> {
     .map((row) => [row.experience_slug, Number(row.count)]));
 }
 
-async function updateReaction(request: Request, env: Env, slug: string): Promise<Response> {
-  if (!validSlugs.has(slug)) return json({ error: "Unknown experience" }, 404);
-  if (!sameOrigin(request)) return json({ error: "Origin is not allowed" }, 403);
+export async function updateReaction(request: Request, env: RuntimeEnv | undefined, slug: string) {
+  if (!env?.REACTIONS_DB) return jsonResponse({ error: "Service unavailable" }, 503);
+  if (!validSlugs.has(slug)) return jsonResponse({ error: "Unknown experience" }, 404);
+  if (!sameOrigin(request)) return jsonResponse({ error: "Origin is not allowed" }, 403);
   if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
-    return json({ error: "Expected JSON" }, 415);
+    return jsonResponse({ error: "Expected JSON" }, 415);
   }
-  if (!await reactionAllowed(request, env)) {
-    return json({ error: "Too many requests" }, 429, { "retry-after": "10" });
+  const key = request.headers.get("cf-connecting-ip") ?? "local";
+  if (env.REACTION_RATE_LIMITER && !(await env.REACTION_RATE_LIMITER.limit({ key })).success) {
+    return jsonResponse({ error: "Too many requests" }, 429, { "retry-after": "10" });
   }
 
   const parsed = await limitedJson(request);
   if ("response" in parsed) return parsed.response;
   const body = parsed.value;
-
   if (
     typeof body !== "object"
     || body === null
@@ -97,7 +95,7 @@ async function updateReaction(request: Request, env: Env, slug: string): Promise
     || !voterIdPattern.test(body.voterId)
     || typeof body.selected !== "boolean"
   ) {
-    return json({ error: "Invalid reaction" }, 400);
+    return jsonResponse({ error: "Invalid reaction" }, 400);
   }
 
   const write = body.selected
@@ -112,46 +110,9 @@ async function updateReaction(request: Request, env: Env, slug: string): Promise
   ).bind(slug);
   const [, countResult] = await env.REACTIONS_DB.batch<{ count: number }>([write, count]);
 
-  return json({ slug, selected: body.selected, count: Number(countResult.results[0]?.count ?? 0) });
+  return jsonResponse({
+    slug,
+    selected: body.selected,
+    count: Number(countResult.results[0]?.count ?? 0),
+  });
 }
-
-export default {
-  async fetch(request, env): Promise<Response> {
-    const url = new URL(request.url);
-
-    try {
-      if (request.method === "GET" && url.pathname === "/api/reactions") {
-        return json({ counts: await reactionCounts(env) });
-      }
-
-      if (url.pathname === "/api/reactions") {
-        return json({ error: "Method not allowed" }, 405, { allow: "GET" });
-      }
-
-      const match = url.pathname.match(/^\/api\/reactions\/([^/]+)$/);
-      if (match) {
-        if (request.method !== "POST") {
-          return json({ error: "Method not allowed" }, 405, { allow: "POST" });
-        }
-        let slug: string;
-        try {
-          slug = decodeURIComponent(match[1]);
-        } catch {
-          return json({ error: "Invalid experience" }, 400);
-        }
-        return updateReaction(request, env, slug);
-      }
-
-      if (url.pathname.startsWith("/api/")) return json({ error: "Not found" }, 404);
-      return env.ASSETS.fetch(request);
-    } catch (error) {
-      console.error(JSON.stringify({
-        message: "reaction_api_error",
-        method: request.method,
-        pathname: url.pathname,
-        error: error instanceof Error ? error.message : "Unknown error",
-      }));
-      return json({ error: "Service unavailable" }, 503);
-    }
-  },
-} satisfies ExportedHandler<Env>;

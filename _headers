@@ -6,5 +6,5 @@
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
 
-/assets/*
+/_app/*
   Cache-Control: public, max-age=31536000, immutable

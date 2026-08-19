@@ -1,13 +1,14 @@
 # Gender Experience Index
 
-A browsable reference of recurring gender experiences.
+A localized reference of recurring gender experiences. SvelteKit renders the catalog and detail pages on Cloudflare Workers. Reaction totals come from D1 during server rendering.
 
 ## Development
 
-Install the JavaScript dependencies and start the Vite development server:
+Install the dependencies and start SvelteKit:
 
 ```sh
 npm install
+npx wrangler d1 migrations apply dysphoria-db-reactions --local
 npm run dev
 ```
 
@@ -20,12 +21,18 @@ npm run build
 npm run preview
 ```
 
-The build creates the Vite asset bundle and static HTML pages in `dist/`.
+The Cloudflare adapter writes the Worker and static assets to `.svelte-kit/cloudflare/`.
 
 ## Tests
 
 ```sh
 npm test
+```
+
+Run Svelte diagnostics separately:
+
+```sh
+npm run check
 ```
 
 ## Deployment

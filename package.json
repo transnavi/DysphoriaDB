@@ -6,30 +6,38 @@
     "node": "^20.19.0 || >=22.12.0"
   },
   "scripts": {
-    "build": "vite build && node scripts/build_site.mjs",
+    "build": "vite build",
     "build:og": "bash scripts/build_og_images.sh",
     "dev": "vite --host 0.0.0.0 --port 4174",
     "preview": "vite preview --host 0.0.0.0 --port 4174",
     "deploy": "npm run build && wrangler deploy --old-asset-ttl 604800",
-    "test": "npm run test:worker && npm run test:content",
+    "test": "npm run build && npm run test:worker && npm run test:content",
     "test:worker": "vitest run",
-    "test:content": "node --test tests/i18n.test.mjs tests/browser-state.test.mjs tests/reaction-ranking.test.mjs && npm run build && node --test tests/build-output.test.mjs && uv run pytest -q",
-    "types": "wrangler types --env-interface Env && tsc --noEmit"
+    "test:content": "node --test tests/i18n.test.mjs tests/reaction-ranking.test.mjs && uv run pytest -q",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "types": "wrangler types --env-interface Env && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.53.0",
     "@cloudflare/vitest-pool-workers": "^0.22.0",
+    "@sveltejs/adapter-cloudflare": "^7.2.9",
+    "@sveltejs/kit": "^2.70.3",
     "@types/node": "^26.2.0",
-    "typescript": "^7.0.2",
+    "svelte": "^5.56.9",
+    "svelte-check": "^4.3.4",
+    "typescript": "^6.0.3",
     "vite": "^8.2.1",
     "vitest": "^4.1.11",
     "wrangler": "^4.124.0"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.8.0",
     "@fontsource-variable/noto-sans-jp": "^5.3.0",
     "@fontsource-variable/noto-sans-sc": "^5.3.0",
     "@fontsource-variable/nunito-sans": "^5.3.0",
     "i18next": "^26.3.6"
+  },
+  "overrides": {
+    "@sveltejs/kit": {
+      "cookie": "0.7.2"
+    }
   }
 }

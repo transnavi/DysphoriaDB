@@ -19,6 +19,11 @@ test("localized root pages include canonical metadata and visible actions", asyn
   assert.match(ja, /id="search-button" type="submit">検索<\/button>/);
   assert.match(ja, /og-image-ja\.png\?v=20260819/);
   assert.match(ja, /property="og:image:alt" content="ジェンダー体験事典。ジェンダー体験を分類・整理し/);
+  assert.match(ja, /class="trans-pride-mark"/);
+  assert.match(ja, /id="footer-reference-title">資料<\/p>/);
+  assert.match(ja, /id="footer-data-title">オープンデータ<\/p>/);
+  assert.match(ja, /id="footer-submit">体験を投稿する<\/span>/);
+  assert.doesNotMatch(ja, /trans-pride-stripe/);
   assert.match(zhCN, /<html lang="zh-Hans"/);
   assert.match(zhCN, /og-image-zh-cn\.png\?v=20260819/);
   assert.ok(en.indexOf('rel="stylesheet"') < en.indexOf('type="module"'));

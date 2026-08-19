@@ -222,8 +222,12 @@ function localizeShell(baseHtml, i18n, locale, claim = null) {
   html = html.replace(/(<nav class="domain-tabs" id="domain-tabs" aria-label=")[^"]*(")/, `$1${escapeHtml(i18n.t("ui.experienceAreas"))}$2`);
   html = replaceTextById(html, "empty", i18n.t("ui.noMatches"));
   html = replaceTextById(html, "footer-statement", i18n.t("ui.footerStatement"));
-  html = html.replace(/(<div class="trans-pride-stripe"[^>]*aria-label=")[^"]*(")/, `$1${escapeHtml(i18n.t("ui.footerFlagLabel"))}$2`);
-  html = replaceTextById(html, "footer-glossary", `${i18n.t("ui.glossary")} ↗`);
+  html = html.replace(/(<span class="trans-pride-mark"[^>]*aria-label=")[^"]*(")/, `$1${escapeHtml(i18n.t("ui.footerFlagLabel"))}$2`);
+  html = html.replace(/(<nav class="footer-navigation"[^>]*aria-label=")[^"]*(")/, `$1${escapeHtml(i18n.t("ui.footerNavLabel"))}$2`);
+  html = replaceTextById(html, "footer-reference-title", i18n.t("ui.footerReference"));
+  html = replaceTextById(html, "footer-data-title", i18n.t("ui.footerOpenData"));
+  html = replaceTextById(html, "footer-glossary", i18n.t("ui.glossary"));
+  html = replaceTextById(html, "footer-submit", i18n.t("ui.submitExperience"));
   html = replaceTextById(html, "footer-json", i18n.t("ui.downloadJson"));
   html = replaceTextById(html, "footer-csv", i18n.t("ui.downloadCsv"));
   html = replaceTextById(html, "footer-license", i18n.t("ui.contentLicense"));

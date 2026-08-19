@@ -42,9 +42,13 @@ const themeColor = document.querySelector("#theme-color");
 const reactionStatus = document.querySelector("#reaction-status");
 const footerStatement = document.querySelector("#footer-statement");
 const footerFlagLabel = document.querySelector("#footer-flag-label");
+const footerNavigation = document.querySelector("#footer-navigation");
+const footerReferenceTitle = document.querySelector("#footer-reference-title");
+const footerDataTitle = document.querySelector("#footer-data-title");
 const footerJson = document.querySelector("#footer-json");
 const footerCsv = document.querySelector("#footer-csv");
 const footerGlossary = document.querySelector("#footer-glossary");
+const footerSubmit = document.querySelector("#footer-submit");
 const footerLicense = document.querySelector("#footer-license");
 const footerCopyright = document.querySelector("#footer-copyright");
 const themePreference = matchMedia("(prefers-color-scheme: dark)");
@@ -421,9 +425,13 @@ function applyStaticTranslations() {
   });
   footerStatement.textContent = t("ui.footerStatement");
   footerFlagLabel.setAttribute("aria-label", t("ui.footerFlagLabel"));
+  footerNavigation.setAttribute("aria-label", t("ui.footerNavLabel"));
+  footerReferenceTitle.textContent = t("ui.footerReference");
+  footerDataTitle.textContent = t("ui.footerOpenData");
   footerJson.textContent = t("ui.downloadJson");
   footerCsv.textContent = t("ui.downloadCsv");
-  footerGlossary.textContent = `${t("ui.glossary")} ↗`;
+  footerGlossary.textContent = t("ui.glossary");
+  footerSubmit.textContent = t("ui.submitExperience");
   footerLicense.textContent = t("ui.contentLicense");
   footerCopyright.textContent = t("ui.copyright");
 }

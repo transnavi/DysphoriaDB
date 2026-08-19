@@ -1,0 +1,39 @@
+name: Submit an experience
+description: Suggest a gender-related experience for the index
+title: "Experience: "
+labels:
+  - experience-submission
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share only details you are comfortable posting publicly. A short description is enough.
+  - type: textarea
+    id: experience
+    attributes:
+      label: Experience
+      description: Describe the recurring feeling, situation, or response.
+      placeholder: What happens, and how can it feel?
+    validations:
+      required: true
+  - type: textarea
+    id: variations
+    attributes:
+      label: Variations
+      description: Include any different forms this experience can take.
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Add public links that discuss or document the experience.
+  - type: dropdown
+    id: language
+    attributes:
+      label: Submission language
+      options:
+        - English
+        - 日本語
+        - 简体中文
+        - Another language
+    validations:
+      required: true

@@ -38,4 +38,31 @@ describe("experience reactions", () => {
     expect((await postReaction("missing", { voterId, selected: true })).status).toBe(404);
     expect((await postReaction(slug, { voterId, selected: true }, "https://attacker.example")).status).toBe(403);
   });
+
+  it("bounds request bodies and rejects malformed routes", async () => {
+    const oversized = await exports.default.fetch(new Request(`${baseUrl}/api/reactions/${slug}`, {
+      method: "POST",
+      headers: { "content-type": "application/json", origin: baseUrl },
+      body: JSON.stringify({ voterId, selected: true, padding: "x".repeat(1100) }),
+    }));
+    expect(oversized.status).toBe(413);
+
+    const malformed = await exports.default.fetch(new Request(`${baseUrl}/api/reactions/%E0%A4%A`, {
+      method: "POST",
+      headers: { "content-type": "application/json", origin: baseUrl },
+      body: JSON.stringify({ voterId, selected: true }),
+    }));
+    expect(malformed.status).toBe(400);
+
+    const wrongMethod = await exports.default.fetch(`${baseUrl}/api/reactions/${slug}`);
+    expect(wrongMethod.status).toBe(405);
+    expect(wrongMethod.headers.get("allow")).toBe("POST");
+  });
+
+  it("sends defensive API headers", async () => {
+    const response = await exports.default.fetch(`${baseUrl}/api/reactions`);
+    expect(response.headers.get("cache-control")).toBe("no-store");
+    expect(response.headers.get("content-security-policy")).toContain("default-src 'none'");
+    expect(response.headers.get("x-content-type-options")).toBe("nosniff");
+  });
 });

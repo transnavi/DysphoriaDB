@@ -25,6 +25,8 @@ export const en = {
     tags: "Tags",
     experienceType: "Experience type",
     population: "Population",
+    stage: "Recognition and transition context",
+    stageNote: "Stages can overlap. People may skip them or use different forms of transition.",
     topic: "Topic",
     resultCount_one: "{{count}} experience",
     resultCount_other: "{{count}} experiences",
@@ -99,6 +101,14 @@ export const en = {
       transmasculine: "Transmasculine",
       nonbinary: "Nonbinary",
       "cross-directional": "Cross-directional",
+    },
+    stages: {
+      "before-realization": "Before realization",
+      questioning: "Questioning or unsure",
+      "self-recognized": "Self-recognized",
+      disclosed: "Disclosed to others",
+      transitioning: "Transitioning",
+      established: "Established after transition",
     },
   },
   sourceKinds: {

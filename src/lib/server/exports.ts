@@ -32,7 +32,7 @@ const translated = (map: TranslationMap | undefined, value: string) => map?.[val
 export async function exportData() {
   const translations = await translationsByLocale();
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     dateModified: catalogMetadata.dateModified,
     license: catalogMetadata.license,
     attribution: "TransNavi contributors",
@@ -46,6 +46,7 @@ export async function exportData() {
       domain: experience.domain,
       types: experience.types,
       directions: experience.directions,
+      stages: experience.stages,
       responses: experience.responses,
       tags: experience.tags,
       reportCount: experience.reportCount,
@@ -73,7 +74,7 @@ const csvCell = (value: unknown) => `"${String(value).replaceAll('"', '""')}"`;
 
 export async function exportCsv() {
   const translations = await translationsByLocale();
-  const headers = ["slug", "locale", "title", "summary", "domain", "family", "types", "directions", "tags", "report_count", "sources"];
+  const headers = ["slug", "locale", "title", "summary", "domain", "family", "types", "directions", "stages", "tags", "report_count", "sources"];
   const rows = [headers, ...experiences.flatMap((experience) => locales.map((locale) => {
     const bundle = translations[locale];
     const localized = bundle.claims[experience.slug] ?? {};
@@ -86,6 +87,7 @@ export async function exportCsv() {
       translated(bundle.taxonomy.families, experience.family),
       experience.types.map((type) => translated(bundle.taxonomy.types, type)).join(" | "),
       experience.directions.map((direction) => translated(bundle.taxonomy.directions, direction)).join(" | "),
+      experience.stages.map((stage) => translated(bundle.taxonomy.stages, stage)).join(" | "),
       experience.tags.map((tag) => translated(bundle.terms, tag)).join(" | "),
       experience.reportCount,
       experience.sources.map(([, url]) => url).join(" | "),

@@ -6,12 +6,13 @@ export function filterKey(group: string, value: string) {
 }
 
 export function claimHasFilter(
-  claim: { types: string[]; directions: string[]; tags: string[] },
+  claim: { types: string[]; directions: string[]; stages: string[]; tags: string[] },
   key: string,
 ) {
   const [group, value] = key.split(":", 2);
   if (group === "type") return claim.types.includes(value);
   if (group === "population") return claim.directions.includes(value);
+  if (group === "stage") return claim.stages.includes(value);
   return claim.tags.includes(value);
 }
 

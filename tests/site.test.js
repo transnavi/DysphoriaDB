@@ -1,5 +1,6 @@
 import { exports } from "cloudflare:workers";
 import { describe, expect, it } from "vitest";
+import { experiences } from "../site/data/experiences.js";
 
 const baseUrl = "https://example.com";
 
@@ -42,6 +43,16 @@ describe("SvelteKit rendering", () => {
     expect(html).toMatch(/data-family="body-image-and-self-recognition"(?![^>]* open)/);
   });
 
+  it("filters the catalog by recognition and transition context", async () => {
+    const response = await exports.default.fetch(`${baseUrl}/ja/?filter=stage:established`);
+    const html = await response.text();
+    const expected = experiences.filter(({ stages }) => stages.includes("established")).length;
+    expect(response.status).toBe(200);
+    expect(html.match(/class="card /g)).toHaveLength(expected);
+    expect(html).toContain('aria-pressed="true">性別移行後の生活が定着した時期</button>');
+    expect(html).toContain("時期は重なることがあり");
+  });
+
   it("serves localized detail metadata, dataset metadata, and data exports", async () => {
     const [detail, catalog, data, csv] = await Promise.all([
       exports.default.fetch(`${baseUrl}/zh-cn/experience/unfamiliar-reflection/`),
@@ -56,6 +67,7 @@ describe("SvelteKit rendering", () => {
     expect(detail.headers.get("content-language")).toBe("zh-Hans");
     expect(detailHtml).toContain('rel="canonical" href="https://db.transnavi.jp/zh-cn/experience/unfamiliar-reflection/"');
     expect(detailHtml).toContain('"@type":"DefinedTerm"');
+    expect(detailHtml).toContain('class="category-tag stage-tag"');
     expect(detailHtml).not.toContain('"@type":"Dataset"');
     expect(catalogHtml).toContain('"@type":"Dataset"');
     expect(catalogHtml).toContain('"isAccessibleForFree":true');
@@ -72,9 +84,13 @@ describe("SvelteKit rendering", () => {
     ]);
     expect(dataset.distribution).toHaveLength(2);
     expect(json.experiences).toHaveLength(60);
+    expect(json.schemaVersion).toBe(2);
+    expect(json.experiences.every((experience) => experience.stages.length > 0)).toBe(true);
     expect(json.dateModified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(data.headers.get("x-robots-tag")).toBe("noindex");
-    expect((await csv.text()).trim().split("\n")).toHaveLength(1 + 60 * 3);
+    const csvText = await csv.text();
+    expect(csvText.split("\n", 1)[0]).toContain('"stages"');
+    expect(csvText.trim().split("\n")).toHaveLength(1 + 60 * 3);
     expect(csv.headers.get("x-robots-tag")).toBe("noindex");
   });
 

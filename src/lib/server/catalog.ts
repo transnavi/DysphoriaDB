@@ -1,6 +1,6 @@
 import { organizeCatalog } from "$lib/catalog";
 import type { CatalogItem, CatalogTag, LocalizedSite } from "$lib/types";
-import { domains, experiences } from "$site/data/experiences.js";
+import { domains, experiences, journeyStages } from "$site/data/experiences.js";
 import {
   createI18n,
   localeDefinitions,
@@ -73,6 +73,13 @@ export async function localizedSite(
         className: "population-tag",
         categoryLabel: messages.population,
       }));
+    const stages: CatalogTag[] = claim.stages.map((value) => ({
+      group: "stage",
+      value,
+      label: taxonomyLabel("stages", value),
+      className: "stage-tag",
+      categoryLabel: messages.stage,
+    }));
     const topics: CatalogTag[] = claim.tags.map((value) => ({
       group: "topic",
       value,
@@ -87,6 +94,7 @@ export async function localizedSite(
       taxonomyLabel("domains", claim.domain),
       ...types.map(({ label }) => label),
       ...claim.directions.map((value) => taxonomyLabel("directions", value)),
+      ...stages.map(({ label }) => label),
       ...claim.responses.map(termLabel),
       ...topics.map(({ label }) => label),
       ...(localized.patterns ?? []).flat(),
@@ -106,6 +114,7 @@ export async function localizedSite(
       })),
       typeTags: types,
       populationTags: populations,
+      stageTags: stages,
       topicTags: topics,
       searchText,
       sources: claim.sources.map((source) => ({
@@ -138,6 +147,13 @@ export async function localizedSite(
         label: taxonomyLabel("domains", domain.id),
       })),
     ],
+    stageFilters: journeyStages.map(({ id }) => ({
+      group: "stage",
+      value: id,
+      label: taxonomyLabel("stages", id),
+      className: "stage-tag",
+      categoryLabel: messages.stage,
+    })),
     experiences: localizedExperiences,
   };
 }

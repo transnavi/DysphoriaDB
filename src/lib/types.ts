@@ -7,7 +7,7 @@ export type LocaleDefinition = {
 };
 
 export type CatalogTag = {
-  group: "type" | "population" | "topic";
+  group: "type" | "population" | "stage" | "topic";
   value: string;
   label: string;
   className: string;
@@ -33,6 +33,7 @@ export type CatalogItem = {
   domain: string;
   types: string[];
   directions: string[];
+  stages: string[];
   tags: string[];
   reportCount: number;
   reactionCount: number;
@@ -43,6 +44,7 @@ export type CatalogItem = {
   variations: CatalogVariation[];
   typeTags: CatalogTag[];
   populationTags: CatalogTag[];
+  stageTags: CatalogTag[];
   topicTags: CatalogTag[];
   searchText: string;
 };
@@ -65,6 +67,7 @@ export type LocalizedSite = {
   messages: Record<string, string>;
   domains: CatalogDomain[];
   domainTabs: Array<{ id: string; label: string }>;
+  stageFilters: CatalogTag[];
   experiences: CatalogItem[];
 };
 

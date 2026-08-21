@@ -79,7 +79,7 @@
     },
     "review": {
       "type": "object",
-      "required": ["status", "reportType", "reporter"],
+      "required": ["status", "reportType", "subject"],
       "properties": {
         "status": {
           "enum": [
@@ -115,33 +115,33 @@
             "same_thread_explicit"
           ]
         },
-        "reporter": {
+        "subject": {
           "type": "object",
-          "description": "Gender position of the person whose experience the source reports.",
+          "description": "Gender position of the person whose experience the source reports, who is not always the source author.",
           "required": ["direction", "trajectory", "statedAs", "basis"],
           "properties": {
             "direction": {
-              "description": "Coarse axis, shared with the experience taxonomy.",
+              "description": "Coarse axis, using the vocabulary of experience directions.",
               "enum": [
                 "unknown",
                 "transfeminine",
                 "transmasculine",
                 "nonbinary",
-                "questioning",
                 "cisgender"
               ]
             },
             "trajectory": {
-              "description": "Assigned sex to identified gender, where both are determinable.",
+              "description": "Assigned sex to identified gender. The letter after the t is the identified gender, so mtx and ftx are the two nonbinary routes and a nonbinary person assigned male is mtx rather than mtf.",
               "enum": ["unspecified", "mtf", "mtx", "ftm", "ftx"]
             },
             "statedAs": {
-              "description": "The person's own wording, quoted rather than paraphrased.",
+              "description": "The person's own wording for their position, quoted.",
               "type": ["string", "null"]
             },
             "basis": {
-              "description": "Where the position is stated.",
+              "description": "Where the position is stated. undetermined means no one has looked yet; unstated means the person says nothing anywhere reachable.",
               "enum": [
+                "undetermined",
                 "unstated",
                 "same_post",
                 "same_thread",
@@ -181,13 +181,21 @@
             },
             {
               "if": {
-                "properties": { "basis": { "const": "unstated" } },
+                "properties": {
+                  "basis": { "enum": ["undetermined", "unstated"] }
+                },
                 "required": ["basis"]
               },
               "then": {
                 "properties": {
                   "direction": { "const": "unknown" },
-                  "trajectory": { "const": "unspecified" }
+                  "trajectory": { "const": "unspecified" },
+                  "statedAs": { "type": "null" }
+                }
+              },
+              "else": {
+                "properties": {
+                  "statedAs": { "type": "string", "minLength": 1 }
                 }
               }
             }

@@ -5,12 +5,12 @@ from __future__ import annotations
 from typing import Any
 
 
-def unknown_reporter() -> dict[str, Any]:
-    """A reporter position that has not been determined from any source."""
+def undetermined_subject() -> dict[str, Any]:
+    """A gender position nobody has looked for yet."""
 
     return {
         "direction": "unknown",
         "trajectory": "unspecified",
         "statedAs": None,
-        "basis": "unstated",
+        "basis": "undetermined",
     }

@@ -5,23 +5,23 @@ import pytest
 from jsonschema import Draft202012Validator, FormatChecker
 from referencing import Registry, Resource
 
-from scripts.review_defaults import unknown_reporter
+from scripts.review_defaults import undetermined_subject
 
 
-SCHEMA_DIR = Path("schemas")
+SCHEMA_DIR = Path(__file__).resolve().parents[1] / "schemas"
 
 
 @pytest.fixture(scope="module")
 def validator() -> Draft202012Validator:
     source = json.loads((SCHEMA_DIR / "source.schema.json").read_text(encoding="utf-8"))
-    candidate = json.loads(
+    candidate_schema = json.loads(
         (SCHEMA_DIR / "source-candidate.schema.json").read_text(encoding="utf-8")
     )
     registry = Registry().with_resource(
         source["$id"], Resource.from_contents(source)
     )
     return Draft202012Validator(
-        candidate, registry=registry, format_checker=FormatChecker()
+        candidate_schema, registry=registry, format_checker=FormatChecker()
     )
 
 
@@ -58,7 +58,7 @@ def candidate() -> dict:
             "status": "pending",
             "reportType": "unknown",
             "identityBasis": "unknown",
-            "reporter": unknown_reporter(),
+            "subject": undetermined_subject(),
         },
         "availability": {
             "status": "public",
@@ -68,55 +68,82 @@ def candidate() -> dict:
     }
 
 
-def errors(validator: Draft202012Validator, value: dict) -> list[str]:
+def paths(validator: Draft202012Validator, value: dict) -> list[str]:
+    return [error.json_path for error in validator.iter_errors(value)]
+
+
+def messages(validator: Draft202012Validator, value: dict) -> list[str]:
     return [error.message for error in validator.iter_errors(value)]
 
 
-def test_an_undetermined_reporter_validates(validator: Draft202012Validator) -> None:
-    assert errors(validator, candidate()) == []
+def with_subject(**fields) -> dict:
+    value = candidate()
+    value["review"]["subject"].update(fields)
+    return value
 
 
-def test_review_requires_a_reporter_position(
+def test_an_undetermined_subject_validates(validator: Draft202012Validator) -> None:
+    assert messages(validator, candidate()) == []
+
+
+def test_the_fixture_resolves_the_referenced_source_schema(
     validator: Draft202012Validator,
 ) -> None:
     value = candidate()
-    del value["review"]["reporter"]
+    del value["source"]["contentHash"]
 
-    assert any("'reporter' is a required property" in m for m in errors(validator, value))
+    assert any(
+        "'contentHash' is a required property" in m for m in messages(validator, value)
+    )
 
 
-def test_a_reporter_position_needs_all_four_fields(
-    validator: Draft202012Validator,
-) -> None:
+def test_format_checking_is_active(validator: Draft202012Validator) -> None:
     value = candidate()
-    del value["review"]["reporter"]["basis"]
+    value["discovery"]["discoveredAt"] = "the day before yesterday"
 
-    assert any("'basis' is a required property" in m for m in errors(validator, value))
+    assert "$.discovery.discoveredAt" in paths(validator, value)
+
+
+def test_review_requires_a_subject(validator: Draft202012Validator) -> None:
+    value = candidate()
+    del value["review"]["subject"]
+
+    assert any(
+        "'subject' is a required property" in m for m in messages(validator, value)
+    )
+
+
+def test_a_subject_needs_all_four_fields(validator: Draft202012Validator) -> None:
+    value = candidate()
+    del value["review"]["subject"]["basis"]
+
+    assert any("'basis' is a required property" in m for m in messages(validator, value))
+
+
+def test_a_subject_rejects_unknown_fields(validator: Draft202012Validator) -> None:
+    value = with_subject(pronouns="she/her")
+
+    assert any("'pronouns' was unexpected" in m for m in messages(validator, value))
 
 
 @pytest.mark.parametrize(
     ("trajectory", "direction"),
     [
         ("mtf", "transmasculine"),
+        ("mtf", "nonbinary"),
         ("ftm", "transfeminine"),
         ("mtx", "transfeminine"),
         ("ftx", "transmasculine"),
     ],
 )
-def test_trajectory_and_direction_must_agree(
+def test_a_trajectory_pins_its_direction(
     validator: Draft202012Validator, trajectory: str, direction: str
 ) -> None:
-    value = candidate()
-    value["review"]["reporter"].update(
-        {
-            "direction": direction,
-            "trajectory": trajectory,
-            "statedAs": "example",
-            "basis": "same_post",
-        }
+    value = with_subject(
+        direction=direction, trajectory=trajectory, statedAs="example", basis="same_post"
     )
 
-    assert errors(validator, value) != []
+    assert "$.review.subject.direction" in paths(validator, value)
 
 
 @pytest.mark.parametrize(
@@ -131,47 +158,47 @@ def test_trajectory_and_direction_must_agree(
 def test_an_agreeing_trajectory_validates(
     validator: Draft202012Validator, trajectory: str, direction: str
 ) -> None:
-    value = candidate()
-    value["review"]["reporter"].update(
-        {
-            "direction": direction,
-            "trajectory": trajectory,
-            "statedAs": "example",
-            "basis": "profile",
-        }
+    value = with_subject(
+        direction=direction, trajectory=trajectory, statedAs="example", basis="profile"
     )
 
-    assert errors(validator, value) == []
+    assert messages(validator, value) == []
 
 
-def test_an_unstated_reporter_carries_no_position(
-    validator: Draft202012Validator,
+@pytest.mark.parametrize("basis", ["undetermined", "unstated"])
+def test_an_unsourced_basis_carries_no_position(
+    validator: Draft202012Validator, basis: str
 ) -> None:
-    value = candidate()
-    value["review"]["reporter"].update(
-        {"direction": "transfeminine", "trajectory": "mtf"}
+    value = with_subject(direction="transfeminine", trajectory="mtf", basis=basis)
+
+    assert "$.review.subject.direction" in paths(validator, value)
+
+
+@pytest.mark.parametrize("basis", ["undetermined", "unstated"])
+def test_an_unsourced_basis_carries_no_wording(
+    validator: Draft202012Validator, basis: str
+) -> None:
+    value = with_subject(statedAs="I am a trans woman", basis=basis)
+
+    assert "$.review.subject.statedAs" in paths(validator, value)
+
+
+@pytest.mark.parametrize("basis", ["same_post", "same_thread", "profile", "elsewhere_public"])
+def test_a_sourced_position_must_quote_the_wording(
+    validator: Draft202012Validator, basis: str
+) -> None:
+    absent = with_subject(direction="transfeminine", trajectory="mtf", basis=basis)
+    empty = with_subject(
+        direction="transfeminine", trajectory="mtf", statedAs="", basis=basis
     )
 
-    assert errors(validator, value) != []
+    assert "$.review.subject.statedAs" in paths(validator, absent)
+    assert "$.review.subject.statedAs" in paths(validator, empty)
 
 
 def test_a_position_without_a_trajectory_validates(
     validator: Draft202012Validator,
 ) -> None:
-    value = candidate()
-    value["review"]["reporter"].update(
-        {
-            "direction": "questioning",
-            "statedAs": "祂、她、他、它",
-            "basis": "profile",
-        }
-    )
+    value = with_subject(statedAs="祂、她、他、它", basis="profile")
 
-    assert errors(validator, value) == []
-
-
-def test_reporter_rejects_unknown_fields(validator: Draft202012Validator) -> None:
-    value = candidate()
-    value["review"]["reporter"]["pronouns"] = "she/her"
-
-    assert any("'pronouns' was unexpected" in m for m in errors(validator, value))
+    assert messages(validator, value) == []

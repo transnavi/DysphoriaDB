@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://db.transnavi.jp/schemas/source-candidate.schema.json",
+  "title": "Gender Experience Index source candidate",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "candidateId",
+    "source",
+    "discovery",
+    "proposedPhenomena",
+    "review",
+    "availability",
+    "publication"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "0.1.0" },
+    "candidateId": {
+      "type": "string",
+      "pattern": "^candidate:src:[a-z0-9_-]+:.+$"
+    },
+    "source": { "$ref": "source.schema.json" },
+    "discovery": {
+      "type": "object",
+      "required": ["method", "sourceUrls", "discoveredAt"],
+      "properties": {
+        "method": {
+          "enum": [
+            "curated_public_source",
+            "direct_public_post",
+            "public_keyword_search",
+            "public_thread",
+            "public_list",
+            "user_submission"
+          ]
+        },
+        "sourceUrls": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "format": "uri" }
+        },
+        "discoveredAt": { "type": "string", "format": "date-time" },
+        "context": { "type": ["string", "null"] },
+        "query": { "type": ["string", "null"] },
+        "queryLanguage": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "proposedPhenomena": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["relation", "label"],
+        "properties": {
+          "relation": {
+            "enum": ["supports_experience", "suggests_experience", "contextualizes_experience"]
+          },
+          "experienceId": { "type": ["string", "null"], "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "label": { "type": "string", "minLength": 1 },
+          "rationale": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": { "relation": { "const": "supports_experience" } },
+              "required": ["relation"]
+            },
+            "then": {
+              "required": ["experienceId"],
+              "properties": {
+                "experienceId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": ["status", "reportType", "reporter"],
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "in_review",
+            "needs_context",
+            "needs_translation",
+            "approved",
+            "rejected",
+            "duplicate",
+            "withdrawn"
+          ]
+        },
+        "reportType": {
+          "enum": [
+            "unknown",
+            "first_person",
+            "first_person_plural",
+            "first_person_summary",
+            "autobiographical_second_person",
+            "secondhand",
+            "general_discourse",
+            "hypothetical",
+            "promotional",
+            "context_only"
+          ]
+        },
+        "identityBasis": {
+          "enum": [
+            "unknown",
+            "not_required",
+            "same_post_explicit",
+            "same_thread_explicit"
+          ]
+        },
+        "reporter": {
+          "type": "object",
+          "description": "Gender position of the person whose experience the source reports.",
+          "required": ["direction", "trajectory", "statedAs", "basis"],
+          "properties": {
+            "direction": {
+              "description": "Coarse axis, shared with the experience taxonomy.",
+              "enum": [
+                "unknown",
+                "transfeminine",
+                "transmasculine",
+                "nonbinary",
+                "questioning",
+                "cisgender"
+              ]
+            },
+            "trajectory": {
+              "description": "Assigned sex to identified gender, where both are determinable.",
+              "enum": ["unspecified", "mtf", "mtx", "ftm", "ftx"]
+            },
+            "statedAs": {
+              "description": "The person's own wording, quoted rather than paraphrased.",
+              "type": ["string", "null"]
+            },
+            "basis": {
+              "description": "Where the position is stated.",
+              "enum": [
+                "unstated",
+                "same_post",
+                "same_thread",
+                "profile",
+                "elsewhere_public"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": { "trajectory": { "const": "mtf" } },
+                "required": ["trajectory"]
+              },
+              "then": {
+                "properties": { "direction": { "const": "transfeminine" } }
+              }
+            },
+            {
+              "if": {
+                "properties": { "trajectory": { "const": "ftm" } },
+                "required": ["trajectory"]
+              },
+              "then": {
+                "properties": { "direction": { "const": "transmasculine" } }
+              }
+            },
+            {
+              "if": {
+                "properties": { "trajectory": { "enum": ["mtx", "ftx"] } },
+                "required": ["trajectory"]
+              },
+              "then": {
+                "properties": { "direction": { "const": "nonbinary" } }
+              }
+            },
+            {
+              "if": {
+                "properties": { "basis": { "const": "unstated" } },
+                "required": ["basis"]
+              },
+              "then": {
+                "properties": {
+                  "direction": { "const": "unknown" },
+                  "trajectory": { "const": "unspecified" }
+                }
+              }
+            }
+          ]
+        },
+        "threadSourceId": { "type": ["string", "null"] },
+        "independenceKey": { "type": ["string", "null"] },
+        "excerpt": { "type": ["string", "null"] },
+        "reviewedAt": { "type": ["string", "null"], "format": "date-time" },
+        "reviewer": { "type": ["string", "null"] },
+        "decisionReason": { "type": ["string", "null"] },
+        "duplicateOf": {
+          "type": ["string", "null"],
+          "pattern": "^candidate:src:[a-z0-9_-]+:.+$"
+        },
+        "languageNotes": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "status": { "const": "duplicate" } },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["duplicateOf"],
+            "properties": {
+              "duplicateOf": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "status": { "const": "approved" } },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["identityBasis"],
+            "properties": {
+              "reportType": { "not": { "const": "unknown" } },
+              "identityBasis": { "not": { "const": "unknown" } }
+            }
+          }
+        }
+      ]
+    },
+    "availability": {
+      "type": "object",
+      "required": ["status", "checkedAt"],
+      "properties": {
+        "status": {
+          "enum": ["unchecked", "public", "unavailable", "deleted", "protected"]
+        },
+        "checkedAt": { "type": ["string", "null"], "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "publication": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": ["unpublished", "published", "suppressed", "tombstoned"]
+        },
+        "publishedAt": { "type": ["string", "null"], "format": "date-time" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "publication": {
+            "properties": { "status": { "const": "published" } },
+            "required": ["status"]
+          }
+        },
+        "required": ["publication"]
+      },
+      "then": {
+        "properties": {
+          "review": {
+            "properties": { "status": { "const": "approved" } }
+          },
+          "publication": {
+            "required": ["publishedAt"],
+            "properties": {
+              "publishedAt": { "type": "string", "format": "date-time" }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

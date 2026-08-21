@@ -381,6 +381,10 @@ const experiences = {
         "A child may repeatedly want a family role, character, or social position associated with another gender."
       ],
       [
+        "Costume and cosplay",
+        "Dressing as a character of another gender and going out in that form can bring a pleasure unlike anything felt before, and it may become something you keep going back to."
+      ],
+      [
         "Games and avatars",
         "Choosing a character of another gender may feel more comfortable, interesting, or personally meaningful."
       ],

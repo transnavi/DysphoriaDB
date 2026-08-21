@@ -262,7 +262,7 @@ export const experiences = [
       "identity",
       "self-recognition"
     ],
-    "reportCount": 5,
+    "reportCount": 4,
     "reactionCount": 0,
     "sources": [
       [
@@ -1400,7 +1400,7 @@ export const experiences = [
       "cosplay",
       "online-identity"
     ],
-    "reportCount": 4,
+    "reportCount": 3,
     "reactionCount": 0,
     "sources": [
       [

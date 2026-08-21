@@ -1337,7 +1337,7 @@ export const experiences = [
       "cosplay",
       "online-identity"
     ],
-    "reportCount": 0,
+    "reportCount": 4,
     "reactionCount": 0,
     "sources": [
       [
@@ -1347,6 +1347,26 @@ export const experiences = [
       [
         "Gender Dysphoria Bible: Euphoria",
         "https://genderdysphoria.fyi/en/euphoria"
+      ],
+      [
+        "羊毛球 (@ki_3ri): 一个朋友拉着我玩cosplay，我选择了当时比较喜欢的男性角色，以他的形象出门之后一下子就被从未体会过的愉悦冲昏了头脑。 A friend pulled me into cosplay; I picked a male character I liked, and going out in his form left me overwhelmed by a pleasure I had never felt before.",
+        "https://x.com/ki_3ri/status/2090489175116251404",
+        "Community report"
+      ],
+      [
+        "羊毛球 (@ki_3ri): 我当时还不知道什么是跨性别，只知道自己特别开心，然后我就一直玩cos直到认识了几个神人 I didn't know what transgender meant then; I only knew I was very happy, and I kept doing cosplay until I met a few remarkable people.",
+        "https://x.com/ki_3ri/status/2090496684178755903",
+        "Community report · reply"
+      ],
+      [
+        "絵空　雫 (@EsoraShizuku): 我也觉得第一次女装cos很开心… My first feminine cosplay felt happy too.",
+        "https://x.com/EsoraShizuku/status/2090519237060075757",
+        "Community report · reply"
+      ],
+      [
+        "真左要乐奈 (@Pissenlit_AH): 我大概6、7岁的时候我表姐把我扮成女孩子，然后拉去给我妈妈和舅母看...听她们称呼我是女孩子。然后就一发不可收拾了...被愉悦冲昏头脑了 At about six or seven my cousin dressed me as a girl and took me to my mother and aunt, and I heard them call me a girl. After that there was no going back.",
+        "https://x.com/Pissenlit_AH/status/2090538615873163367",
+        "Community report · reply"
       ]
     ]
   },

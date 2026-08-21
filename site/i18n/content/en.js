@@ -359,7 +359,7 @@ const experiences = {
       ],
       [
         "Costume and cosplay",
-        "Dressing as a character of another gender and going out in that form can bring a pleasure unlike anything felt before, and the costume may be repeated long after the first occasion."
+        "Dressing as a character of another gender and going out in that form can bring a pleasure unlike anything felt before, and it may become something you keep going back to."
       ],
       [
         "Games and avatars",

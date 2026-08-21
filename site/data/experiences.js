@@ -262,7 +262,7 @@ export const experiences = [
       "identity",
       "self-recognition"
     ],
-    "reportCount": 5,
+    "reportCount": 4,
     "reactionCount": 0,
     "sources": [
       [

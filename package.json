@@ -11,11 +11,12 @@
     "dev": "vite --host 0.0.0.0 --port 4174",
     "preview": "vite preview --host 0.0.0.0 --port 4174",
     "deploy": "npm run build && wrangler deploy --old-asset-ttl 604800",
-    "test": "npm run build && npm run test:worker && npm run test:content",
+    "test": "npm run build && npm run test:worker && npm run test:content && npm run test:schema",
     "test:worker": "vitest run",
     "test:content": "node --test tests/i18n.test.mjs tests/reaction-ranking.test.mjs tests/reaction-state.test.mjs",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "types": "wrangler types --env-interface Env && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    "types": "wrangler types --env-interface Env && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "test:schema": "uv run pytest"
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.22.0",

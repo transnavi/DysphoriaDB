@@ -5,6 +5,29 @@ const experiences = {
     "patterns": [],
     "variations": []
   },
+  "self-hatred": {
+    "title": "Self-hatred",
+    "summary": "Contempt can attach to yourself as a whole: how you look, how you come across to other people, and the kind of person you take yourself to be. Words used against people like you can become the ordinary words you use about yourself.",
+    "patterns": [
+      [
+        "Insults become self-description",
+        "Slurs and mockery aimed at transgender people can become the everyday words you use for your own face, body, or voice."
+      ],
+      [
+        "Harsher than anyone around you",
+        "The judgement you pass on yourself can be far heavier than anything the people near you say or appear to think."
+      ],
+      [
+        "Standing beside someone else",
+        "Being seen next to a partner or friend can sharpen how you read your own appearance, and the pairing itself may feel like it gives you away."
+      ],
+      [
+        "Contempt held before self-recognition",
+        "Dislike of transgender people, held before recognizing yourself among them, can leave its wording behind afterwards."
+      ]
+    ],
+    "variations": []
+  },
   "unfamiliar-reflection": {
     "title": "Your reflection feels unfamiliar",
     "summary": "Your reflection, photograph, or recording may look like another person or fail to produce an ordinary sense of self-recognition.",

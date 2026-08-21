@@ -27,6 +27,7 @@ export const experienceFamilies = [
       "unfamiliar-reflection",
       "difficulty-picturing-your-current-body-shape",
       "body-looks-like-the-wrong-gender",
+      "self-hatred",
       "feeling-detached-from-the-body",
       "seeing-yourself-shift-toward-recognition",
       "avoiding-your-own-unclothed-body"
@@ -234,6 +235,68 @@ export const experiences = [
         "https://pmc.ncbi.nlm.nih.gov/articles/PMC6831013/",
         "Questionnaire",
         "Covers genitalia, chest, other sex characteristics, social gender recognition, intimacy, psychological functioning, and life satisfaction."
+      ]
+    ]
+  },
+  {
+    "id": "self-hatred",
+    "stages": ["before-realization","questioning","self-recognized","disclosed","transitioning"],
+    "family": "body-image-and-self-recognition",
+    "domain": "body",
+    "types": [
+      "dysphoric"
+    ],
+    "directions": [
+      "cross-directional"
+    ],
+    "responses": [
+      "self-criticism",
+      "feeling-ugly",
+      "low-confidence",
+      "isolation"
+    ],
+    "tags": [
+      "appearance",
+      "body-image",
+      "confidence",
+      "identity",
+      "self-recognition"
+    ],
+    "reportCount": 5,
+    "reactionCount": 0,
+    "sources": [
+      [
+        "Gender Dysphoria Bible: Societal Dysphoria",
+        "https://genderdysphoria.fyi/en/societal-dysphoria"
+      ],
+      [
+        "Gender Dysphoria Bible: Impostor Syndrome",
+        "https://genderdysphoria.fyi/en/impostor-syndrome"
+      ],
+      [
+        "Mr. Textured Graphics (@AliasTextured), drawing: two partners walking together, each reading their own appearance through a slur and expecting the pair to be taken for a same-gender couple.",
+        "https://x.com/AliasTextured/status/2090517590334492975",
+        "Community report"
+      ],
+      [
+        "crawbugz (@crawbugz): I look like this and I say this.",
+        "https://x.com/crawbugz/status/2090522955541324102",
+        "Community report · reply"
+      ],
+      [
+        "Arctic (@neco_arctic): when I eat lots of yummy treats and food and then take selfies with captions like “I'm ugly and fat and a boy”",
+        "https://x.com/neco_arctic/status/2086744881595359695",
+        "Community report"
+      ],
+      [
+        "Peevee (@Peevee39525): if im gonna be dysphoric and clocky i dont want to do it alone.",
+        "https://x.com/Peevee39525/status/2090534444385853815",
+        "Community report · reply"
+      ],
+      [
+        "psychobellum (@psychobellum): this was literally my ex and i until one day we went to an event and the tgirl working doors said “just so you know, this is a *queer* party”",
+        "https://x.com/psychobellum/status/2090573745555378458",
+        "Community report · reply"
       ]
     ]
   },

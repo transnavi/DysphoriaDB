@@ -1,24 +1,3 @@
-export const journeyStages = [
-  {
-    "id": "before-realization"
-  },
-  {
-    "id": "questioning"
-  },
-  {
-    "id": "self-recognized"
-  },
-  {
-    "id": "disclosed"
-  },
-  {
-    "id": "transitioning"
-  },
-  {
-    "id": "established"
-  }
-];
-
 export const experienceFamilies = [
   {
     "id": "body-image-and-self-recognition",
@@ -27,7 +6,6 @@ export const experienceFamilies = [
       "unfamiliar-reflection",
       "difficulty-picturing-your-current-body-shape",
       "body-looks-like-the-wrong-gender",
-      "self-hatred",
       "feeling-detached-from-the-body",
       "seeing-yourself-shift-toward-recognition",
       "avoiding-your-own-unclothed-body"
@@ -124,7 +102,6 @@ export const experienceFamilies = [
       "returning-to-gendered-childhood-interests",
       "fear-of-aging-in-the-assigned-gender",
       "fear-that-transition-began-too-late",
-      "recurring-doubt-about-being-trans-enough",
       "gender-feelings-fluctuate-in-intensity",
       "gender-expression-becomes-less-deliberate",
       "moving-forward-after-gender-self-recognition",
@@ -193,7 +170,6 @@ export const domains = [
 export const experiences = [
   {
     "id": "mirrors-and-photographs-feel-unflattering",
-    "stages": ["before-realization","questioning"],
     "family": "body-image-and-self-recognition",
     "domain": "body",
     "types": [
@@ -223,10 +199,6 @@ export const experiences = [
         "https://genderdysphoria.fyi/en/physical-dysphoria"
       ],
       [
-        "Gender Dysphoria Bible: Androgenic Puberty",
-        "https://genderdysphoria.fyi/en/second-puberty-masc"
-      ],
-      [
         "TransNavi: 性別違和を知る",
         "https://transnavi.jp/dysphoria/"
       ],
@@ -239,70 +211,7 @@ export const experiences = [
     ]
   },
   {
-    "id": "self-hatred",
-    "stages": ["before-realization","questioning","self-recognized","disclosed","transitioning"],
-    "family": "body-image-and-self-recognition",
-    "domain": "body",
-    "types": [
-      "dysphoric"
-    ],
-    "directions": [
-      "cross-directional"
-    ],
-    "responses": [
-      "self-criticism",
-      "feeling-ugly",
-      "low-confidence",
-      "isolation"
-    ],
-    "tags": [
-      "appearance",
-      "body-image",
-      "confidence",
-      "identity",
-      "self-recognition"
-    ],
-    "reportCount": 4,
-    "reactionCount": 0,
-    "sources": [
-      [
-        "Gender Dysphoria Bible: Societal Dysphoria",
-        "https://genderdysphoria.fyi/en/societal-dysphoria"
-      ],
-      [
-        "Gender Dysphoria Bible: Impostor Syndrome",
-        "https://genderdysphoria.fyi/en/impostor-syndrome"
-      ],
-      [
-        "Mr. Textured Graphics (@AliasTextured), drawing: two partners walking together, each reading their own appearance through a slur and expecting the pair to be taken for a same-gender couple.",
-        "https://x.com/AliasTextured/status/2090517590334492975",
-        "Community report"
-      ],
-      [
-        "crawbugz (@crawbugz): I look like this and I say this.",
-        "https://x.com/crawbugz/status/2090522955541324102",
-        "Community report · reply"
-      ],
-      [
-        "Arctic (@neco_arctic): when I eat lots of yummy treats and food and then take selfies with captions like “I'm ugly and fat and a boy”",
-        "https://x.com/neco_arctic/status/2086744881595359695",
-        "Community report"
-      ],
-      [
-        "Peevee (@Peevee39525): if im gonna be dysphoric and clocky i dont want to do it alone.",
-        "https://x.com/Peevee39525/status/2090534444385853815",
-        "Community report · reply"
-      ],
-      [
-        "psychobellum (@psychobellum): this was literally my ex and i until one day we went to an event and the tgirl working doors said “just so you know, this is a *queer* party”",
-        "https://x.com/psychobellum/status/2090573745555378458",
-        "Community report · reply"
-      ]
-    ]
-  },
-  {
     "id": "unfamiliar-reflection",
-    "stages": ["before-realization","questioning"],
     "family": "body-image-and-self-recognition",
     "domain": "body",
     "types": [
@@ -338,7 +247,6 @@ export const experiences = [
   },
   {
     "id": "difficulty-picturing-your-current-body-shape",
-    "stages": ["before-realization","questioning"],
     "family": "body-image-and-self-recognition",
     "domain": "body",
     "types": [
@@ -376,7 +284,6 @@ export const experiences = [
   },
   {
     "id": "avoiding-your-own-unclothed-body",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "body-image-and-self-recognition",
     "domain": "body",
     "types": [
@@ -414,7 +321,6 @@ export const experiences = [
   },
   {
     "id": "discomfort-with-your-body-being-seen",
-    "stages": ["before-realization","questioning","self-recognized","transitioning"],
     "family": "bodily-privacy-and-visibility-to-others",
     "domain": "body",
     "types": [
@@ -448,7 +354,6 @@ export const experiences = [
   },
   {
     "id": "feeling-out-of-place-in-gendered-restrooms",
-    "stages": ["self-recognized","disclosed","transitioning","established"],
     "family": "bodily-privacy-and-visibility-to-others",
     "domain": "body",
     "types": [
@@ -500,7 +405,6 @@ export const experiences = [
   },
   {
     "id": "body-looks-like-the-wrong-gender",
-    "stages": ["questioning","self-recognized","transitioning"],
     "family": "body-image-and-self-recognition",
     "domain": "body",
     "types": [
@@ -563,7 +467,6 @@ export const experiences = [
   },
   {
     "id": "covering-the-bare-upper-torso",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "bodily-privacy-and-visibility-to-others",
     "domain": "body",
     "types": [
@@ -699,7 +602,6 @@ export const experiences = [
   },
   {
     "id": "concealing-chest-development-while-boymoding",
-    "stages": ["transitioning"],
     "family": "bodily-privacy-and-visibility-to-others",
     "domain": "body",
     "types": [
@@ -745,7 +647,6 @@ export const experiences = [
   },
   {
     "id": "minimizing-or-binding-an-unwanted-chest",
-    "stages": ["questioning","self-recognized","disclosed","transitioning"],
     "family": "clothing-and-body-silhouette",
     "domain": "presentation",
     "types": [
@@ -783,7 +684,6 @@ export const experiences = [
   },
   {
     "id": "discomfort-with-sex-characteristics",
-    "stages": ["before-realization","questioning","self-recognized","transitioning"],
     "family": "gendered-body-traits-and-changes",
     "domain": "body",
     "types": [
@@ -848,7 +748,6 @@ export const experiences = [
   },
   {
     "id": "extreme-body-shape-and-gendered-silhouette",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "gendered-body-traits-and-changes",
     "domain": "body",
     "types": [
@@ -886,7 +785,6 @@ export const experiences = [
   },
   {
     "id": "feeling-detached-from-the-body",
-    "stages": ["before-realization","questioning"],
     "family": "body-image-and-self-recognition",
     "domain": "body",
     "types": [
@@ -923,7 +821,6 @@ export const experiences = [
   },
   {
     "id": "assigned-gender-presentation-feels-wrong",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "gender-expression-and-assigned-expectations",
     "domain": "presentation",
     "types": [
@@ -978,7 +875,6 @@ export const experiences = [
   },
   {
     "id": "plain-clothes-over-assigned-gender-beauty",
-    "stages": ["before-realization","questioning"],
     "family": "gender-expression-and-assigned-expectations",
     "domain": "presentation",
     "types": [
@@ -1024,7 +920,6 @@ export const experiences = [
   },
   {
     "id": "gravitating-away-from-assigned-gender-expectations",
-    "stages": ["before-realization"],
     "family": "gender-expression-and-assigned-expectations",
     "domain": "presentation",
     "types": [
@@ -1074,7 +969,6 @@ export const experiences = [
   },
   {
     "id": "being-treated-as-the-assigned-gender-feels-wrong",
-    "stages": ["questioning","self-recognized","disclosed","transitioning","established"],
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
     "types": [
@@ -1138,7 +1032,6 @@ export const experiences = [
   },
   {
     "id": "gendered-records-feel-inaccurate",
-    "stages": ["self-recognized","disclosed","transitioning","established"],
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
     "types": [
@@ -1178,7 +1071,6 @@ export const experiences = [
   },
   {
     "id": "hesitating-over-gender-fields",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
     "types": [
@@ -1216,7 +1108,6 @@ export const experiences = [
   },
   {
     "id": "relief-from-gender-recognition",
-    "stages": ["questioning","self-recognized","disclosed","transitioning","established"],
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
     "types": [
@@ -1270,7 +1161,6 @@ export const experiences = [
   },
   {
     "id": "gender-policing-insults-feel-affirming",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
     "types": [
@@ -1319,7 +1209,6 @@ export const experiences = [
   },
   {
     "id": "relief-from-gender-affirming-expression",
-    "stages": ["questioning","self-recognized","disclosed","transitioning","established"],
     "family": "gender-expression-and-assigned-expectations",
     "domain": "presentation",
     "types": [
@@ -1377,7 +1266,6 @@ export const experiences = [
   },
   {
     "id": "another-gender-in-games-and-imagined-roles",
-    "stages": ["before-realization","questioning"],
     "family": "exploring-gender-through-imagination-and-identification",
     "domain": "self-understanding",
     "types": [
@@ -1400,7 +1288,7 @@ export const experiences = [
       "cosplay",
       "online-identity"
     ],
-    "reportCount": 3,
+    "reportCount": 4,
     "reactionCount": 0,
     "sources": [
       [
@@ -1410,32 +1298,11 @@ export const experiences = [
       [
         "Gender Dysphoria Bible: Euphoria",
         "https://genderdysphoria.fyi/en/euphoria"
-      ],
-      [
-        "羊毛球 (@ki_3ri): 一个朋友拉着我玩cosplay，我选择了当时比较喜欢的男性角色，以他的形象出门之后一下子就被从未体会过的愉悦冲昏了头脑。 A friend pulled me into cosplay; I picked a male character I liked, and going out in his form left me overwhelmed by a pleasure I had never felt before.",
-        "https://x.com/ki_3ri/status/2090489175116251404",
-        "Community report"
-      ],
-      [
-        "羊毛球 (@ki_3ri): 我当时还不知道什么是跨性别，只知道自己特别开心，然后我就一直玩cos直到认识了几个神人 I didn't know what transgender meant then; I only knew I was very happy, and I kept doing cosplay until I met a few remarkable people.",
-        "https://x.com/ki_3ri/status/2090496684178755903",
-        "Community report · reply"
-      ],
-      [
-        "絵空　雫 (@EsoraShizuku): 我也觉得第一次女装cos很开心… My first feminine cosplay felt happy too.",
-        "https://x.com/EsoraShizuku/status/2090519237060075757",
-        "Community report · reply"
-      ],
-      [
-        "真左要乐奈 (@Pissenlit_AH): 我大概6、7岁的时候我表姐把我扮成女孩子，然后拉去给我妈妈和舅母看...听她们称呼我是女孩子。然后就一发不可收拾了...被愉悦冲昏头脑了 At about six or seven my cousin dressed me as a girl and took me to my mother and aunt, and I heard them call me a girl. After that there was no going back.",
-        "https://x.com/Pissenlit_AH/status/2090538615873163367",
-        "Community report · reply"
       ]
     ]
   },
   {
     "id": "gender-transformation-stories-feel-compelling",
-    "stages": ["before-realization","questioning"],
     "family": "exploring-gender-through-imagination-and-identification",
     "domain": "self-understanding",
     "types": [
@@ -1473,7 +1340,6 @@ export const experiences = [
   },
   {
     "id": "assigned-gender-roles-feel-performed",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "assigned-gender-roles-and-performance",
     "domain": "social",
     "types": [
@@ -1519,7 +1385,6 @@ export const experiences = [
   },
   {
     "id": "same-gender-friendship-feels-socially-wrong",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "assigned-gender-roles-and-performance",
     "domain": "social",
     "types": [
@@ -1579,7 +1444,6 @@ export const experiences = [
   },
   {
     "id": "overperforming-the-assigned-gender",
-    "stages": ["before-realization","questioning"],
     "family": "assigned-gender-roles-and-performance",
     "domain": "social",
     "types": [
@@ -1617,7 +1481,6 @@ export const experiences = [
   },
   {
     "id": "clothing-that-hides-the-body-silhouette",
-    "stages": ["before-realization","questioning","self-recognized","transitioning"],
     "family": "clothing-and-body-silhouette",
     "domain": "presentation",
     "types": [
@@ -1655,7 +1518,6 @@ export const experiences = [
   },
   {
     "id": "voice-feels-unlike-oneself",
-    "stages": ["before-realization","questioning","self-recognized","transitioning"],
     "family": "gendered-body-traits-and-changes",
     "domain": "body",
     "types": [
@@ -1668,25 +1530,13 @@ export const experiences = [
       "jarring-recognition",
       "avoidance",
       "embarrassment",
-      "wish-for-change",
-      "fear",
-      "dread",
-      "grief",
-      "withdrawal",
-      "hopelessness",
-      "loss-of-control",
-      "urgency"
+      "wish-for-change"
     ],
     "tags": [
       "voice",
       "recordings",
       "speech",
-      "self-recognition",
-      "puberty",
-      "body-change",
-      "anticipation",
-      "hrt",
-      "avoidance"
+      "self-recognition"
     ],
     "reportCount": 0,
     "reactionCount": 0,
@@ -1703,7 +1553,6 @@ export const experiences = [
   },
   {
     "id": "grief-for-life-in-the-wrong-gender-role",
-    "stages": ["self-recognized","disclosed","transitioning","established"],
     "family": "understanding-gender-across-time",
     "domain": "self-understanding",
     "types": [
@@ -1740,7 +1589,6 @@ export const experiences = [
   },
   {
     "id": "returning-to-gendered-childhood-interests",
-    "stages": ["self-recognized","disclosed","transitioning","established"],
     "family": "understanding-gender-across-time",
     "domain": "self-understanding",
     "types": [
@@ -1799,7 +1647,6 @@ export const experiences = [
   },
   {
     "id": "fear-of-aging-in-the-assigned-gender",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "understanding-gender-across-time",
     "domain": "self-understanding",
     "types": [
@@ -1842,7 +1689,6 @@ export const experiences = [
   },
   {
     "id": "fear-that-transition-began-too-late",
-    "stages": ["questioning","self-recognized","transitioning"],
     "family": "understanding-gender-across-time",
     "domain": "self-understanding",
     "types": [
@@ -1881,7 +1727,6 @@ export const experiences = [
   },
   {
     "id": "belonging-among-peers-of-another-gender",
-    "stages": ["before-realization","questioning","self-recognized","disclosed"],
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
     "types": [
@@ -1938,7 +1783,6 @@ export const experiences = [
   },
   {
     "id": "singled-out-around-gendered-privacy",
-    "stages": ["disclosed","transitioning","established"],
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
     "types": [
@@ -1960,9 +1804,7 @@ export const experiences = [
       "social-gender",
       "privacy",
       "body-exposure",
-      "recognition",
-      "restrooms",
-      "touch"
+      "recognition"
     ],
     "reportCount": 0,
     "reactionCount": 0,
@@ -1979,7 +1821,6 @@ export const experiences = [
   },
   {
     "id": "belonging-among-transgender-and-lgbtq-people",
-    "stages": ["questioning","self-recognized","disclosed","transitioning","established"],
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
     "types": [
@@ -2025,7 +1866,6 @@ export const experiences = [
   },
   {
     "id": "gender-peer-friendship-mistaken-for-romantic-interest",
-    "stages": ["self-recognized","disclosed","transitioning","established"],
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
     "types": [
@@ -2071,7 +1911,6 @@ export const experiences = [
   },
   {
     "id": "moving-forward-after-gender-self-recognition",
-    "stages": ["self-recognized","disclosed","transitioning"],
     "family": "understanding-gender-across-time",
     "domain": "self-understanding",
     "types": [
@@ -2125,7 +1964,6 @@ export const experiences = [
   },
   {
     "id": "clothing-fit-highlights-body-shape",
-    "stages": ["before-realization","questioning","self-recognized","transitioning"],
     "family": "clothing-and-body-silhouette",
     "domain": "presentation",
     "types": [
@@ -2158,7 +1996,6 @@ export const experiences = [
   },
   {
     "id": "controlling-gendered-body-hair",
-    "stages": ["before-realization","questioning","self-recognized","transitioning"],
     "family": "hair-and-grooming",
     "domain": "presentation",
     "types": [
@@ -2201,7 +2038,6 @@ export const experiences = [
   },
   {
     "id": "hair-carries-unusual-importance",
-    "stages": ["before-realization","questioning","self-recognized","disclosed","transitioning"],
     "family": "hair-and-grooming",
     "domain": "presentation",
     "types": [
@@ -2242,7 +2078,6 @@ export const experiences = [
   },
   {
     "id": "identifying-with-characters-of-another-gender",
-    "stages": ["before-realization","questioning"],
     "family": "exploring-gender-through-imagination-and-identification",
     "domain": "self-understanding",
     "types": [
@@ -2275,7 +2110,6 @@ export const experiences = [
   },
   {
     "id": "aligned-with-gender-concerns-before-self-recognition",
-    "stages": ["before-realization"],
     "family": "understanding-gender-across-time",
     "domain": "self-understanding",
     "types": [
@@ -2321,7 +2155,6 @@ export const experiences = [
   },
   {
     "id": "living-through-another-persons-presentation",
-    "stages": ["before-realization","questioning"],
     "family": "exploring-gender-through-imagination-and-identification",
     "domain": "self-understanding",
     "types": [
@@ -2354,7 +2187,6 @@ export const experiences = [
   },
   {
     "id": "envy-blends-appearance-identity-and-attraction",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "exploring-gender-through-imagination-and-identification",
     "domain": "self-understanding",
     "types": [
@@ -2400,7 +2232,6 @@ export const experiences = [
   },
   {
     "id": "attuned-to-gender-variance-in-other-people",
-    "stages": ["questioning","self-recognized","transitioning","established"],
     "family": "exploring-gender-through-imagination-and-identification",
     "domain": "self-understanding",
     "types": [
@@ -2452,7 +2283,6 @@ export const experiences = [
   },
   {
     "id": "social-withdrawal-reduces-gendered-exposure",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "suppressing-or-avoiding-gender-awareness",
     "domain": "self-understanding",
     "types": [
@@ -2485,7 +2315,6 @@ export const experiences = [
   },
   {
     "id": "separate-online-identity-until-gender-disclosure-feels-safe",
-    "stages": ["before-realization","questioning","self-recognized","disclosed","transitioning"],
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
     "types": [
@@ -2530,7 +2359,6 @@ export const experiences = [
   },
   {
     "id": "staying-busy-to-avoid-gender-feelings",
-    "stages": ["before-realization","questioning"],
     "family": "suppressing-or-avoiding-gender-awareness",
     "domain": "self-understanding",
     "types": [
@@ -2562,47 +2390,7 @@ export const experiences = [
     ]
   },
   {
-    "id": "recurring-doubt-about-being-trans-enough",
-    "stages": ["before-realization","questioning","self-recognized","disclosed","transitioning"],
-    "family": "understanding-gender-across-time",
-    "domain": "self-understanding",
-    "types": [
-      "dysphoric"
-    ],
-    "directions": [
-      "cross-directional"
-    ],
-    "responses": [
-      "uncertainty",
-      "confusion",
-      "self-criticism",
-      "fear",
-      "disbelief"
-    ],
-    "tags": [
-      "identity",
-      "exploration",
-      "childhood",
-      "gender-incongruence",
-      "denial",
-      "self-recognition"
-    ],
-    "reportCount": 0,
-    "reactionCount": 0,
-    "sources": [
-      [
-        "Gender Dysphoria Bible: Am I Trans?",
-        "https://genderdysphoria.fyi/en/am-i-trans"
-      ],
-      [
-        "Gender Dysphoria Bible: Impostor Syndrome",
-        "https://genderdysphoria.fyi/en/impostor-syndrome"
-      ]
-    ]
-  },
-  {
     "id": "gender-feelings-fluctuate-in-intensity",
-    "stages": ["before-realization","questioning","self-recognized","transitioning"],
     "family": "understanding-gender-across-time",
     "domain": "self-understanding",
     "types": [
@@ -2634,7 +2422,6 @@ export const experiences = [
   },
   {
     "id": "gender-expression-becomes-less-deliberate",
-    "stages": ["transitioning","established"],
     "family": "understanding-gender-across-time",
     "domain": "self-understanding",
     "types": [
@@ -2673,7 +2460,6 @@ export const experiences = [
   },
   {
     "id": "intimacy-when-gendered-roles-align",
-    "stages": ["questioning","self-recognized","disclosed","transitioning","established"],
     "family": "gendered-roles-in-intimacy-and-attraction",
     "domain": "sexuality",
     "types": [
@@ -2718,7 +2504,6 @@ export const experiences = [
   },
   {
     "id": "withdrawing-when-a-promising-date-becomes-real",
-    "stages": ["before-realization","questioning","self-recognized"],
     "family": "gendered-roles-in-intimacy-and-attraction",
     "domain": "sexuality",
     "types": [
@@ -2759,7 +2544,6 @@ export const experiences = [
   },
   {
     "id": "body-changes-create-recognition-and-relief",
-    "stages": ["transitioning","established"],
     "family": "gendered-body-traits-and-changes",
     "domain": "body",
     "types": [
@@ -2818,7 +2602,6 @@ export const experiences = [
   },
   {
     "id": "seeing-yourself-shift-toward-recognition",
-    "stages": ["transitioning","established"],
     "family": "body-image-and-self-recognition",
     "domain": "body",
     "types": [
@@ -2859,7 +2642,6 @@ export const experiences = [
   },
   {
     "id": "libido-or-arousal-feels-alien",
-    "stages": ["before-realization","questioning","self-recognized","transitioning"],
     "family": "sexual-responses-and-embodiment",
     "domain": "sexuality",
     "types": [
@@ -2910,7 +2692,6 @@ export const experiences = [
   },
   {
     "id": "libido-changes-make-friendship-with-women-easier",
-    "stages": ["transitioning"],
     "family": "sexual-responses-and-embodiment",
     "domain": "sexuality",
     "types": [
@@ -2959,7 +2740,6 @@ export const experiences = [
   },
   {
     "id": "attraction-to-women-and-the-imposed-male-role",
-    "stages": ["before-realization","questioning","self-recognized","disclosed","transitioning","established"],
     "family": "gendered-roles-in-intimacy-and-attraction",
     "domain": "sexuality",
     "types": [
@@ -3006,7 +2786,6 @@ export const experiences = [
   },
   {
     "id": "assigned-gender-compliments-feel-wrong",
-    "stages": ["before-realization","questioning","self-recognized","disclosed","transitioning","established"],
     "family": "gender-recognition-and-evaluation",
     "domain": "social",
     "types": [
@@ -3057,7 +2836,6 @@ export const experiences = [
   },
   {
     "id": "masturbation-that-affirms-a-feminine-self",
-    "stages": ["before-realization","questioning","self-recognized","disclosed","transitioning","established"],
     "family": "sexual-responses-and-embodiment",
     "domain": "sexuality",
     "types": [

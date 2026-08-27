@@ -15,7 +15,7 @@ export default defineConfig({
     })),
   ],
   test: {
-    include: ["tests/reactions.test.js", "tests/site.test.js"],
+    include: ["tests/reactions.test.js"],
     setupFiles: ["./tests/apply-migrations.js"],
   },
 });

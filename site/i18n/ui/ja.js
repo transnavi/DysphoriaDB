@@ -1,11 +1,9 @@
 export const ja = {
   ui: {
-    siteName: "ジェンダー体験事典",
-    seoTitle: "ジェンダー体験事典｜ジェンダー体験を分類・整理した資料",
-    description: "繰り返し語られるジェンダー体験を分類・整理し、自己理解や調査・研究のための資料として公開しています。",
-    ogImageAlt: "ジェンダー体験事典。ジェンダー体験を分類・整理し、自己理解や調査・研究に活用できる資料です。",
-    datasetDescription: "トランスジェンダーや多様なジェンダーのコミュニティで繰り返し語られる体験を、自己理解や調査・研究に活用できるよう分類・整理した公開データです。",
-    datasetKeywords: "ジェンダー体験, トランスジェンダー, 性別違和, 性別高揚感, ノンバイナリー, クィア・スタディーズ",
+    siteName: "ジェンダー経験事典",
+    description: "繰り返し語られるジェンダー経験を分類・整理し、自己理解や調査・研究のための資料として公開しています。",
+    ogImageAlt: "ジェンダー経験事典。ジェンダー経験を分類・整理し、自己理解や調査・研究に活用できる資料です。",
+    datasetDescription: "繰り返し語られるジェンダー経験を、自己理解や調査・研究に活用できるよう分類・整理したデータです。",
     heading: "人はジェンダーをどう体験するか",
     introduction: "トランスジェンダーや多様なジェンダーのコミュニティで繰り返し語られてきた体験を、性別違和、性別高揚感、嗜好性などに分類して整理しています。自己理解の手がかりや、クィア・スタディーズを含む調査・研究の資料として利用できます。",
     submitExperience: "体験を投稿する",
@@ -26,7 +24,6 @@ export const ja = {
     tags: "タグ",
     experienceType: "体験の種類",
     population: "該当する人",
-    stage: "自覚・性別移行の時期",
     topic: "トピック",
     resultCount: "{{count}}件の体験",
     newCount: "前回以降の新しい体験 {{count}}件",
@@ -97,14 +94,6 @@ export const ja = {
       transmasculine: "トランスマスキュリン",
       nonbinary: "ノンバイナリー",
       "cross-directional": "性別を問わず",
-    },
-    stages: {
-      "before-realization": "自覚前",
-      questioning: "模索中・まだ確信がない",
-      "self-recognized": "自分のジェンダーを自覚した後",
-      disclosed: "周囲へ開示した後",
-      transitioning: "性別移行中",
-      established: "性別移行後の生活が定着した時期",
     },
   },
   sourceKinds: {

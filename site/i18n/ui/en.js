@@ -1,11 +1,9 @@
 export const en = {
   ui: {
     siteName: "Gender Experience Index",
-    seoTitle: "Gender Experience Index | Categorized Gender Experiences",
     description: "This reference categorizes recurring gender experiences for personal reflection and research.",
     ogImageAlt: "Gender Experience Index. Gender experiences are categorized for personal reflection and research.",
-    datasetDescription: "This dataset categorizes recurring experiences described in transgender and gender-diverse communities for personal reflection, reference, and research, including queer studies.",
-    datasetKeywords: "gender experience, transgender, gender dysphoria, gender euphoria, nonbinary, queer studies",
+    datasetDescription: "This dataset categorizes recurring gender experiences for personal reflection and research.",
     heading: "How people experience gender",
     introduction: "This reference organizes experiences repeatedly described in transgender and gender-diverse communities, including gender dysphoria, gender euphoria, and preferences. It can support personal reflection and research, including queer studies.",
     submitExperience: "Submit an experience",
@@ -26,7 +24,6 @@ export const en = {
     tags: "Tags",
     experienceType: "Experience type",
     population: "Population",
-    stage: "Recognition and transition context",
     topic: "Topic",
     resultCount_one: "{{count}} experience",
     resultCount_other: "{{count}} experiences",
@@ -101,14 +98,6 @@ export const en = {
       transmasculine: "Transmasculine",
       nonbinary: "Nonbinary",
       "cross-directional": "Cross-directional",
-    },
-    stages: {
-      "before-realization": "Before realization",
-      questioning: "Questioning or unsure",
-      "self-recognized": "Self-recognized",
-      disclosed: "Disclosed to others",
-      transitioning: "Transitioning",
-      established: "Established after transition",
     },
   },
   sourceKinds: {

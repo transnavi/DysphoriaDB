@@ -30,9 +30,9 @@ magick "${base_args[@]}" \
 
 magick "${base_args[@]}" \
   -font "$cjk_bold" -fill "$title_color" -pointsize 62 \
-  -annotate +78+200 'ジェンダー体験事典' \
+  -annotate +78+200 'ジェンダー経験事典' \
   -font "$cjk_light" -fill "$body_color" -pointsize 28 \
-  -annotate +81+326 'ジェンダー体験を分類・整理し、' \
+  -annotate +81+326 'ジェンダー経験を分類・整理し、' \
   -annotate +81+368 '自己理解や調査・研究に' \
   -annotate +81+410 '活用できる資料です。' \
   -strip -define png:compression-level=9 "$output_dir/og-image-ja.png"

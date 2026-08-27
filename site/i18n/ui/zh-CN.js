@@ -1,11 +1,9 @@
 export const zhCN = {
   ui: {
     siteName: "性别体验索引",
-    seoTitle: "性别体验索引｜分类整理性别体验的参考资料",
     description: "本资料分类整理常见性别体验，可用于自我理解与相关研究。",
     ogImageAlt: "性别体验索引。本资料分类整理性别体验，可用于自我理解与相关研究。",
-    datasetDescription: "本数据集将跨性别与多元性别社群中反复提及的性别体验分类整理，可用于自我理解、资料查阅以及酷儿研究等相关研究。",
-    datasetKeywords: "性别体验, 跨性别, 性别焦虑, 性别欣快, 非二元性别, 酷儿研究",
+    datasetDescription: "将常见性别体验分类整理，供自我理解与相关研究使用的数据集。",
     heading: "人们如何体验性别",
     introduction: "本资料分类整理跨性别与多元性别社群反复提及的体验，涵盖性别焦虑、性别欣快、偏好等类别，可用于自我理解、资料查阅和酷儿研究。",
     submitExperience: "提交体验",
@@ -26,7 +24,6 @@ export const zhCN = {
     tags: "标签",
     experienceType: "体验类型",
     population: "相关群体",
-    stage: "自我认识与性别过渡阶段",
     topic: "主题",
     resultCount: "{{count}} 项体验",
     newCount: "上次访问后新增 {{count}} 项体验",
@@ -97,14 +94,6 @@ export const zhCN = {
       transmasculine: "跨男性相关",
       nonbinary: "非二元相关",
       "cross-directional": "不同性别方向均可能出现",
-    },
-    stages: {
-      "before-realization": "认识自身性别以前",
-      questioning: "探索中或尚未确定",
-      "self-recognized": "已经自我确认",
-      disclosed: "已经向他人公开",
-      transitioning: "性别过渡中",
-      established: "过渡后的生活已经稳定",
     },
   },
   sourceKinds: {

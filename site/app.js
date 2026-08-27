@@ -1,0 +1,666 @@
+import {
+  buildSearchIndex,
+  escapeHtml,
+  filterKey,
+  renderCatalog,
+  renderExperienceDetail,
+  renderReaction,
+} from "./catalog-render.js";
+import { normalizeBrowseState, reconcileCatalogItems } from "./browser-state.js";
+import { domains, experienceFamilies, experiences } from "./data/experiences.js";
+import { rankByReactionCount } from "./reaction-ranking.js";
+import {
+  createI18n,
+  experiencePath,
+  localeDefinitions,
+  localeFromPath,
+  localeRoot,
+  localizeExperience,
+  localizeTaxonomy,
+  localizeTerm,
+  pathForLocale,
+} from "./i18n/index.js";
+
+const locale = localeFromPath(window.location.pathname);
+if (locale === "ja") void import("./fonts-ja.css");
+if (locale === "zh-CN") void import("./fonts-zh-cn.css");
+const i18n = await createI18n(locale);
+const t = (key, options) => i18n.t(key, options);
+
+const cards = document.querySelector("#cards");
+const searchForm = document.querySelector("#search-form");
+const search = document.querySelector("#search");
+const searchLabel = document.querySelector("#search-label");
+const searchButton = document.querySelector("#search-button");
+const count = document.querySelector("#result-count");
+const empty = document.querySelector("#empty");
+const catalogLoadingLabel = document.querySelector("#catalog-loading-label");
+const domainTabs = document.querySelector("#domain-tabs");
+const activeFiltersElement = document.querySelector("#active-filters");
+const browseView = document.querySelector("#browse-view");
+const detailView = document.querySelector("#experience-detail");
+const intro = document.querySelector(".intro");
+const submitExperience = document.querySelector("#submit-experience");
+const wordmark = document.querySelector(".wordmark");
+const browser = document.querySelector(".browser");
+const localeLabel = document.querySelector("#locale-label");
+const localeTrigger = document.querySelector("#locale-trigger");
+const localeCurrent = document.querySelector("#locale-current");
+const localeMenu = document.querySelector("#locale-menu");
+const themeToggle = document.querySelector("#theme-toggle");
+const themeColor = document.querySelector("#theme-color");
+const reactionStatus = document.querySelector("#reaction-status");
+const newCount = document.querySelector("#new-count");
+const skipLink = document.querySelector("#skip-link");
+const footerStatement = document.querySelector("#footer-statement");
+const footerFlagLabel = document.querySelector("#footer-flag-label");
+const footerNavigation = document.querySelector("#footer-navigation");
+const footerReferenceTitle = document.querySelector("#footer-reference-title");
+const footerDataTitle = document.querySelector("#footer-data-title");
+const footerJson = document.querySelector("#footer-json");
+const footerCsv = document.querySelector("#footer-csv");
+const footerGlossary = document.querySelector("#footer-glossary");
+const footerSubmit = document.querySelector("#footer-submit");
+const footerLicense = document.querySelector("#footer-license");
+const footerCopyright = document.querySelector("#footer-copyright");
+const themePreference = matchMedia("(prefers-color-scheme: dark)");
+const themeStorageKey = "gender-experience-theme";
+const reactionStorageKey = "gender-experience-reactions-v1";
+const voterStorageKey = "gender-experience-voter-v1";
+const knownItemsStorageKey = "gender-experience-known-items-v1";
+const unseenItemsStorageKey = "gender-experience-unseen-items-v1";
+const browseStateStorageKey = `gender-experience-browser-v1:${locale}`;
+const validDomainIds = new Set(domains.map(({ id }) => id));
+const validFamilyIds = new Set(experienceFamilies.map(({ id }) => id));
+const experiencesById = new Map(experiences.map((experience) => [experience.id, experience]));
+const validFilterKeys = new Set(experiences.flatMap((experience) => [
+  ...experience.types.map((value) => filterKey("type", value)),
+  ...experience.directions.map((value) => filterKey("population", value)),
+  ...experience.tags.map((value) => filterKey("topic", value)),
+]));
+const restoredBrowseState = loadBrowseState();
+let activeDomain = restoredBrowseState.activeDomain;
+const activeFilters = new Set(restoredBrowseState.activeFilters);
+const closedFamilies = new Set(restoredBrowseState.closedFamilies);
+const closedDomains = new Set(restoredBrowseState.closedDomains);
+const pendingReactions = new Set();
+const localeShortLabels = { en: "EN", ja: "JA", "zh-CN": "中文" };
+let stopLocalePositioning = null;
+let floatingUiPromise = null;
+let selectedReactions = loadSelectedReactions();
+let newExperienceIds = loadNewItems();
+let reactionCountsLoaded = false;
+let searchTimer = null;
+const searchIndex = buildSearchIndex(i18n, experiences);
+search.value = restoredBrowseState.query;
+
+function storedJson(storage, key, fallback) {
+  try {
+    return JSON.parse(storage.getItem(key) ?? JSON.stringify(fallback));
+  } catch {
+    return fallback;
+  }
+}
+
+function loadBrowseState() {
+  return normalizeBrowseState(storedJson(sessionStorage, browseStateStorageKey, {}), {
+    validDomains: validDomainIds,
+    validFamilies: validFamilyIds,
+    validFilters: validFilterKeys,
+  });
+}
+
+function saveBrowseState() {
+  if (experienceForCurrentRoute()) return;
+  try {
+    sessionStorage.setItem(browseStateStorageKey, JSON.stringify({
+      activeDomain,
+      activeFilters: [...activeFilters],
+      closedDomains: [...closedDomains],
+      closedFamilies: [...closedFamilies],
+      query: search.value,
+      scrollY: window.scrollY,
+    }));
+  } catch {
+    // Browsing remains available when session storage is unavailable.
+  }
+}
+
+function loadNewItems() {
+  const current = experiences.map(({ id }) => id);
+  const reconciled = reconcileCatalogItems(
+    current,
+    storedJson(localStorage, knownItemsStorageKey, []),
+    storedJson(localStorage, unseenItemsStorageKey, []),
+  );
+  try {
+    localStorage.setItem(knownItemsStorageKey, JSON.stringify(reconciled.known));
+    localStorage.setItem(unseenItemsStorageKey, JSON.stringify(reconciled.unseen));
+  } catch {
+    // New-item markers remain available for the current page.
+  }
+  return new Set(reconciled.unseen);
+}
+
+function markItemSeen(id) {
+  if (!newExperienceIds.delete(id)) return;
+  try {
+    localStorage.setItem(unseenItemsStorageKey, JSON.stringify([...newExperienceIds]));
+  } catch {
+    // The marker still clears for the current page.
+  }
+  cards.querySelector(`[data-card-id="${CSS.escape(id)}"] .new-badge`)?.remove();
+  syncNewCount();
+}
+
+function loadSelectedReactions() {
+  try {
+    const value = JSON.parse(localStorage.getItem(reactionStorageKey) ?? "[]");
+    return new Set(Array.isArray(value) ? value.filter((id) => experiences.some((experience) => experience.id === id)) : []);
+  } catch {
+    return new Set();
+  }
+}
+
+function saveSelectedReactions() {
+  try {
+    localStorage.setItem(reactionStorageKey, JSON.stringify([...selectedReactions]));
+  } catch {
+    // Reactions still work for the current page when storage is unavailable.
+  }
+}
+
+function voterId() {
+  try {
+    const saved = localStorage.getItem(voterStorageKey);
+    if (saved) return saved;
+    const created = crypto.randomUUID();
+    localStorage.setItem(voterStorageKey, created);
+    return created;
+  } catch {
+    return crypto.randomUUID();
+  }
+}
+
+function savedTheme() {
+  try {
+    const value = localStorage.getItem(themeStorageKey);
+    return value === "light" || value === "dark" ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+function applyTheme(theme, save = false) {
+  document.documentElement.dataset.theme = theme;
+  const nextTheme = theme === "dark" ? "light" : "dark";
+  const label = t(nextTheme === "dark" ? "ui.useDarkTheme" : "ui.useLightTheme");
+  themeToggle.setAttribute("aria-label", label);
+  themeToggle.title = label;
+  themeColor.content = theme === "dark" ? "#1a1624" : "#fffdf8";
+  if (save) {
+    try {
+      localStorage.setItem(themeStorageKey, theme);
+    } catch {
+      // The selected theme still applies when storage is unavailable.
+    }
+  }
+}
+
+function floatingUi() {
+  floatingUiPromise ??= import("@floating-ui/dom");
+  return floatingUiPromise;
+}
+
+async function positionLocaleMenu() {
+  const { computePosition, flip, offset, shift } = await floatingUi();
+  if (localeMenu.hidden) return;
+  const { x, y } = await computePosition(localeTrigger, localeMenu, {
+    placement: "bottom-end",
+    strategy: "fixed",
+    middleware: [offset(7), flip(), shift({ padding: 10 })],
+  });
+  Object.assign(localeMenu.style, { left: `${x}px`, top: `${y}px` });
+}
+
+function closeLocaleMenu(returnFocus = false) {
+  localeTrigger.setAttribute("aria-expanded", "false");
+  localeMenu.hidden = true;
+  stopLocalePositioning?.();
+  stopLocalePositioning = null;
+  if (returnFocus) localeTrigger.focus();
+}
+
+async function openLocaleMenu(focusFirst = false) {
+  localeTrigger.setAttribute("aria-expanded", "true");
+  localeMenu.hidden = false;
+  const { autoUpdate } = await floatingUi();
+  if (localeMenu.hidden) return;
+  stopLocalePositioning = autoUpdate(localeTrigger, localeMenu, positionLocaleMenu);
+  if (focusFirst) localeMenu.querySelector("a")?.focus();
+}
+
+function localizedFilter(group, value) {
+  if (group === "type") return localizeTaxonomy(i18n, "types", value);
+  if (group === "population") return localizeTaxonomy(i18n, "directions", value);
+  return localizeTerm(i18n, value);
+}
+
+function renderTabs() {
+  domainTabs.innerHTML = [null, ...domains.map((domain) => domain.id)].map((id) => {
+    const value = id ?? "all";
+    const label = id ? localizeTaxonomy(i18n, "domains", id) : t("ui.all");
+    return `<button type="button" data-domain="${escapeHtml(value)}" aria-pressed="${value === activeDomain}">${escapeHtml(label)}</button>`;
+  }).join("");
+}
+
+function renderActiveFilters() {
+  if (activeFilters.size === 0) {
+    activeFiltersElement.innerHTML = "";
+    return;
+  }
+  activeFiltersElement.innerHTML = `
+    <span>${escapeHtml(t("ui.filteredBy"))}</span>
+    ${[...activeFilters].map((key) => {
+      const [group, value] = key.split(":", 2);
+      const label = localizedFilter(group, value);
+      return `<button type="button" data-remove-filter="${escapeHtml(key)}" aria-label="${escapeHtml(t("ui.removeFilter", { label }))}">${escapeHtml(label)} ×</button>`;
+    }).join("")}
+    <button class="clear-filters" type="button" data-clear-filters>${escapeHtml(t("ui.clear"))}</button>
+  `;
+}
+
+function closeOtherSources(current) {
+  cards.querySelectorAll(".sources[open]").forEach((source) => {
+    if (source !== current) source.open = false;
+  });
+}
+
+function attachCatalogListeners() {
+  cards.querySelectorAll(".experience-group").forEach((group) => {
+    group.addEventListener("toggle", () => {
+      if (group.open) closedFamilies.delete(group.dataset.family);
+      else closedFamilies.add(group.dataset.family);
+      saveBrowseState();
+    });
+  });
+  cards.querySelectorAll(".domain-section[data-domain-section]").forEach((domain) => {
+    domain.addEventListener("toggle", () => {
+      if (domain.open) closedDomains.delete(domain.dataset.domainSection);
+      else closedDomains.add(domain.dataset.domainSection);
+      saveBrowseState();
+    });
+  });
+  cards.querySelectorAll(".sources").forEach((source) => {
+    source.addEventListener("toggle", () => {
+      if (source.open) closeOtherSources(source);
+    });
+  });
+}
+
+function sortCatalogByReactions() {
+  if (!reactionCountsLoaded) return;
+  cards.querySelectorAll(".group-grid").forEach((grid) => {
+    const allCards = [...grid.querySelectorAll(":scope > [data-card-id]")];
+    const rankCards = (items) => rankByReactionCount(
+      items,
+      (card) => experiencesById.get(card.dataset.cardId)?.reactionCount,
+    );
+    const rankedCards = [
+      ...rankCards(allCards.filter((card) => newExperienceIds.has(card.dataset.cardId))),
+      ...rankCards(allCards.filter((card) => !newExperienceIds.has(card.dataset.cardId))),
+    ];
+    for (const card of rankedCards) grid.append(card);
+  });
+}
+
+function syncNewCount() {
+  newCount.textContent = t("ui.newCount", { count: newExperienceIds.size });
+  newCount.hidden = newExperienceIds.size === 0;
+}
+
+function syncCatalogControls(total) {
+  count.textContent = t("ui.resultCount", { count: total });
+  empty.textContent = t("ui.noMatches");
+  empty.hidden = total !== 0;
+  cards.setAttribute("aria-busy", "false");
+}
+
+function renderCards({ reusePrerendered = false } = {}) {
+  const result = renderCatalog({
+    i18n,
+    locale,
+    activeDomain,
+    activeFilters,
+    closedDomains,
+    closedFamilies,
+    newExperienceIds,
+    selectedReactions,
+    pendingReactions,
+    query: search.value,
+    searchIndex,
+    collection: experiences,
+  });
+  if (!reusePrerendered) cards.innerHTML = result.html;
+  cards.removeAttribute("data-prerendered-locale");
+  attachCatalogListeners();
+  sortCatalogByReactions();
+  syncCatalogControls(result.total);
+  syncNewCount();
+}
+
+function resetCatalogView() {
+  renderCards();
+  saveBrowseState();
+}
+
+function renderDetail(experience) {
+  detailView.innerHTML = renderExperienceDetail({
+    i18n,
+    locale,
+    experience,
+    activeFilters,
+    selectedReactions,
+    pendingReactions,
+    collection: experiences,
+  });
+}
+
+function setMeta(attribute, key, value) {
+  document.querySelector(`meta[${attribute}="${key}"]`)?.setAttribute("content", value);
+}
+
+function updateMetadata(experience = null) {
+  const localized = experience ? localizeExperience(i18n, experience) : null;
+  const path = experience ? experiencePath(locale, experience.id) : localeRoot(locale);
+  const url = new URL(path, "https://db.transnavi.jp").href;
+  const title = localized ? `${localized.title} — ${t("ui.siteName")}` : t("ui.siteName");
+  const description = localized?.summary ?? t("ui.description");
+  document.title = title;
+  document.querySelector('link[rel="canonical"]')?.setAttribute("href", url);
+  setMeta("name", "description", description);
+  setMeta("property", "og:url", url);
+  setMeta("property", "og:type", experience ? "article" : "website");
+  setMeta("property", "og:locale", localeDefinitions[locale].ogLocale);
+  setMeta("property", "og:title", title);
+  setMeta("property", "og:description", description);
+  setMeta("name", "twitter:title", title);
+  setMeta("name", "twitter:description", description);
+}
+
+function applyStaticTranslations() {
+  document.documentElement.lang = localeDefinitions[locale].htmlLang;
+  skipLink.textContent = t("ui.skipToExperiences");
+  wordmark.textContent = t("ui.siteName");
+  wordmark.href = localeRoot(locale);
+  intro.querySelector("h1, .intro-title").textContent = t("ui.heading");
+  intro.querySelector(":scope > p").textContent = t("ui.introduction");
+  submitExperience.innerHTML = `${t("ui.submitExperience")} <span aria-hidden="true">↗</span>`;
+  browser.setAttribute("aria-label", t("ui.browseExperiences"));
+  searchLabel.textContent = t("ui.searchLabel");
+  search.placeholder = t("ui.searchPlaceholder");
+  searchButton.textContent = t("ui.searchButton");
+  domainTabs.setAttribute("aria-label", t("ui.experienceAreas"));
+  empty.textContent = t("ui.noMatches");
+  if (catalogLoadingLabel) catalogLoadingLabel.textContent = t("ui.loadingExperiences");
+  localeLabel.textContent = t("ui.languageLabel");
+  localeCurrent.textContent = localeDefinitions[locale].label;
+  localeCurrent.dataset.shortLabel = localeShortLabels[locale];
+  localeMenu.querySelectorAll("[data-locale]").forEach((link) => {
+    const isCurrent = link.dataset.locale === locale;
+    if (isCurrent) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+    const nextPath = pathForLocale(window.location.pathname, link.dataset.locale);
+    link.href = `${nextPath}${window.location.search}${window.location.hash}`;
+  });
+  footerStatement.textContent = t("ui.footerStatement");
+  footerFlagLabel.setAttribute("aria-label", t("ui.footerFlagLabel"));
+  footerNavigation.setAttribute("aria-label", t("ui.footerNavLabel"));
+  footerReferenceTitle.textContent = t("ui.footerReference");
+  footerDataTitle.textContent = t("ui.footerOpenData");
+  footerJson.textContent = t("ui.downloadJson");
+  footerCsv.textContent = t("ui.downloadCsv");
+  footerGlossary.textContent = t("ui.glossary");
+  footerSubmit.textContent = t("ui.submitExperience");
+  footerLicense.textContent = t("ui.contentLicense");
+  footerCopyright.textContent = t("ui.copyright");
+}
+
+function experienceForCurrentRoute() {
+  const match = window.location.pathname.match(/^\/(?:ja\/|zh-cn\/)?experience\/([^/]+)\/?$/i)
+    ?? window.location.hash.match(/^#\/experience\/([^/]+)$/);
+  return match ? experiences.find((item) => item.id === decodeURIComponent(match[1])) : null;
+}
+
+function renderRoute() {
+  const experience = experienceForCurrentRoute();
+  if (experience) {
+    markItemSeen(experience.id);
+    browseView.hidden = true;
+    intro.hidden = true;
+    detailView.hidden = false;
+    renderDetail(experience);
+    updateMetadata(experience);
+    return;
+  }
+  browseView.hidden = false;
+  intro.hidden = false;
+  detailView.hidden = true;
+  updateMetadata();
+}
+
+function updateReactionControls(id, restoreFocus = false) {
+  const experience = experiences.find((item) => item.id === id);
+  if (!experience) return;
+  document.querySelectorAll(`[data-reaction-id="${CSS.escape(id)}"]`).forEach((button) => {
+    button.outerHTML = renderReaction(i18n, locale, experience, selectedReactions, pendingReactions);
+  });
+  if (restoreFocus) {
+    document.querySelector(`[data-reaction-id="${CSS.escape(id)}"]`)?.focus({ preventScroll: true });
+  }
+}
+
+async function loadReactionCounts() {
+  try {
+    const response = await fetch("/api/reactions", { headers: { accept: "application/json" } });
+    if (!response.ok) return;
+    const data = await response.json();
+    for (const experience of experiences) {
+      const nextCount = Number(data.counts?.[experience.id] ?? 0);
+      const changed = experience.reactionCount !== nextCount;
+      experience.reactionCount = nextCount;
+      if (changed) updateReactionControls(experience.id);
+    }
+    reactionCountsLoaded = true;
+    sortCatalogByReactions();
+  } catch {
+    // The index remains available if the reaction service is offline.
+  }
+}
+
+async function handleReaction(button) {
+  const experience = experiences.find((item) => item.id === button.dataset.reactionId);
+  if (!experience || button.disabled) return;
+
+  const wasSelected = selectedReactions.has(experience.id);
+  const previousCount = experience.reactionCount;
+  const selected = !wasSelected;
+  pendingReactions.add(experience.id);
+  selected ? selectedReactions.add(experience.id) : selectedReactions.delete(experience.id);
+  experience.reactionCount = Math.max(0, previousCount + (selected ? 1 : -1));
+  saveSelectedReactions();
+  updateReactionControls(experience.id, true);
+  let failureMessage = "ui.reactionError";
+
+  try {
+    const response = await fetch(`/api/reactions/${encodeURIComponent(experience.id)}`, {
+      method: "POST",
+      headers: { "content-type": "application/json", accept: "application/json" },
+      body: JSON.stringify({ voterId: voterId(), selected }),
+    });
+    if (response.status === 429) {
+      failureMessage = "ui.reactionRateLimited";
+      throw new Error("Reaction rate limited");
+    }
+    if (!response.ok) throw new Error("Reaction request failed");
+    const data = await response.json();
+    experience.reactionCount = Number(data.count ?? experience.reactionCount);
+    reactionStatus.textContent = t(selected ? "ui.reactionSaved" : "ui.reactionRemoved");
+    pendingReactions.delete(experience.id);
+    updateReactionControls(experience.id, true);
+    return;
+  } catch {
+    wasSelected ? selectedReactions.add(experience.id) : selectedReactions.delete(experience.id);
+    experience.reactionCount = previousCount;
+    saveSelectedReactions();
+    reactionStatus.textContent = t(failureMessage);
+  }
+  pendingReactions.delete(experience.id);
+  updateReactionControls(experience.id, true);
+}
+
+search.addEventListener("input", () => {
+  window.clearTimeout(searchTimer);
+  searchTimer = window.setTimeout(resetCatalogView, 120);
+});
+searchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  window.clearTimeout(searchTimer);
+  resetCatalogView();
+});
+domainTabs.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-domain]");
+  if (!button) return;
+  activeDomain = button.dataset.domain;
+  renderTabs();
+  resetCatalogView();
+});
+cards.addEventListener("click", (event) => {
+  const experienceLink = event.target.closest("[data-experience-id]");
+  if (experienceLink) markItemSeen(experienceLink.dataset.experienceId);
+  const reaction = event.target.closest("[data-reaction-id]");
+  if (reaction) {
+    void handleReaction(reaction);
+    return;
+  }
+  const tag = event.target.closest("[data-filter-group]");
+  if (!tag) return;
+  const key = filterKey(tag.dataset.filterGroup, tag.dataset.filterValue);
+  activeFilters.has(key) ? activeFilters.delete(key) : activeFilters.add(key);
+  renderActiveFilters();
+  resetCatalogView();
+});
+detailView.addEventListener("click", (event) => {
+  const experienceLink = event.target.closest("[data-experience-id]");
+  if (experienceLink) markItemSeen(experienceLink.dataset.experienceId);
+  const reaction = event.target.closest("[data-reaction-id]");
+  if (reaction) {
+    void handleReaction(reaction);
+    return;
+  }
+  const tag = event.target.closest("[data-filter-group]");
+  if (!tag) return;
+  activeFilters.add(filterKey(tag.dataset.filterGroup, tag.dataset.filterValue));
+  renderActiveFilters();
+  resetCatalogView();
+  window.history.pushState(null, "", localeRoot(locale));
+  renderRoute();
+});
+activeFiltersElement.addEventListener("click", (event) => {
+  const remove = event.target.closest("[data-remove-filter]");
+  if (remove) activeFilters.delete(remove.dataset.removeFilter);
+  if (event.target.closest("[data-clear-filters]")) activeFilters.clear();
+  renderActiveFilters();
+  resetCatalogView();
+});
+themeToggle.addEventListener("click", () => {
+  const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(nextTheme, true);
+});
+localeTrigger.addEventListener("click", () => {
+  if (localeMenu.hidden) void openLocaleMenu();
+  else closeLocaleMenu();
+});
+localeTrigger.addEventListener("keydown", (event) => {
+  if (event.key !== "ArrowDown") return;
+  event.preventDefault();
+  if (localeMenu.hidden) void openLocaleMenu(true);
+  else localeMenu.querySelector("a")?.focus();
+});
+localeMenu.addEventListener("keydown", (event) => {
+  const links = [...localeMenu.querySelectorAll("a")];
+  const currentIndex = links.indexOf(document.activeElement);
+  if (event.key === "Escape") {
+    event.preventDefault();
+    closeLocaleMenu(true);
+    return;
+  }
+  if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+  event.preventDefault();
+  const nextIndex = event.key === "Home"
+    ? 0
+    : event.key === "End"
+      ? links.length - 1
+      : (currentIndex + (event.key === "ArrowDown" ? 1 : -1) + links.length) % links.length;
+  links[nextIndex]?.focus();
+});
+document.addEventListener("pointerdown", (event) => {
+  if (!localeMenu.hidden && !event.target.closest(".locale-switcher")) closeLocaleMenu();
+  if (!event.target.closest(".sources")) closeOtherSources(null);
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  const source = cards.querySelector(".sources[open]");
+  if (!source) return;
+  source.open = false;
+  source.querySelector("summary")?.focus();
+});
+document.addEventListener("focusin", (event) => {
+  if (!localeMenu.hidden && !event.target.closest(".locale-switcher")) closeLocaleMenu();
+});
+themePreference.addEventListener("change", (event) => {
+  if (!savedTheme()) applyTheme(event.matches ? "dark" : "light");
+});
+window.addEventListener("storage", (event) => {
+  if (event.key !== themeStorageKey) return;
+  const theme = event.newValue === "light" || event.newValue === "dark"
+    ? event.newValue
+    : (themePreference.matches ? "dark" : "light");
+  applyTheme(theme);
+});
+applyStaticTranslations();
+applyTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+renderTabs();
+renderActiveFilters();
+if (experienceForCurrentRoute()) {
+  cards.innerHTML = "";
+  cards.setAttribute("aria-busy", "false");
+} else {
+  const canReusePrerendered = cards.dataset.prerenderedLocale === locale
+    && selectedReactions.size === 0
+    && newExperienceIds.size === 0
+    && activeDomain === "all"
+    && activeFilters.size === 0
+    && closedDomains.size === 0
+    && closedFamilies.size === 0
+    && search.value === "";
+  renderCards({ reusePrerendered: canReusePrerendered });
+}
+renderRoute();
+void loadReactionCounts();
+window.addEventListener("hashchange", () => {
+  renderRoute();
+  window.scrollTo({ top: 0, behavior: "instant" });
+});
+window.addEventListener("popstate", () => {
+  renderRoute();
+  window.scrollTo({ top: 0, behavior: "instant" });
+});
+window.addEventListener("pagehide", saveBrowseState);
+
+if (!experienceForCurrentRoute() && restoredBrowseState.scrollY > 0) {
+  history.scrollRestoration = "manual";
+  window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+    window.scrollTo({ top: restoredBrowseState.scrollY, behavior: "instant" });
+  }));
+}

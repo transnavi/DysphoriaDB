@@ -5,29 +5,6 @@ const experiences = {
     "patterns": [],
     "variations": []
   },
-  "self-hatred": {
-    "title": "Self-hatred",
-    "summary": "Contempt can attach to yourself as a whole: how you look, how you come across to other people, and the kind of person you take yourself to be. Words used against people like you can become the ordinary words you use about yourself.",
-    "patterns": [
-      [
-        "Insults become self-description",
-        "Slurs and mockery aimed at transgender people can become the everyday words you use for your own face, body, or voice."
-      ],
-      [
-        "Harsher than anyone around you",
-        "The judgement you pass on yourself can be far heavier than anything the people near you say or appear to think."
-      ],
-      [
-        "Standing beside someone else",
-        "Being seen next to a partner or friend can sharpen how you read your own appearance, and the pairing itself may feel like it gives you away."
-      ],
-      [
-        "Contempt held before self-recognition",
-        "Dislike of transgender people, held before recognizing yourself among them, can leave its wording behind afterwards."
-      ]
-    ],
-    "variations": []
-  },
   "unfamiliar-reflection": {
     "title": "Your reflection feels unfamiliar",
     "summary": "Your reflection, photograph, or recording may look like another person or fail to produce an ordinary sense of self-recognition.",
@@ -382,7 +359,7 @@ const experiences = {
       ],
       [
         "Costume and cosplay",
-        "Dressing as a character of another gender and going out in that form can bring a pleasure unlike anything felt before, and it may become something you keep going back to."
+        "Dressing as a character of another gender and going out in that form can bring a pleasure unlike anything felt before, and the costume may be repeated long after the first occasion."
       ],
       [
         "Games and avatars",
@@ -469,29 +446,8 @@ const experiences = {
   },
   "voice-feels-unlike-oneself": {
     "title": "The voice feels unlike oneself",
-    "summary": "Speaking, hearing a recording, or noticing the voice change during puberty or testosterone therapy can feel jarring when pitch, resonance, speech patterns, or gendered interpretation conflict with your sense of self.",
-    "patterns": [
-      [
-        "Fear before a voice change",
-        "Approaching puberty or the first signs of an unwanted voice drop can bring dread, grief, or despair when the expected change feels lasting."
-      ],
-      [
-        "The voice changes",
-        "Cracking, a changing pitch, a new resonance, or reduced control can make speaking and singing feel unstable or unfamiliar."
-      ],
-      [
-        "Avoiding voice use",
-        "You may withdraw from conversation, calls, recordings, public speaking, or singing because hearing the voice or having it gendered by others feels painful."
-      ],
-      [
-        "Uncertainty about a wanted change",
-        "When a testosterone-related voice drop is desired, fear that it will happen slowly, only slightly, or never can become intense."
-      ],
-      [
-        "Concern about losing a familiar voice",
-        "A wanted change can still bring anxiety about vocal range, singing ability, professional skills, or losing a voice that has become familiar."
-      ]
-    ],
+    "summary": "Speaking or hearing a recording can feel jarring when vocal pitch, resonance, speech patterns, or gendered interpretation conflict with your sense of self.",
+    "patterns": [],
     "variations": []
   },
   "grief-for-life-in-the-wrong-gender-role": {
@@ -610,36 +566,24 @@ const experiences = {
     "variations": []
   },
   "singled-out-around-gendered-privacy": {
-    "title": "Being excluded from privacy and closeness despite verbal gender recognition",
-    "summary": "Friends may recognize your gender in words, then treat you according to your assigned gender when privacy or closeness is involved. They may ask only you to leave a toilet or changing area, exclude you from home visits or overnight stays, avoid the casual touch they share with other peers, or refuse to spend time alone with you. These unequal boundaries can feel like a withdrawal of recognition and trust, even when you respect other people’s privacy and have no wish to cross their boundaries.",
+    "title": "Being the only person asked to leave when gender peers need privacy",
+    "summary": "Friends may recognize your gender in words, then single you out when people of your gender change clothes or enter another privacy-sensitive situation. Being the only person asked to leave can feel like a painful withdrawal of recognition and trust, even when you have no interest in seeing anyone’s body.",
     "patterns": [
       [
-        "Privacy-based exclusion",
-        "Other friends may remain while only you are asked to leave a same-gender toilet, changing area, bathing place, bedroom, sleeping arrangement, or another private setting."
-      ],
-      [
-        "Touch becomes restricted",
-        "Friends may hug, sit close to, or casually touch other peers of your gender, then avoid the same ordinary contact with you because they still categorize you by your assigned gender."
-      ],
-      [
-        "Homes and overnight stays",
-        "A friend may avoid visiting your home, inviting you into theirs, sharing accommodation, or including you in a sleepover while feeling comfortable doing so with other gender peers."
-      ],
-      [
-        "Avoiding one-to-one time",
-        "A friend may spend time with you in a group, then refuse to be alone with you for a visit, journey, study session, or private conversation because of assumptions about gender, attraction, or safety."
+        "Selective exclusion",
+        "Other friends may remain while only you are asked to leave during changing, bathing, sleeping arrangements, or another private moment."
       ],
       [
         "Recognition becomes conditional",
-        "Unequal rules around privacy or closeness can reveal that others still place you in a different gender category despite respecting your name and pronouns in ordinary situations."
+        "A privacy rule that singles you out can reveal that others still place you in a different gender category despite respecting your name and pronouns in ordinary situations."
       ],
       [
-        "Respecting consent and privacy",
-        "Everyone can choose who touches them, enters a private space, or spends time alone with them. You may readily respect every boundary. The pain can arise when a recurring unequal pattern communicates that your assigned gender still determines how people see you."
+        "Respecting privacy",
+        "You may readily leave when anyone asks for privacy and have no wish to watch them change. The pain centers on the unequal rule and the loss of ordinary trust."
       ],
       [
-        "Group preparation and shared roles",
-        "Weddings, performances, sports, trips, and other group events can involve shared changing or preparation. Excluding only a transgender participant can withdraw the ordinary peer trust associated with their role in the group."
+        "Weddings and group preparation",
+        "For example, a transgender bridesmaid may be sent away while every other bridesmaid remains with the bride as she changes."
       ],
       [
         "Afterward",
@@ -861,10 +805,6 @@ const experiences = {
         "You may keep accounts and social circles apart to prevent online activity from being connected with your offline identity."
       ],
       [
-        "An unwanted connection between identities",
-        "Being outed or having an account accidentally linked to your offline identity can bring intense sadness, fear, anger, or distress. You may withdraw from friends, leave the account, remove content, or avoid online spaces afterward."
-      ],
-      [
         "Openness after recognition or transition",
         "A fitting name, voice, appearance, or social role can make sharing profiles and connecting identities feel safer and more comfortable."
       ],
@@ -879,37 +819,6 @@ const experiences = {
     "title": "Constant activity keeps gender feelings out of awareness",
     "summary": "Work, hobbies, games, media, cleaning, sleep, or substance use can fill idle time and postpone attention to recurring gender-related feelings.",
     "patterns": [],
-    "variations": []
-  },
-  "recurring-doubt-about-being-trans-enough": {
-    "title": "Recurring doubt about being trans enough",
-    "summary": "You may repeatedly question whether your gender experience is strong, clear, early, physical, or typical enough to count, even while gender-related wishes, relief, or distress keep returning.",
-    "patterns": [
-      [
-        "Comparing experiences",
-        "Other people’s certainty, dysphoria, childhood memories, or transition goals may seem more convincing than your own."
-      ],
-      [
-        "No early certainty",
-        "You may doubt yourself because you did not know from childhood or because earlier signs only became meaningful in hindsight."
-      ],
-      [
-        "Dysphoria seems too mild",
-        "Limited, intermittent, social, or hard-to-name discomfort may feel insufficient when compared with accounts of severe physical dysphoria."
-      ],
-      [
-        "A stereotype does not fit",
-        "Interests, appearance, sexuality, gender expression, or a nonbinary identity may differ from the trans narratives you first encountered."
-      ],
-      [
-        "Fear of a mistake",
-        "Concern about regret, transition, relationships, safety, or appearance may turn into a recurring belief that your identity must be false."
-      ],
-      [
-        "Room for exploration",
-        "Self-doubt does not determine a person’s gender. Time, low-pressure exploration, and attention to recurring experiences can help clarify what feels fitting."
-      ]
-    ],
     "variations": []
   },
   "gender-feelings-fluctuate-in-intensity": {

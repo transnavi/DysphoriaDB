@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "transnavi-db-site",
-  "main": ".svelte-kit/cloudflare/_worker.js",
+  "main": "./worker/index.ts",
   "compatibility_date": "2026-08-19",
   "compatibility_flags": ["nodejs_compat"],
   "d1_databases": [
@@ -35,8 +35,9 @@
   },
   "assets": {
     "binding": "ASSETS",
-    "directory": ".svelte-kit/cloudflare",
-    "run_worker_first": true
+    "run_worker_first": ["/api/*"],
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
   },
   "routes": [
     {

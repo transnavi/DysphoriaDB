@@ -1,32 +1,21 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { referenceSources } from "../data/source/reference-sources.js";
-import { domains, experienceFamilies, experiences, journeyStages } from "../site/data/experiences.js";
+import { domains, experienceFamilies, experiences } from "../site/data/experiences.js";
 import { content as en } from "../site/i18n/content/en.js";
 import { content as ja } from "../site/i18n/content/ja.js";
 import { content as zhCN } from "../site/i18n/content/zh-CN.js";
+import { evidenceRanking, evidenceSamples } from "../data/source/approved-evidence.js";
+import { referenceSources } from "../data/source/reference-sources.js";
 import { en as enUi } from "../site/i18n/ui/en.js";
 import { ja as jaUi } from "../site/i18n/ui/ja.js";
 import { zhCN as zhCNUi } from "../site/i18n/ui/zh-CN.js";
-import { experiencePath, localeFromPath, pathForLocale } from "../site/i18n/index.js";
+import { buildSearchIndex, renderCatalog } from "../site/catalog-render.js";
+import { createI18n, experiencePath, localeFromPath, pathForLocale } from "../site/i18n/index.js";
 
 const contentByLocale = { en, ja, "zh-CN": zhCN };
 const uiByLocale = { en: enUi, ja: jaUi, "zh-CN": zhCNUi };
-
-test("experience IDs are stable data keys", () => {
-  const ids = experiences.map(({ id }) => id);
-  const validIds = new Set(ids);
-  assert.equal(validIds.size, ids.length);
-  for (const experience of experiences) {
-    assert.match(experience.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
-    assert.equal("title" in experience, false, experience.id);
-    assert.equal("summary" in experience, false, experience.id);
-  }
-  for (const id of Object.keys(referenceSources)) {
-    assert.ok(validIds.has(id), `reference:${id}`);
-  }
-});
 
 test("every locale supplies peer content for every experience", () => {
   const ids = experiences.map(({ id }) => id).sort();
@@ -46,6 +35,28 @@ test("every locale supplies peer content for every experience", () => {
   }
 });
 
+test("experience identity is independent from localized titles", () => {
+  const ids = new Set(experiences.map(({ id }) => id));
+  assert.equal(ids.size, experiences.length);
+  for (const experience of experiences) {
+    assert.match(experience.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    assert.equal(Object.hasOwn(experience, "title"), false, experience.id);
+    assert.equal(Object.hasOwn(experience, "summary"), false, experience.id);
+  }
+  for (const references of [referenceSources, evidenceRanking, evidenceSamples]) {
+    for (const id of Object.keys(references)) assert.ok(ids.has(id), id);
+  }
+});
+
+test("reviewed evidence uses experience IDs", async () => {
+  const source = await readFile(new URL("../data/approved-evidence.json", import.meta.url), "utf8");
+  const ids = new Set(experiences.map(({ id }) => id));
+  for (const record of JSON.parse(source)) {
+    assert.ok(ids.has(record.experienceId), record.experienceId);
+    assert.equal(Object.hasOwn(record, "claim"), false);
+  }
+});
+
 test("all visible tags and taxonomy IDs are localized", () => {
   const tags = new Set(experiences.flatMap(({ tags }) => tags));
   for (const [locale, content] of Object.entries(contentByLocale)) {
@@ -55,20 +66,9 @@ test("all visible tags and taxonomy IDs are localized", () => {
   for (const [locale, ui] of Object.entries(uiByLocale)) {
     for (const { id } of domains) assert.ok(ui.taxonomy.domains[id], `${locale}:domain:${id}`);
     for (const { id } of experienceFamilies) assert.ok(ui.taxonomy.families[id], `${locale}:family:${id}`);
-    for (const { id } of journeyStages) assert.ok(ui.taxonomy.stages[id], `${locale}:stage:${id}`);
     for (const experience of experiences) {
       for (const type of experience.types) assert.ok(ui.taxonomy.types[type], `${locale}:type:${type}`);
       for (const direction of experience.directions) assert.ok(ui.taxonomy.directions[direction], `${locale}:direction:${direction}`);
-    }
-  }
-});
-
-test("journey stages classify every experience", () => {
-  const stageIds = new Set(journeyStages.map(({ id }) => id));
-  for (const experience of experiences) {
-    assert.ok(experience.stages.length > 0, experience.id);
-    for (const stage of experience.stages) {
-      assert.ok(stageIds.has(stage), `${experience.id}:${stage}`);
     }
   }
 });
@@ -88,10 +88,6 @@ test("site descriptions present the catalog as an organized reference", () => {
   assert.match(jaUi.ui.introduction, /クィア・スタディーズ/);
   assert.doesNotMatch(jaUi.ui.description, /探せる|出典/);
   assert.match(zhCNUi.ui.description, /分类整理/);
-  for (const [locale, ui] of Object.entries(uiByLocale)) {
-    assert.ok([...ui.ui.datasetDescription].length >= 50, `${locale}:datasetDescription`);
-    assert.ok(ui.ui.datasetKeywords.split(",").length >= 5, `${locale}:datasetKeywords`);
-  }
 });
 
 test("language-specific expressions remain in their localized content", () => {
@@ -113,4 +109,73 @@ test("locale routes preserve equivalent experience paths", () => {
   assert.equal(experiencePath("zh-CN", id), `/zh-cn/experience/${id}/`);
   assert.equal(pathForLocale(`/ja/experience/${id}/`, "zh-CN"), `/zh-cn/experience/${id}/`);
   assert.equal(localeFromPath("/zh-cn/"), "zh-CN");
+});
+
+test("the browser runtime reads locale-neutral metadata", async () => {
+  const app = await readFile(new URL("../site/app.js", import.meta.url), "utf8");
+  assert.match(app, /\.\/data\/experiences\.js/);
+  assert.doesNotMatch(app, /data\/source|claim-slugs|claims\.js|approved-evidence/);
+});
+
+test("catalog rendering supports localized bounded previews", async () => {
+  const i18n = await createI18n("ja");
+  const catalog = renderCatalog({
+    i18n,
+    locale: "ja",
+    limit: 16,
+    searchIndex: buildSearchIndex(i18n, experiences),
+  });
+  assert.equal(catalog.total, experiences.length);
+  assert.equal(catalog.shown, 16);
+  assert.equal((catalog.html.match(/class="card /g) ?? []).length, 16);
+  for (const domain of domains) {
+    assert.match(catalog.html, new RegExp(`data-domain-section="${domain.id}"`));
+  }
+  assert.match(catalog.html, /性別高揚感/);
+  assert.deepEqual(Object.keys(i18n.options.resources), ["ja"]);
+});
+
+test("Me too totals do not change fair exposure order", async () => {
+  const i18n = await createI18n("en");
+  const before = renderCatalog({ i18n, locale: "en", collection: experiences }).html;
+  const withReactions = experiences.map((experience, index) => ({
+    ...experience,
+    reactionCount: index === experiences.length - 1 ? 10000 : index,
+  }));
+  const after = renderCatalog({ i18n, locale: "en", collection: withReactions }).html;
+  const ids = (html) => [...html.matchAll(/data-card-id="([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(ids(after), ids(before));
+});
+
+test("new experiences appear before previously known experiences", async () => {
+  const i18n = await createI18n("en");
+  const newExperience = experiences.at(-1);
+  const catalog = renderCatalog({
+    i18n,
+    locale: "en",
+    collection: experiences,
+    newExperienceIds: new Set([newExperience.id]),
+  });
+  const ids = [...catalog.html.matchAll(/data-card-id="([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(ids[0], newExperience.id);
+});
+
+test("catalog domains can collapse and rendered source data is escaped", async () => {
+  const i18n = await createI18n("en");
+  const sample = {
+    ...experiences[0],
+    sources: [["<img src=x onerror=alert(1)>", "javascript:alert(1)", "Community report"]],
+  };
+  const catalog = renderCatalog({
+    i18n,
+    locale: "en",
+    closedDomains: new Set([sample.domain]),
+    newExperienceIds: new Set([sample.id]),
+    collection: [sample],
+  });
+  assert.match(catalog.html, new RegExp(`data-domain-section="${sample.domain}"`));
+  assert.doesNotMatch(catalog.html, new RegExp(`data-domain-section="${sample.domain}" open`));
+  assert.match(catalog.html, /class="new-badge">New/);
+  assert.match(catalog.html, /&lt;img src=x onerror=alert\(1\)&gt;/);
+  assert.doesNotMatch(catalog.html, /href="javascript:/);
 });

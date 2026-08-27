@@ -14,10 +14,10 @@ test("localized root pages include canonical metadata and visible actions", asyn
   assert.match(ja, /<html lang="ja"/);
   assert.match(ja, /性別高揚感/);
   assert.match(ja, /繰り返し語られるジェンダー経験を分類・整理し/);
-  assert.doesNotMatch(ja, /出典とともに探す|体験を探せる資料/);
-  assert.match(ja, />体験を投稿する ↗<\/a>/);
+  assert.doesNotMatch(ja, /出典とともに探す|経験を探せる資料/);
+  assert.match(ja, />ジェンダー経験を投稿する ↗<\/a>/);
   assert.match(ja, /id="search-button" type="submit">検索<\/button>/);
-  assert.match(ja, /id="skip-link"[^>]*>体験一覧へ移動<\/a>/);
+  assert.match(ja, /id="skip-link"[^>]*>ジェンダー経験一覧へ移動<\/a>/);
   assert.match(ja, /data-prerendered-locale="ja"/);
   assert.doesNotMatch(ja, /id="load-more-button"/);
   assert.ok((ja.match(/class="card /g) ?? []).length > 16);
@@ -31,7 +31,7 @@ test("localized root pages include canonical metadata and visible actions", asyn
   assert.match(ja, /class="categories" role="group" aria-label="タグ"/);
   assert.match(ja, /id="footer-reference-title">資料<\/p>/);
   assert.match(ja, /id="footer-data-title">オープンデータ<\/p>/);
-  assert.match(ja, /id="footer-submit">体験を投稿する<\/span>/);
+  assert.match(ja, /id="footer-submit">ジェンダー経験を投稿する<\/span>/);
   assert.doesNotMatch(ja, /trans-pride-stripe/);
   assert.match(zhCN, /<html lang="zh-Hans"/);
   assert.match(zhCN, /og-image-zh-cn\.png\?v=20260819/);

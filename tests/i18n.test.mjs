@@ -114,3 +114,10 @@ test("locale routes preserve equivalent experience paths", () => {
   assert.equal(pathForLocale(`/ja/experience/${id}/`, "zh-CN"), `/zh-cn/experience/${id}/`);
   assert.equal(localeFromPath("/zh-cn/"), "zh-CN");
 });
+
+test("every locale's Dataset description satisfies Google's 50 to 5000 character range", () => {
+  for (const [locale, ui] of Object.entries(uiByLocale)) {
+    const length = [...ui.ui.datasetDescription.trim()].length;
+    assert.ok(length >= 50 && length <= 5000, `${locale}:datasetDescription is ${length} characters`);
+  }
+});
